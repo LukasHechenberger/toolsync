@@ -2,6 +2,14 @@
   "name": "@devtools/logger",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    }
+  },
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
@@ -9,10 +17,12 @@
     "lint": "echo 'Add lint script here'"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.12",
     "tsup": "^8.5.0"
   },
   "dependencies": {
     "debug": "^4.4.1",
-    "pino": "^9.7.0"
+    "pino": "^9.7.0",
+    "pino-pretty": "^13.0.0"
   }
 }

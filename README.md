@@ -2,7 +2,30 @@
 
 > No more setting up the same 100 tools when starting a new project
 >
-> **Very opinionated** by default, but following **best practises** and easy to **customize**.
+> **Very opinionated** by default, but following **best practices** and easy to **customize**.
+
+> [!NOTE]
+> Still in development
+
+## Usage
+
+**Debugging**
+
+You can use the `LOG_LEVEL` environment variable to control how verbose logging should be:
+
+```shell
+LOG_LEVEL=debug <your command> # Enables debug logging
+LOG_LEVEL=trace <your command> # Even more logging
+```
+
+> The log levels available are: `trace`, `debug`, `info`, `warn`, `error`, `fatal` and `silent`
+
+If you want more granular debug logs use `DEBUG` instead
+
+```shell
+DEBUG=devtools:* <your command> # Same as using `LOG_LEVEL=debug`
+DEBUG=devtools:cli:* <your command> # Enable debug logging just for the cli package
+```
 
 ## Tools (TODO)
 
@@ -56,7 +79,7 @@ Individial packages can disable tools in their package.json (or devtools.json ?)
 }
 ```
 
-## CLI
+### CLI
 
 - `prepare` should set up tools, update readme etc. for each package
   - Run from repo root to handle all packages

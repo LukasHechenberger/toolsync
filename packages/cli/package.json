@@ -12,6 +12,7 @@
     "lint": "echo 'Add lint script here'"
   },
   "dependencies": {
+    "@devtools/logger": "workspace:^",
     "@devtools/core": "workspace:^",
     "commander": "^14.0.0",
     "debug": "^4.4.1"

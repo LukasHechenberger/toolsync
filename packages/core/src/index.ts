@@ -1,13 +1,17 @@
-import setupDebug from 'debug';
+import { logger } from '@devtools/logger';
 import type { DevtoolsConfig } from './types.js';
 import { definePlugin, type Plugin } from './plugins.js';
 
-const debug = setupDebug('devtools:core');
+const log = logger.child('core');
+const pluginLogger = logger.child('plugin');
+
+log.info('Devtools Core initialized');
+log.debug('Debug logging is enabled');
 
 const corePlugin = definePlugin({
   name: '@devtools/core',
   async loadModule(reference: string) {
-    debug(`Loading module ${reference} as a node module`);
+    log.debug(`Loading module ${reference} as a node module`);
     return await import(reference);
   },
   loadConfig() {
@@ -23,23 +27,23 @@ type RuntimeDevtoolsConfig = Omit<DevtoolsConfig, 'plugins'> & {
 };
 
 class Devtools {
-  private debug = debug.extend('api');
+  private log = log.child('api');
   private _resolvedConfig: RuntimeDevtoolsConfig = { plugins: [corePlugin], config: {} };
 
   constructor(private readonly _initialConfig: DevtoolsConfig) {
-    this.debug('Devtools initialized with config:', _initialConfig);
+    this.log.trace('Devtools initialized', { initialConfig: _initialConfig });
   }
 
   private async loadModule<T>(ref: string): Promise<T> {
     for (const plugin of [...this._resolvedConfig.plugins].reverse()) {
       if (plugin.loadModule) {
-        this.debug(`Trying to load module ${ref} with plugin ${plugin.name}`);
+        this.log.trace(`Trying to load module ${ref} with plugin ${plugin.name}`);
         const module = await plugin.loadModule<T>(ref);
 
         if (module) {
           return module;
         } else {
-          console.warn(`Module ${ref} not found in plugin ${plugin.name}`);
+          this.log.debug(`Module ${ref} not found in plugin ${plugin.name}`);
         }
       }
     }
@@ -54,12 +58,12 @@ class Devtools {
         typeof pluginRef === 'string' ? await this.loadModule<Plugin>(pluginRef) : pluginRef;
 
       if (this._resolvedConfig.plugins.some((p) => p.name === plugin.name)) {
-        this.debug(`Plugin ${plugin.name} is already loaded, skipping.`);
+        this.log.debug(`Plugin ${plugin.name} is already loaded, skipping.`);
         continue;
       }
 
       this._resolvedConfig.plugins.push(plugin);
-      this.debug('loaded plugin:', plugin);
+      this.log.debug('loaded plugin', { plugin });
     }
   }
 
@@ -68,28 +72,35 @@ class Devtools {
     // Load the config from the plugins
     for (const plugin of this._resolvedConfig.plugins) {
       if (plugin.loadConfig) {
-        this.debug(`Loaded config before plugin ${plugin.name}`, this._resolvedConfig);
-        const result = await plugin.loadConfig(this._resolvedConfig.config[plugin.name]);
+        this.log.trace(`Loaded config before plugin ${plugin.name}`, {
+          resolvedConfig: this._resolvedConfig,
+        });
+        const result = await plugin.loadConfig(this._resolvedConfig.config[plugin.name], {
+          log: pluginLogger.child(plugin.name),
+        });
         if (result) {
           const { plugins, config: remainingConfig } = result;
-          this.debug(`Loaded config from plugin: ${plugin.name}`, remainingConfig);
+          this.log.debug(`Loaded config from plugin: ${plugin.name}`, remainingConfig);
 
           // Merge the loaded config into the resolved config
           Object.assign(this._resolvedConfig.config, remainingConfig);
 
           if (plugins && plugins.length > 0) {
-            this.debug(`Loading plugins from ${plugin.name}:`, plugins);
+            this.log.debug(`Loading plugins from ${plugin.name}:`, plugins);
             await this.loadPlugins(result);
           }
         }
       }
     }
 
-    debug('Final resolved config:', this._resolvedConfig);
+    this.log.debug('Final resolved config:', { config: this._resolvedConfig });
+
+    return this._resolvedConfig;
   }
 }
 
 export async function devtools(config: DevtoolsConfig = { plugins: [], config: {} }) {
+  log.debug('Creating Devtools instance', { initialConfig: config });
   // console.dir({ initialConfig: config }, { depth: null, colors: true });
 
   const instance = new Devtools(config);

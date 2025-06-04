@@ -1,20 +1,16 @@
+import type { Logger } from '@devtools/logger';
 import type { DevtoolsConfig, LoaderReference, MaybePromise } from './types.js';
 
 export interface PluginContext {
-  rootDir: string;
+  log: Logger;
 }
 
 export type Plugin<Options = {}> = {
   name: string;
   loadModule?<T>(reference: string): MaybePromise<T | void>;
 
-  loadConfig?(options: Options): MaybePromise<DevtoolsConfig | void>;
+  loadConfig?(options: Options, context: PluginContext): MaybePromise<DevtoolsConfig | void>;
 
-  /** Inside the 'config' hook you can manipulate the incoming config */
-  config?(
-    incomingConfig: Options,
-    context: PluginContext
-  ): {} extends Options ? void : MaybePromise<Options>;
 };
 
 export function definePlugin<Options = {}>(plugin: Plugin<Options>) {
