@@ -1,0 +1,41 @@
+{
+  "name": "@devtools/core",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Core functionality used in @devtools/cli etc",
+  "main": "out/index.cjs",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "require": "./out/index.cjs"
+    },
+    "./plugins": {
+      "types": "./out/plugins.d.ts",
+      "import": "./out/plugins.js",
+      "require": "./out/plugins.cjs"
+    },
+    "./types": {
+      "types": "./out/types.d.ts",
+      "import": "./out/types.js",
+      "require": "./out/types.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "@types/node": "^22.15.29",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "^3.0.0",
+    "debug": "^4.4.1"
+  }
+}

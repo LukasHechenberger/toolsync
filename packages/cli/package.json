@@ -1,0 +1,25 @@
+{
+  "name": "@devtools/cli",
+  "version": "0.0.0",
+  "type": "module",
+  "bin": {
+    "devtools": "./out/bin.js"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "echo 'Add test script here'",
+    "lint": "echo 'Add lint script here'"
+  },
+  "dependencies": {
+    "@devtools/core": "workspace:^",
+    "commander": "^14.0.0",
+    "debug": "^4.4.1"
+  },
+  "devDependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^22.15.29",
+    "tsup": "^8.5.0"
+  }
+}
