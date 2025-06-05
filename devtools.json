@@ -1,7 +1,13 @@
 {
   "@devtools/builtin/ignore-sync": {},
   "@devtools/builtin/vscode": {},
-  "@devtools/builtin/prettier": {},
+  "@devtools/builtin/prettier": {
+    "settings": {
+      "singleQuote": true,
+      "printWidth": 100,
+      "plugins": ["prettier-plugin-packagejson"]
+    }
+  },
   "@devtools/builtin/github-actions": {},
   "@devtools/cli": {
     "version": "workspace:*"

@@ -23,15 +23,17 @@ const prettierPlugin = definePlugin<{ version?: string; settings: Record<string,
       pkg.packageJson.scripts ??= {};
       pkg.packageJson.scripts['format'] = 'prettier --write .';
 
+      // FIXME: Move to install action
       pkg.packageJson.devDependencies ??= {};
       pkg.packageJson.devDependencies['prettier'] = options.version || devDependencies['prettier'];
 
       await writeFile(
         join(pkg.dir, '.prettierrc.json'),
+        // TODO: Deep merge with default settings
         `${JSON.stringify(options.settings ?? defaultSettings, null, 2)}\n`,
       );
 
-      // TODO: Add to gitignore if not customized
+      // TODO: Add .prettierrc.json to gitignore
     }
   },
 });

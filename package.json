@@ -18,8 +18,9 @@
     "@devtools/cli": "workspace:*",
     "@turbo/gen": "^2.5.4",
     "ignore-sync": "^8.0.0",
-    "turbo": "^2.5.4",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "prettier-plugin-packagejson": "^2.5.15",
+    "turbo": "^2.5.4"
   },
   "engines": {
     "node": ">=20.6.0"
