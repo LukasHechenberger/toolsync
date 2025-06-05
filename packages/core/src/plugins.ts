@@ -2,7 +2,8 @@ import type { Logger } from '@devtools/logger';
 import type { DevtoolsConfig, Package, MaybePromise } from './types.js';
 
 export interface PluginContext<Options = {}> {
-  // rootDir: string;
+  rootDir: string;
+  rootPackage: Package | undefined;
   log: Logger;
   options: Options;
 }
@@ -17,7 +18,7 @@ export type Plugin<Options = {}> = {
   loadModule?<T>(reference: string, context: PluginContext): MaybePromise<T | void>;
   loadConfig?(
     options: Options,
-    context: PluginContext
+    context: PluginContext,
   ): MaybePromise<Partial<DevtoolsConfig> | void>;
 } & PluginHooks<Options>;
 

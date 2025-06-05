@@ -1,4 +1,4 @@
-import type { Package as ToolsPackage } from '@manypkg/get-packages';
+import type { Package as ToolsPackage, Packages as ToolsPackages } from '@manypkg/get-packages';
 import type { Plugin } from './plugins.js';
 
 // MARK: Helpers
@@ -32,4 +32,10 @@ declare module '@manypkg/tools' {
 /** A package inside the current project */
 export interface Package extends ToolsPackage {
   isRoot: boolean;
+}
+
+/** A package inside the current project */
+export interface Packages extends ToolsPackages {
+  rootPackage?: Package;
+  packages: Package[];
 }
