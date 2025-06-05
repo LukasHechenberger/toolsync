@@ -110,3 +110,8 @@ Individial packages can disable tools in their package.json (or devtools.json ?)
 ### Core
 
 - [ ] Warn if plugin is configured but not loaded (?)
+
+### General
+
+- [ ] Rename from `@devtools` to `@tool-sync`
+- [ ] Create _create_ package `create-super-fancy-tools-setup` :)
