@@ -55,7 +55,10 @@ class Logger implements LogFns {
     return this.pino.level;
   }
 
-  constructor(readonly ns: string, parent?: Logger) {
+  constructor(
+    readonly ns: string,
+    parent?: Logger,
+  ) {
     this.pino = parent
       ? parent.pino.child({ ns: parent.pino === rootLogger ? ns : `${parent.ns}:${ns}` })
       : rootLogger;

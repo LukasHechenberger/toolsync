@@ -11,18 +11,18 @@
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
-    "test": "echo 'Add test script here'",
-    "lint": "echo 'Add lint script here'"
-  },
-  "devDependencies": {
-    "@types/debug": "^4.1.12",
-    "tsup": "^8.5.0"
+    "dev": "tsup --watch",
+    "lint": "echo 'Add lint script here'",
+    "test": "echo 'Add test script here'"
   },
   "dependencies": {
     "debug": "^4.4.1",
     "pino": "^9.7.0",
     "pino-pretty": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "tsup": "^8.5.0"
   }
 }

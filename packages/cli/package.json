@@ -6,10 +6,10 @@
     "devtools": "./out/bin.js"
   },
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
-    "test": "echo 'Add test script here'",
-    "lint": "echo 'Add lint script here'"
+    "dev": "tsup --watch",
+    "lint": "echo 'Add lint script here'",
+    "test": "echo 'Add test script here'"
   },
   "dependencies": {
     "@devtools/builtin": "workspace:^",

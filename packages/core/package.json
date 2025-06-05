@@ -1,9 +1,10 @@
 {
   "name": "@devtools/core",
-  "type": "module",
   "version": "0.0.0",
   "description": "Core functionality used in @devtools/cli etc",
-  "main": "out/index.cjs",
+  "license": "MIT",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./out/index.d.ts",
@@ -21,17 +22,10 @@
       "require": "./out/types.cjs"
     }
   },
+  "main": "out/index.cjs",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
-  },
-  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/debug": "^4.1.12",
-    "@types/node": "^22.15.29",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@devtools/logger": "workspace:^",
@@ -39,5 +33,11 @@
     "@manypkg/tools": "^2.0.0",
     "debug": "^4.4.1",
     "deepmerge-ts": "^7.1.5"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.12",
+    "@types/node": "^22.15.29",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   }
 }

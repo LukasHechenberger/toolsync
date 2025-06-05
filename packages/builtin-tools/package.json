@@ -1,8 +1,10 @@
 {
   "name": "@devtools/builtin",
   "version": "0.0.0",
-  "type": "module",
   "description": "Default devtools available",
+  "license": "MIT",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./out/index.d.ts",
@@ -34,11 +36,9 @@
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
-  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
-  "license": "MIT",
   "dependencies": {
     "@devtools/core": "workspace:^"
   },
@@ -55,10 +55,10 @@
     "yaml": "^2.8.0"
   },
   "peerDependenciesMeta": {
-    "prettier": {
+    "ignore-sync": {
       "optional": true
     },
-    "ignore-sync": {
+    "prettier": {
       "optional": true
     },
     "yaml": {
