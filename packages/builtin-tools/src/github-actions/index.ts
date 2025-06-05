@@ -50,8 +50,8 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
             jobs: {
               build: {
                 name: 'Code Quality',
-                timeout: 15,
-                runsOn: 'ubuntu-latest',
+                'timeout-minutes': 15,
+                'runs-on': 'ubuntu-latest',
                 env: {
                   DO_NOT_TRACK: '1',
                 },
@@ -60,7 +60,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                     name: 'Check out code',
                     uses: 'actions/checkout@v4',
                     with: {
-                      fetchDepth: 2,
+                      'fetch-depth': 2,
                       lfs: true,
                     },
                   },
@@ -71,7 +71,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                     name: 'Setup Node.js environment',
                     uses: 'actions/setup-node@v4',
                     with: {
-                      nodeVersion: 22,
+                      'node-version': 22,
                       cache: 'pnpm',
                     },
                   },
