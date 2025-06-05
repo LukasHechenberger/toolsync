@@ -2,6 +2,7 @@
   "@devtools/builtin/ignore-sync": {},
   "@devtools/builtin/vscode": {},
   "@devtools/builtin/prettier": {},
+  "@devtools/builtin/github-actions": {},
   "@devtools/cli": {
     "version": "workspace:*"
   }

@@ -18,14 +18,14 @@ const require = global.require ?? createRequire(import.meta.url);
 const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
   name: '@devtools/core',
   async loadModule(reference: string, { log }) {
-    log.debug(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
+    log.trace(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
 
     // NOTE: Once it's stable, we can use import.meta.resolve
     // const metaResolved = import.meta.resolve(reference, 'file://' + process.cwd());
 
     // FIXME: Does not work if "exports" does not contain a "default" field - Add a warning!
     const resolved = require.resolve(reference, { paths: [process.cwd()] });
-    log.info(`Resolved module '${reference}' to '${resolved}'`);
+    log.debug(`Resolved module '${reference}' to '${resolved}'`);
 
     return (await import(resolved)).default;
   },
@@ -33,10 +33,10 @@ const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
     const pluginsToLoad = Array.isArray(defaultPlugins)
       ? defaultPlugins
       : defaultPlugins
-      ? [
-          /* FIXME: 'some', 'defaults' (?) or remove defaultPlugins option */
-        ]
-      : [];
+        ? [
+            /* FIXME: 'some', 'defaults' (?) or remove defaultPlugins option */
+          ]
+        : [];
 
     return {
       plugins: pluginsToLoad,
@@ -49,7 +49,7 @@ const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
 type PluginHookPayload = {
   [K in keyof Required<PluginHooks>]: Parameters<Required<PluginHooks>[K]> extends [
     infer P,
-    PluginContext
+    PluginContext,
   ]
     ? P
     : never;
@@ -153,7 +153,7 @@ class Devtools {
 
   private async run<H extends keyof PluginHookPayload>(
     hook: H,
-    payload: PluginHookPayload[H]
+    payload: PluginHookPayload[H],
   ): Promise<void> {
     this.log.trace(`Running hook ${hook}`, { payload });
 
@@ -194,7 +194,7 @@ class Devtools {
       // TODO: Use prettier etc. to format the package.json
       await writeFile(
         join(pkg.dir, 'package.json'),
-        JSON.stringify(pkg.packageJson, null, 2) + '\n'
+        JSON.stringify(pkg.packageJson, null, 2) + '\n',
       );
     }
   }

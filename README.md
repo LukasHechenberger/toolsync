@@ -30,6 +30,9 @@ DEBUG=*:timing <your command> # Log timing
 
 ## Tools (TODO)
 
+- [ ] Package readmes
+  - [ ] Header with package name, description, npm badge etc. for every package
+  - [ ] List of packages in Root readme
 - [ ] VScode
   - [x] Create settings.json based on other plugins
   - [ ] Gitignore .vscode folder
@@ -37,6 +40,8 @@ DEBUG=*:timing <your command> # Log timing
   - [x] Create .prettierrc
   - [x] Add `format` script
   - [x] Add vscode extension if enabled
+- [ ] Github Actions
+  - [x] Basic CI workflow
 - [ ] ignore-sync
   - [ ] Install
   - [x] setup "prepare" script
@@ -52,7 +57,7 @@ DEBUG=*:timing <your command> # Log timing
   - [ ] Add vscode extension if enabled
   - [ ] Framework integration:
     - Create e.g. nextjs config if used
-    - Disable nextjs eslint during build if github actions is used
+    - Disable nextjs eslint during build if github actions are used
 - [ ] Publint
   - [ ] Ensure all packages have a "check-build" script
   - [ ] Add "check-build" to turbo.json if necessary
@@ -69,8 +74,8 @@ All tools used/configured should be saved in a simple json file e.g.
 ```jsonc filename="devtools.json"
 {
   "prettier": {
-    "formatPackageJson": true // Enables `prettier-plugin-packagejson`
-  }
+    "formatPackageJson": true, // Enables `prettier-plugin-packagejson`
+  },
 }
 ```
 
