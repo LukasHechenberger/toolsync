@@ -8,7 +8,8 @@
     "dev": "turbo run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ignore-sync": "ignore-sync .",
-    "postinstall": "ignore-sync ."
+    "postinstall": "ignore-sync .",
+    "format": "prettier --write ."
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",
@@ -17,7 +18,8 @@
     "@devtools/cli": "workspace:*",
     "@turbo/gen": "^2.5.4",
     "ignore-sync": "^8.0.0",
-    "turbo": "^2.5.4"
+    "turbo": "^2.5.4",
+    "prettier": "^3.5.3"
   },
   "engines": {
     "node": ">=20.6.0"

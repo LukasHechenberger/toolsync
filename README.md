@@ -33,11 +33,11 @@ DEBUG=*:timing <your command> # Log timing
 - [ ] VScode
   - [x] Create settings.json based on other plugins
   - [ ] Gitignore .vscode folder
-- [ ] prettier
-  - [ ] Create .prettierrc (in all packages??)
-  - [ ] Add `format` script (to all packages ??)
-  - [ ] Add vscode extension if enabled
-- [x] ignore-sync
+- [x] prettier
+  - [x] Create .prettierrc
+  - [x] Add `format` script
+  - [x] Add vscode extension if enabled
+- [ ] ignore-sync
   - [ ] Install
   - [x] setup "prepare" script
   - [ ] Create .prettierignore-sync if prettier is enabled
