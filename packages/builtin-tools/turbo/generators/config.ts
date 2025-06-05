@@ -1,4 +1,5 @@
 import { PlopTypes } from '@turbo/gen';
+import { name as prefix } from '../../package.json';
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
   plop.setGenerator('plugin', {
@@ -15,6 +16,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
           return true;
         },
       },
+      {
+        type: 'confirm',
+        name: 'installInWorkspace',
+        message: 'Should this plugin be installed in the workspace?',
+        default: true,
+      },
     ],
     actions: [
       // Create the plugin file
@@ -22,11 +29,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: 'add',
         path: './src/{{ dashCase name }}/index.ts',
         template: `import { definePlugin } from '@devtools/core/plugins';
+const pluginName = '${prefix}/{{ dashCase name }}';
 
 const {{ camelCase name }}Plugin = definePlugin<{
   // TODO: Define plugin options here
 }>({
-  name: '@devtools/builtin/{{ dashCase name }}',
+  name: pluginName,
   // TODO: Add hooks here...
 });
 
@@ -46,6 +54,16 @@ export default {{ camelCase name }}Plugin;
               default: `./out/${data.name}/index.js`,
             },
           };
+
+          return JSON.stringify(manifest, null, 2) + '\n';
+        },
+      },
+      {
+        type: 'modify',
+        path: '{{ turbo.paths.root }}/devtools.json',
+        transform(current, data) {
+          const manifest = JSON.parse(current);
+          manifest[`${prefix}/${data.name}`] = {};
 
           return JSON.stringify(manifest, null, 2) + '\n';
         },
