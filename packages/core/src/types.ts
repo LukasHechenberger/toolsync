@@ -21,6 +21,9 @@ export interface DevtoolsConfig {
 
 declare module '@manypkg/tools' {
   interface PackageJSON {
+    /** Optional description of the package */
+    description?: string;
+
     /** Package scripts */
     scripts?: Record<string, string>;
 

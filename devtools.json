@@ -6,5 +6,6 @@
   "@devtools/cli": {
     "version": "workspace:*"
   },
-  "@devtools/builtin/pnpm": {}
+  "@devtools/builtin/pnpm": {},
+  "@devtools/builtin/package-readme": {}
 }

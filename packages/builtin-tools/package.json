@@ -27,6 +27,10 @@
     "./pnpm": {
       "types": "./out/pnpm/index.d.ts",
       "default": "./out/pnpm/index.js"
+    },
+    "./package-readme": {
+      "types": "./out/package-readme/index.d.ts",
+      "default": "./out/package-readme/index.js"
     }
   },
   "scripts": {
