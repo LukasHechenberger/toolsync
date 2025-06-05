@@ -1,19 +1,19 @@
 {
   "name": "@devtools/monorepo",
-  "type": "module",
   "version": "0.0.0",
   "description": "No more setting up the same 100 tools when starting a new project",
+  "license": "MIT",
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "type": "module",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "ignore-sync": "ignore-sync .",
     "format": "prettier --write .",
-    "test": "turbo run test",
-    "prepare": "devtools prepare --config devtools.json && ignore-sync ."
+    "format:root": "prettier --write .",
+    "ignore-sync": "ignore-sync .",
+    "prepare": "devtools prepare --config devtools.json && ignore-sync .",
+    "test": "turbo run test"
   },
-  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
-  "license": "MIT",
-  "packageManager": "pnpm@10.11.1",
   "devDependencies": {
     "@devtools/cli": "workspace:*",
     "@turbo/gen": "^2.5.4",
@@ -22,6 +22,7 @@
     "prettier-plugin-packagejson": "^2.5.15",
     "turbo": "^2.5.4"
   },
+  "packageManager": "pnpm@10.11.1",
   "engines": {
     "node": ">=20.6.0"
   }
