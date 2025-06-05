@@ -44,7 +44,8 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
         await writeFile(
           join(dir, `${name}.yml`),
           YAML.stringify({
-            name: 'CI',
+            // FIXME: Insert remaining options, like additional jobs, etc.
+            name: workflow.name,
             on: ['push'],
             jobs: {
               build: {
