@@ -1,13 +1,16 @@
 import { definePlugin } from '@devtools/core/plugins';
-import type { DevtoolsConfig } from '@devtools/core/types';
+import { devDependencies } from '../../package.json';
 
-const ignoreSyncPlugin = definePlugin({
+const ignoreSyncPlugin = definePlugin<{
+  /** Version of ignore-sync to install. */
+  version?: string;
+}>({
   name: 'ignore-sync',
   loadConfig() {
     return {
       config: {
         '@devtools/cli': {
-          postinstall: ['ignore-sync .'],
+          prepare: ['ignore-sync .'],
         },
         '@devtools/builtin/vscode': {
           settings: {
@@ -19,13 +22,14 @@ const ignoreSyncPlugin = definePlugin({
       },
     };
   },
-  setupPackage(pkg, { log }) {
+  setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
       pkg.packageJson.scripts['ignore-sync'] = 'ignore-sync .';
 
       pkg.packageJson.devDependencies ??= {};
-      pkg.packageJson.devDependencies['ignore-sync'] = '^8.0.0'; // FIXME: Get version from options
+      pkg.packageJson.devDependencies['ignore-sync'] =
+        options.version || devDependencies['ignore-sync'];
     }
   },
 });

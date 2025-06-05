@@ -37,7 +37,7 @@ const programConfig: DevtoolsConfig = {
   config: {},
 };
 
-const cliPlugin = definePlugin<{ version?: string; configFile?: string; postinstall?: string[] }>({
+const cliPlugin = definePlugin<{ version?: string; configFile?: string; prepare?: string[] }>({
   name: '@devtools/cli',
   loadConfig() {
     return programConfig;
@@ -45,9 +45,9 @@ const cliPlugin = definePlugin<{ version?: string; configFile?: string; postinst
   setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
-      if (options.postinstall) {
+      if (options.prepare) {
         // TODO: Append if already exists
-        pkg.packageJson.scripts['postinstall'] = options.postinstall.join(' && ');
+        pkg.packageJson.scripts['prepare'] = options.prepare.join(' && ');
 
         // NOTE: If we want to use dynamic configuration:
         // pkg.packageJson.scripts['_postinstall'] = pkg.packageJson.scripts[
@@ -75,7 +75,7 @@ const program = new Command()
   .addHelpText(
     'afterAll',
     `
-For usage details see <LINK>` // TODO: Insert repo url
+For usage details see <LINK>`, // TODO: Insert repo url
   )
   .on('option:no-default-plugins', () => {
     log.debug('Disabling default plugins via --no-default-plugins');

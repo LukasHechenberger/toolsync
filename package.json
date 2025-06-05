@@ -8,8 +8,8 @@
     "dev": "turbo run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ignore-sync": "ignore-sync .",
-    "postinstall": "ignore-sync .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "ignore-sync ."
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",

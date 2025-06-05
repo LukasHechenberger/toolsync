@@ -30,6 +30,8 @@ const prettierPlugin = definePlugin<{ version?: string; settings: Record<string,
         join(pkg.dir, '.prettierrc.json'),
         `${JSON.stringify(options.settings ?? defaultSettings, null, 2)}\n`,
       );
+
+      // TODO: Add to gitignore if not customized
     }
   },
 });
