@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "ignore-sync": "ignore-sync .",
     "format": "prettier --write .",
-    "prepare": "ignore-sync ."
+    "prepare": "devtools prepare --config devtools.json && ignore-sync ."
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",

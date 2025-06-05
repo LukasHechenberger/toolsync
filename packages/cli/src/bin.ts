@@ -32,32 +32,31 @@ const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
   },
 });
 
+const cliPluginName = '@devtools/cli';
 const programConfig: DevtoolsConfig = {
   plugins: [],
-  config: {},
+  config: {
+    [cliPluginName]: {
+      prepare: ['devtools prepare'],
+    },
+  },
 };
 
 const cliPlugin = definePlugin<{ version?: string; configFile?: string; prepare?: string[] }>({
-  name: '@devtools/cli',
-  loadConfig() {
+  name: cliPluginName,
+  loadConfig(_, { log }) {
+    log.trace('Returning CLI plugin config', { programConfig });
     return programConfig;
   },
   setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
-      if (options.prepare) {
-        // TODO: Append if already exists
-        pkg.packageJson.scripts['prepare'] = options.prepare.join(' && ');
 
-        // NOTE: If we want to use dynamic configuration:
-        // pkg.packageJson.scripts['_postinstall'] = pkg.packageJson.scripts[
-        //   'devtools:postinstall'
-        // ] = `devtools postinstall${
-        //   options.configFile
-        //     ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}`
-        //     : ''
-        // }`;
-      }
+      // TODO: Append if already exists
+      pkg.packageJson.scripts['prepare'] = [
+        `devtools prepare${options.configFile ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}` : ''}`,
+        ...(options.prepare ?? []),
+      ].join(' && ');
 
       // FIXME: Move to 'install' hook
       pkg.packageJson.devDependencies ??= {};
@@ -97,7 +96,9 @@ For usage details see <LINK>`, // TODO: Insert repo url
     programConfig.plugins = [...programConfig.plugins, resolveJsonFilePlugin];
     programConfig.config = {
       ...programConfig.config,
-      [cliPlugin.name]: { configFile },
+      [cliPluginName]: {
+        configFile,
+      },
       [resolveJsonFilePlugin.name]: { configFile },
     };
   })

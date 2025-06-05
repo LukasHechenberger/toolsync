@@ -32,6 +32,7 @@ DEBUG=*:timing <your command> # Log timing
 
 - [ ] Pnpm
   - [x] Set correct version in root packageManager
+  - [ ] Set version in github actions install steps
 - [ ] Package readmes
   - [ ] Header with package name, description, npm badge etc. for every package
   - [ ] List of packages in Root readme
@@ -42,6 +43,7 @@ DEBUG=*:timing <your command> # Log timing
   - [x] Create .prettierrc
   - [x] Add `format` script
   - [x] Add vscode extension if enabled
+  - [ ] Add format task to turbo.json (if enabled)
 - [ ] Github Actions
   - [x] Basic CI workflow
 - [ ] ignore-sync
@@ -70,6 +72,13 @@ DEBUG=*:timing <your command> # Log timing
 - [ ] Generate VScode devcontainers
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
+- [x] CLI
+  - [ ] `prepare` should set up tools, update readme etc. for each package
+    - [x] Run from repo root to handle all packages
+    - [ ] Should not run during CI to speed up build
+  - [ ] `check` should call prepare and check if git status is clean - to validate setup during CI builds
+
+> `check` could be a v2 feature
 
 All tools used/configured should be saved in a simple json file e.g.
 
@@ -94,12 +103,3 @@ Individial packages can disable tools in their package.json (or devtools.json ?)
 ### Core
 
 - [ ] Warn if plugin is configured but not loaded (?)
-
-### CLI
-
-- `prepare` should set up tools, update readme etc. for each package
-  - Run from repo root to handle all packages
-  - Should not run during CI to speed up build
-- `check` should call prepare and check if git status is clean - to validate setup during CI builds
-
-> `check` could be a v2 feature
