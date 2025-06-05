@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - name: Prepare devtools
+        run: pnpm install --ignore-scripts && pnpm build
       - name: Install dependencies
         run: pnpm install
       - name: Code Quality Checks

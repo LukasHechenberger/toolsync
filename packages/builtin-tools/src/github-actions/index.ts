@@ -4,6 +4,7 @@ import { definePlugin } from '@devtools/core/plugins';
 import { join } from 'path';
 
 interface GithubActionsWorkflowStepOptions {
+  id?: string;
   name: string;
   uses?: string;
   with?: Record<string, any>;
@@ -74,6 +75,11 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                       'node-version': 22,
                       cache: 'pnpm',
                     },
+                  },
+                  // FIXME: Add via (private) repo devtools plugin
+                  {
+                    name: 'Prepare devtools',
+                    run: `pnpm install --ignore-scripts && pnpm build`,
                   },
                   {
                     name: 'Install dependencies',
