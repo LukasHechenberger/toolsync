@@ -5,7 +5,7 @@ import { devtools } from '@devtools/core';
 import { definePlugin } from '@devtools/core/plugins';
 import type { DevtoolsConfig } from '@devtools/core/types';
 import { name, version } from '../package.json';
-import { join } from 'path';
+import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
 import { logger } from '@devtools/logger';
 
@@ -16,11 +16,11 @@ const log = logger.child('cli');
 const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
   name: '@devtools/cli/resolve-json-config-file',
   async loadConfig({ configFile }, { log }) {
-    log.info(`Loading JSON config file`, { configFile });
+    log.trace(`Trying to load config file ${configFile}`);
     if (!configFile.endsWith('.json'))
       throw new Error(`Config file must be a JSON file, got: ${configFile}`);
 
-    log.info('Loading config file', { configFile });
+    log.info(`Loading config file ${configFile}`);
 
     const jsonFile = JSON.parse(await readFile(configFile, 'utf-8').catch(() => 'null'));
     log.debug(`Loaded JSON file:`, { jsonFile, plugins: Object.keys(jsonFile) });
@@ -37,10 +37,33 @@ const programConfig: DevtoolsConfig = {
   config: {},
 };
 
-const cliPlugin = definePlugin<{ configFile: string }>({
+const cliPlugin = definePlugin<{ version?: string; configFile?: string; postinstall?: string[] }>({
   name: '@devtools/cli',
   loadConfig() {
     return programConfig;
+  },
+  setupPackage(pkg, { log, options }) {
+    if (pkg.isRoot) {
+      console.dir({ options });
+      pkg.packageJson.scripts ??= {};
+      if (options.postinstall) {
+        // TODO: Append if already exists
+        pkg.packageJson.scripts['postinstall'] = options.postinstall.join(' && ');
+
+        // NOTE: If we want to use dynamic configuration:
+        // pkg.packageJson.scripts['_postinstall'] = pkg.packageJson.scripts[
+        //   'devtools:postinstall'
+        // ] = `devtools postinstall${
+        //   options.configFile
+        //     ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}`
+        //     : ''
+        // }`;
+      }
+
+      // FIXME: Move to 'install' hook
+      pkg.packageJson.devDependencies ??= {};
+      pkg.packageJson.devDependencies['@devtools/cli'] = options.version ?? version;
+    }
   },
 });
 
@@ -69,18 +92,22 @@ For usage details see <LINK>` // TODO: Insert repo url
     log.debug(`Plugin specified: ${loader}`);
     programConfig.plugins.push(loader.startsWith('.') ? join(process.cwd(), loader) : loader);
   })
-  .on('option:config', (config) => {
-    log.debug(`Config file specified via --config: ${config}`);
+  .on('option:config', (configFile) => {
+    log.debug(`Config file specified via --config: ${configFile}`);
 
     programConfig.plugins = [...programConfig.plugins, resolveJsonFilePlugin];
     programConfig.config = {
       ...programConfig.config,
-      [resolveJsonFilePlugin.name]: {
-        configFile: config,
-      },
+      [cliPlugin.name]: { configFile },
+      [resolveJsonFilePlugin.name]: { configFile },
     };
   })
   .hook('preAction', (thisCommand, actionCommand) => {
+    if (!thisCommand.opts().config) {
+      log.info(`No config file specified, using default config`);
+      // FIXME: TODO: Default to devtools.json in the current directory
+    }
+
     log.trace(`About to call action handler for subcommand: ${actionCommand.name()}`, {
       arguments: actionCommand.args,
       options: actionCommand.opts(),
@@ -112,6 +139,34 @@ program
     log.timing('Finished running setupPackage hooks');
 
     log.info('Setup completed', { config: tools.config });
+  });
+
+program
+  .command('postinstall')
+  .description('Run necessary posinstall steps')
+  .action(async (options, args) => {
+    log.timing('Starting devtools CLI preparation');
+    const tools = await devtools({
+      plugins: [cliPlugin],
+      config: {
+        [cliPlugin.name]: options,
+      },
+    });
+    log.timing('Finished devtools CLI preparation');
+
+    log.timing('Start loading config');
+    const config = await tools.loadConfig();
+    log.timing('Finished loading config');
+
+    log.debug('Devtools CLI is ready', { config: config.config });
+
+    console.log('TODO: Run postinstall steps', tools.config[cliPlugin.name]);
+
+    // log.timing('Running setupPackage hooks');
+    // await tools.runSetup();
+    // log.timing('Finished running setupPackage hooks');
+
+    // log.info('Setup completed', { config: tools.config });
   });
 
 program.parse();

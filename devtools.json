@@ -1,3 +1,6 @@
 {
-  "@devtools/builtin/ignore-sync": {}
+  "@devtools/builtin/ignore-sync": {},
+  "@devtools/cli": {
+    "version": "workspace:*"
+  }
 }

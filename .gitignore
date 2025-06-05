@@ -3,3 +3,6 @@ out
 
 # By turborepo tool
 .turbo
+
+# By ignore-sync
+.prettierignore

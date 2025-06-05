@@ -1,4 +1,5 @@
 import { logger } from '@devtools/logger';
+import { deepmergeInto } from 'deepmerge-ts';
 import type { DevtoolsConfig, Package } from './types';
 import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
 import { getPackages } from '@manypkg/get-packages';
@@ -74,7 +75,10 @@ class Devtools {
     for (const plugin of [...this.resolvedConfig.plugins].reverse()) {
       if (plugin.loadModule) {
         this.log.trace(`Trying to load module ${ref} with plugin ${plugin.name}`);
-        const module = await plugin.loadModule<T>(ref, { log: pluginLogger.child(plugin.name) });
+        const module = await plugin.loadModule<T>(ref, {
+          log: pluginLogger.child(plugin.name),
+          options: this.resolvedConfig.config[plugin.name] ?? {},
+        });
 
         if (module) {
           return module;
@@ -92,14 +96,15 @@ class Devtools {
     this.log.timing('Starting loadPlugins');
 
     for (const pluginRef of config.plugins) {
-      const plugin =
-        typeof pluginRef === 'string' ? await this.loadModule<Plugin>(pluginRef) : pluginRef;
+      const name = typeof pluginRef === 'string' ? pluginRef : pluginRef.name;
 
-      // FIXME: Do this before loading the plugin (does not matter as import() is cached by node.js)
-      if (this.resolvedConfig.plugins.some((p) => p.name === plugin.name)) {
-        this.log.debug(`Plugin ${plugin.name} is already loaded, skipping.`);
+      if (this.resolvedConfig.plugins.some((p) => p.name === name)) {
+        this.log.debug(`Plugin ${name} is already loaded, skipping.`);
         continue;
       }
+
+      const plugin =
+        typeof pluginRef === 'string' ? await this.loadModule<Plugin>(pluginRef) : pluginRef;
 
       this.resolvedConfig.plugins.push(plugin);
       this.log.debug('loaded plugin', { plugin });
@@ -120,6 +125,7 @@ class Devtools {
         });
         const result = await plugin.loadConfig(this.resolvedConfig.config[plugin.name] ?? {}, {
           log: pluginLogger.child(plugin.name),
+          options: this.resolvedConfig.config[plugin.name] ?? {},
         });
 
         if (result) {
@@ -127,11 +133,11 @@ class Devtools {
           this.log.debug(`Loaded config from plugin: ${plugin.name}`, remainingConfig);
 
           // Merge the loaded config into the resolved config
-          Object.assign(this.resolvedConfig.config, remainingConfig);
+          deepmergeInto(this.resolvedConfig.config, remainingConfig ?? {});
 
           if (plugins && plugins.length > 0) {
             this.log.debug(`Loading plugins from ${plugin.name}:`, plugins);
-            await this.loadPlugins(result);
+            await this.loadPlugins({ config: {}, plugins: [], ...result });
           }
         } else {
           this.log.warn(`Plugin '${plugin.name}' did not return a config`);
@@ -154,7 +160,10 @@ class Devtools {
     for (const plugin of this.resolvedConfig.plugins) {
       if (plugin[hook]) {
         this.log.debug(`Running '${hook}' hook for plugin '${plugin.name}'`);
-        await plugin[hook](payload, { log: pluginLogger.child(plugin.name) });
+        await plugin[hook](payload, {
+          log: pluginLogger.child(plugin.name),
+          options: this.resolvedConfig.config[plugin.name] ?? {},
+        });
       }
     }
 
