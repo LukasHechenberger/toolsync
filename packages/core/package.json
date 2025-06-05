@@ -23,8 +23,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsup --watch"
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",

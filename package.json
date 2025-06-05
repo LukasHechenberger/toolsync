@@ -6,9 +6,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "ignore-sync": "ignore-sync .",
     "format": "prettier --write .",
+    "test": "turbo run test",
     "prepare": "devtools prepare --config devtools.json && ignore-sync ."
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
