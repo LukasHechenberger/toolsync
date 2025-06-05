@@ -34,8 +34,9 @@ DEBUG=*:timing <your command> # Log timing
   - [ ] Create .prettierrc (in all packages??)
   - [ ] Add `format` script (to all packages ??)
   - [ ] Add vscode extension if enabled
-- [ ] ignore-sync
-  - [ ] Install and setup "prepare" script
+- [x] ignore-sync
+  - [ ] Install
+  - [x] setup "prepare" script
   - [ ] Create .prettierignore-sync if prettier is enabled
   - [ ] Add file associations to vscode settings
 - [ ] Turborepo
