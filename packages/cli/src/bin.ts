@@ -138,7 +138,8 @@ program
     await tools.runSetup();
     log.timing('Finished running setupPackage hooks');
 
-    log.info('Setup completed', { config: tools.config });
+    log.debug('Setup completed', { config: tools.config });
+    log.info('Done');
   });
 
 program
