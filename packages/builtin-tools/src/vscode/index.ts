@@ -1,6 +1,5 @@
 import { mkdir, writeFile } from 'fs/promises';
 import { definePlugin } from '@devtools/core/plugins';
-import type { DevtoolsConfig } from '@devtools/core/types';
 import { join } from 'path';
 
 const vscodePlugin = definePlugin<{ settings: Record<string, any> }>({

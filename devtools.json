@@ -1,6 +1,7 @@
 {
   "@devtools/builtin/ignore-sync": {},
   "@devtools/builtin/vscode": {},
+  "@devtools/builtin/prettier": {},
   "@devtools/cli": {
     "version": "workspace:*"
   }

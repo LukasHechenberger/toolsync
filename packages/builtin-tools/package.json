@@ -15,6 +15,10 @@
     "./vscode": {
       "types": "./out/vscode/index.d.ts",
       "default": "./out/vscode/index.js"
+    },
+    "./prettier": {
+      "types": "./out/prettier/index.d.ts",
+      "default": "./out/prettier/index.js"
     }
   },
   "scripts": {
@@ -28,7 +32,16 @@
     "@devtools/core": "workspace:^"
   },
   "devDependencies": {
+    "prettier": "^3.5.3",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    }
   }
 }
