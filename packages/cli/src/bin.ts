@@ -44,7 +44,6 @@ const cliPlugin = definePlugin<{ version?: string; configFile?: string; postinst
   },
   setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
-      console.dir({ options });
       pkg.packageJson.scripts ??= {};
       if (options.postinstall) {
         // TODO: Append if already exists
