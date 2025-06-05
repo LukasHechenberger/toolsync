@@ -1,6 +1,10 @@
 import { logger } from '@devtools/logger';
-import type { DevtoolsConfig } from './types.js';
-import { definePlugin, type Plugin } from './plugins.js';
+import type { DevtoolsConfig, Package } from './types';
+import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
+import { getPackages } from '@manypkg/get-packages';
+import { createRequire } from 'module';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
@@ -8,37 +12,69 @@ const pluginLogger = logger.child('plugin');
 log.info('Devtools Core initialized');
 log.debug('Debug logging is enabled');
 
-const corePlugin = definePlugin({
+const require = global.require ?? createRequire(import.meta.url);
+
+const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
   name: '@devtools/core',
-  async loadModule(reference: string) {
-    log.debug(`Loading module ${reference} as a node module`);
-    return await import(reference);
+  async loadModule(reference: string, { log }) {
+    log.debug(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
+
+    // NOTE: Once it's stable, we can use import.meta.resolve
+    // const metaResolved = import.meta.resolve(reference, 'file://' + process.cwd());
+
+    // FIXME: Does not work if "exports" does not contain a "default" field - Add a warning!
+    const resolved = require.resolve(reference, { paths: [process.cwd()] });
+    log.info(`Resolved module '${reference}' to '${resolved}'`);
+
+    return (await import(resolved)).default;
   },
-  loadConfig() {
+  loadConfig({ defaultPlugins = true }, { log }) {
+    const pluginsToLoad = Array.isArray(defaultPlugins)
+      ? defaultPlugins
+      : defaultPlugins
+      ? [
+          /* FIXME: 'some', 'defaults' (?) or remove defaultPlugins option */
+        ]
+      : [];
+
     return {
-      plugins: [],
+      plugins: pluginsToLoad,
       config: {},
     };
   },
 });
 
+/** @internal */
+type PluginHookPayload = {
+  [K in keyof Required<PluginHooks>]: Parameters<Required<PluginHooks>[K]> extends [
+    infer P,
+    PluginContext
+  ]
+    ? P
+    : never;
+};
+
 type RuntimeDevtoolsConfig = Omit<DevtoolsConfig, 'plugins'> & {
-  plugins: Plugin[];
+  plugins: Plugin[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
 };
 
 class Devtools {
   private log = log.child('api');
-  private _resolvedConfig: RuntimeDevtoolsConfig = { plugins: [corePlugin], config: {} };
+
+  private resolvedConfig: RuntimeDevtoolsConfig = { plugins: [corePlugin], config: {} };
+  get config() {
+    return this.resolvedConfig.config;
+  }
 
   constructor(private readonly _initialConfig: DevtoolsConfig) {
     this.log.trace('Devtools initialized', { initialConfig: _initialConfig });
   }
 
   private async loadModule<T>(ref: string): Promise<T> {
-    for (const plugin of [...this._resolvedConfig.plugins].reverse()) {
+    for (const plugin of [...this.resolvedConfig.plugins].reverse()) {
       if (plugin.loadModule) {
         this.log.trace(`Trying to load module ${ref} with plugin ${plugin.name}`);
-        const module = await plugin.loadModule<T>(ref);
+        const module = await plugin.loadModule<T>(ref, { log: pluginLogger.child(plugin.name) });
 
         if (module) {
           return module;
@@ -53,55 +89,110 @@ class Devtools {
 
   // FIXME: Only once!
   async loadPlugins(config: DevtoolsConfig = this._initialConfig) {
+    this.log.timing('Starting loadPlugins');
+
     for (const pluginRef of config.plugins) {
       const plugin =
         typeof pluginRef === 'string' ? await this.loadModule<Plugin>(pluginRef) : pluginRef;
 
-      if (this._resolvedConfig.plugins.some((p) => p.name === plugin.name)) {
+      // FIXME: Do this before loading the plugin (does not matter as import() is cached by node.js)
+      if (this.resolvedConfig.plugins.some((p) => p.name === plugin.name)) {
         this.log.debug(`Plugin ${plugin.name} is already loaded, skipping.`);
         continue;
       }
 
-      this._resolvedConfig.plugins.push(plugin);
+      this.resolvedConfig.plugins.push(plugin);
       this.log.debug('loaded plugin', { plugin });
     }
+
+    this.log.timing('Finished loadPlugins');
   }
 
   // FIXME: Only once!
   async loadConfig() {
+    this.log.timing('Starting loadConfig');
+
     // Load the config from the plugins
-    for (const plugin of this._resolvedConfig.plugins) {
+    for (const plugin of this.resolvedConfig.plugins) {
       if (plugin.loadConfig) {
         this.log.trace(`Loaded config before plugin ${plugin.name}`, {
-          resolvedConfig: this._resolvedConfig,
+          resolvedConfig: this.resolvedConfig,
         });
-        const result = await plugin.loadConfig(this._resolvedConfig.config[plugin.name], {
+        const result = await plugin.loadConfig(this.resolvedConfig.config[plugin.name] ?? {}, {
           log: pluginLogger.child(plugin.name),
         });
+
         if (result) {
           const { plugins, config: remainingConfig } = result;
           this.log.debug(`Loaded config from plugin: ${plugin.name}`, remainingConfig);
 
           // Merge the loaded config into the resolved config
-          Object.assign(this._resolvedConfig.config, remainingConfig);
+          Object.assign(this.resolvedConfig.config, remainingConfig);
 
           if (plugins && plugins.length > 0) {
             this.log.debug(`Loading plugins from ${plugin.name}:`, plugins);
             await this.loadPlugins(result);
           }
+        } else {
+          this.log.warn(`Plugin '${plugin.name}' did not return a config`);
         }
       }
     }
 
-    this.log.debug('Final resolved config:', { config: this._resolvedConfig });
+    this.log.timing('Finished loadConfig');
+    this.log.debug('Final resolved config:', { config: this.resolvedConfig });
 
-    return this._resolvedConfig;
+    return this.resolvedConfig;
+  }
+
+  private async run<H extends keyof PluginHookPayload>(
+    hook: H,
+    payload: PluginHookPayload[H]
+  ): Promise<void> {
+    this.log.trace(`Running hook ${hook}`, { payload });
+
+    for (const plugin of this.resolvedConfig.plugins) {
+      if (plugin[hook]) {
+        this.log.debug(`Running '${hook}' hook for plugin '${plugin.name}'`);
+        await plugin[hook](payload, { log: pluginLogger.child(plugin.name) });
+      }
+    }
+
+    this.log.debug(`Finished running '${hook}' hook`);
+  }
+
+  private async getPackages(): Promise<Package[]> {
+    const { rootPackage, packages } = await getPackages(process.cwd());
+
+    return [
+      ...(rootPackage ? [{ ...rootPackage, isRoot: true }] : []),
+      ...packages.map((pkg) => ({ ...pkg, isRoot: false })),
+    ];
+  }
+
+  async runSetup() {
+    const packages = await this.getPackages();
+    this.log.debug('Running setup hook for all packages', {
+      packages: packages.map((p) => p.packageJson.name),
+      plugins: this.resolvedConfig.plugins.map((p) => p.name),
+    });
+
+    for (const pkg of packages) {
+      this.log.debug(`Running setup for package: ${pkg.packageJson.name}`);
+      await this.run('setupPackage', pkg);
+
+      // TODO: Only write package.json if it was modified
+      // TODO: Use prettier etc. to format the package.json
+      await writeFile(
+        join(pkg.dir, 'package.json'),
+        JSON.stringify(pkg.packageJson, null, 2) + '\n'
+      );
+    }
   }
 }
 
 export async function devtools(config: DevtoolsConfig = { plugins: [], config: {} }) {
   log.debug('Creating Devtools instance', { initialConfig: config });
-  // console.dir({ initialConfig: config }, { depth: null, colors: true });
 
   const instance = new Devtools(config);
   await instance.loadPlugins();

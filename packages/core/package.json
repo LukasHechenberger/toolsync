@@ -37,6 +37,7 @@
   "dependencies": {
     "@devtools/logger": "workspace:^",
     "@manypkg/get-packages": "^3.0.0",
+    "@manypkg/tools": "^2.0.0",
     "debug": "^4.4.1"
   }
 }

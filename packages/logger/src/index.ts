@@ -11,6 +11,7 @@ const pretty = pinoPretty({
   messageFormat(log, messageKey, levelLabel, { colors }) {
     return `${log[messageKey]} ${colors.reset(colors.dim(`[${log.ns}]`))} `;
   },
+  sync: true,
 });
 const rootLogger = pino({ level: envLogLevel }, pretty);
 

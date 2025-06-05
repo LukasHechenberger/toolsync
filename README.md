@@ -25,6 +25,7 @@ If you want more granular debug logs use `DEBUG` instead
 ```shell
 DEBUG=devtools:* <your command> # Same as using `LOG_LEVEL=debug`
 DEBUG=devtools:cli:* <your command> # Enable debug logging just for the cli package
+DEBUG=*:timing <your command> # Log timing
 ```
 
 ## Tools (TODO)

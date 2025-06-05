@@ -27,6 +27,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@devtools/builtin':
+        specifier: workspace:^
+        version: link:../builtin-tools
       '@devtools/core':
         specifier: workspace:^
         version: link:../core
@@ -61,6 +64,9 @@ importers:
       '@manypkg/get-packages':
         specifier: ^3.0.0
         version: 3.0.0
+      '@manypkg/tools':
+        specifier: ^2.0.0
+        version: 2.0.0
       debug:
         specifier: ^4.4.1
         version: 4.4.1

@@ -1,6 +1,7 @@
-// MARK: Helpers
-
+import type { Package as ToolsPackage } from '@manypkg/get-packages';
 import type { Plugin } from './plugins.js';
+
+// MARK: Helpers
 
 export type MaybePromise<T> = T | Promise<T>;
 
@@ -14,10 +15,18 @@ export type PluginReference = string | Plugin<any>;
 
 /** Configuration for your devtools */
 export interface DevtoolsConfig {
-  // tools: Record<string, any>;
-  // plugins: Plugin[];
-  // plugins: Record<string, any>;
-  // plugins: Record<string, { reference: PluginReference; get plugin(): MaybePromise<Plugin> }>;
   plugins: PluginReference[];
   config: Record<string, any>;
+}
+
+declare module '@manypkg/tools' {
+  interface PackageJSON {
+    /** Package scripts */
+    scripts?: Record<string, string>;
+  }
+}
+
+/** A package inside the current project */
+export interface Package extends ToolsPackage {
+  isRoot: boolean;
 }

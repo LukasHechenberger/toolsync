@@ -4,13 +4,17 @@
   "version": "0.0.0",
   "description": "No more setting up the same 100 tools when starting a new project",
   "scripts": {
+    "build": "turbo run build",
     "dev": "turbo run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
   },
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "license": "MIT",
   "packageManager": "pnpm@10.11.1",
   "devDependencies": {
     "turbo": "^2.5.4"
+  },
+  "engines": {
+    "node": ">=20.6.0"
   }
 }

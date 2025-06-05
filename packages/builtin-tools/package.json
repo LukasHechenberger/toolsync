@@ -1,0 +1,31 @@
+{
+  "name": "@devtools/builtin",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Default devtools available",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js"
+    },
+    "./ignore-sync": {
+      "types": "./out/ignore-sync/index.d.ts",
+      "import": "./out/ignore-sync/index.js",
+      "default": "./out/ignore-sync/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "@devtools/core": "workspace:^"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}
