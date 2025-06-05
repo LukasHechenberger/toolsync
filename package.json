@@ -9,7 +9,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "format": "prettier --write .",
-    "format:root": "prettier --write .",
+    "format:root": "prettier --check .",
     "ignore-sync": "ignore-sync .",
     "prepare": "devtools prepare --config devtools.json && ignore-sync .",
     "test": "turbo run test"
