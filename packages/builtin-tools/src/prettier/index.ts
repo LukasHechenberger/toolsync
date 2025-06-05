@@ -5,8 +5,14 @@ import { devDependencies } from '../../package.json';
 
 export const defaultSettings = { singleQuote: true, printWidth: 100 };
 
-const prettierPlugin = definePlugin<{ version?: string; settings: Record<string, any> }>({
-  name: '@devtools/builtin/prettier',
+const pluginName = '@devtools/builtin/prettier';
+
+const prettierPlugin = definePlugin<{
+  version?: string;
+  scriptName?: string;
+  settings?: Record<string, any>;
+}>({
+  name: pluginName,
   loadConfig() {
     return {
       config: {
@@ -21,7 +27,8 @@ const prettierPlugin = definePlugin<{ version?: string; settings: Record<string,
   async setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
-      pkg.packageJson.scripts['format'] = 'prettier --write .';
+      pkg.packageJson.scripts[options.scriptName ?? 'format'] =
+        '[ \"${CI+z}\" ] && prettier --check . || prettier --write .';
 
       // FIXME: Move to install action
       pkg.packageJson.devDependencies ??= {};
