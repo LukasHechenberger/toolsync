@@ -9,6 +9,13 @@ const ignoreSyncPlugin = definePlugin({
         '@devtools/cli': {
           postinstall: ['ignore-sync .'],
         },
+        '@devtools/builtin/vscode': {
+          settings: {
+            'files.associations': {
+              '*-sync': 'ignore',
+            },
+          },
+        },
       },
     };
   },

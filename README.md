@@ -30,6 +30,9 @@ DEBUG=*:timing <your command> # Log timing
 
 ## Tools (TODO)
 
+- [ ] VScode
+  - [x] Create settings.json based on other plugins
+  - [ ] Gitignore .vscode folder
 - [ ] prettier
   - [ ] Create .prettierrc (in all packages??)
   - [ ] Add `format` script (to all packages ??)
@@ -38,7 +41,7 @@ DEBUG=*:timing <your command> # Log timing
   - [ ] Install
   - [x] setup "prepare" script
   - [ ] Create .prettierignore-sync if prettier is enabled
-  - [ ] Add file associations to vscode settings
+  - [x] Add file associations to vscode settings
 - [ ] Turborepo
   - [ ] Create turbo.json
   - [ ] Create root scripts
@@ -80,6 +83,10 @@ Individial packages can disable tools in their package.json (or devtools.json ?)
   }
 }
 ```
+
+### Core
+
+- [ ] Warn if plugin is configured but not loaded (?)
 
 ### CLI
 

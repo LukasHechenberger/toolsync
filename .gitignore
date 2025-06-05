@@ -1,8 +1,11 @@
 node_modules
 out
 
-# By turborepo tool
+# By @devtools/builtins/turborepo tool
 .turbo
 
-# By ignore-sync
+# By @devtools/builtins/ignore-sync
 .prettierignore
+
+# By @devtools/builtins/vscode
+.vscode

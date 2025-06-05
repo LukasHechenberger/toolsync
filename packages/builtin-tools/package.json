@@ -10,8 +10,11 @@
     },
     "./ignore-sync": {
       "types": "./out/ignore-sync/index.d.ts",
-      "import": "./out/ignore-sync/index.js",
       "default": "./out/ignore-sync/index.js"
+    },
+    "./vscode": {
+      "types": "./out/vscode/index.d.ts",
+      "default": "./out/vscode/index.js"
     }
   },
   "scripts": {
