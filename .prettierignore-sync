@@ -1,3 +1,5 @@
+# TODO: Generate with @devtools/builtin/ignore-sync (configured via @devtools/builtin/prettier), then add to gitignore
+
 [relative]
 .gitignore
 
