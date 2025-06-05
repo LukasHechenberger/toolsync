@@ -23,9 +23,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         path: './src/{{ dashCase name }}/index.ts',
         template: `import { definePlugin } from '@devtools/core/plugins';
 
-const {{ camelCase name }}Plugin = definePlugin({
+const {{ camelCase name }}Plugin = definePlugin<{
+  // TODO: Define plugin options here
+}>({
   name: '@devtools/builtin/{{ dashCase name }}',
-  // Add hooks here...
+  // TODO: Add hooks here...
 });
 
 export default {{ camelCase name }}Plugin;

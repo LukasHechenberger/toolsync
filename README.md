@@ -30,6 +30,8 @@ DEBUG=*:timing <your command> # Log timing
 
 ## Tools (TODO)
 
+- [ ] Pnpm
+  - [x] Set correct version in root packageManager
 - [ ] Package readmes
   - [ ] Header with package name, description, npm badge etc. for every package
   - [ ] List of packages in Root readme

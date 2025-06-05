@@ -23,6 +23,10 @@
     "./github-actions": {
       "types": "./out/github-actions/index.d.ts",
       "default": "./out/github-actions/index.js"
+    },
+    "./pnpm": {
+      "types": "./out/pnpm/index.d.ts",
+      "default": "./out/pnpm/index.js"
     }
   },
   "scripts": {

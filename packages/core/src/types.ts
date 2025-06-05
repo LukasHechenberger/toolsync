@@ -23,6 +23,9 @@ declare module '@manypkg/tools' {
   interface PackageJSON {
     /** Package scripts */
     scripts?: Record<string, string>;
+
+    /** Package Manager [corepack](https://github.com/nodejs/corepack) should use */
+    packageManager?: string;
   }
 }
 
