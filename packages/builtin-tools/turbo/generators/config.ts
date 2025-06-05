@@ -9,8 +9,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         name: 'name',
         message: 'What is the name of the new plugin?',
         validate(input) {
-          if (!/^[a-z][a-zA-Z0-9]*$/.test(input)) {
-            return 'Plugin name must be in camelCase';
+          if (!/^[a-z]+(-[a-z0-9]+)*$/.test(input)) {
+            return 'Plugin name must be in dash-case (e.g., my-plugin)';
           }
           return true;
         },
