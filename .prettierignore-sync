@@ -4,5 +4,10 @@
 .gitignore
 
 [inline]
-.prettierignore
 pnpm-lock.yaml
+
+# Should be added by @toolsync/builtin/prettier
+.prettierignore
+
+# Should be added by @toolsync/builtin/changesets
+.changeset/*.md

@@ -95,6 +95,21 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                       name: 'Ensure there are no uncommitted changes',
                       run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
                     },
+                    {
+                      if: 'github.ref_name == github.event.repository.default_branch',
+                      name: 'Changesets',
+                      uses: 'changesets/action@v1',
+                      with: {
+                        commit: 'chore: Update versions',
+                        title: 'chore: Update versions',
+                        version: 'npm run changeset:version',
+                        publish: 'npm run changeset:publish',
+                      },
+                      env: {
+                        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+                        NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+                      },
+                    },
                   ],
                 },
               },

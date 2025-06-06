@@ -12,3 +12,6 @@ out
 
 # By @toolsync/builtins/vscode
 .vscode
+
+# By @toolsync/builtins/changeset
+.changeset/README.md

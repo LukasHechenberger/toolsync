@@ -97,6 +97,9 @@ This repository contains the following packages:
   - [ ] Add vscode extension if enabled
 - [ ] @manypkg/cli
   - [ ] Run during check
+- [ ] Changesets
+  - [ ] Manage config file (?)
+  - [ ] Setup github action
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [x] CLI

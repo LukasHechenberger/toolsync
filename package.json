@@ -21,6 +21,7 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.4",
     "@toolsync/cli": "workspace:*",
     "@turbo/gen": "^2.5.4",
     "ignore-sync": "^8.0.0",
