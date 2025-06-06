@@ -1,12 +1,12 @@
 import { mkdir, writeFile } from 'fs/promises';
-import { definePlugin } from '@devtools/core/plugins';
+import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
 
 const vscodePlugin = definePlugin<{
   settings?: Record<string, any>;
   extensions?: { recommendations?: string[] };
 }>({
-  name: '@devtools/builtin/vscode',
+  name: '@toolsync/builtin/vscode',
   async setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       if (options.settings || options.extensions) {

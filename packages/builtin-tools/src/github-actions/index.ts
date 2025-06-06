@@ -1,6 +1,6 @@
 import { writeFile, mkdir } from 'fs/promises';
 import YAML from 'yaml';
-import { definePlugin } from '@devtools/core/plugins';
+import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
 
 interface GithubActionsWorkflowStepOptions {
@@ -30,10 +30,10 @@ export const defaultOptions = {
 } satisfies GithubActionsPluginOptions;
 
 const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
-  name: '@devtools/builtin/github-actions',
+  name: '@toolsync/builtin/github-actions',
   loadConfig: () => ({
     config: {
-      ['@devtools/builtin/github-actions']: defaultOptions,
+      ['@toolsync/builtin/github-actions']: defaultOptions,
     },
   }),
   async setupPackage(pkg, { log, options }) {
@@ -78,9 +78,9 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                         cache: 'pnpm',
                       },
                     },
-                    // FIXME: Add via (private) repo devtools plugin
+                    // FIXME: Add via (private) repo toolsync plugin
                     {
-                      name: 'Prepare devtools',
+                      name: 'Prepare toolsync',
                       run: `pnpm install --ignore-scripts && pnpm build`,
                     },
                     {
@@ -89,7 +89,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                     },
                     {
                       name: 'Code Quality Checks',
-                      run: 'pnpm turbo check lint check-types test',
+                      run: 'pnpm turbo check lint check-types test build',
                     },
                     {
                       name: 'Ensure there are no uncommitted changes',

@@ -1,14 +1,14 @@
 node_modules
 out
 
-# By @devtools/builtins/turborepo tool
+# By @toolsync/builtins/turborepo tool
 .turbo
 
-# By @devtools/builtins/ignore-sync
+# By @toolsync/builtins/ignore-sync
 .prettierignore
 
-# By @devtools/builtins/prettier
+# By @toolsync/builtins/prettier
 .prettierrc.json
 
-# By @devtools/builtins/vscode
+# By @toolsync/builtins/vscode
 .vscode

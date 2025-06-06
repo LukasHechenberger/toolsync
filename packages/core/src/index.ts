@@ -1,6 +1,6 @@
-import { logger } from '@devtools/logger';
+import { logger } from '@toolsync/logger';
 import { deepmergeInto } from 'deepmerge-ts';
-import type { DevtoolsConfig, Package, Packages } from './types';
+import type { ToolsyncConfig, Package, Packages } from './types';
 import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
 import { getPackages } from '@manypkg/get-packages';
 import { createRequire } from 'module';
@@ -10,13 +10,13 @@ import { join } from 'path';
 const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
 
-log.info('Devtools Core initialized');
+log.info('Toolsync Core initialized');
 log.debug('Debug logging is enabled');
 
 const require = global.require ?? createRequire(import.meta.url);
 
 const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
-  name: '@devtools/core',
+  name: '@toolsync/core',
   async loadModule(reference: string, { log }) {
     log.trace(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
 
@@ -55,20 +55,20 @@ type PluginHookPayload = {
     : never;
 };
 
-type RuntimeDevtoolsConfig = Omit<DevtoolsConfig, 'plugins'> & {
+type RuntimeToolsyncConfig = Omit<ToolsyncConfig, 'plugins'> & {
   plugins: Plugin[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
 };
 
-class Devtools {
+class Toolsync {
   private log = log.child('api');
 
-  private resolvedConfig: RuntimeDevtoolsConfig = { plugins: [corePlugin], config: {} };
+  private resolvedConfig: RuntimeToolsyncConfig = { plugins: [corePlugin], config: {} };
   get config() {
     return this.resolvedConfig.config;
   }
 
-  constructor(private readonly _initialConfig: DevtoolsConfig) {
-    this.log.trace('Devtools initialized', { initialConfig: _initialConfig });
+  constructor(private readonly _initialConfig: ToolsyncConfig) {
+    this.log.trace('Toolsync initialized', { initialConfig: _initialConfig });
   }
 
   private async loadModule<T>(ref: string): Promise<T> {
@@ -95,7 +95,7 @@ class Devtools {
   }
 
   // FIXME: Only once!
-  async loadPlugins(config: DevtoolsConfig = this._initialConfig) {
+  async loadPlugins(config: ToolsyncConfig = this._initialConfig) {
     this.log.timing('Starting loadPlugins');
 
     for (const pluginRef of config.plugins) {
@@ -219,10 +219,10 @@ class Devtools {
   }
 }
 
-export async function devtools(config: DevtoolsConfig = { plugins: [], config: {} }) {
-  log.debug('Creating Devtools instance', { initialConfig: config });
+export async function toolsync(config: ToolsyncConfig = { plugins: [], config: {} }) {
+  log.debug('Creating Toolsync instance', { initialConfig: config });
 
-  const instance = new Devtools(config);
+  const instance = new Toolsync(config);
   await instance.loadPlugins();
 
   return instance;

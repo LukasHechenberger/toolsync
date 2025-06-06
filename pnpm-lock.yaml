@@ -8,7 +8,7 @@ importers:
 
   .:
     devDependencies:
-      '@devtools/cli':
+      '@toolsync/cli':
         specifier: workspace:*
         version: link:packages/cli
       '@turbo/gen':
@@ -29,7 +29,7 @@ importers:
 
   packages/builtin-tools:
     dependencies:
-      '@devtools/core':
+      '@toolsync/core':
         specifier: workspace:^
         version: link:../core
     devDependencies:
@@ -51,13 +51,13 @@ importers:
 
   packages/cli:
     dependencies:
-      '@devtools/builtin':
+      '@toolsync/builtin':
         specifier: workspace:^
         version: link:../builtin-tools
-      '@devtools/core':
+      '@toolsync/core':
         specifier: workspace:^
         version: link:../core
-      '@devtools/logger':
+      '@toolsync/logger':
         specifier: workspace:^
         version: link:../logger
       commander:
@@ -82,7 +82,7 @@ importers:
 
   packages/core:
     dependencies:
-      '@devtools/logger':
+      '@toolsync/logger':
         specifier: workspace:^
         version: link:../logger
       '@manypkg/get-packages':

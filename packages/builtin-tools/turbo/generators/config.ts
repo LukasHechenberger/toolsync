@@ -28,7 +28,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: 'add',
         path: './src/{{ dashCase name }}/index.ts',
-        template: `import { definePlugin } from '@devtools/core/plugins';
+        template: `import { definePlugin } from '@toolsync/core/plugins';
 const pluginName = '${prefix}/{{ dashCase name }}';
 
 const {{ camelCase name }}Plugin = definePlugin<{
@@ -60,7 +60,7 @@ export default {{ camelCase name }}Plugin;
       },
       {
         type: 'modify',
-        path: '{{ turbo.paths.root }}/devtools.json',
+        path: '{{ turbo.paths.root }}/toolsync.json',
         transform(current, data) {
           const manifest = JSON.parse(current);
           manifest[`${prefix}/${data.name}`] = {};

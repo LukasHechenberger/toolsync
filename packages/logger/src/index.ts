@@ -15,7 +15,7 @@ const pretty = pinoPretty({
 });
 const rootLogger = pino({ level: envLogLevel }, pretty);
 
-const rootNamespace = 'devtools';
+const rootNamespace = 'toolsync';
 
 const rootDebug = setupDebug(rootNamespace);
 let debugEnabledViaLogLevel = false;

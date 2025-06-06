@@ -1,20 +1,20 @@
 #! /usr/bin/env node
 
 import { Command } from 'commander';
-import { devtools } from '@devtools/core';
-import { definePlugin } from '@devtools/core/plugins';
-import type { DevtoolsConfig } from '@devtools/core/types';
+import { toolsync } from '@toolsync/core';
+import { definePlugin } from '@toolsync/core/plugins';
+import type { ToolsyncConfig } from '@toolsync/core/types';
 import { name, version } from '../package.json';
 import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
-import { logger } from '@devtools/logger';
+import { logger } from '@toolsync/logger';
 
 const log = logger.child('cli');
 
-// TODO: Also implement a config plugin that checks for "devtools" inside package.json
+// TODO: Also implement a config plugin that checks for "toolsync" inside package.json
 
 const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
-  name: '@devtools/cli/resolve-json-config-file',
+  name: '@toolsync/cli/resolve-json-config-file',
   async loadConfig({ configFile }, { log }) {
     log.trace(`Trying to load config file ${configFile}`);
     if (!configFile.endsWith('.json'))
@@ -23,7 +23,7 @@ const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
     log.info(`Loading config file ${configFile}`);
 
     const jsonFile = JSON.parse(await readFile(configFile, 'utf-8').catch(() => 'null'));
-    log.debug(`Loaded JSON file:`, { jsonFile, plugins: Object.keys(jsonFile) });
+    log.debug(`Loaded JSON file:`, { jsonFile, plugins: jsonFile ? Object.keys(jsonFile) : [] });
 
     return {
       plugins: Object.keys(jsonFile),
@@ -32,12 +32,12 @@ const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
   },
 });
 
-const cliPluginName = '@devtools/cli';
-const programConfig: DevtoolsConfig = {
+const cliPluginName = '@toolsync/cli';
+const programConfig: ToolsyncConfig = {
   plugins: [],
   config: {
     [cliPluginName]: {
-      prepare: ['devtools prepare'],
+      prepare: ['toolsync prepare'],
     },
   },
 };
@@ -54,13 +54,13 @@ const cliPlugin = definePlugin<{ version?: string; configFile?: string; prepare?
 
       // TODO: Append if already exists
       pkg.packageJson.scripts['prepare'] = [
-        `devtools prepare${options.configFile ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}` : ''}`,
+        `toolsync prepare${options.configFile ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}` : ''}`,
         ...(options.prepare ?? []),
       ].join(' && ');
 
       // FIXME: Move to 'install' hook
       pkg.packageJson.devDependencies ??= {};
-      pkg.packageJson.devDependencies['@devtools/cli'] = options.version ?? version;
+      pkg.packageJson.devDependencies['@toolsync/cli'] = options.version ?? version;
     }
   },
 });
@@ -81,7 +81,7 @@ For usage details see <LINK>`, // TODO: Insert repo url
 
     programConfig.config = {
       ...programConfig.config,
-      '@devtools/core': {
+      '@toolsync/core': {
         defaultPlugins: false,
       },
     };
@@ -105,7 +105,7 @@ For usage details see <LINK>`, // TODO: Insert repo url
   .hook('preAction', (thisCommand, actionCommand) => {
     if (!thisCommand.opts().config) {
       log.info(`No config file specified, using default config`);
-      // FIXME: TODO: Default to devtools.json in the current directory
+      // FIXME: TODO: Default to toolsync.json in the current directory
     }
 
     log.trace(`About to call action handler for subcommand: ${actionCommand.name()}`, {
@@ -119,20 +119,20 @@ program
   .command('prepare')
   .description('Prepare the environment for development')
   .action(async (options, args) => {
-    log.timing('Starting devtools CLI preparation');
-    const tools = await devtools({
+    log.timing('Starting toolsync CLI preparation');
+    const tools = await toolsync({
       plugins: [cliPlugin],
       config: {
         [cliPlugin.name]: options,
       },
     });
-    log.timing('Finished devtools CLI preparation');
+    log.timing('Finished toolsync CLI preparation');
 
     log.timing('Start loading config');
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    log.debug('Devtools CLI is ready', { config: config.config });
+    log.debug('Toolsync CLI is ready', { config: config.config });
 
     log.timing('Running setupPackage hooks');
     await tools.runSetup();
@@ -146,20 +146,20 @@ program
   .command('postinstall')
   .description('Run necessary posinstall steps')
   .action(async (options, args) => {
-    log.timing('Starting devtools CLI preparation');
-    const tools = await devtools({
+    log.timing('Starting toolsync CLI preparation');
+    const tools = await toolsync({
       plugins: [cliPlugin],
       config: {
         [cliPlugin.name]: options,
       },
     });
-    log.timing('Finished devtools CLI preparation');
+    log.timing('Finished toolsync CLI preparation');
 
     log.timing('Start loading config');
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    log.debug('Devtools CLI is ready', { config: config.config });
+    log.debug('Toolsync CLI is ready', { config: config.config });
 
     console.log('TODO: Run postinstall steps', tools.config[cliPlugin.name]);
 

@@ -1,5 +1,5 @@
 {
-  "name": "@devtools/logger",
+  "name": "@toolsync/logger",
   "version": "0.0.0",
   "description": "The logger we use",
   "type": "module",

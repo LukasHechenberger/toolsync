@@ -1,7 +1,7 @@
 {
-  "name": "@devtools/builtin",
+  "name": "@toolsync/builtin",
   "version": "0.0.0",
-  "description": "Default devtools available",
+  "description": "Default toolsync available",
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "type": "module",
@@ -40,7 +40,7 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@devtools/core": "workspace:^"
+    "@toolsync/core": "workspace:^"
   },
   "devDependencies": {
     "ignore-sync": "^8.0.0",

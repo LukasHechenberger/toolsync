@@ -1,0 +1,17 @@
+{
+  "@toolsync/builtin/ignore-sync": {},
+  "@toolsync/builtin/vscode": {},
+  "@toolsync/builtin/prettier": {
+    "settings": {
+      "singleQuote": true,
+      "printWidth": 100,
+      "plugins": ["prettier-plugin-packagejson"]
+    }
+  },
+  "@toolsync/builtin/github-actions": {},
+  "@toolsync/cli": {
+    "version": "workspace:*"
+  },
+  "@toolsync/builtin/pnpm": {},
+  "@toolsync/builtin/package-readme": {}
+}

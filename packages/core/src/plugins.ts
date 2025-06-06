@@ -1,5 +1,5 @@
-import type { Logger } from '@devtools/logger';
-import type { DevtoolsConfig, Package, MaybePromise, Packages } from './types.js';
+import type { Logger } from '@toolsync/logger';
+import type { ToolsyncConfig, Package, MaybePromise, Packages } from './types.js';
 
 export type PluginContext<Options = {}> = Packages & {
   log: Logger;
@@ -17,7 +17,7 @@ export type Plugin<Options = {}> = {
   loadConfig?(
     options: Options,
     context: PluginContext,
-  ): MaybePromise<Partial<DevtoolsConfig> | void>;
+  ): MaybePromise<Partial<ToolsyncConfig> | void>;
 } & PluginHooks<Options>;
 
 export function definePlugin<Options = {}>(plugin: Plugin<Options>) {
