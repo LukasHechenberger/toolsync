@@ -33,6 +33,10 @@
     "./package-readme": {
       "types": "./out/package-readme/index.d.ts",
       "default": "./out/package-readme/index.js"
+    },
+    "./package-meta": {
+      "types": "./out/package-meta/index.d.ts",
+      "default": "./out/package-meta/index.js"
     }
   },
   "scripts": {

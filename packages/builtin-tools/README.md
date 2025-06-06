@@ -20,5 +20,6 @@ Default toolsync available
 - **@toolsync/builtin/github-actions**
 - **@toolsync/builtin/pnpm** - Integrates with the pnpm package manager, setting up the root package.json with the specified version.
 - **@toolsync/builtin/package-readme** - Generates README.md files for all packages in the workspace.
+- **@toolsync/builtin/package-meta** - Sync package metadata like repository etc between workspace packages
 
 <!-- #endregion tools -->

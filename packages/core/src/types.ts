@@ -26,6 +26,9 @@ declare module '@manypkg/tools' {
     /** Optional description of the package */
     description?: string;
 
+    /** License of the package */
+    license?: string;
+
     /** Package scripts */
     scripts?: Record<string, string>;
 
