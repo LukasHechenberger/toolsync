@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - name: Prepare devtools
+      - name: Prepare toolsync
         run: pnpm install --ignore-scripts && pnpm build
       - name: Install dependencies
         run: pnpm install
