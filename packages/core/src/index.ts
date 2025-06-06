@@ -59,7 +59,7 @@ type RuntimeDevtoolsConfig = Omit<DevtoolsConfig, 'plugins'> & {
   plugins: Plugin[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
 };
 
-class Devtools {
+class Toolsync {
   private log = log.child('api');
 
   private resolvedConfig: RuntimeDevtoolsConfig = { plugins: [corePlugin], config: {} };
@@ -222,7 +222,7 @@ class Devtools {
 export async function toolsync(config: DevtoolsConfig = { plugins: [], config: {} }) {
   log.debug('Creating Devtools instance', { initialConfig: config });
 
-  const instance = new Devtools(config);
+  const instance = new Toolsync(config);
   await instance.loadPlugins();
 
   return instance;
