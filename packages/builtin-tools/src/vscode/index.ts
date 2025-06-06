@@ -1,12 +1,13 @@
 import { mkdir, writeFile } from 'fs/promises';
-import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
-const vscodePlugin = definePlugin<{
+const vscodePlugin = defineBuiltinPlugin<{
   settings?: Record<string, any>;
   extensions?: { recommendations?: string[] };
 }>({
   name: '@toolsync/builtin/vscode',
+  description: 'Integrates with Visual Studio Code for settings and extensions management',
   async setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       if (options.settings || options.extensions) {

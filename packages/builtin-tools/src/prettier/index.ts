@@ -1,18 +1,19 @@
-import { mkdir, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { definePlugin } from '@toolsync/core/plugins';
 import { devDependencies } from '../../package.json';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
 export const defaultSettings = { singleQuote: true, printWidth: 100 };
 
 const pluginName = '@toolsync/builtin/prettier';
 
-const prettierPlugin = definePlugin<{
+const prettierPlugin = defineBuiltinPlugin<{
   version?: string;
   scriptName?: Partial<{ write: string; check: string }>;
   settings?: Record<string, any>;
 }>({
   name: pluginName,
+  description: 'Integrates with Prettier for code formatting',
   loadConfig() {
     return {
       config: {

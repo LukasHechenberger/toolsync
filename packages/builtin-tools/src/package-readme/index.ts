@@ -1,8 +1,9 @@
-import { definePlugin } from '@toolsync/core/plugins';
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
-const pluginName = '@toolsync/builtin/package-readme';
+// #region Template
+// FIXME: Move to a separate package, like @toolsync/template
 
 type TemplateOptions = {
   /** Path to the template file */
@@ -106,7 +107,7 @@ class Template {
   }
 }
 
-class MarkdownTemplate extends Template {
+export class MarkdownTemplate extends Template {
   static get defaultOptions() {
     return {
       ...super.defaultOptions,
@@ -115,13 +116,18 @@ class MarkdownTemplate extends Template {
   }
 }
 
+// #region Plugin
+
+const pluginName = '@toolsync/builtin/package-readme';
+
 const allBadges = ['npm-version'] as const;
 type BadgesAvailable = (typeof allBadges)[number];
 
-const packageReadmePlugin = definePlugin<{
+const packageReadmePlugin = defineBuiltinPlugin<{
   badges: boolean | BadgesAvailable[];
 }>({
   name: pluginName,
+  description: 'Generates README.md files for all packages in the workspace.',
   async setupPackage(pkg, { packages, log, options: { badges: _badges = allBadges } }) {
     log.trace('Setting up package readme plugin', { pkg });
 

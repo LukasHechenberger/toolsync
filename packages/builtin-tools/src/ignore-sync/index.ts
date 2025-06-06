@@ -1,11 +1,12 @@
-import { definePlugin } from '@toolsync/core/plugins';
 import { devDependencies } from '../../package.json';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
-const ignoreSyncPlugin = definePlugin<{
+const ignoreSyncPlugin = defineBuiltinPlugin<{
   /** Version of ignore-sync to install. */
   version?: string;
 }>({
-  name: 'ignore-sync',
+  name: '@toolsync/builtin/ignore-sync',
+  description: `Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc. files across multiple directories.`,
   loadConfig() {
     return {
       config: {

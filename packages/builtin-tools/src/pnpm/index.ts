@@ -1,10 +1,12 @@
-import { definePlugin } from '@toolsync/core/plugins';
 import { packageManager as defaultPackageManager } from '../../../../package.json';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
-const pnpmPlugin = definePlugin<{
+const pnpmPlugin = defineBuiltinPlugin<{
   version?: string;
 }>({
   name: '@toolsync/builtin/pnpm',
+  description:
+    'Integrates with the pnpm package manager, setting up the root package.json with the specified version.',
   loadConfig(config, { rootPackage }) {
     let version = config.version;
 

@@ -82,15 +82,15 @@ importers:
 
   packages/core:
     dependencies:
-      '@toolsync/logger':
-        specifier: workspace:^
-        version: link:../logger
       '@manypkg/get-packages':
         specifier: ^3.0.0
         version: 3.0.0
       '@manypkg/tools':
         specifier: ^2.0.0
         version: 2.0.0
+      '@toolsync/logger':
+        specifier: workspace:^
+        version: link:../logger
       debug:
         specifier: ^4.4.1
         version: 4.4.1
@@ -126,6 +126,19 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(typescript@5.8.3)(yaml@2.8.0)
+
+  packages/repo-plugins:
+    dependencies:
+      '@toolsync/builtin':
+        specifier: workspace:*
+        version: link:../builtin-tools
+      '@toolsync/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(typescript@5.8.3)(yaml@2.8.0)

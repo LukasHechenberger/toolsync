@@ -13,5 +13,6 @@
     "version": "workspace:*"
   },
   "@toolsync/builtin/pnpm": {},
-  "@toolsync/builtin/package-readme": {}
+  "@toolsync/builtin/package-readme": {},
+  "@repo/toolsync-plugins": {}
 }

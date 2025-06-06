@@ -1,0 +1,24 @@
+{
+  "name": "@repo/toolsync-plugins",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Some toolsync plugins we use in the toolsync monorepo :)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "default": "./out/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@toolsync/builtin": "workspace:*",
+    "@toolsync/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  }
+}
