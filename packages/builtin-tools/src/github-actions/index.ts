@@ -107,7 +107,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                       },
                       env: {
                         GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
-                        NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+                        NPM_TOKEN: '${{ secrets.NPM_TOKEN }}',
                       },
                     },
                   ],
