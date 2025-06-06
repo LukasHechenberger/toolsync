@@ -42,6 +42,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
         const dir = join(pkg.dir, '.github', 'workflows');
 
         await mkdir(dir, { recursive: true });
+        // TODO: Update if file already exists
         await writeFile(
           join(dir, `${name}.yml`),
           YAML.stringify(
