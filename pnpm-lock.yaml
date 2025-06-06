@@ -32,6 +32,9 @@ importers:
       '@toolsync/core':
         specifier: workspace:^
         version: link:../core
+      '@toolsync/template':
+        specifier: workspace:^
+        version: link:../template
     devDependencies:
       ignore-sync:
         specifier: ^8.0.0
@@ -70,6 +73,9 @@ importers:
       '@commander-js/extra-typings':
         specifier: ^14.0.0
         version: 14.0.0(commander@14.0.0)
+      '@toolsync/template':
+        specifier: workspace:*
+        version: link:../template
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
@@ -138,7 +144,23 @@ importers:
       '@toolsync/core':
         specifier: workspace:*
         version: link:../core
+      '@toolsync/template':
+        specifier: workspace:*
+        version: link:../template
     devDependencies:
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(typescript@5.8.3)(yaml@2.8.0)
+
+  packages/template:
+    dependencies:
+      commander:
+        specifier: ^14.0.0
+        version: 14.0.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.15.29
+        version: 22.15.29
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(typescript@5.8.3)(yaml@2.8.0)

@@ -4,7 +4,7 @@
   "description": "Core functionality used in @toolsync/cli etc",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "url": "https://github.com/LukasHechenberger/toolsync",
     "directory": "packages/core"
   },
   "license": "MIT",

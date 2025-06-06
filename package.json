@@ -5,7 +5,7 @@
   "description": "No more setting up the same 100 tools when starting a new project",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LukasHechenberger/toolsync.git"
+    "url": "https://github.com/LukasHechenberger/toolsync"
   },
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",

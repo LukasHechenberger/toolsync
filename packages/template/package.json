@@ -1,12 +1,11 @@
 {
-  "name": "@repo/toolsync-plugins",
+  "name": "@toolsync/template",
   "version": "0.0.0",
-  "private": true,
-  "description": "Some toolsync plugins we use in the toolsync monorepo :)",
+  "description": "Update sections of source files",
   "repository": {
     "type": "git",
     "url": "https://github.com/LukasHechenberger/toolsync",
-    "directory": "packages/repo-plugins"
+    "directory": "packages/template"
   },
   "license": "MIT",
   "type": "module",
@@ -16,16 +15,19 @@
       "default": "./out/index.js"
     }
   },
+  "bin": {
+    "update-section": "./out/bin.js"
+  },
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "update-readme": "node out/bin.js README.md cli-usage \"\\`\\`\\`\n$(node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
-    "@toolsync/builtin": "workspace:*",
-    "@toolsync/core": "workspace:*",
-    "@toolsync/template": "workspace:*"
+    "commander": "^14.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.15.29",
     "tsup": "^8.5.0"
   }
 }

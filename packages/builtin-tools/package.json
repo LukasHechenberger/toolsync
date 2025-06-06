@@ -4,7 +4,7 @@
   "description": "Default toolsync available",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "url": "https://github.com/LukasHechenberger/toolsync",
     "directory": "packages/builtin-tools"
   },
   "license": "MIT",
@@ -49,7 +49,8 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@toolsync/core": "workspace:^"
+    "@toolsync/core": "workspace:^",
+    "@toolsync/template": "workspace:^"
   },
   "devDependencies": {
     "ignore-sync": "^8.0.0",
