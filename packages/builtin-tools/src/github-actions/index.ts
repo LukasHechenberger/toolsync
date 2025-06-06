@@ -89,7 +89,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                     },
                     {
                       name: 'Code Quality Checks',
-                      run: 'pnpm turbo check lint check-types test',
+                      run: 'pnpm turbo check lint check-types test build',
                     },
                     {
                       name: 'Ensure there are no uncommitted changes',
