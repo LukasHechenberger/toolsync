@@ -91,6 +91,10 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                       name: 'Code Quality Checks',
                       run: 'pnpm turbo check lint check-types test',
                     },
+                    {
+                      name: 'Ensure there are no uncommitted changes',
+                      run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
+                    },
                   ],
                 },
               },
