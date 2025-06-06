@@ -15,8 +15,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "echo 'Add lint script here'",
-    "test": "echo 'Add test script here'"
+    "update-readme": "update-section README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
     "@toolsync/builtin": "workspace:^",
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@toolsync/template": "workspace:*",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.15.29",
     "tsup": "^8.5.0"

@@ -73,6 +73,9 @@ importers:
       '@commander-js/extra-typings':
         specifier: ^14.0.0
         version: 14.0.0(commander@14.0.0)
+      '@toolsync/template':
+        specifier: workspace:*
+        version: link:../template
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
