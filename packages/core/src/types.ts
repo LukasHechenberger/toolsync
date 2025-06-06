@@ -13,7 +13,7 @@ export type LoaderReference = string;
 /** A plugin or a plugin's package name or import path */
 export type PluginReference = string | Plugin<any>;
 
-/** Configuration for your devtools */
+/** Configuration for your toolsync */
 export interface DevtoolsConfig {
   plugins: PluginReference[];
   config: Record<string, any>;

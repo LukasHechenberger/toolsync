@@ -1,7 +1,7 @@
 {
-  "name": "@devtools/core",
+  "name": "@toolsync/core",
   "version": "0.0.0",
-  "description": "Core functionality used in @devtools/cli etc",
+  "description": "Core functionality used in @toolsync/cli etc",
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "type": "module",
@@ -28,9 +28,9 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@devtools/logger": "workspace:^",
     "@manypkg/get-packages": "^3.0.0",
     "@manypkg/tools": "^2.0.0",
+    "@toolsync/logger": "workspace:^",
     "debug": "^4.4.1",
     "deepmerge-ts": "^7.1.5"
   },

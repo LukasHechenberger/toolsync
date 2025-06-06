@@ -1,4 +1,4 @@
-import { definePlugin } from '@devtools/core/plugins';
+import { definePlugin } from '@toolsync/core/plugins';
 import { devDependencies } from '../../package.json';
 
 const ignoreSyncPlugin = definePlugin<{
@@ -9,10 +9,10 @@ const ignoreSyncPlugin = definePlugin<{
   loadConfig() {
     return {
       config: {
-        '@devtools/cli': {
+        '@toolsync/cli': {
           prepare: ['ignore-sync .'],
         },
-        '@devtools/builtin/vscode': {
+        '@toolsync/builtin/vscode': {
           settings: {
             'files.associations': {
               '*-sync': 'ignore',

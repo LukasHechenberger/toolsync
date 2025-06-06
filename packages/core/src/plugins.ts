@@ -1,4 +1,4 @@
-import type { Logger } from '@devtools/logger';
+import type { Logger } from '@toolsync/logger';
 import type { DevtoolsConfig, Package, MaybePromise, Packages } from './types.js';
 
 export type PluginContext<Options = {}> = Packages & {

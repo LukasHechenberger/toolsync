@@ -1,11 +1,11 @@
 import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { definePlugin } from '@devtools/core/plugins';
+import { definePlugin } from '@toolsync/core/plugins';
 import { devDependencies } from '../../package.json';
 
 export const defaultSettings = { singleQuote: true, printWidth: 100 };
 
-const pluginName = '@devtools/builtin/prettier';
+const pluginName = '@toolsync/builtin/prettier';
 
 const prettierPlugin = definePlugin<{
   version?: string;
@@ -16,7 +16,7 @@ const prettierPlugin = definePlugin<{
   loadConfig() {
     return {
       config: {
-        '@devtools/builtin/vscode': {
+        '@toolsync/builtin/vscode': {
           extensions: {
             recommendations: ['esbenp.prettier-vscode'],
           },

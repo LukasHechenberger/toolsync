@@ -1,10 +1,10 @@
 {
-  "name": "@devtools/cli",
+  "name": "@toolsync/cli",
   "version": "0.0.0",
-  "description": "The devtools command line interface",
+  "description": "The toolsync command line interface",
   "type": "module",
   "bin": {
-    "devtools": "./out/bin.js"
+    "toolsync": "./out/bin.js"
   },
   "scripts": {
     "build": "tsup",
@@ -13,9 +13,9 @@
     "test": "echo 'Add test script here'"
   },
   "dependencies": {
-    "@devtools/builtin": "workspace:^",
-    "@devtools/core": "workspace:^",
-    "@devtools/logger": "workspace:^",
+    "@toolsync/builtin": "workspace:^",
+    "@toolsync/core": "workspace:^",
+    "@toolsync/logger": "workspace:^",
     "commander": "^14.0.0",
     "debug": "^4.4.1"
   },

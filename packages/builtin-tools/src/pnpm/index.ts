@@ -1,10 +1,10 @@
-import { definePlugin } from '@devtools/core/plugins';
+import { definePlugin } from '@toolsync/core/plugins';
 import { packageManager as defaultPackageManager } from '../../../../package.json';
 
 const pnpmPlugin = definePlugin<{
   version?: string;
 }>({
-  name: '@devtools/builtin/pnpm',
+  name: '@toolsync/builtin/pnpm',
   loadConfig(config, { rootPackage }) {
     let version = config.version;
 
@@ -24,7 +24,7 @@ const pnpmPlugin = definePlugin<{
 
     return {
       config: {
-        '@devtools/builtin/pnpm': {
+        '@toolsync/builtin/pnpm': {
           version,
         },
       },

@@ -1,4 +1,4 @@
-import { logger } from '@devtools/logger';
+import { logger } from '@toolsync/logger';
 import { deepmergeInto } from 'deepmerge-ts';
 import type { DevtoolsConfig, Package, Packages } from './types';
 import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
@@ -16,7 +16,7 @@ log.debug('Debug logging is enabled');
 const require = global.require ?? createRequire(import.meta.url);
 
 const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
-  name: '@devtools/core',
+  name: '@toolsync/core',
   async loadModule(reference: string, { log }) {
     log.trace(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
 
@@ -219,7 +219,7 @@ class Devtools {
   }
 }
 
-export async function devtools(config: DevtoolsConfig = { plugins: [], config: {} }) {
+export async function toolsync(config: DevtoolsConfig = { plugins: [], config: {} }) {
   log.debug('Creating Devtools instance', { initialConfig: config });
 
   const instance = new Devtools(config);
