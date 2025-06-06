@@ -7,11 +7,7 @@ No more setting up the same 100 tools when starting a new project
 
 <!-- #endregion header -->
 
-# devtools
-
-> No more setting up the same 100 tools when starting a new project
->
-> **Very opinionated** by default, but following **best practices** and easy to **customize**.
+**Very opinionated** by default, but following **best practices** and easy to **customize**.
 
 > [!NOTE]
 > Still in development
@@ -42,6 +38,9 @@ DEBUG=*:timing <your command> # Log timing
 - [ ] Pnpm
   - [x] Set correct version in root packageManager
   - [ ] Set version in github actions install steps
+- [ ] Package metadata
+  - [ ] Sync meta fields like repository, url, author, etc.
+  - [ ] Ensure private packages have the same scope (e.g. `@repo/`)
 - [ ] Package readmes
   - [x] Header with package name, description, npm badge etc. for every package
   - [ ] List of packages in Root readme
