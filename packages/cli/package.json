@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "update-readme": "update-section README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
+    "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
     "@toolsync/builtin": "workspace:^",
