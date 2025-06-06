@@ -45,7 +45,7 @@ ${pkg.packageJson.description ?? ''}
       }
     }
 
-    const result = currentContent.replace(regExp, replacement);
+    const result = `${currentContent.replace(regExp, replacement).trim()}\n`;
 
     await writeFile(readmePath, result, 'utf8');
   },

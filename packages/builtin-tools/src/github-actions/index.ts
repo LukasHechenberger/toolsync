@@ -44,55 +44,61 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
         await mkdir(dir, { recursive: true });
         await writeFile(
           join(dir, `${name}.yml`),
-          YAML.stringify({
-            // FIXME: Insert remaining options, like additional jobs, etc.
-            name: workflow.name,
-            on: ['push'],
-            jobs: {
-              build: {
-                name: 'Code Quality',
-                'timeout-minutes': 15,
-                'runs-on': 'ubuntu-latest',
-                env: {
-                  DO_NOT_TRACK: '1',
+          YAML.stringify(
+            {
+              // FIXME: Insert remaining options, like additional jobs, etc.
+              name: workflow.name,
+              on: ['push'],
+              jobs: {
+                build: {
+                  name: 'Code Quality',
+                  'timeout-minutes': 15,
+                  'runs-on': 'ubuntu-latest',
+                  env: {
+                    DO_NOT_TRACK: '1',
+                  },
+                  steps: [
+                    {
+                      name: 'Check out code',
+                      uses: 'actions/checkout@v4',
+                      with: {
+                        'fetch-depth': 2,
+                        lfs: true,
+                      },
+                    },
+                    {
+                      uses: 'pnpm/action-setup@v4',
+                    },
+                    {
+                      name: 'Setup Node.js environment',
+                      uses: 'actions/setup-node@v4',
+                      with: {
+                        'node-version': 22,
+                        cache: 'pnpm',
+                      },
+                    },
+                    // FIXME: Add via (private) repo devtools plugin
+                    {
+                      name: 'Prepare devtools',
+                      run: `pnpm install --ignore-scripts && pnpm build`,
+                    },
+                    {
+                      name: 'Install dependencies',
+                      run: 'pnpm install',
+                    },
+                    {
+                      name: 'Code Quality Checks',
+                      run: 'pnpm turbo format lint check-types test',
+                    },
+                  ],
                 },
-                steps: [
-                  {
-                    name: 'Check out code',
-                    uses: 'actions/checkout@v4',
-                    with: {
-                      'fetch-depth': 2,
-                      lfs: true,
-                    },
-                  },
-                  {
-                    uses: 'pnpm/action-setup@v4',
-                  },
-                  {
-                    name: 'Setup Node.js environment',
-                    uses: 'actions/setup-node@v4',
-                    with: {
-                      'node-version': 22,
-                      cache: 'pnpm',
-                    },
-                  },
-                  // FIXME: Add via (private) repo devtools plugin
-                  {
-                    name: 'Prepare devtools',
-                    run: `pnpm install --ignore-scripts && pnpm build`,
-                  },
-                  {
-                    name: 'Install dependencies',
-                    run: 'pnpm install',
-                  },
-                  {
-                    name: 'Code Quality Checks',
-                    run: 'pnpm turbo format lint check-types test',
-                  },
-                ],
               },
             },
-          }),
+            {
+              // TODO: Get from prettier settings
+              singleQuote: true,
+            },
+          ),
         );
       }
     }

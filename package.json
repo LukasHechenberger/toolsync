@@ -7,9 +7,10 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "check": "turbo run check",
+    "check:format": "prettier --check .",
     "dev": "turbo run dev",
     "format": "prettier --write .",
-    "format:root": "[ \"${CI+z}\" ] && prettier --check . || prettier --write .",
     "ignore-sync": "ignore-sync .",
     "prepare": "devtools prepare --config devtools.json && ignore-sync .",
     "test": "turbo run test"

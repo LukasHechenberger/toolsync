@@ -9,7 +9,7 @@ const pluginName = '@devtools/builtin/prettier';
 
 const prettierPlugin = definePlugin<{
   version?: string;
-  scriptName?: string;
+  scriptName?: Partial<{ write: string; check: string }>;
   settings?: Record<string, any>;
 }>({
   name: pluginName,
@@ -27,8 +27,8 @@ const prettierPlugin = definePlugin<{
   async setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
-      pkg.packageJson.scripts[options.scriptName ?? 'format'] =
-        '[ \"${CI+z}\" ] && prettier --check . || prettier --write .';
+      pkg.packageJson.scripts[options.scriptName?.write ?? 'format'] = 'prettier --write .';
+      pkg.packageJson.scripts[options.scriptName?.check ?? 'check:format'] = 'prettier --check .';
 
       // FIXME: Move to install action
       pkg.packageJson.devDependencies ??= {};
