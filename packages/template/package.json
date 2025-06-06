@@ -4,7 +4,7 @@
   "description": "Update sections of source files",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "url": "https://github.com/LukasHechenberger/toolsync",
     "directory": "packages/template"
   },
   "license": "MIT",
@@ -15,9 +15,16 @@
       "default": "./out/index.js"
     }
   },
+  "bin": {
+    "update-section": "./out/bin.js"
+  },
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "update-readme": "node out/bin.js README.md cli-usage \"\\`\\`\\`\n$(node ./out/bin.js --help)\n\\`\\`\\`\""
+  },
+  "dependencies": {
+    "commander": "^14.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.29",

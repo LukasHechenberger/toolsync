@@ -19,6 +19,8 @@ pnpm install @toolsync/template # pnpm (recommended), you can also use npm, yarn
 
 ## Usage
 
+> For command line usage, go ahead to [CLI](#cli)
+
 Let's see how it works:
 
 ```ts
@@ -54,3 +56,30 @@ Other content...
 Whenever you run the script again the section will be updated.
 
 > Take a look at the source of this README, it's also updated with `@toolsync/template` :)
+
+## CLI
+
+<!-- #region cli-usage -->
+<!-- This section is generated. Do not edit manually! -->
+
+```
+Usage: npx @toolsync/template [options] <file> <section> <content>
+
+Update a section of a file with @toolsync/template
+
+Arguments:
+  file                   file to update (only .md files are supported)
+  section                section to update
+  content                content to insert into the section
+
+Options:
+  -V, --version          output the version number
+  --notice <text>        notice to add to the section
+  --insert <top|bottom>  where to insert the section if it does not exist
+                         (default: "bottom")
+  -h, --help             display help for command
+
+For more information, visit https://github.com/LukasHechenberger/toolsync/packages/template
+```
+
+<!-- #endregion cli-usage -->

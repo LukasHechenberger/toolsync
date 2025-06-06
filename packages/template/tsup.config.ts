@@ -5,4 +5,5 @@ export default defineConfig({
   outDir: 'out',
   format: ['esm'],
   dts: true,
+  onSuccess: 'pnpm -s update-readme',
 });
