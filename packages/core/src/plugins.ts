@@ -12,7 +12,11 @@ export type PluginHooks<Options = {}> = {
 };
 
 export type Plugin<Options = {}> = {
+  /** The name of the plugin */
   name: string;
+  /** An (optional) description of the plugin */
+  description?: string;
+  /** Implement this hook if you need to import non-esm modules */
   loadModule?<T>(reference: string, context: PluginContext): MaybePromise<T | void>;
   loadConfig?(
     options: Options,

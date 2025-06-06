@@ -19,6 +19,8 @@ export interface ToolsyncConfig {
   config: Record<string, any>;
 }
 
+type ExportString = `./${string}`;
+
 declare module '@manypkg/tools' {
   interface PackageJSON {
     /** Optional description of the package */
@@ -29,6 +31,11 @@ declare module '@manypkg/tools' {
 
     /** Package Manager [corepack](https://github.com/nodejs/corepack) should use */
     packageManager?: string;
+
+    /** Entry points for a package @see https://nodejs.org/api/packages.html#package-entry-points */
+    exports?:
+      | ExportString
+      | Record<'.' | ExportString, ExportString | null | Record<string, ExportString | null>>;
   }
 }
 

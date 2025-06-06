@@ -28,10 +28,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: 'add',
         path: './src/{{ dashCase name }}/index.ts',
-        template: `import { definePlugin } from '@toolsync/core/plugins';
+        template: `import { defineBuiltinPlugin } from '../lib/plugins';
+
 const pluginName = '${prefix}/{{ dashCase name }}';
 
-const {{ camelCase name }}Plugin = definePlugin<{
+const {{ camelCase name }}Plugin = defineBuiltinPlugin<{
   // TODO: Define plugin options here
 }>({
   name: pluginName,
