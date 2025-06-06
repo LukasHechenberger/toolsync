@@ -51,6 +51,9 @@ This repository contains the following packages:
 
 ## Tools (TODO)
 
+- [ ] Node
+  - [ ] Set engines in root package.json
+  - [ ] Set `node-version` in github actions workflows
 - [ ] Pnpm
   - [x] Set correct version in root packageManager
   - [ ] Set version in github actions install steps
