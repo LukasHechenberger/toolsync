@@ -72,15 +72,15 @@ class Devtools {
   }
 
   private async loadModule<T>(ref: string): Promise<T> {
-    const { rootDir, rootPackage } = await this.getPackages();
+    const pkgs = await this.getPackages();
+
     for (const plugin of [...this.resolvedConfig.plugins].reverse()) {
       if (plugin.loadModule) {
         this.log.trace(`Trying to load module ${ref} with plugin ${plugin.name}`);
         const module = await plugin.loadModule<T>(ref, {
           log: pluginLogger.child(plugin.name),
           options: this.resolvedConfig.config[plugin.name] ?? {},
-          rootDir,
-          rootPackage,
+          ...pkgs,
         });
 
         if (module) {
@@ -120,7 +120,7 @@ class Devtools {
   async loadConfig() {
     this.log.timing('Starting loadConfig');
 
-    const { rootDir, rootPackage } = await this.getPackages();
+    const pkgs = await this.getPackages();
 
     // Load the config from the plugins
     for (const plugin of this.resolvedConfig.plugins) {
@@ -131,8 +131,7 @@ class Devtools {
         const result = await plugin.loadConfig(this.resolvedConfig.config[plugin.name] ?? {}, {
           log: pluginLogger.child(plugin.name),
           options: this.resolvedConfig.config[plugin.name] ?? {},
-          rootDir,
-          rootPackage,
+          ...pkgs,
         });
 
         if (result) {
@@ -161,14 +160,11 @@ class Devtools {
   private async run<H extends keyof PluginHookPayload>(
     hook: H,
     payload: PluginHookPayload[H],
-    _context?: Partial<Omit<PluginContext, 'log' | 'options'>>,
+    context?: Omit<PluginContext, 'log' | 'options'>,
   ): Promise<void> {
     this.log.trace(`Running hook ${hook}`, { payload });
 
-    const baseContext = {
-      rootPackage: _context?.rootPackage || (await this.getPackages()).rootPackage,
-      rootDir: _context?.rootDir || (await this.getPackages()).rootDir,
-    };
+    const baseContext = context ?? (await this.getPackages());
 
     for (const plugin of this.resolvedConfig.plugins) {
       if (plugin[hook]) {
@@ -203,15 +199,15 @@ class Devtools {
   }
 
   async runSetup() {
-    const { packages } = await this.getPackages();
+    const pkgs = await this.getPackages();
     this.log.debug('Running setup hook for all packages', {
-      packages: packages.map((p) => p.packageJson.name),
+      packages: pkgs.packages.map((p) => p.packageJson.name),
       plugins: this.resolvedConfig.plugins.map((p) => p.name),
     });
 
-    for (const pkg of packages) {
+    for (const pkg of pkgs.packages) {
       this.log.debug(`Running setup for package: ${pkg.packageJson.name}`);
-      await this.run('setupPackage', pkg);
+      await this.run('setupPackage', pkg, pkgs);
 
       // TODO: Only write package.json if it was modified
       // TODO: Use prettier etc. to format the package.json

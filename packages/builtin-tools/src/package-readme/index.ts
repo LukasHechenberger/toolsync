@@ -88,12 +88,12 @@ class Template {
     if (!this.options.content.match(regExp)) {
       // console.warn(`Section "${sectionName}" not found in ${readmePath}. Adding it.`);
       if (insert === 'top') {
-        this.options.content = [...markerComments, this.options.content].join('\n\n');
+        this.options.content = [...markerComments, this.options.content.trim()].join('\n\n');
       } else if (insert === 'bottom') {
-        this.options.content = [this.options.content, ...markerComments].join('\n\n');
+        this.options.content = [this.options.content.trim(), ...markerComments].join('\n\n');
       } else {
         throw new Error(
-          `Section "${sectionName}" not found - add insert option for appending/prepending it automatically.`,
+          `Section "${sectionName}" not found - add it or use "insert" option for appending/prepending it automatically.`,
         );
       }
     }
@@ -119,7 +119,7 @@ const packageReadmePlugin = definePlugin<{
   // TODO: Define plugin options here
 }>({
   name: pluginName,
-  async setupPackage(pkg, { log }) {
+  async setupPackage(pkg, { packages, log }) {
     log.trace('Setting up package readme plugin', { pkg });
 
     const readmePath = join(pkg.dir, 'README.md');
@@ -135,6 +135,22 @@ const packageReadmePlugin = definePlugin<{
 ${pkg.packageJson.description ?? ''}
 `,
     });
+
+    if (pkg.isRoot) {
+      readmeTemplate.update({
+        section: 'packages',
+        insert: 'bottom',
+        content: `## Packages
+
+This repository contains the following packages:
+
+${packages
+  .filter((p) => !p.isRoot)
+  .map((p) => `- [${p.packageJson.name}](${p.relativeDir}) - ${p.packageJson.description ?? ''}`)
+  .join('\n')}
+`,
+      });
+    }
 
     await readmeTemplate.save();
     log.debug(`Updated README.md for package ${pkg.packageJson.name}`);
