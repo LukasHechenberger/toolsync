@@ -1,13 +1,12 @@
+import type { Package } from '@toolsync/core/types';
 import { defineBuiltinPlugin } from '../lib/plugins';
 
 const pluginName = '@toolsync/builtin/package-meta';
 
-const packageMetaPlugin = defineBuiltinPlugin<{
-  // TODO: Define plugin options here
-}>({
+const packageMetaPlugin = defineBuiltinPlugin<Pick<Package['packageJson'], 'publishConfig'>>({
   name: pluginName,
   description: 'Sync package metadata like repository etc between workspace packages',
-  setupPackage(pkg, { rootPackage, log }) {
+  setupPackage(pkg, { rootPackage, log, options }) {
     if (pkg.isRoot) {
       // Skip root package
 
@@ -38,6 +37,12 @@ const packageMetaPlugin = defineBuiltinPlugin<{
           directory: pkg.relativeDir,
         };
       }
+    }
+
+    if (options.publishConfig && !pkg.packageJson.private) {
+      pkg.packageJson.publishConfig = options.publishConfig;
+    } else {
+      delete pkg.packageJson.publishConfig;
     }
   },
 });
