@@ -44,7 +44,6 @@ This repository contains the following packages:
 - [@devtools/cli](packages/cli) - The devtools command line interface
 - [@devtools/core](packages/core) - Core functionality used in @devtools/cli etc
 - [@devtools/logger](packages/logger) - The logger we use
-- [@repo/devtools-plugins](packages/repo-plugins) - Some devtools plugins we use in the devtools monorepo :)
 
 <!-- #endregion packages -->
 
