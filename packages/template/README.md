@@ -3,6 +3,8 @@
 
 # @toolsync/template
 
+![NPM Version](https://img.shields.io/npm/v/@toolsync/template)
+
 Update sections of source files
 
 <!-- #endregion header -->

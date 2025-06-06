@@ -52,6 +52,12 @@ This repository contains the following packages:
 
 ${packages
   .filter((p) => !p.isRoot)
+  // Private packages should come last in the list
+  .sort((a, b) => {
+    if (a.packageJson.private && !b.packageJson.private) return 1;
+    if (!a.packageJson.private && b.packageJson.private) return -1;
+    return a.packageJson.name.localeCompare(b.packageJson.name);
+  })
   .map(
     (p) =>
       `- [${p.packageJson.name}](${p.relativeDir}) - ${p.packageJson.description ?? '_no description_'}`,

@@ -44,8 +44,8 @@ This repository contains the following packages:
 - [@toolsync/cli](packages/cli) - The toolsync command line interface
 - [@toolsync/core](packages/core) - Core functionality used in @toolsync/cli etc
 - [@toolsync/logger](packages/logger) - The logger we use
-- [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
 - [@toolsync/template](packages/template) - Update sections of source files
+- [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
 
 <!-- #endregion packages -->
 
