@@ -3,6 +3,8 @@
 
 # @devtools/cli
 
+![NPM Version](https://img.shields.io/npm/v/@devtools/cli)
+
 The devtools command line interface
 
 <!-- #endregion header -->

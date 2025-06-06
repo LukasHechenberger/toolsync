@@ -1,6 +1,7 @@
 {
   "name": "@devtools/monorepo",
   "version": "0.0.0",
+  "private": true,
   "description": "No more setting up the same 100 tools when starting a new project",
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",

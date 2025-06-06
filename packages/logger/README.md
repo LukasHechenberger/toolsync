@@ -3,6 +3,8 @@
 
 # @devtools/logger
 
+![NPM Version](https://img.shields.io/npm/v/@devtools/logger)
+
 The logger we use
 
 <!-- #endregion header -->

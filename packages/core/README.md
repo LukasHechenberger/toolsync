@@ -3,6 +3,8 @@
 
 # @devtools/core
 
+![NPM Version](https://img.shields.io/npm/v/@devtools/core)
+
 Core functionality used in @devtools/cli etc
 
 <!-- #endregion header -->

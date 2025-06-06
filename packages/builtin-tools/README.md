@@ -3,6 +3,8 @@
 
 # @devtools/builtin
 
+![NPM Version](https://img.shields.io/npm/v/@devtools/builtin)
+
 Default devtools available
 
 <!-- #endregion header -->

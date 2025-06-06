@@ -1,7 +1,6 @@
 {
   "name": "@devtools/logger",
   "version": "0.0.0",
-  "private": true,
   "description": "The logger we use",
   "type": "module",
   "exports": {
