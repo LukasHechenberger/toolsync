@@ -4,6 +4,6 @@ export default defineConfig({
   entry: ['src/*.ts'],
   outDir: 'out',
   format: ['esm', 'cjs'],
-  // format: 'esm',
   dts: true,
+  onSuccess: 'pnpm -s update-readme',
 });

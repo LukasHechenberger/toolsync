@@ -25,6 +25,9 @@ const packageMetaPlugin = defineBuiltinPlugin<{
     const license = rootPackage?.packageJson.license;
     if (license) pkg.packageJson.license = license;
 
+    const engines = rootPackage?.packageJson.engines;
+    if (engines) pkg.packageJson.engines = engines;
+
     const repository = rootPackage?.packageJson.repository;
     if (repository) {
       if (typeof repository === 'string') {

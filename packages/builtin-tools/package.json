@@ -74,5 +74,8 @@
     "yaml": {
       "optional": true
     }
+  },
+  "engines": {
+    "node": ">=20.6.0"
   }
 }

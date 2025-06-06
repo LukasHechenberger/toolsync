@@ -40,6 +40,8 @@ declare module '@manypkg/tools' {
     /** Package scripts */
     scripts?: Record<string, string>;
 
+    engines?: Record<string, string>;
+
     /** Package Manager [corepack](https://github.com/nodejs/corepack) should use */
     packageManager?: string;
 
