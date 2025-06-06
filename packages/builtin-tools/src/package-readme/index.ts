@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { defineBuiltinPlugin } from '../lib/plugins';
 
-// #region Template
+// MARK: Template
 // FIXME: Move to a separate package, like @toolsync/template
 
 type TemplateOptions = {
@@ -116,7 +116,7 @@ export class MarkdownTemplate extends Template {
   }
 }
 
-// #region Plugin
+// MARK: Plugin
 
 const pluginName = '@toolsync/builtin/package-readme';
 
