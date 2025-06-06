@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import { toolsync } from '@toolsync/core';
 import { definePlugin } from '@toolsync/core/plugins';
-import type { DevtoolsConfig } from '@toolsync/core/types';
+import type { ToolsyncConfig } from '@toolsync/core/types';
 import { name, version } from '../package.json';
 import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
@@ -33,7 +33,7 @@ const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
 });
 
 const cliPluginName = '@toolsync/cli';
-const programConfig: DevtoolsConfig = {
+const programConfig: ToolsyncConfig = {
   plugins: [],
   config: {
     [cliPluginName]: {
@@ -132,7 +132,7 @@ program
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    log.debug('Devtools CLI is ready', { config: config.config });
+    log.debug('Toolsync CLI is ready', { config: config.config });
 
     log.timing('Running setupPackage hooks');
     await tools.runSetup();
@@ -159,7 +159,7 @@ program
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    log.debug('Devtools CLI is ready', { config: config.config });
+    log.debug('Toolsync CLI is ready', { config: config.config });
 
     console.log('TODO: Run postinstall steps', tools.config[cliPlugin.name]);
 

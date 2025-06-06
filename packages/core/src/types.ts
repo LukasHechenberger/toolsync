@@ -5,7 +5,7 @@ import type { Plugin } from './plugins.js';
 
 export type MaybePromise<T> = T | Promise<T>;
 
-// MARK: Devtools Types
+// MARK: Toolsync Types
 
 /** Probably a module loader plugin's package name */
 export type LoaderReference = string;
@@ -14,7 +14,7 @@ export type LoaderReference = string;
 export type PluginReference = string | Plugin<any>;
 
 /** Configuration for your toolsync */
-export interface DevtoolsConfig {
+export interface ToolsyncConfig {
   plugins: PluginReference[];
   config: Record<string, any>;
 }
