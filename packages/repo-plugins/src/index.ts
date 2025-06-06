@@ -1,7 +1,7 @@
 import { definePlugin, type Plugin } from '@toolsync/core/plugins';
 import { join } from 'path';
 import { name } from '../package.json';
-import { MarkdownTemplate } from '@toolsync/builtin/package-readme';
+import { MarkdownTemplate } from '@toolsync/template';
 
 const repoPlugin = definePlugin({
   name,
