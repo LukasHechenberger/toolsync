@@ -146,7 +146,10 @@ This repository contains the following packages:
 
 ${packages
   .filter((p) => !p.isRoot)
-  .map((p) => `- [${p.packageJson.name}](${p.relativeDir}) - ${p.packageJson.description ?? ''}`)
+  .map(
+    (p) =>
+      `- [${p.packageJson.name}](${p.relativeDir}) - ${p.packageJson.description ?? '_no description_'}`,
+  )
   .join('\n')}
 `,
       });

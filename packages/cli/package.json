@@ -1,6 +1,7 @@
 {
   "name": "@devtools/cli",
   "version": "0.0.0",
+  "description": "The devtools command line interface",
   "type": "module",
   "bin": {
     "devtools": "./out/bin.js"

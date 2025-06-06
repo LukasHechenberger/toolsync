@@ -2,6 +2,7 @@
   "name": "@devtools/logger",
   "version": "0.0.0",
   "private": true,
+  "description": "The logger we use",
   "type": "module",
   "exports": {
     ".": {
@@ -12,9 +13,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
-    "lint": "echo 'Add lint script here'",
-    "test": "echo 'Add test script here'"
+    "dev": "tsup --watch"
   },
   "dependencies": {
     "debug": "^4.4.1",
