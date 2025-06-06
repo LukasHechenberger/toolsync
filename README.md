@@ -48,6 +48,7 @@ DEBUG=*:timing <your command> # Log timing
 - [ ] VScode
   - [x] Create settings.json based on other plugins
   - [ ] Gitignore .vscode folder
+  - [ ] Generate devcontainers.json
 - [x] prettier
   - [x] Create .prettierrc
   - [x] Add `format` script
@@ -75,7 +76,8 @@ DEBUG=*:timing <your command> # Log timing
   - [ ] Ensure all packages have a "check-build" script
   - [ ] Add "check-build" to turbo.json if necessary
   - [ ] Add vscode extension if enabled
-- [ ] Generate VScode devcontainers
+- [ ] @manypkg/cli
+  - [ ] Run during check
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [x] CLI

@@ -9,20 +9,20 @@
     ".": {
       "types": "./out/index.d.ts",
       "import": "./out/index.js",
-      "require": "./out/index.cjs"
+      "default": "./out/index.js"
     },
     "./plugins": {
       "types": "./out/plugins.d.ts",
       "import": "./out/plugins.js",
-      "require": "./out/plugins.cjs"
+      "default": "./out/plugins.js"
     },
     "./types": {
       "types": "./out/types.d.ts",
       "import": "./out/types.js",
-      "require": "./out/types.cjs"
+      "default": "./out/types.js"
     }
   },
-  "main": "out/index.cjs",
+  "main": "out/index.js",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
