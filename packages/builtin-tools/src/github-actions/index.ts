@@ -102,8 +102,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
                       with: {
                         commit: 'chore: Update versions',
                         title: 'chore: Update versions',
-                        version: 'npm run changeset:version',
-                        publish: 'npm run changeset:publish',
+                        publish: 'pnpm changeset publish',
                       },
                       env: {
                         GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
