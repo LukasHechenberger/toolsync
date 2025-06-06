@@ -29,6 +29,14 @@ declare module '@manypkg/tools' {
     /** License of the package */
     license?: string;
 
+    repository?: /** @deprecated  */
+    | string
+      | {
+          type: string;
+          url: string;
+          directory?: string;
+        };
+
     /** Package scripts */
     scripts?: Record<string, string>;
 
