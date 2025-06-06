@@ -2,6 +2,11 @@
   "name": "@toolsync/builtin",
   "version": "0.0.0",
   "description": "Default toolsync available",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "directory": "packages/builtin-tools"
+  },
   "license": "MIT",
   "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "type": "module",
@@ -33,6 +38,10 @@
     "./package-readme": {
       "types": "./out/package-readme/index.d.ts",
       "default": "./out/package-readme/index.js"
+    },
+    "./package-meta": {
+      "types": "./out/package-meta/index.d.ts",
+      "default": "./out/package-meta/index.js"
     }
   },
   "scripts": {

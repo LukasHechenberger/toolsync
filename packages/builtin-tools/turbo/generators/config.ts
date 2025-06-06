@@ -17,6 +17,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         },
       },
       {
+        type: 'input',
+        name: 'description',
+        message: 'What is the description of the new plugin?',
+      },
+      {
         type: 'confirm',
         name: 'installInWorkspace',
         message: 'Should this plugin be installed in the workspace?',
@@ -36,6 +41,7 @@ const {{ camelCase name }}Plugin = defineBuiltinPlugin<{
   // TODO: Define plugin options here
 }>({
   name: pluginName,
+  description: '{{ description }}',
   // TODO: Add hooks here...
 });
 

@@ -2,6 +2,12 @@
   "name": "@toolsync/cli",
   "version": "0.0.0",
   "description": "The toolsync command line interface",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
   "type": "module",
   "bin": {
     "toolsync": "./out/bin.js"

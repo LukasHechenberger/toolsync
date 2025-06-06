@@ -14,5 +14,6 @@
   },
   "@toolsync/builtin/pnpm": {},
   "@toolsync/builtin/package-readme": {},
-  "@repo/toolsync-plugins": {}
+  "@repo/toolsync-plugins": {},
+  "@toolsync/builtin/package-meta": {}
 }
