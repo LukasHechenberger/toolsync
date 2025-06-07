@@ -74,7 +74,7 @@ This repository contains the following packages:
   - [x] Add `format` script
   - [x] Add vscode extension if enabled
   - [ ] Add format task to turbo.json (if enabled)
-- [ ] Github Actions
+- [x] Github Actions
   - [x] Basic CI workflow
 - [ ] ignore-sync
   - [ ] Install

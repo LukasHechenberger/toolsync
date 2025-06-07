@@ -100,6 +100,11 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
   loadConfig: () => ({
     config: {
       ['@toolsync/builtin/github-actions']: defaultOptions,
+      '@toolsync/builtin/vscode': {
+        extensions: {
+          recommendations: ['github.vscode-github-actions'],
+        },
+      },
     },
   }),
   async setupPackage(pkg, { log, options }) {
