@@ -22,7 +22,8 @@ jobs:
           cache: pnpm
       - name: Prepare toolsync
         run: pnpm install --ignore-scripts && pnpm build
-      - name: Install dependencies
+      - id: install
+        name: Install dependencies
         run: pnpm install
       - name: Code Quality Checks
         run: pnpm turbo check lint check-types test build
