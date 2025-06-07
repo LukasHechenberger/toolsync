@@ -1,5 +1,6 @@
 import { devDependencies } from '../../package.json';
 import { defineBuiltinPlugin } from '../lib/plugins';
+import { vscodePluginName } from '../vscode';
 
 const pluginName = '@toolsync/builtin/ignore-sync';
 
@@ -23,7 +24,7 @@ const ignoreSyncPlugin = defineBuiltinPlugin({
         '@toolsync/cli': {
           prepare: ['ignore-sync .'],
         },
-        '@toolsync/builtin/vscode': {
+        [vscodePluginName]: {
           settings: {
             'files.associations': {
               '*-sync': 'ignore',

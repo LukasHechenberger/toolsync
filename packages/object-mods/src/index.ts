@@ -99,10 +99,10 @@ export function handleModifier<T extends object>(modifier: Modifier<T>): T {
   return modify(target, modifier);
 }
 
-export type WithModifiers<T> = {
+export type WithModifiers<T> = Partial<{
   [K in keyof T]: T[K] extends (infer U)[]
     ? Array<Partial<U> | ArrayOperation<WithModifiers<U>>> // recurse into array elements
-    : T[K] extends object
-      ? Partial<WithModifiers<T[K]>> // recurse into nested object
+    : NonNullable<T[K]> extends object
+      ? WithModifiers<T[K]> // recurse into nested object
       : T[K]; // primitive — leave as-is
-};
+}>;

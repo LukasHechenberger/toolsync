@@ -2,12 +2,12 @@ import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { defineBuiltinPlugin } from '../lib/plugins';
 
-const pluginName = '@toolsync/builtin/vscode';
+export const vscodePluginName = '@toolsync/builtin/vscode';
 
 declare global {
   namespace Toolsync {
     interface ConfigMap {
-      [pluginName]: {
+      [vscodePluginName]: {
         /** VSCode settings */
         settings?: Record<string, any>;
         /** VSCode extensions */
@@ -21,7 +21,7 @@ declare global {
 }
 
 const vscodePlugin = defineBuiltinPlugin({
-  name: pluginName,
+  name: vscodePluginName,
   description: 'Integrates with Visual Studio Code for settings and extensions management',
   async setupPackage(pkg, { log, options }) {
     if (pkg.isRoot) {

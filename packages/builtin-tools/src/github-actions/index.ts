@@ -2,6 +2,7 @@ import { writeFile, mkdir } from 'fs/promises';
 import YAML from 'yaml';
 import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
+import type { WithModifiers } from '@toolsync/object-mods';
 
 interface GithubActionsWorkflowStepOptions {
   id?: string;
@@ -15,14 +16,14 @@ interface GithubActionsWorkflowStepOptions {
 
 interface GithubActionsJobOptions {
   name?: string;
-  'timeout-minutes'?: number;
+  'timeout-minutes': number;
   'runs-on': string;
   env?: Record<string, string>;
   steps: GithubActionsWorkflowStepOptions[];
 }
 
 interface GithubActionsWorkflowOptions {
-  name: string;
+  name?: string;
   on: string[] | Record<string, any>;
   jobs: Record<string, GithubActionsJobOptions>;
 }
@@ -109,7 +110,7 @@ const githubActionsPlugin = definePlugin({
   name: pluginName,
   loadConfig: () => ({
     config: {
-      '@toolsync/builtin/github-actions': defaultOptions,
+      [pluginName]: defaultOptions,
       '@toolsync/builtin/vscode': {
         extensions: {
           recommendations: ['github.vscode-github-actions'],
