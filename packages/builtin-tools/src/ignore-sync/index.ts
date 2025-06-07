@@ -1,11 +1,22 @@
 import { devDependencies } from '../../package.json';
 import { defineBuiltinPlugin } from '../lib/plugins';
+import { vscodePluginName } from '../vscode';
 
-const ignoreSyncPlugin = defineBuiltinPlugin<{
-  /** Version of ignore-sync to install. */
-  version?: string;
-}>({
-  name: '@toolsync/builtin/ignore-sync',
+const pluginName = '@toolsync/builtin/ignore-sync';
+
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: {
+        /** Version of ignore-sync to install. */
+        version?: string;
+      };
+    }
+  }
+}
+
+const ignoreSyncPlugin = defineBuiltinPlugin({
+  name: pluginName,
   description: `Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc. files across multiple directories.`,
   loadConfig() {
     return {
@@ -13,7 +24,7 @@ const ignoreSyncPlugin = defineBuiltinPlugin<{
         '@toolsync/cli': {
           prepare: ['ignore-sync .'],
         },
-        '@toolsync/builtin/vscode': {
+        [vscodePluginName]: {
           settings: {
             'files.associations': {
               '*-sync': 'ignore',

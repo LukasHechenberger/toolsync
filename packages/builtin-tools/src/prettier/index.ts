@@ -2,22 +2,31 @@ import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import { devDependencies } from '../../package.json';
 import { defineBuiltinPlugin } from '../lib/plugins';
+import { vscodePluginName } from '../vscode';
 
 export const defaultSettings = { singleQuote: true, printWidth: 100 };
 
 const pluginName = '@toolsync/builtin/prettier';
 
-const prettierPlugin = defineBuiltinPlugin<{
-  version?: string;
-  scriptName?: Partial<{ write: string; check: string }>;
-  settings?: Record<string, any>;
-}>({
+declare global {
+  namespace Toolsync {
+    export interface ConfigMap {
+      [pluginName]: {
+        version?: string;
+        scriptName?: Partial<{ write: string; check: string }>;
+        settings?: Record<string, any>;
+      };
+    }
+  }
+}
+
+const prettierPlugin = defineBuiltinPlugin({
   name: pluginName,
   description: 'Integrates with Prettier for code formatting',
-  loadConfig() {
+  loadConfig(c) {
     return {
       config: {
-        '@toolsync/builtin/vscode': {
+        [vscodePluginName]: {
           extensions: {
             recommendations: ['esbenp.prettier-vscode'],
           },

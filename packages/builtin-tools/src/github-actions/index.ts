@@ -22,7 +22,7 @@ interface GithubActionsJobOptions {
 }
 
 interface GithubActionsWorkflowOptions {
-  name: string;
+  name?: string;
   on: string[] | Record<string, any>;
   jobs: Record<string, GithubActionsJobOptions>;
 }
@@ -75,6 +75,7 @@ export const defaultOptions = {
               run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
             },
             {
+              // TODO: Move to @toolsync/builtin/changesets plugin
               if: 'github.ref_name == github.event.repository.default_branch',
               name: 'Changesets',
               uses: 'changesets/action@v1',
@@ -95,11 +96,21 @@ export const defaultOptions = {
   },
 } satisfies GithubActionsPluginOptions;
 
-const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
-  name: '@toolsync/builtin/github-actions',
+const pluginName = '@toolsync/builtin/github-actions';
+
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: GithubActionsPluginOptions;
+    }
+  }
+}
+
+const githubActionsPlugin = definePlugin({
+  name: pluginName,
   loadConfig: () => ({
     config: {
-      '@toolsync/builtin/github-actions': defaultOptions,
+      [pluginName]: defaultOptions,
       '@toolsync/builtin/vscode': {
         extensions: {
           recommendations: ['github.vscode-github-actions'],

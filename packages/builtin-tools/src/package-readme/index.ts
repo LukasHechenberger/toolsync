@@ -7,9 +7,17 @@ const pluginName = '@toolsync/builtin/package-readme';
 const allBadges = ['npm-version'] as const;
 type BadgesAvailable = (typeof allBadges)[number];
 
-const packageReadmePlugin = defineBuiltinPlugin<{
-  badges: boolean | BadgesAvailable[];
-}>({
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: {
+        badges?: boolean | BadgesAvailable[];
+      };
+    }
+  }
+}
+
+const packageReadmePlugin = defineBuiltinPlugin({
   name: pluginName,
   description: 'Generates README.md files for all packages in the workspace.',
   async setupPackage(pkg, { packages, log, options: { badges: _badges = allBadges } }) {

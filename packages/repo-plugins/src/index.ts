@@ -3,6 +3,14 @@ import { join } from 'path';
 import { name, homepage } from '../package.json';
 import { MarkdownTemplate } from '@toolsync/template';
 
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [name]: {};
+    }
+  }
+}
+
 const repoPlugin = definePlugin({
   name,
   loadConfig() {
@@ -36,13 +44,13 @@ const repoPlugin = definePlugin({
     if (pkg.packageJson.name === '@toolsync/builtin') {
       const { exports: exportedTools } = pkg.packageJson;
 
-      const tools: Plugin[] = [];
+      const tools: Plugin<any>[] = [];
 
       for (const importPath of Object.keys(exportedTools!)) {
         if (importPath === '.') continue; // Skip the root export
 
         const importReference = join('@toolsync/builtin', importPath);
-        const { default: plugin } = (await import(importReference)) as { default: Plugin };
+        const { default: plugin } = (await import(importReference)) as { default: Plugin<any> };
 
         tools.push(plugin);
       }

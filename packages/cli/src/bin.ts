@@ -13,7 +13,22 @@ const log = logger.child('cli');
 
 // TODO: Also implement a config plugin that checks for "toolsync" inside package.json
 
-const resolveJsonFilePlugin = definePlugin<{ configFile: string }>({
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      '@toolsync/cli': {
+        version?: string;
+        configFile?: string;
+        prepare?: string[];
+      };
+      '@toolsync/cli/resolve-json-config-file': {
+        configFile: string;
+      };
+    }
+  }
+}
+
+const resolveJsonFilePlugin = definePlugin({
   name: '@toolsync/cli/resolve-json-config-file',
   async loadConfig({ configFile }, { log }) {
     log.trace(`Trying to load config file ${configFile}`);
@@ -42,7 +57,7 @@ const programConfig: ToolsyncConfig = {
   },
 };
 
-const cliPlugin = definePlugin<{ version?: string; configFile?: string; prepare?: string[] }>({
+const cliPlugin = definePlugin({
   name: cliPluginName,
   loadConfig(_, { log }) {
     log.trace('Returning CLI plugin config', { programConfig });
@@ -77,6 +92,7 @@ const program = new Command()
 For usage details see ${new URL(repository.directory, `${homepage}/tree/main/`)}`,
   )
   .on('option:no-default-plugins', () => {
+    // FIXME: Implement or remove
     log.debug('Disabling default plugins via --no-default-plugins');
 
     programConfig.config = {
@@ -122,9 +138,7 @@ program
     log.timing('Starting toolsync CLI preparation');
     const tools = await toolsync({
       plugins: [cliPlugin],
-      config: {
-        [cliPlugin.name]: options,
-      },
+      config: {},
     });
     log.timing('Finished toolsync CLI preparation');
 
@@ -150,9 +164,7 @@ program
     log.timing('Starting toolsync CLI preparation');
     const tools = await toolsync({
       plugins: [cliPlugin],
-      config: {
-        [cliPlugin.name]: options,
-      },
+      config: {},
     });
     log.timing('Finished toolsync CLI preparation');
 

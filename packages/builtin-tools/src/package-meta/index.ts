@@ -3,7 +3,15 @@ import { defineBuiltinPlugin } from '../lib/plugins';
 
 const pluginName = '@toolsync/builtin/package-meta';
 
-const packageMetaPlugin = defineBuiltinPlugin<Pick<Package['packageJson'], 'publishConfig'>>({
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: Pick<Package['packageJson'], 'publishConfig'>;
+    }
+  }
+}
+
+const packageMetaPlugin = defineBuiltinPlugin({
   name: pluginName,
   description: 'Sync package metadata like repository etc between workspace packages',
   setupPackage(pkg, { rootPackage, log, options }) {

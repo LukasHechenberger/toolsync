@@ -13,7 +13,8 @@ type UpdateOperation<T> = {
   };
 };
 
-type ModifierForArray<T> = Array<InsertOperation<T> | UpdateOperation<T> | Partial<T>>;
+type ArrayOperation<T> = InsertOperation<T> | UpdateOperation<T>;
+type ModifierForArray<T> = Array<ArrayOperation<T> | Partial<T>>;
 
 export type Modifier<T> = {
   [K in keyof T]?: T[K] extends Array<infer U> ? ModifierForArray<U> : T[K]; // direct value for non-array keys
@@ -97,3 +98,11 @@ export function handleModifier<T extends object>(modifier: Modifier<T>): T {
   const target: T = {} as T; // Create an empty target object
   return modify(target, modifier);
 }
+
+export type WithModifiers<T> = Partial<{
+  [K in keyof T]: T[K] extends (infer U)[]
+    ? Array<Partial<U> | ArrayOperation<WithModifiers<U>>> // recurse into array elements
+    : NonNullable<T[K]> extends object
+      ? WithModifiers<T[K]> // recurse into nested object
+      : T[K]; // primitive — leave as-is
+}>;
