@@ -1,0 +1,28 @@
+[github/gitignore]
+Node.gitignore
+
+[relative]
+packages/*/.gitignore-sync
+docs/.gitignore-sync
+
+[inline]
+packages/.gitignore
+docs/.gitignore
+
+# By @toolsync/builtins/turborepo tool
+.turbo
+
+# By @toolsync/builtins/ignore-sync
+.prettierignore
+
+# By @toolsync/builtins/prettier
+.prettierrc.json
+
+# By @toolsync/builtins/vscode
+.vscode
+
+# By @toolsync/builtins/changeset
+.changeset/README.md
+
+# By @toolsync/builtins/tsup
+tsup.config.bundled*

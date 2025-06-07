@@ -29,7 +29,7 @@
     "@commander-js/extra-typings": "^14.0.0",
     "@toolsync/template": "workspace:*",
     "@types/debug": "^4.1.12",
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.30",
     "tsup": "^8.5.0"
   },
   "engines": {
