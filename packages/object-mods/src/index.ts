@@ -6,7 +6,14 @@ type InsertOperation<T> = {
   };
 };
 
-type ModifierForArray<T> = Array<InsertOperation<T> | Partial<T>>;
+type UpdateOperation<T> = {
+  '@update': {
+    id: string;
+    data: Partial<T>;
+  };
+};
+
+type ModifierForArray<T> = Array<InsertOperation<T> | UpdateOperation<T> | Partial<T>>;
 
 export type Modifier<T> = {
   [K in keyof T]?: T[K] extends Array<infer U> ? ModifierForArray<U> : T[K]; // direct value for non-array keys
@@ -14,7 +21,7 @@ export type Modifier<T> = {
 
 export function modify<T extends object>(target: T, modifier: Modifier<T>): T {
   for (const key in modifier) {
-    const modVal = modifier[key];
+    const modVal: any = modifier[key];
     const targetVal = target[key];
 
     // Handle missing or primitive target keys
@@ -41,6 +48,15 @@ export function modify<T extends object>(target: T, modifier: Modifier<T>): T {
 
             const insertIndex = before ? index : index + 1;
             targetVal.splice(insertIndex, 0, data);
+          } else if ('@update' in op) {
+            const { id, data } = op['@update'];
+            const item = targetVal.find((item: any) => item.id === id);
+            if (!item) {
+              throw new Error(`Item with id '${id}' not found in '${key}'`);
+            }
+            modify(item, data); // deep merge into the matched item
+          } else {
+            throw new Error(`Unknown operator in modifier: ${JSON.stringify(op)}`);
           }
         } else {
           targetVal.push(op);
