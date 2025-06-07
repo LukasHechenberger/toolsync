@@ -55,9 +55,9 @@ This repository contains the following packages:
 - [ ] Node
   - [ ] Set engines in root package.json
   - [ ] Set `node-version` in github actions workflows
-- [ ] Pnpm
+- [x] Pnpm
   - [x] Set correct version in root packageManager
-  - [ ] Set version in github actions install steps
+  - [x] Set version in github actions install steps
 - [ ] Package metadata
   - [x] Sync meta fields like repository, url, author, etc.
   - [ ] Ensure private packages have the same scope (e.g. `@repo/`)
