@@ -64,6 +64,7 @@ export const defaultOptions = {
             {
               id: 'install',
               name: 'Install dependencies',
+              // NOTE: run is set by e.g. pnpm plugin
             },
             {
               name: 'Code Quality Checks',
