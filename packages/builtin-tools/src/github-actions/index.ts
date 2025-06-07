@@ -57,11 +57,11 @@ export const defaultOptions = {
               uses: 'pnpm/action-setup@v4',
             },
             {
+              id: 'setup-node',
               name: 'Setup Node.js environment',
               uses: 'actions/setup-node@v4',
               with: {
                 'node-version': 22,
-                cache: 'pnpm',
               },
             },
             {

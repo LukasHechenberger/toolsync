@@ -15,7 +15,8 @@ jobs:
           fetch-depth: 2
           lfs: true
       - uses: pnpm/action-setup@v4
-      - name: Setup Node.js environment
+      - id: setup-node
+        name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 22

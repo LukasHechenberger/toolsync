@@ -29,6 +29,17 @@ const pnpmPlugin = defineBuiltinPlugin<{
         '@toolsync/builtin/pnpm': {
           version,
         },
+        '@toolsync/builtin/github-actions': {
+          workflows: {
+            ci: {
+              jobs: {
+                build: {
+                  steps: [{ '@update': { id: 'setup-node', data: { with: { cache: 'pnpm' } } } }],
+                },
+              },
+            },
+          },
+        },
       },
     };
   },
