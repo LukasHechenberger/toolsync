@@ -13,7 +13,9 @@ export type LoaderReference = string;
 /** A plugin or a plugin's package name or import path */
 export type PluginReference = string | Plugin<keyof Toolsync.ConfigMap>;
 
-export interface PluginConfigMap {} // intentionally empty
+interface PluginConfigMap {
+  // intentionally empty
+}
 
 declare global {
   namespace Toolsync {
@@ -21,10 +23,9 @@ declare global {
   }
 }
 
-/** Configuration for your toolsync */
+/** Configuration for your toolsync project */
 export interface ToolsyncConfig {
   plugins: PluginReference[];
-  // config: Record<string, any>;
   config: {
     [K in keyof Toolsync.ConfigMap]?: Toolsync.ConfigMap[K];
   };
