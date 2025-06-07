@@ -15,7 +15,7 @@ interface GithubActionsWorkflowStepOptions {
 
 interface GithubActionsJobOptions {
   name?: string;
-  'timeout-minutes': number;
+  'timeout-minutes'?: number;
   'runs-on': string;
   env?: Record<string, string>;
   steps: GithubActionsWorkflowStepOptions[];
