@@ -20,7 +20,10 @@ export type Plugin<K extends keyof Toolsync.ConfigMap> = {
   loadConfig?(
     options: Toolsync.ConfigMap[K],
     context: PluginContext<K>,
-  ): MaybePromise<Partial<ToolsyncConfig> | void>;
+  ): MaybePromise<{
+    plugins?: ToolsyncConfig['plugins'];
+    config?: WithModifiers<ToolsyncConfig['config']>;
+  } | void>;
 
   /** The setup hook can be used to set up a tool. It's called for each package in the workspace */
   setupPackage?(pkg: Package, context: PluginContext<K>): MaybePromise<void>;
