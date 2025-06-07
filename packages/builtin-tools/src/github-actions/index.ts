@@ -54,9 +54,6 @@ export const defaultOptions = {
               },
             },
             {
-              uses: 'pnpm/action-setup@v4',
-            },
-            {
               id: 'setup-node',
               name: 'Setup Node.js environment',
               uses: 'actions/setup-node@v4',
@@ -67,7 +64,6 @@ export const defaultOptions = {
             {
               id: 'install',
               name: 'Install dependencies',
-              run: 'pnpm install',
             },
             {
               name: 'Code Quality Checks',

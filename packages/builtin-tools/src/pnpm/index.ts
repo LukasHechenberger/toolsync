@@ -34,7 +34,11 @@ const pnpmPlugin = defineBuiltinPlugin<{
             ci: {
               jobs: {
                 build: {
-                  steps: [{ '@update': { id: 'setup-node', data: { with: { cache: 'pnpm' } } } }],
+                  steps: [
+                    { '@insert': { before: 'setup-node', data: { uses: 'pnpm/action-setup@v4' } } },
+                    { '@update': { id: 'setup-node', data: { with: { cache: 'pnpm' } } } },
+                    { '@update': { id: 'install', data: { run: 'pnpm install' } } },
+                  ],
                 },
               },
             },
