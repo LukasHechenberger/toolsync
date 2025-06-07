@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The toolsync command line interface",
   "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
