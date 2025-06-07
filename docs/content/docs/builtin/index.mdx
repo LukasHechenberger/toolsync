@@ -1,0 +1,25 @@
+---
+title: Built-in tools
+description: We support many tools out of the box.
+---
+
+The @toolsync/builtin package provides a set of built-in tools that are available for use in your Toolsync project.
+
+## Tools available
+
+import tools from '@toolsync/builtin/tools.json';
+
+<Cards>
+
+{tools.map(tool => (
+
+<Card
+  key={tool.name}
+  title={tool.name}
+  description={tool.description}
+  href={new URL(tool.path, 'https://mydocs.com/docs/builtin/').pathname}
+/>
+
+))}
+
+</Cards>

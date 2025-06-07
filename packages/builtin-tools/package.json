@@ -43,7 +43,8 @@
     "./package-meta": {
       "types": "./out/package-meta/index.d.ts",
       "default": "./out/package-meta/index.js"
-    }
+    },
+    "./tools.json": "./out/tools.json"
   },
   "scripts": {
     "build": "tsup",
