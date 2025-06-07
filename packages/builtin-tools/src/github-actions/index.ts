@@ -75,6 +75,7 @@ export const defaultOptions = {
               run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
             },
             {
+              // TODO: Move to @toolsync/builtin/changesets plugin
               if: 'github.ref_name == github.event.repository.default_branch',
               name: 'Changesets',
               uses: 'changesets/action@v1',
