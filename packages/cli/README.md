@@ -29,7 +29,7 @@ Commands:
   postinstall           Run necessary posinstall steps
   help [command]        display help for command
 
-For usage details see https://github.com/LukasHechenberger/toolsync/packages/cli
+For usage details see https://github.com/LukasHechenberger/toolsync/tree/main/packages/cli
 ```
 
 <!-- #endregion cli-usage -->

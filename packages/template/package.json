@@ -2,9 +2,10 @@
   "name": "@toolsync/template",
   "version": "0.0.0",
   "description": "Update sections of source files",
+  "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LukasHechenberger/toolsync",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
     "directory": "packages/template"
   },
   "license": "MIT",

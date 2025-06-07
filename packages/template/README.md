@@ -79,7 +79,7 @@ Options:
                          (default: "bottom")
   -h, --help             display help for command
 
-For more information, visit https://github.com/LukasHechenberger/toolsync/packages/template
+For more information, visit https://github.com/LukasHechenberger/toolsync/tree/main/packages/template
 ```
 
 <!-- #endregion cli-usage -->

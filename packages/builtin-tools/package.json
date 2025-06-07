@@ -2,9 +2,10 @@
   "name": "@toolsync/builtin",
   "version": "0.0.0",
   "description": "Default toolsync available",
+  "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LukasHechenberger/toolsync",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
     "directory": "packages/builtin-tools"
   },
   "license": "MIT",
