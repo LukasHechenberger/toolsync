@@ -99,7 +99,7 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
   name: '@toolsync/builtin/github-actions',
   loadConfig: () => ({
     config: {
-      ['@toolsync/builtin/github-actions']: defaultOptions,
+      '@toolsync/builtin/github-actions': defaultOptions,
       '@toolsync/builtin/vscode': {
         extensions: {
           recommendations: ['github.vscode-github-actions'],
