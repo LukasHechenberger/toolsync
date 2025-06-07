@@ -48,6 +48,7 @@ const repoPlugin = definePlugin({
 
       for (const importPath of Object.keys(exportedTools!)) {
         if (importPath === '.') continue; // Skip the root export
+        if (importPath.endsWith('.json')) continue; // Skip JSON exports
 
         const importReference = join('@toolsync/builtin', importPath);
         const { default: plugin } = (await import(importReference)) as { default: Plugin<any> };
