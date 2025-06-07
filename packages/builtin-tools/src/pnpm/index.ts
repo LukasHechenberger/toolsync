@@ -1,10 +1,21 @@
 import { packageManager as defaultPackageManager } from '../../../../package.json';
 import { defineBuiltinPlugin } from '../lib/plugins';
 
-const pnpmPlugin = defineBuiltinPlugin<{
-  version?: string;
-}>({
-  name: '@toolsync/builtin/pnpm',
+const pluginName = '@toolsync/builtin/pnpm';
+
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: {
+        /** Version of pnpm to use */
+        version?: string;
+      };
+    }
+  }
+}
+
+const pnpmPlugin = defineBuiltinPlugin({
+  name: pluginName,
   description:
     'Integrates with the pnpm package manager, setting up the root package.json with the specified version.',
   loadConfig(config, { rootPackage }) {

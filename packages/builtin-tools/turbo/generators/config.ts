@@ -37,9 +37,17 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
 
 const pluginName = '${prefix}/{{ dashCase name }}';
 
-const {{ camelCase name }}Plugin = defineBuiltinPlugin<{
-  // TODO: Define plugin options here
-}>({
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: {
+        // TODO: Define plugin options here
+      };
+    }
+  }
+}
+
+const {{ camelCase name }}Plugin = defineBuiltinPlugin({
   name: pluginName,
   description: '{{ description }}',
   // TODO: Add hooks here...

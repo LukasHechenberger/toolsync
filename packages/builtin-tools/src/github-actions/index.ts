@@ -95,8 +95,18 @@ export const defaultOptions = {
   },
 } satisfies GithubActionsPluginOptions;
 
-const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
-  name: '@toolsync/builtin/github-actions',
+const pluginName = '@toolsync/builtin/github-actions';
+
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      [pluginName]: GithubActionsPluginOptions;
+    }
+  }
+}
+
+const githubActionsPlugin = definePlugin({
+  name: pluginName,
   loadConfig: () => ({
     config: {
       '@toolsync/builtin/github-actions': defaultOptions,

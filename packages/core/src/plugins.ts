@@ -1,30 +1,31 @@
 import type { Logger } from '@toolsync/logger';
 import type { ToolsyncConfig, Package, MaybePromise, Packages } from './types.js';
+import type { WithModifiers } from '@toolsync/object-mods';
 
-export type PluginContext<Options = {}> = Packages & {
+export type PluginContext<K extends keyof Toolsync.ConfigMap> = Packages & {
   log: Logger;
-  options: Options;
+  options: Toolsync.ConfigMap[K];
 };
 
-export type PluginHooks<Options = {}> = {
-  /** The setup hook can be used to set up a tool. It's called for each package in the workspace */
-  setupPackage?(pkg: Package, context: PluginContext<Options>): MaybePromise<void>;
-};
-
-export type Plugin<Options = {}> = {
+export type Plugin<K extends keyof Toolsync.ConfigMap> = {
   /** The name of the plugin */
-  name: string;
+  name: K;
   /** An (optional) description of the plugin */
   description?: string;
-  /** Implement this hook if you need to import non-esm modules */
-  loadModule?<T>(reference: string, context: PluginContext): MaybePromise<T | void>;
-  loadConfig?(
-    options: Options,
-    context: PluginContext,
-  ): MaybePromise<Partial<ToolsyncConfig> | void>;
-} & PluginHooks<Options>;
 
-export function definePlugin<Options = {}>(plugin: Plugin<Options>) {
-  // Plugin definition logic goes here
+  /** Implement this hook if you need to import non-esm modules */
+  loadModule?<T>(reference: string, context: PluginContext<K>): MaybePromise<T | void>;
+
+  /** The loadConfig hook is called to load the plugin's configuration and to configure other plugins */
+  loadConfig?(
+    options: Toolsync.ConfigMap[K],
+    context: PluginContext<K>,
+  ): MaybePromise<Partial<ToolsyncConfig> | void>;
+
+  /** The setup hook can be used to set up a tool. It's called for each package in the workspace */
+  setupPackage?(pkg: Package, context: PluginContext<K>): MaybePromise<void>;
+};
+
+export function definePlugin<K extends keyof Toolsync.ConfigMap>(plugin: Plugin<K>) {
   return plugin;
 }

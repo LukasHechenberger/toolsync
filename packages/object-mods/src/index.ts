@@ -97,3 +97,11 @@ export function handleModifier<T extends object>(modifier: Modifier<T>): T {
   const target: T = {} as T; // Create an empty target object
   return modify(target, modifier);
 }
+
+export type WithModifiers<T> = {
+  [K in keyof T]: T[K] extends (infer U)[]
+    ? Array<ModifierForArray<WithModifiers<U>>> // recurse into array elements
+    : T[K] extends object
+      ? WithModifiers<T[K]> // recurse into nested object
+      : T[K]; // primitive — leave as-is
+};

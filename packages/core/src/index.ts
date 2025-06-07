@@ -1,11 +1,15 @@
 import { logger } from '@toolsync/logger';
 import type { ToolsyncConfig, Package, Packages } from './types';
-import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
+import { definePlugin, type Plugin, type PluginContext } from './plugins';
 import { getPackages } from '@manypkg/get-packages';
 import { createRequire } from 'module';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import { modify } from '@toolsync/object-mods';
+
+type FullyImplementedPlugin<K extends keyof Toolsync.ConfigMap = keyof Toolsync.ConfigMap> =
+  Required<Plugin<K>>;
+type PluginHooks = Omit<FullyImplementedPlugin, 'name' | 'description'>;
 
 const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
@@ -15,7 +19,17 @@ log.debug('Debug logging is enabled');
 
 const require = global.require ?? createRequire(import.meta.url);
 
-const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
+declare global {
+  namespace Toolsync {
+    interface ConfigMap {
+      '@toolsync/core': {
+        defaultPlugins?: boolean | string[];
+      };
+    }
+  }
+}
+
+const corePlugin = definePlugin({
   name: '@toolsync/core',
   async loadModule(reference: string, { log }) {
     log.trace(`Loading module '${reference}' as a node module`, { cwd: process.cwd() });
@@ -47,16 +61,16 @@ const corePlugin = definePlugin<{ defaultPlugins?: boolean | string[] }>({
 
 /** @internal */
 type PluginHookPayload = {
-  [K in keyof Required<PluginHooks>]: Parameters<Required<PluginHooks>[K]> extends [
+  [KK in keyof PluginHooks]: Parameters<PluginHooks[KK]> extends [
     infer P,
-    PluginContext,
+    PluginContext<keyof Toolsync.ConfigMap>,
   ]
     ? P
     : never;
 };
 
 type RuntimeToolsyncConfig = Omit<ToolsyncConfig, 'plugins'> & {
-  plugins: Plugin[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
+  plugins: Plugin<keyof Toolsync.ConfigMap>[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
 };
 
 class Toolsync {
@@ -107,7 +121,9 @@ class Toolsync {
       }
 
       const plugin =
-        typeof pluginRef === 'string' ? await this.loadModule<Plugin>(pluginRef) : pluginRef;
+        typeof pluginRef === 'string'
+          ? await this.loadModule<Plugin<keyof Toolsync.ConfigMap>>(pluginRef)
+          : pluginRef;
 
       this.resolvedConfig.plugins.push(plugin);
       this.log.debug('loaded plugin', { plugin });
@@ -157,10 +173,10 @@ class Toolsync {
     return this.resolvedConfig;
   }
 
-  private async run<H extends keyof PluginHookPayload>(
+  private async run<H extends keyof PluginHooks>(
     hook: H,
     payload: PluginHookPayload[H],
-    context?: Omit<PluginContext, 'log' | 'options'>,
+    context?: Omit<PluginContext<keyof Toolsync.ConfigMap>, 'log' | 'options'>,
   ): Promise<void> {
     this.log.trace(`Running hook ${hook}`, { payload });
 
@@ -169,7 +185,7 @@ class Toolsync {
     for (const plugin of this.resolvedConfig.plugins) {
       if (plugin[hook]) {
         this.log.debug(`Running '${hook}' hook for plugin '${plugin.name}'`);
-        await plugin[hook](payload, {
+        await plugin[hook](payload as any, {
           ...baseContext,
           log: pluginLogger.child(plugin.name),
           options: this.resolvedConfig.config[plugin.name] ?? {},
