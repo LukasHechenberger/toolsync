@@ -39,6 +39,9 @@ const packageMetaPlugin = defineBuiltinPlugin<Pick<Package['packageJson'], 'publ
       }
     }
 
+    const homepage = rootPackage?.packageJson.homepage;
+    if (homepage) pkg.packageJson.homepage = homepage;
+
     if (options.publishConfig && !pkg.packageJson.private) {
       pkg.packageJson.publishConfig = options.publishConfig;
     } else {

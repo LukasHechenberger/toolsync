@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "description": "Some toolsync plugins we use in the toolsync monorepo :)",
+  "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LukasHechenberger/toolsync",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
     "directory": "packages/repo-plugins"
   },
   "license": "MIT",

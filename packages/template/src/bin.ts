@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import { Command } from 'commander';
-import { name, version, repository, bin } from '../package.json';
+import { name, version, homepage, repository } from '../package.json';
 import { MarkdownTemplate } from '.';
 
 const program = new Command();
@@ -11,7 +11,7 @@ program
   .description('Update a section of a file with ' + name)
   .addHelpText(
     'after',
-    '\nFor more information, visit ' + new URL(repository.directory, `${repository.url}/`),
+    '\nFor more information, visit ' + new URL(repository.directory, `${homepage}/tree/main/`),
   )
   .version(version)
   .argument('<file>', 'file to update (only .md files are supported)')

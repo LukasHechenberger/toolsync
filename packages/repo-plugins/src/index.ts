@@ -1,10 +1,37 @@
 import { definePlugin, type Plugin } from '@toolsync/core/plugins';
 import { join } from 'path';
-import { name, repository } from '../package.json';
+import { name, homepage } from '../package.json';
 import { MarkdownTemplate } from '@toolsync/template';
 
 const repoPlugin = definePlugin({
   name,
+  loadConfig() {
+    return {
+      config: {
+        '@toolsync/builtin/github-actions': {
+          workflows: {
+            ci: {
+              jobs: {
+                build: {
+                  steps: [
+                    {
+                      '@insert': {
+                        before: 'install',
+                        data: {
+                          name: 'Prepare toolsync',
+                          run: `pnpm install --ignore-scripts && pnpm build`,
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  },
   async setupPackage(pkg, {}) {
     if (pkg.packageJson.name === '@toolsync/builtin') {
       const { exports: exportedTools } = pkg.packageJson;
@@ -46,7 +73,7 @@ ${tools.map((tool) => `- ${[`**${tool.name}**`, ...(tool.description ? [tool.des
         insert: 'bottom',
         content: `---
 
-Part of the [toolsync](${repository.url}) project.
+Part of the [toolsync](${homepage}) project.
 `,
       });
 

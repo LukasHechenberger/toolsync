@@ -44,6 +44,7 @@ This repository contains the following packages:
 - [@toolsync/cli](packages/cli) - The toolsync command line interface
 - [@toolsync/core](packages/core) - Core functionality used in @toolsync/cli etc
 - [@toolsync/logger](packages/logger) - The logger we use
+- [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
 - [@toolsync/template](packages/template) - Update sections of source files
 - [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
 
@@ -54,9 +55,9 @@ This repository contains the following packages:
 - [ ] Node
   - [ ] Set engines in root package.json
   - [ ] Set `node-version` in github actions workflows
-- [ ] Pnpm
+- [x] Pnpm
   - [x] Set correct version in root packageManager
-  - [ ] Set version in github actions install steps
+  - [x] Set version in github actions install steps
 - [ ] Package metadata
   - [x] Sync meta fields like repository, url, author, etc.
   - [ ] Ensure private packages have the same scope (e.g. `@repo/`)
@@ -73,7 +74,7 @@ This repository contains the following packages:
   - [x] Add `format` script
   - [x] Add vscode extension if enabled
   - [ ] Add format task to turbo.json (if enabled)
-- [ ] Github Actions
+- [x] Github Actions
   - [x] Basic CI workflow
 - [ ] ignore-sync
   - [ ] Install
@@ -136,5 +137,4 @@ Individial packages can disable tools in their package.json (or toolsync.json ?)
 
 ### General
 
-- [ ] Rename from `@toolsync` to `@tool-sync`
 - [ ] Create _create_ package `create-super-fancy-tools-setup` :)

@@ -29,6 +29,9 @@ declare module '@manypkg/tools' {
     /** License of the package */
     license?: string;
 
+    /** Project homepage */
+    homepage?: string;
+
     repository?: /** @deprecated  */
     | string
       | {

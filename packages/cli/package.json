@@ -2,9 +2,10 @@
   "name": "@toolsync/cli",
   "version": "0.0.0",
   "description": "The toolsync command line interface",
+  "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LukasHechenberger/toolsync",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
     "directory": "packages/cli"
   },
   "license": "MIT",
