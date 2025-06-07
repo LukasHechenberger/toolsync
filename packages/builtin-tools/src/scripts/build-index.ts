@@ -1,6 +1,6 @@
-import { writeFile } from 'node:fs/promises';
+import { writeFile } from 'fs/promises';
 import { name, exports } from '../../package.json';
-import { join } from 'node:path';
+import { join } from 'path';
 
 const tools = await Promise.all(
   Object.keys(exports)
