@@ -2,7 +2,6 @@ import { writeFile, mkdir } from 'fs/promises';
 import YAML from 'yaml';
 import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
-import type { WithModifiers } from '@toolsync/object-mods';
 
 interface GithubActionsWorkflowStepOptions {
   id?: string;
