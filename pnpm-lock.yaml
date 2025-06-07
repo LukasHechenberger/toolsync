@@ -54,6 +54,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.8
         version: 4.1.8
+      '@toolsync/builtin':
+        specifier: workspace:*
+        version: link:../packages/builtin-tools
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
