@@ -15,3 +15,6 @@ out
 
 # By @toolsync/builtins/changeset
 .changeset/README.md
+
+# By @toolsync/builtins/tsup
+tsup.config.bundled*

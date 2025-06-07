@@ -136,5 +136,4 @@ Individial packages can disable tools in their package.json (or toolsync.json ?)
 
 ### General
 
-- [ ] Rename from `@toolsync` to `@tool-sync`
 - [ ] Create _create_ package `create-super-fancy-tools-setup` :)

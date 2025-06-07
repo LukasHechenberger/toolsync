@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { toolsync } from '@toolsync/core';
 import { definePlugin } from '@toolsync/core/plugins';
 import type { ToolsyncConfig } from '@toolsync/core/types';
-import { name, version, repository } from '../package.json';
+import { name, version, homepage, repository } from '../package.json';
 import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
 import { logger } from '@toolsync/logger';
@@ -74,7 +74,7 @@ const program = new Command()
   .addHelpText(
     'afterAll',
     `
-For usage details see ${new URL(repository.directory, `${repository.url}/`)}`,
+For usage details see ${new URL(repository.directory, `${homepage}/tree/main/`)}`,
   )
   .on('option:no-default-plugins', () => {
     log.debug('Disabling default plugins via --no-default-plugins');
@@ -143,8 +143,9 @@ program
   });
 
 program
-  .command('postinstall')
-  .description('Run necessary posinstall steps')
+  .command('config')
+  .description('Print the fully resolved toolsync config')
+  .option('--json', 'Output the config as JSON')
   .action(async (options, args) => {
     log.timing('Starting toolsync CLI preparation');
     const tools = await toolsync({
@@ -159,15 +160,7 @@ program
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    log.debug('Toolsync CLI is ready', { config: config.config });
-
-    console.log('TODO: Run postinstall steps', tools.config[cliPlugin.name]);
-
-    // log.timing('Running setupPackage hooks');
-    // await tools.runSetup();
-    // log.timing('Finished running setupPackage hooks');
-
-    // log.info('Setup completed', { config: tools.config });
+    console.log(options.json ? JSON.stringify(config.config, null, 2) : config.config);
   });
 
 program.parse();

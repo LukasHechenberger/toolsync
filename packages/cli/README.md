@@ -26,7 +26,7 @@ Options:
 
 Commands:
   prepare               Prepare the environment for development
-  postinstall           Run necessary posinstall steps
+  config [options]      Print the fully resolved toolsync config
   help [command]        display help for command
 
 For usage details see https://github.com/LukasHechenberger/toolsync/tree/main/packages/cli
