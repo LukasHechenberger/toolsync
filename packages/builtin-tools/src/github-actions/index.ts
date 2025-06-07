@@ -5,15 +5,26 @@ import { join } from 'path';
 
 interface GithubActionsWorkflowStepOptions {
   id?: string;
-  name: string;
+  if?: string;
+  name?: string;
   uses?: string;
   with?: Record<string, any>;
-  run: string;
+  run?: string;
+  env?: Record<string, string>;
+}
+
+interface GithubActionsJobOptions {
+  name?: string;
+  'timeout-minutes'?: number;
+  'runs-on': string;
+  env?: Record<string, string>;
+  steps: GithubActionsWorkflowStepOptions[];
 }
 
 interface GithubActionsWorkflowOptions {
   name: string;
-  steps: GithubActionsWorkflowStepOptions[];
+  on: string[] | Record<string, any>;
+  jobs: Record<string, GithubActionsJobOptions>;
 }
 
 interface GithubActionsPluginOptions {
@@ -24,7 +35,65 @@ export const defaultOptions = {
   workflows: {
     ci: {
       name: 'CI',
-      steps: [],
+      on: ['push'],
+      jobs: {
+        build: {
+          name: 'Code Quality',
+          'timeout-minutes': 15,
+          'runs-on': 'ubuntu-latest',
+          env: {
+            DO_NOT_TRACK: '1',
+          },
+          steps: [
+            {
+              name: 'Check out code',
+              uses: 'actions/checkout@v4',
+              with: {
+                'fetch-depth': 2,
+                lfs: true,
+              },
+            },
+            {
+              uses: 'pnpm/action-setup@v4',
+            },
+            {
+              name: 'Setup Node.js environment',
+              uses: 'actions/setup-node@v4',
+              with: {
+                'node-version': 22,
+                cache: 'pnpm',
+              },
+            },
+            {
+              id: 'install',
+              name: 'Install dependencies',
+              run: 'pnpm install',
+            },
+            {
+              name: 'Code Quality Checks',
+              run: 'pnpm turbo check lint check-types test build',
+            },
+            {
+              name: 'Ensure there are no uncommitted changes',
+              run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
+            },
+            {
+              if: 'github.ref_name == github.event.repository.default_branch',
+              name: 'Changesets',
+              uses: 'changesets/action@v1',
+              with: {
+                commit: 'chore: Update versions',
+                title: 'chore: Update versions',
+                publish: 'pnpm changeset publish',
+              },
+              env: {
+                GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+                NPM_TOKEN: '${{ secrets.NPM_TOKEN }}',
+              },
+            },
+          ],
+        },
+      },
     },
   },
 } satisfies GithubActionsPluginOptions;
@@ -45,79 +114,10 @@ const githubActionsPlugin = definePlugin<GithubActionsPluginOptions>({
         // TODO: Update if file already exists
         await writeFile(
           join(dir, `${name}.yml`),
-          YAML.stringify(
-            {
-              // FIXME: Insert remaining options, like additional jobs, etc.
-              name: workflow.name,
-              on: ['push'],
-              jobs: {
-                build: {
-                  name: 'Code Quality',
-                  'timeout-minutes': 15,
-                  'runs-on': 'ubuntu-latest',
-                  env: {
-                    DO_NOT_TRACK: '1',
-                  },
-                  steps: [
-                    {
-                      name: 'Check out code',
-                      uses: 'actions/checkout@v4',
-                      with: {
-                        'fetch-depth': 2,
-                        lfs: true,
-                      },
-                    },
-                    {
-                      uses: 'pnpm/action-setup@v4',
-                    },
-                    {
-                      name: 'Setup Node.js environment',
-                      uses: 'actions/setup-node@v4',
-                      with: {
-                        'node-version': 22,
-                        cache: 'pnpm',
-                      },
-                    },
-                    // FIXME: Add via (private) repo toolsync plugin
-                    {
-                      name: 'Prepare toolsync',
-                      run: `pnpm install --ignore-scripts && pnpm build`,
-                    },
-                    {
-                      name: 'Install dependencies',
-                      run: 'pnpm install',
-                    },
-                    {
-                      name: 'Code Quality Checks',
-                      run: 'pnpm turbo check lint check-types test build',
-                    },
-                    {
-                      name: 'Ensure there are no uncommitted changes',
-                      run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
-                    },
-                    {
-                      if: 'github.ref_name == github.event.repository.default_branch',
-                      name: 'Changesets',
-                      uses: 'changesets/action@v1',
-                      with: {
-                        commit: 'chore: Update versions',
-                        title: 'chore: Update versions',
-                        publish: 'pnpm changeset publish',
-                      },
-                      env: {
-                        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
-                        NPM_TOKEN: '${{ secrets.NPM_TOKEN }}',
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-            {
-              // TODO: Get from prettier settings
-              singleQuote: true,
-            },
-          ),
+          YAML.stringify(workflow, {
+            // TODO: Get from prettier settings
+            singleQuote: true,
+          }),
         );
       }
     }

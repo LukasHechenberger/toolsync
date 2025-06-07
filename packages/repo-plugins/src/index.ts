@@ -5,6 +5,33 @@ import { MarkdownTemplate } from '@toolsync/template';
 
 const repoPlugin = definePlugin({
   name,
+  loadConfig() {
+    return {
+      config: {
+        '@toolsync/builtin/github-actions': {
+          workflows: {
+            ci: {
+              jobs: {
+                build: {
+                  steps: [
+                    {
+                      '@insert': {
+                        before: 'install',
+                        data: {
+                          name: 'Prepare toolsync',
+                          run: `pnpm install --ignore-scripts && pnpm build`,
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  },
   async setupPackage(pkg, {}) {
     if (pkg.packageJson.name === '@toolsync/builtin') {
       const { exports: exportedTools } = pkg.packageJson;

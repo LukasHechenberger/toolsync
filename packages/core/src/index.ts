@@ -1,11 +1,11 @@
 import { logger } from '@toolsync/logger';
-import { deepmergeInto } from 'deepmerge-ts';
 import type { ToolsyncConfig, Package, Packages } from './types';
 import { definePlugin, type Plugin, type PluginContext, type PluginHooks } from './plugins';
 import { getPackages } from '@manypkg/get-packages';
 import { createRequire } from 'module';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
+import { modify } from '@toolsync/object-mods';
 
 const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
@@ -139,7 +139,7 @@ class Toolsync {
           this.log.debug(`Loaded config from plugin: ${plugin.name}`, remainingConfig);
 
           // Merge the loaded config into the resolved config
-          deepmergeInto(this.resolvedConfig.config, remainingConfig ?? {});
+          modify(this.resolvedConfig.config, remainingConfig ?? {});
 
           if (plugins && plugins.length > 0) {
             this.log.debug(`Loading plugins from ${plugin.name}:`, plugins);

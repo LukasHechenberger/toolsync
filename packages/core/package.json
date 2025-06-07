@@ -37,8 +37,8 @@
     "@manypkg/get-packages": "^3.0.0",
     "@manypkg/tools": "^2.0.0",
     "@toolsync/logger": "workspace:^",
-    "debug": "^4.4.1",
-    "deepmerge-ts": "^7.1.5"
+    "@toolsync/object-mods": "workspace:^",
+    "debug": "^4.4.1"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",

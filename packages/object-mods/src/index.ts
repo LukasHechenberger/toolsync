@@ -17,14 +17,18 @@ export function modify<T extends object>(target: T, modifier: Modifier<T>): T {
     const modVal = modifier[key];
     const targetVal = target[key];
 
-    // If key doesn't exist in target, just assign
-    if (targetVal === undefined || !Array.isArray(targetVal)) {
-      target[key] = modVal as any;
+    // Handle missing or primitive target keys
+    if (
+      targetVal === undefined ||
+      isPrimitive(modVal) ||
+      Array.isArray(targetVal) !== Array.isArray(modVal)
+    ) {
+      (target as any)[key] = modVal;
       continue;
     }
 
     // Handle arrays with operator logic
-    if (Array.isArray(modVal)) {
+    if (Array.isArray(modVal) && Array.isArray(targetVal)) {
       for (const op of modVal) {
         if (isOperatorObject(op)) {
           if ('@insert' in op) {
@@ -37,26 +41,43 @@ export function modify<T extends object>(target: T, modifier: Modifier<T>): T {
 
             const insertIndex = before ? index : index + 1;
             targetVal.splice(insertIndex, 0, data);
-          } else {
-            throw new Error(`Unknown operator in modifier: ${JSON.stringify(op)}`);
           }
         } else {
-          // fallback: push non-operator objects to the array (optional behavior)
           targetVal.push(op);
         }
       }
+      continue;
     }
+
+    // Recursively merge nested objects
+    if (isObject(modVal) && isObject(targetVal)) {
+      modify(targetVal, modVal as any); // recursive call
+      continue;
+    }
+
+    // Fallback: direct overwrite
+    (target as any)[key] = modVal;
   }
 
   return target;
 }
 
-export function handleModifier<T extends object>(modifier: Modifier<T>): T {
-  const target: T = {} as T; // Create an empty target object
-  return modify(target, modifier);
+// --- Helpers
+
+function isObject(value: any): value is object {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function isPrimitive(value: any): value is string | number | boolean | null | undefined {
+  return typeof value !== 'object' || value === null;
 }
 
 function isOperatorObject(obj: any): boolean {
   if (typeof obj !== 'object' || obj === null) return false;
   return Object.keys(obj).some((key) => key.startsWith('@'));
+}
+
+export function handleModifier<T extends object>(modifier: Modifier<T>): T {
+  const target: T = {} as T; // Create an empty target object
+  return modify(target, modifier);
 }
