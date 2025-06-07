@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/builtin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Default toolsync available",
   "homepage": "https://github.com/LukasHechenberger/toolsync",
   "repository": {
