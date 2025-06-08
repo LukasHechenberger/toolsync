@@ -8,6 +8,7 @@ The @toolsync/builtin package provides a set of built-in tools that are availabl
 ## Tools available
 
 import tools from '@toolsync/builtin/tools.json';
+import { joinPathname } from '@/lib/helpers';
 
 <Cards>
 
@@ -17,7 +18,7 @@ import tools from '@toolsync/builtin/tools.json';
   key={tool.name}
   title={tool.name}
   description={tool.description}
-  href={new URL(tool.path, 'https://mydocs.com/docs/builtin/').pathname}
+  href={joinPathname(tool.path, '/docs/builtin/')}
 />
 
 ))}

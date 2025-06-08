@@ -70,6 +70,22 @@ ${tools.map((tool) => `- ${[`**${tool.name}**`, ...(tool.description ? [tool.des
       });
 
       await readme.save();
+
+      // const index = await JsTemplate.load(join(pkg.dir, './src/index.ts'), {});
+      // index.update({
+      //   section: 'tools',
+      //   content: `export const tools = ${JSON.stringify(
+      //     tools.map((tool) => ({
+      //       name: tool.name,
+      //       description: tool.description,
+      //     })),
+      //     null,
+      //     2,
+      //   )}`,
+      //   insert: 'bottom',
+      // });
+
+      // await index.save();
     }
 
     if (!pkg.isRoot) {

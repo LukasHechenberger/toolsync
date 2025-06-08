@@ -118,3 +118,13 @@ export class MarkdownTemplate extends Template {
     };
   }
 }
+
+/** A template, preconfigured to use Markdown/HTML comments */
+export class JsTemplate extends Template {
+  static get defaultOptions() {
+    return {
+      ...super.defaultOptions,
+      commentPattern: { start: '//' },
+    };
+  }
+}
