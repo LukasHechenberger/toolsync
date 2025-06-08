@@ -27,6 +27,14 @@ export default function Layout({ children }: { children: ReactNode }) {
       : child,
   );
 
+  // Insert CLI page
+  pageTree.children.splice(1, 0, {
+    $id: 'cli',
+    type: 'page',
+    name: 'CLI',
+    url: '/docs/cli',
+  });
+
   return (
     <DocsLayout tree={pageTree} {...baseOptions}>
       {children}

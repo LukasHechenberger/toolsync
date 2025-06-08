@@ -12,6 +12,6 @@ Some toolsync plugins we use in the toolsync monorepo :)
 
 ---
 
-Part of the [toolsync](https://github.com/LukasHechenberger/toolsync) project.
+Part of the [toolsync](https://toolsync.vercel.app) project.
 
 <!-- #endregion footer -->

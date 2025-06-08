@@ -2,7 +2,7 @@
   "name": "@toolsync/template",
   "version": "0.0.0",
   "description": "Update sections of source files",
-  "homepage": "https://github.com/LukasHechenberger/toolsync",
+  "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git",

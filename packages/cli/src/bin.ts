@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { toolsync } from '@toolsync/core';
 import { definePlugin } from '@toolsync/core/plugins';
 import type { ToolsyncConfig } from '@toolsync/core/types';
-import { name, version, homepage, repository } from '../package.json';
+import { name, version, homepage } from '../package.json';
 import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
 import { logger } from '@toolsync/logger';
@@ -89,7 +89,7 @@ const program = new Command()
   .addHelpText(
     'afterAll',
     `
-For usage details see ${new URL(repository.directory, `${homepage}/tree/main/`)}`,
+For usage details see ${homepage}`,
   )
   .on('option:no-default-plugins', () => {
     // FIXME: Implement or remove

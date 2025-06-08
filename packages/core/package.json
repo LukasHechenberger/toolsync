@@ -2,7 +2,7 @@
   "name": "@toolsync/core",
   "version": "0.1.0",
   "description": "Core functionality used in @toolsync/cli etc",
-  "homepage": "https://github.com/LukasHechenberger/toolsync",
+  "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git",

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "No more setting up the same 100 tools when starting a new project",
-  "homepage": "https://github.com/LukasHechenberger/toolsync",
+  "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git"

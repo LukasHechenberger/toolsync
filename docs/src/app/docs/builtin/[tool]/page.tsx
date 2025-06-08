@@ -56,7 +56,13 @@ export default async function BuiltinToolPage({ params }: Props) {
           Configure this tool like any other inside your <code>toolsync.json</code> file:
         </p>
 
-        <DynamicCodeBlock lang="json" code={JSON.stringify({ [tool.name]: {} }, null, 2)} />
+        <DynamicCodeBlock
+          lang="jsonc"
+          code={JSON.stringify({ [tool.name]: {} }, null, 2).replace(
+            '{}',
+            '{ /* Your config here */ }',
+          )}
+        />
 
         <h2>Available options:</h2>
 

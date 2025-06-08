@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import { Command } from 'commander';
-import { name, version, homepage, repository } from '../package.json';
+import { name, version, homepage } from '../package.json';
 import { MarkdownTemplate } from '.';
 
 const program = new Command();
@@ -9,10 +9,7 @@ const program = new Command();
 program
   .name(`npx ${name}`)
   .description('Update a section of a file with ' + name)
-  .addHelpText(
-    'after',
-    '\nFor more information, visit ' + new URL(repository.directory, `${homepage}/tree/main/`),
-  )
+  .addHelpText('after', `\nFor more information, visit ${homepage}`)
   .version(version)
   .argument('<file>', 'file to update (only .md files are supported)')
   .argument('<section>', 'section to update')
