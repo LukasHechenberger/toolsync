@@ -1,3 +1,4 @@
+import { repoUrl } from '@/lib/helpers';
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 /**
@@ -21,6 +22,7 @@ export const baseOptions: BaseLayoutProps = {
   themeSwitch: {
     mode: 'light-dark-system',
   },
+  githubUrl: repoUrl('/'),
 
   // see https://fumadocs.dev/docs/ui/navigation/links
   links: [],
