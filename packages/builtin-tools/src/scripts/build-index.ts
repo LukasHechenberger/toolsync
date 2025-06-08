@@ -1,7 +1,6 @@
 import { writeFile } from 'fs/promises';
 import { name, exports } from '../../package.json';
 import { join } from 'path';
-import type { Plugin } from '@toolsync/core/plugins';
 
 const tools = (
   await Promise.all(
@@ -10,7 +9,7 @@ const tools = (
       .map(async (path) => {
         return {
           path,
-          ...((await import(join(name, path))).default as Plugin<any>),
+          ...((await import(join(name, path))).default as { name: string; description: string }),
         };
       }),
   )
