@@ -3,7 +3,8 @@ import { DocsPage, DocsBody, DocsDescription, DocsTitle } from 'fumadocs-ui/page
 import { notFound } from 'next/navigation';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getMDXComponents } from '@/mdx-components';
-import { basePageOptions } from '../page.config';
+import { basePageOptions, BottomFooter } from '../page.config';
+import { repoUrl } from '@/lib/helpers';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
@@ -23,6 +24,8 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
             a: createRelativeLink(source, page),
           })}
         />
+
+        <BottomFooter />
       </DocsBody>
     </DocsPage>
   );

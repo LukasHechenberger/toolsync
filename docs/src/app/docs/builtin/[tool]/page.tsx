@@ -1,7 +1,7 @@
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
 import tools from '@toolsync/builtin/tools.json';
 import { notFound } from 'next/navigation';
-import { basePageOptions } from '../../page.config';
+import { basePageOptions, BottomFooter } from '../../page.config';
 
 type Props = { params: Promise<{ tool: string }> };
 
@@ -40,6 +40,8 @@ export default async function BuiltinToolPage({ params }: Props) {
         {/* TODO: Config types */}
         {/* <pre>{JSON.stringify(tool, null, 2)}</pre> */}
       </DocsBody>
+
+      <BottomFooter />
     </DocsPage>
   );
 }
