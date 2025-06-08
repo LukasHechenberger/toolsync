@@ -2,6 +2,9 @@ import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page
 import tools from '@toolsync/builtin/tools.json';
 import { notFound } from 'next/navigation';
 import { basePageOptions, BottomFooter } from '../../page.config';
+import { AutoTypeTable } from 'fumadocs-typescript/ui';
+import { createGenerator } from 'fumadocs-typescript';
+import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 
 type Props = { params: Promise<{ tool: string }> };
 
@@ -28,6 +31,8 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
+const generator = createGenerator();
+
 export default async function BuiltinToolPage({ params }: Props) {
   const { tool: slug } = await params;
   const tool = findTool(slug);
@@ -37,8 +42,21 @@ export default async function BuiltinToolPage({ params }: Props) {
       <DocsTitle>{tool.name}</DocsTitle>
       <DocsDescription>{tool.description}</DocsDescription>
       <DocsBody>
-        {/* TODO: Config types */}
-        {/* <pre>{JSON.stringify(tool, null, 2)}</pre> */}
+        <h2>Configuration</h2>
+
+        <p>
+          Configure this tool like any other inside your <code>toolsync.json</code> file:
+        </p>
+
+        <DynamicCodeBlock lang="json" code={JSON.stringify({ [tool.name]: {} }, null, 2)} />
+
+        <h3>Available options:</h3>
+
+        <AutoTypeTable
+          generator={generator}
+          path={`./node_modules/@toolsync/builtin/out/${tool.slug}/index.d.ts`}
+          type={`Toolsync.ConfigMap['${tool.name}']`}
+        />
       </DocsBody>
 
       <BottomFooter />
