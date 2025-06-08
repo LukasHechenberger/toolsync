@@ -1,6 +1,7 @@
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
 import tools from '@toolsync/builtin/tools.json';
 import { notFound } from 'next/navigation';
+import { basePageOptions } from '../../page.config';
 
 type Props = { params: Promise<{ tool: string }> };
 
@@ -32,7 +33,7 @@ export default async function BuiltinToolPage({ params }: Props) {
   const tool = findTool(slug);
 
   return (
-    <DocsPage toc={[]} tableOfContent={{ style: 'clerk' }}>
+    <DocsPage toc={[]} {...basePageOptions}>
       <DocsTitle>{tool.name}</DocsTitle>
       <DocsDescription>{tool.description}</DocsDescription>
       <DocsBody>
