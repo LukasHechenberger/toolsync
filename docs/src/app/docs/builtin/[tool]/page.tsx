@@ -5,6 +5,7 @@ import { basePageOptions, BottomFooter } from '../../page.config';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
 import { createGenerator } from 'fumadocs-typescript';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import Link from 'next/link';
 
 type Props = { params: Promise<{ tool: string }> };
 
@@ -42,7 +43,14 @@ export default async function BuiltinToolPage({ params }: Props) {
       <DocsTitle>{tool.name}</DocsTitle>
       <DocsDescription>{tool.description}</DocsDescription>
       <DocsBody>
-        <h2>Configuration</h2>
+        <h2>Installation</h2>
+
+        <p>
+          If you haven&apos;t already,{' '}
+          <Link href="/docs/builtin#installation">
+            install the <code>@toolsync/builtin`</code> package
+          </Link>
+        </p>
 
         <p>
           Configure this tool like any other inside your <code>toolsync.json</code> file:
@@ -50,7 +58,7 @@ export default async function BuiltinToolPage({ params }: Props) {
 
         <DynamicCodeBlock lang="json" code={JSON.stringify({ [tool.name]: {} }, null, 2)} />
 
-        <h3>Available options:</h3>
+        <h2>Available options:</h2>
 
         <AutoTypeTable
           generator={generator}

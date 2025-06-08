@@ -10,28 +10,28 @@ import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 
 ## Installation
 
-First of all, you need to install the [Toolsync CLI](/docs/cli). You can do this with your package manager of choice:
+First of all, you need to install the [Toolsync CLI](/docs/cli). It's also recommended you install the [@toolsync/builtin](/docs/builtin) package. You can do this with your package manager of choice:
 
 <PackageManagerTabs>
 
 <Tab value='pnpm'>
   
 ```bash
-pnpm add -Dw @toolsync/cli
+pnpm add -Dw @toolsync/cli @toolsync/builtin
 ```
 
 </Tab>
 <Tab value='npm'>
 
 ```bash
-npm install --save-dev @toolsync/cli
+npm install --save-dev @toolsync/cli @toolsync/builtin
 ```
 
 </Tab>
 <Tab value='yarn'>
 
 ```shell
-yarn add --save-dev @toolsync/cli
+yarn add --save-dev @toolsync/cli @toolsync/builtin
 ```
 
 </Tab>
@@ -60,21 +60,21 @@ Now that Toolsync is installed and configured, you can run `toolsync prepare`.
 <Tab value='pnpm'>
 
 ```shell
-pnpm toolsync prepare
+pnpm toolsync prepare --config toolsync.json
 ```
 
 </Tab>
 <Tab value='npm'>
 
 ```shell
-npx toolsync prepare
+npx toolsync prepare --config toolsync.json
 ```
 
 </Tab>
 <Tab value='yarn'>
 
 ```shell
-yarn toolsync prepare
+yarn toolsync prepare --config toolsync.json
 ```
 
 </Tab>
