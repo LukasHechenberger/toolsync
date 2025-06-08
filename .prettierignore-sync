@@ -1,7 +1,7 @@
 # TODO: Generate with @toolsync/builtin/ignore-sync (configured via @toolsync/builtin/prettier), then add to gitignore
 
 [relative]
-.gitignore
+.gitignore-sync
 
 [inline]
 pnpm-lock.yaml

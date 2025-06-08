@@ -1,7 +1,7 @@
 import { writeFile, mkdir } from 'fs/promises';
 import YAML from 'yaml';
-import { definePlugin } from '@toolsync/core/plugins';
 import { join } from 'path';
+import { defineBuiltinPlugin } from '../lib/plugins';
 
 interface GithubActionsWorkflowStepOptions {
   id?: string;
@@ -106,8 +106,9 @@ declare global {
   }
 }
 
-const githubActionsPlugin = definePlugin({
+const githubActionsPlugin = defineBuiltinPlugin({
   name: pluginName,
+  description: 'Integrates with GitHub Actions for CI workflows',
   loadConfig: () => ({
     config: {
       [pluginName]: defaultOptions,

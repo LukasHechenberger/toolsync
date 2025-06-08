@@ -47,6 +47,7 @@ This repository contains the following packages:
 - [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
 - [@toolsync/template](packages/template) - Update sections of source files
 - [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
+- [@toolsync/docs](docs) - _no description_
 
 <!-- #endregion packages -->
 
@@ -103,37 +104,27 @@ This repository contains the following packages:
   - [ ] Setup github action
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
+- [ ] Recommended: A builtin plugin that loads all other builtin plugins
 - [x] CLI
+
   - [ ] `prepare` should set up tools, update readme etc. for each package
     - [x] Run from repo root to handle all packages
     - [ ] Should not run during CI to speed up build
-  - [ ] `check` should call prepare and check if git status is clean - to validate setup during CI builds
+  - [ ] `check` should call prepare and check if git status is clean - tovalidate setup during CI builds
+    > `check` could be a v2 feature
 
-> `check` could be a v2 feature
+- [ ] Allow configuration via package.json
+- [ ] Allow individial packages to disable tools in their package.json (or toolsync.json ?)
 
-All tools used/configured should be saved in a simple json file e.g.
-
-```jsonc filename="toolsync.json"
-{
-  "prettier": {
-    "formatPackageJson": true, // Enables `prettier-plugin-packagejson`
-  },
-}
-```
-
-Individial packages can disable tools in their package.json (or toolsync.json ?)
-
-```json filename="packages/my-package/package.json"
-{
-  "toolsync": {
-    "prettier": false
+  ```json filename="packages/my-package/package.json"
+  {
+    "toolsync": {
+      "@toolsync/builtin/toolsync": {
+        "prettier": false
+      }
+    }
   }
-}
-```
-
-### Core
-
-- [ ] Warn if plugin is configured but not loaded (?)
+  ```
 
 ### General
 
