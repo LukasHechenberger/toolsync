@@ -104,6 +104,7 @@ This repository contains the following packages:
   - [ ] Setup github action
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
+- [ ] Recommended: A builtin plugin that loads all other builtin plugins
 - [x] CLI
   - [ ] `prepare` should set up tools, update readme etc. for each package
     - [x] Run from repo root to handle all packages
