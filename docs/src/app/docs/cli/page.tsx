@@ -6,7 +6,7 @@ import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 const exec = promisify(_exec);
 
 export default async function CliPage() {
-  const { stdout: usage } = await exec('toolsync --help', {
+  const { stdout: usage } = await exec('node ./node_modules/@toolsync/cli/out/bin.js --help', {
     env: { ...process.env, FORCE_COLOR: '1', LOG_LEVEL: 'silent' },
   });
 
