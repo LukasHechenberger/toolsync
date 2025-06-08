@@ -31,7 +31,7 @@ export default function HomePage() {
       </div>
 
       <div>
-        <p className="mb-4 text-small">Still interested? Let's get you set up! 🎉</p>
+        <p className="mb-4 text-small">Still interested? Let&apos;s get you set up! 🎉</p>
         <Cards>
           <Card
             title="Get started"
