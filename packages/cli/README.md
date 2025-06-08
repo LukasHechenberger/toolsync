@@ -29,7 +29,7 @@ Commands:
   config [options]      Print the fully resolved toolsync config
   help [command]        display help for command
 
-For usage details see https://github.com/LukasHechenberger/toolsync/tree/main/packages/cli
+For usage details see https://toolsync.vercel.app
 ```
 
 <!-- #endregion cli-usage -->
@@ -39,6 +39,6 @@ For usage details see https://github.com/LukasHechenberger/toolsync/tree/main/pa
 
 ---
 
-Part of the [toolsync](https://github.com/LukasHechenberger/toolsync) project.
+Part of the [toolsync](https://toolsync.vercel.app) project.
 
 <!-- #endregion footer -->

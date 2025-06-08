@@ -79,7 +79,7 @@ Options:
                          (default: "bottom")
   -h, --help             display help for command
 
-For more information, visit https://github.com/LukasHechenberger/toolsync/tree/main/packages/template
+For more information, visit https://toolsync.vercel.app
 ```
 
 <!-- #endregion cli-usage -->
@@ -89,6 +89,6 @@ For more information, visit https://github.com/LukasHechenberger/toolsync/tree/m
 
 ---
 
-Part of the [toolsync](https://github.com/LukasHechenberger/toolsync) project.
+Part of the [toolsync](https://toolsync.vercel.app) project.
 
 <!-- #endregion footer -->

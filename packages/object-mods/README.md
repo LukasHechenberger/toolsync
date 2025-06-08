@@ -43,6 +43,6 @@ const result = modify({
 
 ---
 
-Part of the [toolsync](https://github.com/LukasHechenberger/toolsync) project.
+Part of the [toolsync](https://toolsync.vercel.app) project.
 
 <!-- #endregion footer -->
