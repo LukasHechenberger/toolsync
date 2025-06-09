@@ -133,9 +133,6 @@ importers:
       commander:
         specifier: ^14.0.0
         version: 14.0.0
-      debug:
-        specifier: ^4.4.1
-        version: 4.4.1
     devDependencies:
       '@commander-js/extra-typings':
         specifier: ^14.0.0
@@ -143,9 +140,6 @@ importers:
       '@toolsync/template':
         specifier: workspace:*
         version: link:../template
-      '@types/debug':
-        specifier: ^4.1.12
-        version: 4.1.12
       '@types/node':
         specifier: ^22.15.30
         version: 22.15.30
@@ -183,6 +177,31 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+
+  packages/create:
+    dependencies:
+      '@toolsync/cli':
+        specifier: workspace:^
+        version: link:../cli
+      '@toolsync/logger':
+        specifier: workspace:^
+        version: link:../logger
+      commander:
+        specifier: ^14.0.0
+        version: 14.0.0
+    devDependencies:
+      '@commander-js/extra-typings':
+        specifier: ^14.0.0
+        version: 14.0.0(commander@14.0.0)
+      '@toolsync/template':
+        specifier: workspace:*
+        version: link:../template
+      '@types/node':
+        specifier: ^22.15.30
+        version: 22.15.30
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(typescript@5.8.3)(yaml@2.8.0)
 
   packages/logger:
     dependencies:

@@ -8,7 +8,39 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { PackageManagerTabs } from '@/components/package-managers';
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 
-## Installation
+To get started with Toolsync, you can either use the [create command](/docs/create) (described below) or install it manually. The create command is the recommended way to get started, as it will set up a new project with all the necessary configuration in no time. It works for both **new and existing projects**.
+
+## Setup toolsync
+
+<Callout>We recommend using [pnpm](https://pnpm.io) in the examples below.</Callout>
+
+<PackageManagerTabs>
+
+<Tab value='pnpm'>
+  
+```shell
+pnpm create @toolsync
+```
+
+</Tab>
+<Tab value='npm'>
+
+```shell
+npm init @toolsync
+```
+
+</Tab>
+<Tab value='yarn'>
+
+```shell
+yarn create @toolsync
+```
+
+</Tab>
+
+</PackageManagerTabs>
+
+## Manual Installation
 
 First of all, you need to install the [Toolsync CLI](/docs/cli). It's also recommended you install the [@toolsync/builtin](/docs/builtin) package. You can do this with your package manager of choice:
 
@@ -16,14 +48,14 @@ First of all, you need to install the [Toolsync CLI](/docs/cli). It's also recom
 
 <Tab value='pnpm'>
   
-```bash
+```shell
 pnpm add -Dw @toolsync/cli @toolsync/builtin
 ```
 
 </Tab>
 <Tab value='npm'>
 
-```bash
+```shell
 npm install --save-dev @toolsync/cli @toolsync/builtin
 ```
 
@@ -37,8 +69,6 @@ yarn add --save-dev @toolsync/cli @toolsync/builtin
 </Tab>
 
 </PackageManagerTabs>
-
-<Callout>We recommend [pnpm](https://pnpm.io)</Callout>
 
 ## Configuration
 

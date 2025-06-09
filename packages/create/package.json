@@ -1,26 +1,21 @@
 {
-  "name": "@toolsync/cli",
-  "version": "0.1.0",
-  "description": "The toolsync command line interface",
+  "name": "@toolsync/create",
+  "version": "0.0.0",
+  "private": true,
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git",
-    "directory": "packages/cli"
+    "directory": "packages/create"
   },
   "license": "MIT",
-  "type": "module",
-  "bin": {
-    "toolsync": "./out/bin.js"
-  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
-    "@toolsync/builtin": "workspace:^",
-    "@toolsync/core": "workspace:^",
+    "@toolsync/cli": "workspace:^",
     "@toolsync/logger": "workspace:^",
     "commander": "^14.0.0"
   },
@@ -32,8 +27,5 @@
   },
   "engines": {
     "node": ">=20.6.0"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

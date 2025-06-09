@@ -47,6 +47,7 @@ This repository contains the following packages:
 - [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
 - [@toolsync/template](packages/template) - Update sections of source files
 - [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
+- [@toolsync/create](packages/create) - _no description_
 - [@toolsync/docs](docs) - _no description_
 
 <!-- #endregion packages -->
