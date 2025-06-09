@@ -32,9 +32,6 @@ importers:
 
   docs:
     dependencies:
-      '@fumadocs/mdx-remote':
-        specifier: ^1.3.2
-        version: 1.3.2(acorn@8.14.1)(fumadocs-core@15.5.1(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       fumadocs-core:
         specifier: 15.5.1
         version: 15.5.1(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -5162,6 +5159,7 @@ snapshots:
     transitivePeerDependencies:
       - acorn
       - supports-color
+    optional: true
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
