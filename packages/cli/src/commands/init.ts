@@ -22,6 +22,7 @@ export function setupInitCommand(command: Command) {
           type: 'checkbox',
           name: 'plugins',
           message: 'Which builtin plugins do you want to use?',
+          // TODO: Inherit from existing toolsync.json
           default: tools.map((t) => t.name),
           choices: tools.map((t) => ({
             name: `${t.slug} - ${t.description}`,
