@@ -9,12 +9,14 @@
     "directory": "packages/create"
   },
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
+    "@manypkg/get-packages": "^3.0.0",
     "@toolsync/cli": "workspace:^",
     "@toolsync/logger": "workspace:^",
     "commander": "^14.0.0"
