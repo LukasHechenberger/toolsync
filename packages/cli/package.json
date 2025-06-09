@@ -10,6 +10,18 @@
   },
   "license": "MIT",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/index.d.ts",
+      "import": "./out/index.js",
+      "default": "./out/index.js"
+    },
+    "./commands/init": {
+      "types": "./out/commands/init.d.ts",
+      "import": "./out/commands/init.js",
+      "default": "./out/commands/init.js"
+    }
+  },
   "bin": {
     "toolsync": "./out/bin.js"
   },

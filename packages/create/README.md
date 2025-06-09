@@ -21,11 +21,15 @@ yarn create @toolsync
 ```
 Usage: @toolsync/create [options]
 
-Setup Toolsync in your repository
+Setup Toolsync in your repository - same as running `@toolsync/cli init
+[args...]`
 
 Options:
+  --yes,-y       accept all default options
   -V, --version  output the version number
   -h, --help     display help for command
+
+For more information visit https://toolsync.vercel.app/docs
 ```
 
 <!-- #endregion cli-usage -->

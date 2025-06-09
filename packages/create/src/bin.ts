@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import { name, version, homepage } from '../package.json';
 import { logger } from '@toolsync/logger';
 import { getPackages } from '@manypkg/get-packages';
+import { setupInitCommand } from '@toolsync/cli/commands/init';
 
 const log = logger.child('create');
 
@@ -25,10 +26,19 @@ if (!binName || creatingReadme) {
 }
 
 const program = new Command()
-  .name(binName)
-  .version(version)
-  .description('Setup Toolsync in your repository');
+  .description(
+    'Setup Toolsync in your repository - same as running \`@toolsync/cli init [args...]\`',
+  )
+  .allowUnknownOption(true)
+  .allowExcessArguments(true)
+  .addHelpText(
+    'after',
+    `
+For more information visit ${new URL('/docs', homepage)}`,
+  );
 
-// TODO: Call @toolsync/cli generate
+setupInitCommand(program);
+
+program.name(binName).version(version);
 
 program.parse();
