@@ -25,7 +25,8 @@ Setup Toolsync in your repository - same as running `@toolsync/cli init
 [args...]`
 
 Options:
-  --yes,-y       accept all default options
+  -y, --yes      accept all default options (default: false)
+  -f, --force    overwrite existing files etc. (default: false)
   -V, --version  output the version number
   -h, --help     display help for command
 

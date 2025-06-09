@@ -1,7 +1,7 @@
 import { logger } from '@toolsync/logger';
 import type { ToolsyncConfig, Package, Packages } from './types';
 import { definePlugin, type Plugin, type PluginContext } from './plugins';
-import { getPackages } from '@manypkg/get-packages';
+import { getPackages as _getPackages } from '@manypkg/get-packages';
 import { createRequire } from 'module';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
@@ -73,6 +73,24 @@ type RuntimeToolsyncConfig = Omit<ToolsyncConfig, 'plugins'> & {
   plugins: Plugin<keyof Toolsync.ConfigMap>[]; // TODO: {plugin: Plugin, addedBy: Plugin, logger: Logger}[]
 };
 
+export async function getPackages(): Promise<Packages> {
+  const { rootDir, tool, rootPackage: _rootPackage, packages } = await _getPackages(process.cwd());
+
+  const rootPackage: Package | undefined = _rootPackage
+    ? { isRoot: true, ..._rootPackage }
+    : undefined;
+
+  return {
+    rootDir,
+    tool,
+    rootPackage,
+    packages: [
+      ...(rootPackage ? [rootPackage] : []),
+      ...packages.map((pkg) => ({ ...pkg, isRoot: false })),
+    ],
+  };
+}
+
 class Toolsync {
   private log = log.child('api');
 
@@ -86,7 +104,7 @@ class Toolsync {
   }
 
   private async loadModule<T>(ref: string): Promise<T> {
-    const pkgs = await this.getPackages();
+    const pkgs = await getPackages();
 
     for (const plugin of [...this.resolvedConfig.plugins].reverse()) {
       if (plugin.loadModule) {
@@ -136,7 +154,7 @@ class Toolsync {
   async loadConfig() {
     this.log.timing('Starting loadConfig');
 
-    const pkgs = await this.getPackages();
+    const pkgs = await getPackages();
 
     // Load the config from the plugins
     for (const plugin of this.resolvedConfig.plugins) {
@@ -180,7 +198,7 @@ class Toolsync {
   ): Promise<void> {
     this.log.trace(`Running hook ${hook}`, { payload });
 
-    const baseContext = context ?? (await this.getPackages());
+    const baseContext = context ?? (await getPackages());
 
     for (const plugin of this.resolvedConfig.plugins) {
       if (plugin[hook]) {
@@ -196,26 +214,8 @@ class Toolsync {
     this.log.debug(`Finished running '${hook}' hook`);
   }
 
-  private async getPackages(): Promise<Packages> {
-    const { rootDir, tool, rootPackage: _rootPackage, packages } = await getPackages(process.cwd());
-
-    const rootPackage: Package | undefined = _rootPackage
-      ? { isRoot: true, ..._rootPackage }
-      : undefined;
-
-    return {
-      rootDir,
-      tool,
-      rootPackage,
-      packages: [
-        ...(rootPackage ? [rootPackage] : []),
-        ...packages.map((pkg) => ({ ...pkg, isRoot: false })),
-      ],
-    };
-  }
-
   async runSetup() {
-    const pkgs = await this.getPackages();
+    const pkgs = await getPackages();
     this.log.debug('Running setup hook for all packages', {
       packages: pkgs.packages.map((p) => p.packageJson.name),
       plugins: this.resolvedConfig.plugins.map((p) => p.name),
