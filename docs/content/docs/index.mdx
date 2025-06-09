@@ -4,15 +4,14 @@ description: How to get started with Toolsync.
 ---
 
 import { repoUrl } from '@/lib/helpers';
-import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Tab } from 'fumadocs-ui/components/tabs';
 import { PackageManagerTabs } from '@/components/package-managers';
-import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 
 To get started with Toolsync, you can either use the [create command](/docs/create) (described below) or install it manually. The create command is the recommended way to get started, as it will set up a new project with all the necessary configuration in no time. It works for both **new and existing projects**.
 
-## Setup toolsync
-
 <Callout>We recommend using [pnpm](https://pnpm.io) in the examples below.</Callout>
+
+## Setup toolsync
 
 <PackageManagerTabs>
 
@@ -40,72 +39,12 @@ yarn create @toolsync
 
 </PackageManagerTabs>
 
-## Manual Installation
+The create command will prompt you for some options, such as what [built-in tools](/docs/builtin) to setup.
 
-First of all, you need to install the [Toolsync CLI](/docs/cli). It's also recommended you install the [@toolsync/builtin](/docs/builtin) package. You can do this with your package manager of choice:
+### Manual Setup
 
-<PackageManagerTabs>
+If you prefer, you can also [manually setup](/docs/guides/manual-setup) Toolsync in your project.
 
-<Tab value='pnpm'>
-  
-```shell
-pnpm add -Dw @toolsync/cli @toolsync/builtin
-```
+## Configure tools
 
-</Tab>
-<Tab value='npm'>
-
-```shell
-npm install --save-dev @toolsync/cli @toolsync/builtin
-```
-
-</Tab>
-<Tab value='yarn'>
-
-```shell
-yarn add --save-dev @toolsync/cli @toolsync/builtin
-```
-
-</Tab>
-
-</PackageManagerTabs>
-
-## Configuration
-
-Now, create a `toolsync.json` file in the root of your project. It will configure any plugins you want to use.
-
-{/* TODO: Add recommended plugins here */}
-
-```json
-{
-  "@toolsync/builtin/package-readme": {}
-}
-```
-
-## Create config files
-
-Now that Toolsync is installed and configured, you can run `toolsync prepare`.
-
-<PackageManagerTabs>
-<Tab value='pnpm'>
-
-```shell
-pnpm toolsync prepare --config toolsync.json
-```
-
-</Tab>
-<Tab value='npm'>
-
-```shell
-npx toolsync prepare --config toolsync.json
-```
-
-</Tab>
-<Tab value='yarn'>
-
-```shell
-yarn toolsync prepare --config toolsync.json
-```
-
-</Tab>
-</PackageManagerTabs>
+Once you have set up Toolsync, you can configure it in the `toolsync.json` file in the root of your project. Continue to the [configuration page](/docs/configuration) to learn how.
