@@ -31,7 +31,6 @@
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
-    "@toolsync/builtin": "workspace:^",
     "@toolsync/core": "workspace:^",
     "@toolsync/logger": "workspace:^",
     "commander": "^14.0.0",
@@ -39,6 +38,7 @@
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@toolsync/builtin": "workspace:^",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
     "tsup": "^8.5.0"

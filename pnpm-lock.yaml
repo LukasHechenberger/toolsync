@@ -121,9 +121,6 @@ importers:
 
   packages/cli:
     dependencies:
-      '@toolsync/builtin':
-        specifier: workspace:^
-        version: link:../builtin-tools
       '@toolsync/core':
         specifier: workspace:^
         version: link:../core
@@ -140,6 +137,9 @@ importers:
       '@commander-js/extra-typings':
         specifier: ^14.0.0
         version: 14.0.0(commander@14.0.0)
+      '@toolsync/builtin':
+        specifier: workspace:^
+        version: link:../builtin-tools
       '@toolsync/template':
         specifier: workspace:*
         version: link:../template

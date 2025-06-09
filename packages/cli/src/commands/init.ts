@@ -2,6 +2,7 @@ import { logger } from '@toolsync/logger';
 import type { Command } from 'commander';
 import nodePlop, { type PromptQuestion } from 'node-plop';
 import { getPackages } from '@toolsync/core';
+import tools from '@toolsync/builtin/tools.json';
 
 const log = logger.child('cli:init');
 
@@ -18,10 +19,15 @@ export function setupInitCommand(command: Command) {
 
       const prompts = [
         {
-          type: 'input',
-          name: 'name',
-          message: 'What is the name of your project?',
-          default: 'my-proj',
+          type: 'checkbox',
+          name: 'plugins',
+          message: 'Which builtin plugins do you want to use?',
+          default: tools.map((t) => t.name),
+          choices: tools.map((t) => ({
+            name: `${t.slug} - ${t.description}`,
+            value: t.name,
+            short: t.description + 'asdf',
+          })),
         },
       ] satisfies (PromptQuestion & { name: string })[];
 
@@ -30,13 +36,21 @@ export function setupInitCommand(command: Command) {
         actions: [
           {
             type: 'add',
-            path: 'toolsync2.json',
-            template: `${JSON.stringify({ name: '{{name}}' }, null, 2)}\n`,
+            path: 'toolsync.json',
+            transform(_, data) {
+              return `${JSON.stringify(
+                Object.fromEntries(data.plugins.map((name: string) => [name, {}])),
+                null,
+                2,
+              )}\n`;
+            },
           },
         ],
       });
 
-      const answers = await init.runPrompts(yes ? prompts.map((p) => p.name) : []);
+      const answers = await init.runPrompts(
+        yes ? prompts.map((p) => p.default as unknown as string) : [],
+      );
       let results = await init.runActions(answers);
 
       if (results.failures.length) {
