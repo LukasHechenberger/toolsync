@@ -11,6 +11,10 @@ declare global {
   namespace Toolsync {
     interface ConfigMap {
       [pluginName]: {
+        /**
+         * The badges to add to each package
+         * @default ['npm-version']
+         */
         badges?: boolean | BadgesAvailable[];
       };
     }

@@ -39,11 +39,17 @@ export default async function BuiltinToolPage({ params }: Props) {
   const tool = findTool(slug);
 
   return (
-    <DocsPage toc={[]} {...basePageOptions}>
+    <DocsPage
+      toc={[
+        { url: '#installation', title: 'Installation', depth: 2 },
+        { url: '#options', title: 'Options', depth: 2 },
+      ]}
+      {...basePageOptions}
+    >
       <DocsTitle>{tool.name}</DocsTitle>
       <DocsDescription>{tool.description}</DocsDescription>
       <DocsBody>
-        <h2>Installation</h2>
+        <h2 id="installation">Installation</h2>
 
         <p>
           If you haven&apos;t already,{' '}
@@ -64,7 +70,7 @@ export default async function BuiltinToolPage({ params }: Props) {
           )}
         />
 
-        <h2>Available options:</h2>
+        <h2 id="options">Available options</h2>
 
         <AutoTypeTable
           generator={generator}

@@ -14,9 +14,13 @@ declare global {
       [pluginName]: {
         /** The version of prettier to use. */
         version?: string;
-        /** By default, a "format" script is set up to run `prettier --write` and a "check" script to run `prettier --check`. @see https://prettier.io/docs/options */
+        /** By default, a "format" script is set up to run `prettier --write` and a "check" script to run `prettier --check`.
+         * @default { write: 'format', check: 'check:format' }
+         * @see https://prettier.io/docs/options */
         scriptName?: Partial<{ write: string; check: string }>;
-        /** Your prettier settings. */
+        /** Your prettier settings.
+         * @default { singleQuote: true, printWidth: 100 }
+         */
         settings?: Record<string, any>;
       };
     }
