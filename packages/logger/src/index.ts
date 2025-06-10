@@ -3,13 +3,13 @@ import pinoPretty from 'pino-pretty';
 import setupDebug, { type Debugger } from 'debug';
 
 const envDebug = process.env.DEBUG;
-const envLogLevel = process.env.LOG_LEVEL || 'info'; // (process.env.DEBUG ? 'debug' : 'info');
+const envLogLevel = process.env.LOG_LEVEL || 'info';
 
 const pretty = pinoPretty({
-  ignore: 'pid,hostname,ns',
+  ignore: 'pid,hostname,ns,time',
   // Customize the log message format
-  messageFormat(log, messageKey, levelLabel, { colors }) {
-    return `${log[messageKey]} ${colors.reset(colors.dim(`[${log.ns}]`))} `;
+  messageFormat(log, messageKey, _, { colors }) {
+    return colors.reset(`${log[messageKey]} ${colors.reset(colors.dim(`[${log.ns}]`))}`);
   },
   sync: true,
 });
