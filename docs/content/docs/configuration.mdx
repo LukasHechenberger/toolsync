@@ -1,0 +1,82 @@
+---
+title: Configuration
+description: How to configure Toolsync in your project.
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+## Everything is a plugin
+
+{/* TODO: Link to package plugin sources */}
+
+First of all, Toolsync is heavily based on plugins. Even internally:
+
+- `@toolsync/core` contains a plugin that defines how to load modules.
+- `@toolsync/cli` contains a plugin that injects command line options into the runtime configuration and one to load `toolsync.json` files.
+- `@toolsync/builtin` contains plugins for each of the [built-in tools](/docs/builtin).
+
+### Enable plugins
+
+As soon as you add a plugin's name to your `toolsync.json` file, it will be enabled. When running the command line interface, you can also enable plugins with the `--plugin` flag.
+
+<Tabs items={['toolsync.json', '@toolsync/cli']}>
+<Tab value="toolsync.json">
+
+```json title="toolsync.json"
+{
+  // [!code ++]
+  "name of the plugin": {}
+}
+```
+
+</Tab>
+<Tab value='@toolsync/cli'>
+
+```shell
+toolsync --plugin name-of-the-plugin [options] [command]
+```
+
+</Tab>
+</Tabs>
+
+### Configure plugins
+
+The easiest way to configure Toolsync is to use the `toolsync.json` file in the root of your project. This file is a JSON object where each key is a plugin name and the value is the configuration for that plugin:
+
+```json title="toolsync.json"
+{
+  "name of the plugin": {
+    // [!code ++]
+    "option": "value"
+  }
+}
+```
+
+Check out the plugin's documentation for the available configuration options.
+
+### Examples
+
+<Tabs items={['Custom prettier settings']}>
+<Tab value="Custom prettier settings">
+
+```json title="toolsync.json"
+{
+  "@toolsync/builtin/prettier": {
+    "settings": {
+      "printWidth": 100,
+      "singleQuote": true
+    }
+  }
+}
+```
+
+</Tab>
+</Tabs>
+
+## Debugging
+
+If you want to see which plugins are loaded and how they are configured, you can use the `@evtools/cli config` command:
+
+```shell
+devtools config
+```

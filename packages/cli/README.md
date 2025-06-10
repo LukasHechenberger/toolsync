@@ -18,18 +18,19 @@ The toolsync command line interface
 Usage: @toolsync/cli [options] [command]
 
 Options:
-  -V, --version         output the version number
   --config <config>     Specify a config file to load
   --plugin <plugin>     Specify a plugin to load
   --no-default-plugins  Disable all default plugins
+  -V, --version         output the version number
   -h, --help            display help for command
 
 Commands:
   prepare               Prepare the environment for development
   config [options]      Print the fully resolved toolsync config
+  init [options]        Configure toolsync in the current repository
   help [command]        display help for command
 
-For usage details see https://toolsync.vercel.app
+For usage details see https://toolsync.vercel.app/docs/reference/cli
 ```
 
 <!-- #endregion cli-usage -->

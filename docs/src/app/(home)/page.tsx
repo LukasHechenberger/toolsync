@@ -1,37 +1,40 @@
 import { description } from '../../../../package.json';
 import { Card, Cards } from 'fumadocs-ui/components/card';
-import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
+import { compileMDX } from '@fumadocs/mdx-remote';
+import { getMDXComponents } from '@/mdx-components';
+import { Preview } from './page.client';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { body: InstallCommand } = await compileMDX({
+    source: `\`\`\`shell title="TL;DR"
+pnpm create @toolsync
+\`\`\``,
+  });
+
   return (
-    <main className="flex flex-1 flex-col container mx-auto justify-around text-center space-y-30">
-      <div>
+    <main className="flex flex-1 flex-col container mx-auto gap-12 py-8">
+      <div className="py-12 flex flex-col items-center justify-center space-y-4">
         <h1 className="mb-4 text-2xl font-bold">Toolsync</h1>
         <p className="text-fd-muted-foreground">{description}</p>
-      </div>
 
-      <div className="flex gap-4">
-        <div className="flex-1 text-left">
-          <DynamicCodeBlock
-            lang="jsonc"
-            code={`// toolsync.json\n\n${JSON.stringify(
-              {
-                '@toolsync/builtin/package-readme': {},
-              },
-              null,
-              2,
-            )}`}
-          />
-        </div>
-        <div className="flex-1 prose text-left flex items-center">
-          <ul>
-            <li>Generates a readme for every package in your repository</li>
-          </ul>
+        <div className="text-left">
+          <InstallCommand components={getMDXComponents()} />
         </div>
       </div>
 
       <div>
-        <p className="mb-4 text-small">Still interested? Let&apos;s get you set up! 🎉</p>
+        <h2 className="font-semibold text-xl mb-2">Remove boilerplate</h2>
+        <p className="mb-4 text-fd-muted-foreground">
+          See how toolsync can generate your config files
+        </p>
+
+        <Preview />
+      </div>
+
+      <div>
+        <h2 className="font-semibold text-xl mb-2">Still interested?</h2>
+        <p className="mb-4 text-fd-muted-foreground">Let&apos;s get you set up! 🎉</p>
+
         <Cards>
           <Card
             title="Get started"

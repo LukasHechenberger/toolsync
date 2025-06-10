@@ -1,4 +1,4 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
 import { source } from '@/lib/source';
@@ -26,14 +26,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         }
       : child,
   );
-
-  // Insert CLI page
-  pageTree.children.splice(1, 0, {
-    $id: 'cli',
-    type: 'page',
-    name: 'CLI',
-    url: '/docs/cli',
-  });
 
   return (
     <DocsLayout tree={pageTree} {...baseOptions}>

@@ -1,52 +1,34 @@
 {
-  "name": "@toolsync/cli",
-  "version": "0.1.0",
-  "description": "The toolsync command line interface",
+  "name": "@toolsync/create",
+  "version": "0.0.0",
+  "private": true,
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git",
-    "directory": "packages/cli"
+    "directory": "packages/create"
   },
   "license": "MIT",
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./out/index.d.ts",
-      "import": "./out/index.js",
-      "default": "./out/index.js"
-    },
-    "./commands/init": {
-      "types": "./out/commands/init.d.ts",
-      "import": "./out/commands/init.js",
-      "default": "./out/commands/init.js"
-    }
-  },
-  "bin": {
-    "toolsync": "./out/bin.js"
-  },
+  "bin": "./out/bin.js",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
-    "@toolsync/core": "workspace:^",
+    "@manypkg/get-packages": "^3.0.0",
+    "@toolsync/cli": "workspace:^",
     "@toolsync/logger": "workspace:^",
-    "commander": "^14.0.0",
-    "node-plop": "^0.32.0"
+    "commander": "^14.0.0"
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
-    "@toolsync/builtin": "workspace:^",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
     "tsup": "^8.5.0"
   },
   "engines": {
     "node": ">=20.6.0"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

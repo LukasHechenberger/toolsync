@@ -6,4 +6,13 @@ export const source = loader({
   // it assigns a URL to your pages
   baseUrl: '/docs',
   source: docs.toFumadocsSource(),
+  pageTree: {
+    attachFile(node, file) {
+      if (file?.data?.data?.tocTitle) {
+        node.name = file.data.data.tocTitle;
+      }
+
+      return node;
+    },
+  },
 });

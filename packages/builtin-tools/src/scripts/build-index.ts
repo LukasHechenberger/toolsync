@@ -1,4 +1,5 @@
 import { writeFile } from 'fs/promises';
+import { MarkdownTemplate } from '@toolsync/template';
 import { name, exports } from '../../package.json';
 import { join } from 'path';
 
@@ -21,3 +22,12 @@ const tools = (
   .sort((a, b) => a.name.localeCompare(b.name));
 
 await writeFile('./out/tools.json', JSON.stringify(tools, null, 2) + '\n', 'utf-8');
+
+await MarkdownTemplate.update('./README.md', {
+  notice: `Generated during build. Do not edit manually.`,
+  section: 'tools',
+  content: `## Tools
+
+${tools.map((tool) => `- ${[`**${tool.name}**`, ...(tool.description ? [tool.description] : [])].join(' - ')}`).join('\n')}
+`,
+});
