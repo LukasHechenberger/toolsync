@@ -86,7 +86,7 @@ const program = new Command()
   .addHelpText(
     'afterAll',
     `
-For usage details see ${homepage}`,
+For usage details see ${new URL('/docs/reference/cli', homepage)}`,
   )
   .on('option:no-default-plugins', () => {
     // FIXME: Implement or remove
