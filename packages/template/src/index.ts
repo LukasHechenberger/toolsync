@@ -30,8 +30,22 @@ export type TemplateUpdateOptions = {
   notice?: string;
 };
 
+type NullableIfEmptyParameters<T> = {} extends T ? [T] : [T | undefined];
+
+type RemainingOptions<T extends typeof Template> = Omit<
+  TemplateOptions,
+  keyof T['defaultOptions'] | 'content' | 'path'
+> & {
+  [K in keyof T['defaultOptions']]?: K extends keyof TemplateOptions ? TemplateOptions[K] : never;
+};
+
+type RemainingOptionsArg<T extends typeof Template> =
+  {} extends RemainingOptions<T> ? [options?: RemainingOptions<T>] : [options: RemainingOptions<T>];
+
 /** A basic template class. Can be used to update or create sections */
 export class Template {
+  // #region Conventince methods
+
   static get defaultOptions() {
     return {
       markers: ['#region', '#endregion'],
@@ -39,18 +53,13 @@ export class Template {
     };
   }
 
-  constructor(protected options: TemplateOptions) {}
-
   /** Loads a template from a file */
   static async load<T extends typeof Template>(
     this: T,
     path: string,
-    options: Omit<TemplateOptions, keyof T['defaultOptions'] | 'content' | 'path'> & {
-      [K in keyof T['defaultOptions']]?: K extends keyof TemplateOptions
-        ? TemplateOptions[K]
-        : never;
-    },
+    ...args: RemainingOptionsArg<T>
   ) {
+    const options = args[0] ?? ({} as RemainingOptions<T>);
     const content = await readFile(path, 'utf8').catch((error) => {
       if (error.code === 'ENOENT') return '';
 
@@ -64,6 +73,22 @@ export class Template {
       content,
     } as unknown as TemplateOptions) as InstanceType<T>;
   }
+
+  static async update<T extends typeof Template>(
+    this: T,
+    path: string,
+    options: RemainingOptions<T> & TemplateUpdateOptions,
+  ) {
+    const instance = await this.load(path, options);
+    instance.update(options);
+    await instance.save();
+
+    return instance;
+  }
+
+  // #region Actual methods
+
+  constructor(protected options: TemplateOptions) {}
 
   private comment(content: string) {
     const { start, end } = this.options.commentPattern;
@@ -128,3 +153,6 @@ export class JsTemplate extends Template {
     };
   }
 }
+
+type T = RemainingOptions<typeof Template>;
+type T2 = RemainingOptions<typeof MarkdownTemplate>;

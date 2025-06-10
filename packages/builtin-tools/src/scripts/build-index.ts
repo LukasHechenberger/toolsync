@@ -23,17 +23,11 @@ const tools = (
 
 await writeFile('./out/tools.json', JSON.stringify(tools, null, 2) + '\n', 'utf-8');
 
-const readme = await MarkdownTemplate.load('./README.md', {
+await MarkdownTemplate.update('./README.md', {
   notice: `Generated during build. Do not edit manually.`,
-});
-
-readme.update({
   section: 'tools',
-  insert: 'bottom',
   content: `## Tools
 
 ${tools.map((tool) => `- ${[`**${tool.name}**`, ...(tool.description ? [tool.description] : [])].join(' - ')}`).join('\n')}
 `,
 });
-
-await readme.save();
