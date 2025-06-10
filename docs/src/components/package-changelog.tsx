@@ -1,5 +1,3 @@
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
 import { getPackages } from '@toolsync/core';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
