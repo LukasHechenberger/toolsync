@@ -14,7 +14,7 @@ Default toolsync available
 
 ## Tools
 
-- **@toolsync/builtin/ignore-sync** - Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc. files across multiple directories.
+- **@toolsync/builtin/ignore-sync** - Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc.
 - **@toolsync/builtin/vscode** - Integrates with Visual Studio Code for settings and extensions management
 - **@toolsync/builtin/prettier** - Integrates with Prettier for code formatting
 - **@toolsync/builtin/github-actions** - Integrates with GitHub Actions for CI workflows
