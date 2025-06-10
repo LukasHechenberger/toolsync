@@ -5,4 +5,6 @@ export const joinPathname = (pathname: string, parent: string) =>
 
 const baseRepoUrl = new URL(repository.url.replace('git+http', 'http').replace(/\.git$/, '/'));
 
-export const repoUrl = (pathname: `/${string}`) => new URL(`.${pathname}`, baseRepoUrl).toString();
+export type Pathname = `/${string}`;
+export const repoUrl = (pathname: Pathname) => new URL(`.${pathname}`, baseRepoUrl).toString();
+export const repoFileUrl = (pathname: Pathname) => repoUrl(`/blob/main${pathname}`);
