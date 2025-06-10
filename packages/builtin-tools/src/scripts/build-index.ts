@@ -1,5 +1,5 @@
 import { writeFile } from 'fs/promises';
-import { MarkdownTemplate, Template } from '@toolsync/template';
+import { MarkdownTemplate } from '@toolsync/template';
 import { name, exports } from '../../package.json';
 import { join } from 'path';
 
