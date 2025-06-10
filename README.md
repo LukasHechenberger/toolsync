@@ -45,28 +45,9 @@ This repository contains the following packages:
 
 <!-- #endregion packages -->
 
-## Usage
-
-**Debugging**
-
-You can use the `LOG_LEVEL` environment variable to control how verbose logging should be:
-
-```shell
-LOG_LEVEL=debug <your command> # Enables debug logging
-LOG_LEVEL=trace <your command> # Even more logging
-```
-
-> The log levels available are: `trace`, `debug`, `info`, `warn`, `error`, `fatal` and `silent`
-
-If you want more granular debug logs use `DEBUG` instead
-
-```shell
-DEBUG=toolsync:* <your command> # Same as using `LOG_LEVEL=debug`
-DEBUG=toolsync:cli:* <your command> # Enable debug logging just for the cli package
-DEBUG=*:timing <your command> # Log timing
-```
-
 ## TODO
+
+> Just a bunch of stuff we want to implement in the future
 
 ### Plugins
 
@@ -132,6 +113,8 @@ DEBUG=*:timing <your command> # Log timing
   - [ ] `check` should call prepare and check if git status is clean - tovalidate setup during CI builds
     > `check` could be a v2 feature
 
+## Core
+
 - [ ] Allow configuration via package.json
 - [ ] Allow individial packages to disable tools in their package.json (or toolsync.json ?)
 
@@ -144,7 +127,3 @@ DEBUG=*:timing <your command> # Log timing
     }
   }
   ```
-
-### General
-
-- [ ] Create _create_ package `create-super-fancy-tools-setup` :)
