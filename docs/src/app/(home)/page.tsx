@@ -2,8 +2,6 @@ import { description } from '../../../../package.json';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { compileMDX } from '@fumadocs/mdx-remote';
 import { getMDXComponents } from '@/mdx-components';
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { File, Files } from 'fumadocs-ui/components/files';
 import { Preview } from './page.client';
 
 export default async function HomePage() {
@@ -13,21 +11,9 @@ pnpm create @toolsync
 \`\`\``,
   });
 
-  const { body: ConfigFile } = await compileMDX({
-    source: `\`\`\`json
-${JSON.stringify(
-  {
-    '@toolsync/builtin/prettier': {},
-  },
-  null,
-  2,
-)}
-\`\`\``,
-  });
-
   return (
-    <main className="flex flex-1 flex-col container mx-auto space-y-30">
-      <div className="min-h-[300px] flex flex-col items-center justify-center space-y-4">
+    <main className="flex flex-1 flex-col container mx-auto gap-12 py-8">
+      <div className="py-12 flex flex-col items-center justify-center space-y-4">
         <h1 className="mb-4 text-2xl font-bold">Toolsync</h1>
         <p className="text-fd-muted-foreground">{description}</p>
 
@@ -36,10 +22,19 @@ ${JSON.stringify(
         </div>
       </div>
 
-      <Preview />
+      <div>
+        <h2 className="font-semibold text-xl mb-2">Remove boilerplate</h2>
+        <p className="mb-4 text-fd-muted-foreground">
+          See how toolsync can generate your config files
+        </p>
+
+        <Preview />
+      </div>
 
       <div>
-        <p className="mb-4 text-sm text-center">Still interested? Let&apos;s get you set up! 🎉</p>
+        <h2 className="font-semibold text-xl mb-2">Still interested?</h2>
+        <p className="mb-4 text-fd-muted-foreground">Let&apos;s get you set up! 🎉</p>
+
         <Cards>
           <Card
             title="Get started"

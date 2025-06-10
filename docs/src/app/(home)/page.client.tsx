@@ -1,12 +1,9 @@
 'use client';
 
 import tools from '@toolsync/builtin/tools.json';
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-import { Card, Cards } from 'fumadocs-ui/components/card';
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { HelpCircleIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 type FileTreeRoot = { type: 'root'; children: FileTreeNode[] };
@@ -19,9 +16,11 @@ function FileTreeNode({ node }: { node: FileTreeNode }) {
 
   return (
     <Folder defaultOpen name={node.name}>
-      {node.children.map((child) => (
-        <FileTreeNode key={child.name} node={child} />
-      ))}
+      {node.children
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((child) => (
+          <FileTreeNode key={child.name} node={child} />
+        ))}
     </Folder>
   );
 }
@@ -52,6 +51,9 @@ function FileTree({ files }: { files: string[] }) {
         }
       }
 
+      // Skip if file already exists
+      if (currentNode.children.some((n) => n.type === 'file' && n.name === name)) continue;
+
       currentNode.children.push({ type: 'file', name });
     }
 
@@ -60,22 +62,32 @@ function FileTree({ files }: { files: string[] }) {
 
   return (
     <Files>
-      {tree.children.map((child) => (
-        <FileTreeNode key={child.name} node={child} />
-      ))}
+      {tree.children
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((child) => (
+          <FileTreeNode key={child.name} node={child} />
+        ))}
     </Files>
   );
 }
 
+const eachPackage = (path: string) => ['a', 'b'].map((p) => `packages/${p}/${path}`);
 const toolFiles: Record<string, string[]> = {
   // TODO: Get from plugin itself
   '@toolsync/builtin/github-actions': ['.github/workflows/ci.yml'],
+  '@toolsync/builtin/ignore-sync': ['package.json'],
   '@toolsync/builtin/prettier': ['.prettierrc.json'],
   '@toolsync/builtin/vscode': ['.vscode/settings.json', '.vscode/extensions.json'],
+  '@toolsync/builtin/package-meta': ['package.json', ...eachPackage('package.json')],
+  '@toolsync/builtin/package-readme': ['README.md', ...eachPackage('README.md')],
 };
 
 export function Preview() {
-  const [enabledTools, setEnabledTools] = useState<string[]>(['@toolsync/builtin/prettier']);
+  const [enabledTools, setEnabledTools] = useState<string[]>([
+    '@toolsync/builtin/prettier',
+    '@toolsync/builtin/package-readme',
+    '@toolsync/builtin/github-actions',
+  ]);
   const resultingConfig = useMemo(
     () => JSON.stringify(Object.fromEntries(enabledTools.map((tool) => [tool, {}])), null, 2),
     [enabledTools],
@@ -107,43 +119,46 @@ export function Preview() {
   };
 
   return (
-    <div className="flex gap-4">
-      <div className="flex-1 text-left">
-        <p className="text-sm mb-4 text-fd-muted-foreground">Select tools to enable</p>
-
-        <Cards>
-          {tools.map((tool) => (
-            <Card
-              key={tool.name}
-              className="has-checked:bg-fd-diff-add"
-              title={
-                <label className="text-sm flex gap-2 items-center" title={tool.description}>
+    <div className="flex gap-4 flex-wrap">
+      <div className="flex-1">
+        <Tabs items={['Select tools']} className="!m-0">
+          <Tab className=" h-[300px] overflow-auto">
+            <div className="bg-fd-card border rounded-md overflow-hidden">
+              {tools.map((tool) => (
+                <label
+                  key={tool.name}
+                  className="text-sm flex gap-2 has-checked:bg-fd-diff-add px-4 py-2 items-center justify-between"
+                  title={tool.description}
+                >
                   <input
                     type="checkbox"
                     name={tool.name}
                     checked={enabledTools.some((t) => t === tool.name)}
                     onChange={handleChange}
                   />{' '}
-                  {tool.slug}
-                  <span className="text-fd-muted-foreground inline justify-end">
-                    <HelpCircleIcon size="1.2em" />
-                  </span>
+                  <p className="font-semibold">{tool.slug}</p>
+                  <div className="flex-1" />
+                  <p className="text-right text-xs text-fd-muted-foreground truncate">
+                    {tool.description}
+                  </p>
                 </label>
-              }
-            >
-              <p className="text-xs">{tool.description}</p>
-            </Card>
-          ))}
-        </Cards>
+              ))}
+            </div>
+          </Tab>
+        </Tabs>
       </div>
-      <div className="flex-1 prose text-left flex items-center">
-        <Tabs className="flex-1" items={['Generated files', 'toolsync.json']}>
-          <Tab>
-            <FileTree files={generatedFiles} />
+
+      <div className="flex-1">
+        <Tabs className="flex-1 !m-0" items={['Generated files', 'toolsync.json']}>
+          <Tab className="flex-1 max-h-[300px] overflow-auto">
+            {generatedFiles.length === 0 ? (
+              <p className="text-sm text-fd-muted-foreground">👈 Enable some tools</p>
+            ) : (
+              <FileTree files={generatedFiles} />
+            )}
           </Tab>
 
           <Tab>
-            {/* <ConfigFile components={getMDXComponents()} /> */}
             <DynamicCodeBlock lang="json" code={resultingConfig} />
           </Tab>
         </Tabs>
