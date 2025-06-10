@@ -1,5 +1,5 @@
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const defaultPackageManagers = ['pnpm', 'npm', 'yarn'];
 

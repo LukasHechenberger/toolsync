@@ -1,6 +1,6 @@
 import { repoUrl } from '@/lib/helpers';
 import Link from 'fumadocs-core/link';
-import { DocsPageProps } from 'fumadocs-ui/page';
+import type { DocsPageProps } from 'fumadocs-ui/page';
 
 export const basePageOptions = {
   tableOfContent: {
