@@ -35,7 +35,7 @@ jobs:
         run: pnpm turbo check lint check-types test build
       - name: Ensure there are no uncommitted changes
         run: git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)
-      - if: ${{ github.event == 'push' }}
+      - if: ${{ github.event_name == 'push' }}
         name: Changesets
         uses: changesets/action@v1
         with:

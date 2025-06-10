@@ -80,7 +80,7 @@ export const defaultOptions = {
             {
               // TODO: Move to @toolsync/builtin/changesets plugin
               // if the event is a push this also implies that the branch is main
-              if: "${{ github.event == 'push' }}",
+              if: "${{ github.event_name == 'push' }}",
               name: 'Changesets',
               uses: 'changesets/action@v1',
               with: {
