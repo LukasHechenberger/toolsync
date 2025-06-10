@@ -3,6 +3,8 @@
 
 # @toolsync/create
 
+![NPM Version](https://img.shields.io/npm/v/@toolsync/create)
+
 <!-- #endregion header -->
 
 ## Usage

@@ -1,7 +1,6 @@
 {
   "name": "@toolsync/create",
   "version": "0.2.0",
-  "private": true,
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
@@ -30,5 +29,8 @@
   },
   "engines": {
     "node": ">=20.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

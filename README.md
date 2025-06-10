@@ -43,11 +43,11 @@ This repository contains the following packages:
 - [@toolsync/builtin](packages/builtin-tools) - Default toolsync available
 - [@toolsync/cli](packages/cli) - The toolsync command line interface
 - [@toolsync/core](packages/core) - Core functionality used in @toolsync/cli etc
+- [@toolsync/create](packages/create) - _no description_
 - [@toolsync/logger](packages/logger) - The logger we use
 - [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
 - [@toolsync/template](packages/template) - Update sections of source files
 - [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
-- [@toolsync/create](packages/create) - _no description_
 - [@toolsync/docs](docs) - _no description_
 
 <!-- #endregion packages -->
