@@ -1,5 +1,12 @@
 # @toolsync/cli
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [1aed248]
+  - @toolsync/core@0.1.1
+
 ## 0.2.1
 
 ### Patch Changes
