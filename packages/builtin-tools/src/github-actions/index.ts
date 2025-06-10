@@ -85,7 +85,7 @@ export const defaultOptions = {
                 publish: 'pnpm changeset publish',
               },
               env: {
-                GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+                GITHUB_TOKEN: '${{ secrets.CHANGESETS_GITHUB_TOKEN }}',
                 NPM_TOKEN: '${{ secrets.NPM_TOKEN }}',
               },
             },
