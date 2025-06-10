@@ -86,6 +86,7 @@ This repository contains the following packages:
 - [ ] Turborepo
   - [ ] Create turbo.json
   - [ ] Create root scripts
+  - [ ] Provide instructions on how to configure remote caching
   - [ ] Create generators for new packages
     - [ ] These should also init other tools
 - [ ] Eslint
@@ -103,6 +104,7 @@ This repository contains the following packages:
 - [ ] Changesets
   - [ ] Manage config file (?)
   - [ ] Setup github action
+    - [ ] Provide instructions on how to configure GitHub settings (separate GITHUB_TOKEN)
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [ ] Recommended: A builtin plugin that loads all other builtin plugins
