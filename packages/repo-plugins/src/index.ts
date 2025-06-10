@@ -21,6 +21,7 @@ const repoPlugin = definePlugin({
             ci: {
               jobs: {
                 build: {
+                  // TODO: Move to turborepo toolsync plugin
                   env: {
                     TURBO_TEAM: '${{ vars.TURBO_TEAM }}',
                     TURBO_TOKEN: '${{ secrets.TURBO_TOKEN }}',
