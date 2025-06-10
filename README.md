@@ -43,11 +43,11 @@ This repository contains the following packages:
 - [@toolsync/builtin](packages/builtin-tools) - Default toolsync available
 - [@toolsync/cli](packages/cli) - The toolsync command line interface
 - [@toolsync/core](packages/core) - Core functionality used in @toolsync/cli etc
+- [@toolsync/create](packages/create) - _no description_
 - [@toolsync/logger](packages/logger) - The logger we use
 - [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
 - [@toolsync/template](packages/template) - Update sections of source files
 - [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
-- [@toolsync/create](packages/create) - _no description_
 - [@toolsync/docs](docs) - _no description_
 
 <!-- #endregion packages -->
@@ -86,6 +86,7 @@ This repository contains the following packages:
 - [ ] Turborepo
   - [ ] Create turbo.json
   - [ ] Create root scripts
+  - [ ] Provide instructions on how to configure remote caching
   - [ ] Create generators for new packages
     - [ ] These should also init other tools
 - [ ] Eslint
@@ -103,6 +104,7 @@ This repository contains the following packages:
 - [ ] Changesets
   - [ ] Manage config file (?)
   - [ ] Setup github action
+    - [ ] Provide instructions on how to configure GitHub settings (separate GITHUB_TOKEN)
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [ ] Recommended: A builtin plugin that loads all other builtin plugins

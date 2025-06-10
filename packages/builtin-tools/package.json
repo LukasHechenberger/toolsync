@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/builtin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Default toolsync available",
   "homepage": "https://toolsync.vercel.app",
   "repository": {

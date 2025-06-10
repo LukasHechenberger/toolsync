@@ -1,5 +1,18 @@
 # @toolsync/cli
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [1aed248]
+  - @toolsync/core@0.1.1
+
+## 0.2.1
+
+### Patch Changes
+
+- 31e8f4f: export `getPackages` helper
+
 ## 0.2.0
 
 ### Minor Changes
