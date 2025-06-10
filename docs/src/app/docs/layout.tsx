@@ -27,24 +27,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       : child,
   );
 
-  // Insert CLI page
-  pageTree.children = pageTree.children.map((child) =>
-    child.$id === 'reference' && child.type === 'folder'
-      ? {
-          ...child,
-          children: [
-            ...child.children,
-            {
-              $id: 'cli',
-              type: 'page',
-              name: 'CLI',
-              url: '/docs/reference/cli',
-            },
-          ],
-        }
-      : child,
-  );
-
   return (
     <DocsLayout tree={pageTree} {...baseOptions}>
       {children}
