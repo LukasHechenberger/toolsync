@@ -21,6 +21,10 @@ const repoPlugin = definePlugin({
             ci: {
               jobs: {
                 build: {
+                  env: {
+                    TURBO_TEAM: '${{ vars.TURBO_TEAM }}',
+                    TURBO_TOKEN: '${{ secrets.TURBO_TOKEN }}',
+                  },
                   steps: [
                     {
                       '@insert': {
