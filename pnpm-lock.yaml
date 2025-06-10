@@ -12,8 +12,8 @@ importers:
         specifier: ^2.29.4
         version: 2.29.4
       '@toolsync/cli':
-        specifier: 0.1.0
-        version: 0.1.0(ignore-sync@8.0.0)(prettier@3.5.3)(yaml@2.8.0)
+        specifier: workspace:*
+        version: link:packages/cli
       '@turbo/gen':
         specifier: ^2.5.4
         version: 2.5.4(@types/node@22.15.30)(typescript@5.8.3)
@@ -47,6 +47,9 @@ importers:
       fumadocs-ui:
         specifier: 15.5.1
         version: 15.5.1(@types/react-dom@19.1.6(@types/react@19.1.6))(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.8)
+      lucide-react:
+        specifier: ^0.513.0
+        version: 0.513.0(react@19.1.0)
       next:
         specifier: 15.3.3
         version: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1405,43 +1408,6 @@ packages:
 
   '@tailwindcss/postcss@4.1.8':
     resolution: {integrity: sha512-vB/vlf7rIky+w94aWMw34bWW1ka6g6C3xIOdICKX2GC0VcLtL6fhlLiafF0DVIwa9V6EHz8kbWMkS2s2QvvNlw==}
-
-  '@toolsync/builtin@0.1.0':
-    resolution: {integrity: sha512-GeSY6Idupdwokg70YeiJFSlmltAdMLfwCwXyj79PYhC6uWmk/qO2UeF5O7QZ6wdkwcMQ0VQIlPMBN32AbTPT6w==}
-    engines: {node: '>=20.6.0'}
-    peerDependencies:
-      ignore-sync: ^8.0.0
-      prettier: ^3.5.3
-      yaml: ^2.8.0
-    peerDependenciesMeta:
-      ignore-sync:
-        optional: true
-      prettier:
-        optional: true
-      yaml:
-        optional: true
-
-  '@toolsync/cli@0.1.0':
-    resolution: {integrity: sha512-QykjbGfH7IAiElHXpceTEIvdf0gneM3o49eKFnMZfVHB7TH72q4jgYUkKZPDLE9qt4ptqQuwF8dnlTXG1hZbpQ==}
-    engines: {node: '>=20.6.0'}
-    hasBin: true
-
-  '@toolsync/core@0.1.0':
-    resolution: {integrity: sha512-RYZtQCwPhQX//XZl1I9oO/WTrPop69ydWpmjwn547rdr5j1+8iVb59jAqb1nz+hIxgnuxM37scM68hMLbXDPvg==}
-    engines: {node: '>=20.6.0'}
-
-  '@toolsync/logger@0.0.0':
-    resolution: {integrity: sha512-bHesvWebgWw+8XXSbzqM21YBsj67yvtuwhrS5HrIG9VgoAq8CKm3EFZp6ZPleAFAu1d2khLKvUMZpKnaN3jiQw==}
-    engines: {node: '>=20.6.0'}
-
-  '@toolsync/object-mods@0.0.0':
-    resolution: {integrity: sha512-zzU7cNcR44YsP6tpUe43bcZS8cojfUF0VvB8V+QkshuOx/YE0P7c5dNaEd/L0gJQR63ZsrzXFTIYCiwNry2lVg==}
-    engines: {node: '>=20.6.0'}
-
-  '@toolsync/template@0.0.0':
-    resolution: {integrity: sha512-ATwy4oMjopllZ3AtA6krZ7dALFJd6rNo1AwJSJ+zsNKzVbyCaLPBv3Hw9wlchdkItUiytKHYrtOogGZ1NwCMhQ==}
-    engines: {node: '>=20.6.0'}
-    hasBin: true
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -3309,6 +3275,11 @@ packages:
   lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
+
+  lucide-react@0.513.0:
+    resolution: {integrity: sha512-CJZKq2g8Y8yN4Aq002GahSXbG2JpFv9kXwyiOAMvUBv7pxeOFHUWKB0mO7MiY4ZVFCV4aNjv2BJFq/z3DgKPQg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -5989,54 +5960,6 @@ snapshots:
       postcss: 8.5.4
       tailwindcss: 4.1.8
 
-  '@toolsync/builtin@0.1.0(ignore-sync@8.0.0)(prettier@3.5.3)(yaml@2.8.0)':
-    dependencies:
-      '@toolsync/core': 0.1.0
-      '@toolsync/template': 0.0.0
-    optionalDependencies:
-      ignore-sync: 8.0.0
-      prettier: 3.5.3
-      yaml: 2.8.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@toolsync/cli@0.1.0(ignore-sync@8.0.0)(prettier@3.5.3)(yaml@2.8.0)':
-    dependencies:
-      '@toolsync/builtin': 0.1.0(ignore-sync@8.0.0)(prettier@3.5.3)(yaml@2.8.0)
-      '@toolsync/core': 0.1.0
-      '@toolsync/logger': 0.0.0
-      commander: 14.0.0
-      debug: 4.4.1
-    transitivePeerDependencies:
-      - ignore-sync
-      - prettier
-      - supports-color
-      - yaml
-
-  '@toolsync/core@0.1.0':
-    dependencies:
-      '@manypkg/get-packages': 3.0.0
-      '@manypkg/tools': 2.0.0
-      '@toolsync/logger': 0.0.0
-      '@toolsync/object-mods': 0.0.0
-      debug: 4.4.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@toolsync/logger@0.0.0':
-    dependencies:
-      debug: 4.4.1
-      pino: 9.7.0
-      pino-pretty: 13.0.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@toolsync/object-mods@0.0.0': {}
-
-  '@toolsync/template@0.0.0':
-    dependencies:
-      commander: 14.0.0
-
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
   '@ts-morph/common@0.27.0':
@@ -8292,6 +8215,10 @@ snapshots:
   lru-cache@11.1.0: {}
 
   lru-cache@7.18.3: {}
+
+  lucide-react@0.513.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   magic-string@0.30.17:
     dependencies:
