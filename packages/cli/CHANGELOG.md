@@ -1,5 +1,15 @@
 # @toolsync/cli
 
+## 0.2.0
+
+### Minor Changes
+
+- df74989: Add `toolsync init` command
+
+### Patch Changes
+
+- df74989: Prepare for @toolsync/create
+
 ## 0.1.0
 
 ### Minor Changes

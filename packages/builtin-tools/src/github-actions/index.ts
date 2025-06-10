@@ -35,7 +35,10 @@ export const defaultOptions = {
   workflows: {
     ci: {
       name: 'CI',
-      on: ['push'],
+      on: {
+        push: { branches: ['main'] },
+        pull_request: { branches: ['main'] },
+      },
       jobs: {
         build: {
           name: 'Code Quality',
@@ -76,7 +79,8 @@ export const defaultOptions = {
             },
             {
               // TODO: Move to @toolsync/builtin/changesets plugin
-              if: 'github.ref_name == github.event.repository.default_branch',
+              // if the event is a push this also implies that the branch is main
+              if: "${{ github.event_name == 'push' }}",
               name: 'Changesets',
               uses: 'changesets/action@v1',
               with: {
