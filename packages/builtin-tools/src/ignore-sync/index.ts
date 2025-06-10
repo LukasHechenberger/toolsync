@@ -17,7 +17,7 @@ declare global {
 
 const ignoreSyncPlugin = defineBuiltinPlugin({
   name: pluginName,
-  description: `Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc. files across multiple directories.`,
+  description: `Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc.`,
   loadConfig() {
     return {
       config: {
