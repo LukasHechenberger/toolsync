@@ -27,7 +27,7 @@ export function setupInitCommand(command: Command) {
           choices: tools.map((t) => ({
             name: `${t.slug} - ${t.description}`,
             value: t.name,
-            short: t.description + 'asdf',
+            short: t.slug,
           })),
         },
       ] satisfies (PromptQuestion & { name: string })[];
