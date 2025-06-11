@@ -14,8 +14,8 @@ type PluginHooks = Omit<FullyImplementedPlugin, 'name' | 'description'>;
 const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
 
-log.info('Toolsync Core initialized');
 log.debug('Debug logging is enabled');
+log.debug('Toolsync Core initialized');
 
 const require = global.require ?? createRequire(import.meta.url);
 
