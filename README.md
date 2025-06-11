@@ -129,3 +129,7 @@ This repository contains the following packages:
     }
   }
   ```
+
+## Docs
+
+- [ ] Add builtin plugins to search index

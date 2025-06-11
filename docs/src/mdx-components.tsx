@@ -13,3 +13,5 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...components,
   };
 }
+
+export { getMDXComponents as useMDXComponents };
