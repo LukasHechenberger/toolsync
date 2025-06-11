@@ -1,5 +1,11 @@
 # @toolsync/core
 
+## 0.1.2
+
+### Patch Changes
+
+- 768dd48: Better logging
+
 ## 0.1.1
 
 ### Patch Changes
