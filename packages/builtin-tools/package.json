@@ -1,7 +1,7 @@
 {
   "name": "@toolsync/builtin",
   "version": "0.1.2",
-  "description": "Default toolsync available",
+  "description": "Default toolsync plugins available",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
