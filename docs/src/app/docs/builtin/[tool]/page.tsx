@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 import { basePageOptions, BottomFooter } from '../../page.config';
 import { AutoTypeTable } from 'fumadocs-typescript/ui';
 import { createGenerator } from 'fumadocs-typescript';
-import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
 import Link from 'next/link';
+import { compileMDX } from '@fumadocs/mdx-remote';
+import { getMDXComponents } from '@/mdx-components';
 
 type Props = { params: Promise<{ tool: string }> };
 
@@ -38,6 +39,14 @@ export default async function BuiltinToolPage({ params }: Props) {
   const { tool: slug } = await params;
   const tool = findTool(slug);
 
+  const { body: MinimalConfig } = await compileMDX({
+    source: `\`\`\`json title="toolsync.json"\n${JSON.stringify(
+      { [tool.name]: {} },
+      null,
+      2,
+    ).replace('{}', '{ /* Your config here */ }')}\n\`\`\``,
+  });
+
   return (
     <DocsPage
       toc={[
@@ -62,13 +71,7 @@ export default async function BuiltinToolPage({ params }: Props) {
           Configure this tool like any other inside your <code>toolsync.json</code> file:
         </p>
 
-        <DynamicCodeBlock
-          lang="jsonc"
-          code={JSON.stringify({ [tool.name]: {} }, null, 2).replace(
-            '{}',
-            '{ /* Your config here */ }',
-          )}
-        />
+        <MinimalConfig components={getMDXComponents()} />
 
         <h2 id="options">Available options</h2>
 

@@ -1,7 +1,7 @@
 import { compileMDX } from '@fumadocs/mdx-remote';
 import { promisify } from 'node:util';
 import { exec as _exec } from 'node:child_process';
-import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
+import { getMDXComponents } from '@/mdx-components';
 
 const exec = promisify(_exec);
 
@@ -12,11 +12,5 @@ export async function CommandOutput({ command }: { command: string }) {
 
   const { body: Output } = await compileMDX({ source: `\`\`\`ansi\n${output}\n\`\`\`` });
 
-  return (
-    <CodeBlock>
-      <Pre>
-        <Output />
-      </Pre>
-    </CodeBlock>
-  );
+  return <Output components={getMDXComponents()} />;
 }
