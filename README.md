@@ -35,7 +35,7 @@ This repository contains the following packages:
 
 | Name                                            | Description                                              | Links                                                                                                                     |
 | ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| [@toolsync/builtin](packages/builtin-tools)     | Default toolsync available                               | [![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin)         |
+| [@toolsync/builtin](packages/builtin-tools)     | Default toolsync plugins available                       | [![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin)         |
 | [@toolsync/cli](packages/cli)                   | The toolsync command line interface                      | [![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli)                 |
 | [@toolsync/core](packages/core)                 | Core functionality used in @toolsync/cli etc             | [![NPM Version](https://img.shields.io/npm/v/@toolsync/core)](https://www.npmjs.com/package/@toolsync/core)               |
 | [@toolsync/create](packages/create)             | _no description_                                         | [![NPM Version](https://img.shields.io/npm/v/@toolsync/create)](https://www.npmjs.com/package/@toolsync/create)           |
