@@ -1,5 +1,14 @@
 # @toolsync/builtin
 
+## 0.1.3
+
+### Patch Changes
+
+- 768dd48: `package-readme`: Link npm badges to npm page
+- 768dd48: `package-readme`: Render repo package list as a table
+- Updated dependencies [768dd48]
+  - @toolsync/core@0.1.2
+
 ## 0.1.2
 
 ### Patch Changes

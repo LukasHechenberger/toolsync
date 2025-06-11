@@ -1,5 +1,13 @@
 # @toolsync/create
 
+## 0.2.3
+
+### Patch Changes
+
+- 768dd48: Use `terminal-link` in usage
+- Updated dependencies [768dd48]
+  - @toolsync/cli@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
