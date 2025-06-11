@@ -3,7 +3,7 @@
 
 # @toolsync/logger
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/logger)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/logger)](https://www.npmjs.com/package/@toolsync/logger)
 
 The logger we use
 

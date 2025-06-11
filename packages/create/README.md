@@ -3,7 +3,7 @@
 
 # @toolsync/create
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/create)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/create)](https://www.npmjs.com/package/@toolsync/create)
 
 <!-- #endregion header -->
 

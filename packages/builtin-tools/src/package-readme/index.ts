@@ -1,10 +1,12 @@
 import { join } from 'path';
 import { defineBuiltinPlugin } from '../lib/plugins';
 import { MarkdownTemplate } from '@toolsync/template';
+import { markdownTable } from 'markdown-table';
+import type { Package } from '@toolsync/core/types';
 
 const pluginName = '@toolsync/builtin/package-readme';
 
-const allBadges = ['npm-version'] as const;
+const allBadges = ['npm-version' as const];
 type BadgesAvailable = (typeof allBadges)[number];
 
 declare global {
@@ -19,6 +21,20 @@ declare global {
       };
     }
   }
+}
+
+function badgesForPackage(pkg: Package, badges: BadgesAvailable[]) {
+  return badges
+    .map((badge) =>
+      badge === 'npm-version'
+        ? pkg.packageJson.private // FIXME: Also disable if published to a private registry
+          ? ''
+          : `[![NPM Version](https://img.shields.io/npm/v/${pkg.packageJson.name})](https://www.npmjs.com/package/${pkg.packageJson.name})`
+        : '',
+    )
+
+    .filter(Boolean)
+    .join(' ');
 }
 
 const packageReadmePlugin = defineBuiltinPlugin({
@@ -36,15 +52,7 @@ const packageReadmePlugin = defineBuiltinPlugin({
 
     const paragraphs = [
       `# ${pkg.packageJson.name}`,
-      badges
-        .map((badge) =>
-          badge === 'npm-version'
-            ? pkg.packageJson.private // FIXME: Also disable if published to a private registry
-              ? ''
-              : `![NPM Version](https://img.shields.io/npm/v/${pkg.packageJson.name})`
-            : '',
-        )
-        .join(' '),
+      badgesForPackage(pkg, badges),
       pkg.packageJson.description,
     ];
 
@@ -62,19 +70,22 @@ const packageReadmePlugin = defineBuiltinPlugin({
 
 This repository contains the following packages:
 
-${packages
-  .filter((p) => !p.isRoot)
-  // Private packages should come last in the list
-  .sort((a, b) => {
-    if (a.packageJson.private && !b.packageJson.private) return 1;
-    if (!a.packageJson.private && b.packageJson.private) return -1;
-    return a.packageJson.name.localeCompare(b.packageJson.name);
-  })
-  .map(
-    (p) =>
-      `- [${p.packageJson.name}](${p.relativeDir}) - ${p.packageJson.description ?? '_no description_'}`,
-  )
-  .join('\n')}
+${markdownTable([
+  ['Name', 'Description', 'Links'],
+  ...packages
+    .filter((p) => !p.isRoot)
+    // Private packages should come last in the list
+    .sort((a, b) => {
+      if (a.packageJson.private && !b.packageJson.private) return 1;
+      if (!a.packageJson.private && b.packageJson.private) return -1;
+      return a.packageJson.name.localeCompare(b.packageJson.name);
+    })
+    .map((p) => [
+      `[${p.packageJson.name}](${p.relativeDir})`,
+      `${p.packageJson.description ?? '_no description_'}`,
+      badgesForPackage(p, badges),
+    ]),
+])}
 `,
       });
     }

@@ -3,7 +3,7 @@
 
 # @toolsync/builtin
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin)
 
 Default toolsync available
 

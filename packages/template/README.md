@@ -3,7 +3,7 @@
 
 # @toolsync/template
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/template)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template)
 
 Update sections of source files
 

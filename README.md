@@ -33,15 +33,17 @@ Check out our [**online documentation**](https://toolsync.vercel.app) to find ou
 
 This repository contains the following packages:
 
-- [@toolsync/builtin](packages/builtin-tools) - Default toolsync available
-- [@toolsync/cli](packages/cli) - The toolsync command line interface
-- [@toolsync/core](packages/core) - Core functionality used in @toolsync/cli etc
-- [@toolsync/create](packages/create) - _no description_
-- [@toolsync/logger](packages/logger) - The logger we use
-- [@toolsync/object-mods](packages/object-mods) - Type-safe object manipulation utility
-- [@toolsync/template](packages/template) - Update sections of source files
-- [@repo/toolsync-plugins](packages/repo-plugins) - Some toolsync plugins we use in the toolsync monorepo :)
-- [@toolsync/docs](docs) - _no description_
+| Name                                            | Description                                              | Links                                                                                                                     |
+| ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [@toolsync/builtin](packages/builtin-tools)     | Default toolsync available                               | [![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin)         |
+| [@toolsync/cli](packages/cli)                   | The toolsync command line interface                      | [![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli)                 |
+| [@toolsync/core](packages/core)                 | Core functionality used in @toolsync/cli etc             | [![NPM Version](https://img.shields.io/npm/v/@toolsync/core)](https://www.npmjs.com/package/@toolsync/core)               |
+| [@toolsync/create](packages/create)             | _no description_                                         | [![NPM Version](https://img.shields.io/npm/v/@toolsync/create)](https://www.npmjs.com/package/@toolsync/create)           |
+| [@toolsync/logger](packages/logger)             | The logger we use                                        | [![NPM Version](https://img.shields.io/npm/v/@toolsync/logger)](https://www.npmjs.com/package/@toolsync/logger)           |
+| [@toolsync/object-mods](packages/object-mods)   | Type-safe object manipulation utility                    | [![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods) |
+| [@toolsync/template](packages/template)         | Update sections of source files                          | [![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template)       |
+| [@repo/toolsync-plugins](packages/repo-plugins) | Some toolsync plugins we use in the toolsync monorepo :) |                                                                                                                           |
+| [@toolsync/docs](docs)                          | _no description_                                         |                                                                                                                           |
 
 <!-- #endregion packages -->
 

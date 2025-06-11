@@ -3,7 +3,7 @@
 
 # @toolsync/cli
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli)
 
 The toolsync command line interface
 
