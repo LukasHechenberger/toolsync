@@ -22,7 +22,7 @@ export function ScrollToTop() {
   return (
     <button
       className={cn(
-        'flex gap-2 items-center text-sm mx-2 text-fd-muted-foreground opacity-0 transition-opacity',
+        'flex gap-1 items-center text-sm mx-2 text-fd-muted-foreground opacity-0 transition-opacity',
         visible && 'opacity-100',
       )}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
