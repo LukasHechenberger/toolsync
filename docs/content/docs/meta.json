@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "---Introduction---",
+    "index",
+    "configuration",
+    "---Plugins---",
+    "builtin",
+    "---Guides---",
+    "...guides",
+    "---Reference---",
+    "...reference",
+    "---",
+    "..."
+  ]
+}
