@@ -3,7 +3,7 @@
 
 # @toolsync/core
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/core)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/core)](https://www.npmjs.com/package/@toolsync/core)
 
 Core functionality used in @toolsync/cli etc
 

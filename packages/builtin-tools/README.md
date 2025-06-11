@@ -3,9 +3,9 @@
 
 # @toolsync/builtin
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin)
 
-Default toolsync available
+Default toolsync plugins available
 
 <!-- #endregion header -->
 
@@ -14,13 +14,15 @@ Default toolsync available
 
 ## Tools
 
-- **@toolsync/builtin/github-actions** - Integrates with GitHub Actions for CI workflows
-- **@toolsync/builtin/ignore-sync** - Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc.
-- **@toolsync/builtin/package-meta** - Sync package metadata like repository etc between workspace packages
-- **@toolsync/builtin/package-readme** - Generates README.md files for all packages in the workspace.
-- **@toolsync/builtin/pnpm** - Integrates with the pnpm package manager, setting up the root package.json with the specified version.
-- **@toolsync/builtin/prettier** - Integrates with Prettier for code formatting
-- **@toolsync/builtin/vscode** - Integrates with Visual Studio Code for settings and extensions management
+| Name                                                     | Description                                                                                            | Links                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| [@toolsync/builtin/github-actions](./src/github-actions) | Integrates with GitHub Actions for CI workflows                                                        | [Documentation](https://toolsync.vercel.app/docs/builtin/github-actions) |
+| [@toolsync/builtin/ignore-sync](./src/ignore-sync)       | Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc.                          | [Documentation](https://toolsync.vercel.app/docs/builtin/ignore-sync)    |
+| [@toolsync/builtin/package-meta](./src/package-meta)     | Sync package metadata like repository etc between workspace packages                                   | [Documentation](https://toolsync.vercel.app/docs/builtin/package-meta)   |
+| [@toolsync/builtin/package-readme](./src/package-readme) | Generates README.md files for all packages in the workspace.                                           | [Documentation](https://toolsync.vercel.app/docs/builtin/package-readme) |
+| [@toolsync/builtin/pnpm](./src/pnpm)                     | Integrates with the pnpm package manager, setting up the root package.json with the specified version. | [Documentation](https://toolsync.vercel.app/docs/builtin/pnpm)           |
+| [@toolsync/builtin/prettier](./src/prettier)             | Integrates with Prettier for code formatting                                                           | [Documentation](https://toolsync.vercel.app/docs/builtin/prettier)       |
+| [@toolsync/builtin/vscode](./src/vscode)                 | Integrates with Visual Studio Code for settings and extensions management                              | [Documentation](https://toolsync.vercel.app/docs/builtin/vscode)         |
 
 <!-- #endregion tools -->
 

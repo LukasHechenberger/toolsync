@@ -7,6 +7,7 @@ import { join, relative } from 'path';
 import { readFile } from 'fs/promises';
 import { logger } from '@toolsync/logger';
 import { setupInitCommand } from './commands/init';
+import terminalLink from 'terminal-link';
 
 const log = logger.child('cli');
 
@@ -86,7 +87,7 @@ const program = new Command()
   .addHelpText(
     'afterAll',
     `
-For usage details see ${new URL('/docs/reference/cli', homepage)}`,
+For usage details see ${terminalLink('our documentation', new URL('/docs/reference/cli', homepage).toString())}.`,
   )
   .on('option:no-default-plugins', () => {
     // FIXME: Implement or remove

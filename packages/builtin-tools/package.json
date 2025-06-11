@@ -1,7 +1,7 @@
 {
   "name": "@toolsync/builtin",
   "version": "0.1.2",
-  "description": "Default toolsync available",
+  "description": "Default toolsync plugins available",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "@toolsync/core": "workspace:^",
-    "@toolsync/template": "workspace:^"
+    "@toolsync/template": "workspace:^",
+    "markdown-table": "^3.0.4"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

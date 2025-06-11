@@ -3,7 +3,7 @@
 
 # @toolsync/object-mods
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods)
 
 Type-safe object manipulation utility
 

@@ -3,7 +3,7 @@
 
 # @toolsync/cli
 
-![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli)
 
 The toolsync command line interface
 
@@ -30,7 +30,7 @@ Commands:
   init [options]        Configure toolsync in the current repository
   help [command]        display help for command
 
-For usage details see https://toolsync.vercel.app/docs/reference/cli
+For usage details see our documentation (​https://toolsync.vercel.app/docs/reference/cli​).
 ```
 
 <!-- #endregion cli-usage -->
