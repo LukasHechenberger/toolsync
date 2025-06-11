@@ -15,7 +15,7 @@ const log = logger.child('core');
 const pluginLogger = logger.child('plugin');
 
 log.debug('Debug logging is enabled');
-log.debug('Toolsync Core initialized');
+log.debug('Toolsync Core loading');
 
 const require = global.require ?? createRequire(import.meta.url);
 
