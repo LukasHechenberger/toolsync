@@ -30,7 +30,7 @@ Commands:
   init [options]        Configure toolsync in the current repository
   help [command]        display help for command
 
-For usage details see https://toolsync.vercel.app/docs/reference/cli
+For usage details see our documentation (​https://toolsync.vercel.app/docs/reference/cli​).
 ```
 
 <!-- #endregion cli-usage -->

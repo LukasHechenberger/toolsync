@@ -32,7 +32,7 @@ Options:
   -V, --version  output the version number
   -h, --help     display help for command
 
-For more information visit https://toolsync.vercel.app/docs
+For more information visit our documentation (​https://toolsync.vercel.app/docs​).
 ```
 
 <!-- #endregion cli-usage -->

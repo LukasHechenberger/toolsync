@@ -5,6 +5,7 @@ import { name, version, homepage } from '../package.json';
 import { logger } from '@toolsync/logger';
 import { getPackages } from '@manypkg/get-packages';
 import { setupInitCommand } from '@toolsync/cli/commands/init';
+import terminalLink from 'terminal-link';
 
 const log = logger.child('create');
 
@@ -34,7 +35,7 @@ const program = new Command()
   .addHelpText(
     'after',
     `
-For more information visit ${new URL('/docs', homepage)}`,
+For more information visit ${terminalLink('our documentation', new URL('/docs', homepage).toString())}.`,
   );
 
 setupInitCommand(program);
