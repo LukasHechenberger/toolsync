@@ -21,10 +21,10 @@ No more setting up the same 100 tools when starting a new project
 Toolsync is a set of tools to configure the development tools in your monorepo. Instead of manually configuring
 
 - build tools (turborepo, tsup, next.js)
-- formatters (eslint, [prettier](/docs/builtin/prettier))
-- IDE Settings ([vscode](/docs/builtin/vscode))
-- CI pipline ([GitHub Actions](/docs/builtin/github-actions))
-- [etc.](#plugins)
+- formatters (eslint, [prettier](https://toolsync.vercel.app/docs/builtin/prettier))
+- IDE Settings ([vscode](https://toolsync.vercel.app/docs/builtin/vscode))
+- CI pipline ([GitHub Actions](https://toolsync.vercel.app/docs/builtin/github-actions))
+- [etc.](https://toolsync.vercel.app/docs/builtin)
 
 Toolsync will set them all up from a single (optional) config file, `toolsync.json`.
 
