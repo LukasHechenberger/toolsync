@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.2.1
+
+### Patch Changes
+
+- 16df2ca: Only add docs badge if homepage is set
+
 ## 0.2.0
 
 ### Minor Changes
