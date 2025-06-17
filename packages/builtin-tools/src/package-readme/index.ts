@@ -57,11 +57,7 @@ const packageReadmePlugin = defineBuiltinPlugin({
     });
 
     const badgesForReadme = badgesForPackage(pkg, badges);
-    const paragraphs = [
-      `# ${pkg.packageJson.name}`,
-      badgesForReadme ? `> ${badgesForReadme}` : undefined,
-      pkg.packageJson.description,
-    ];
+    const paragraphs = [`# ${pkg.packageJson.name}`, badgesForReadme, pkg.packageJson.description];
 
     readmeTemplate.update({
       section: 'header',

@@ -3,7 +3,7 @@
 
 # @toolsync/docs
 
-> [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+[![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 The sources of toolsync.vercel.app
 

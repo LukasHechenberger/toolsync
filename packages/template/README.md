@@ -3,7 +3,7 @@
 
 # @toolsync/template
 
-> [![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 Update sections of source files
 

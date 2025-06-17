@@ -3,7 +3,7 @@
 
 # @toolsync/builtin
 
-> [![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+[![NPM Version](https://img.shields.io/npm/v/@toolsync/builtin)](https://www.npmjs.com/package/@toolsync/builtin) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 Default toolsync plugins available
 

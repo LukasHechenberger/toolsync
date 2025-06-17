@@ -3,7 +3,7 @@
 
 # @toolsync/monorepo
 
-> [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+[![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 No more setting up the same 100 tools when starting a new project
 
