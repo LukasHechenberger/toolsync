@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.2.0
+
+### Minor Changes
+
+- cd1659c: Add homepage badge to readmes
+
 ## 0.1.4
 
 ### Patch Changes
