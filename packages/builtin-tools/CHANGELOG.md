@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.2.2
+
+### Patch Changes
+
+- f6f06cf: Remove quotes on badges in readmes
+
 ## 0.2.1
 
 ### Patch Changes
