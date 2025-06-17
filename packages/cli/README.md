@@ -3,7 +3,7 @@
 
 # @toolsync/cli
 
-[![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli)
+> [![NPM Version](https://img.shields.io/npm/v/@toolsync/cli)](https://www.npmjs.com/package/@toolsync/cli) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 The toolsync command line interface
 

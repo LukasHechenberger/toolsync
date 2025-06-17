@@ -3,6 +3,8 @@
 
 # @repo/toolsync-plugins
 
+> [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+
 Some toolsync plugins we use in the toolsync monorepo :)
 
 <!-- #endregion header -->

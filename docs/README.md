@@ -3,9 +3,11 @@
 
 # @toolsync/docs
 
-<!-- #endregion header -->
+> [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
-# docs
+The sources of toolsync.vercel.app
+
+<!-- #endregion header -->
 
 This is a Next.js application generated with
 [Create Fumadocs](https://github.com/fuma-nama/fumadocs).

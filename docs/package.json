@@ -2,6 +2,7 @@
   "name": "@toolsync/docs",
   "version": "0.0.0",
   "private": true,
+  "description": "The sources of toolsync.vercel.app",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
