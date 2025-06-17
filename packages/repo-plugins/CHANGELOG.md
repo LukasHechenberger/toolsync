@@ -1,5 +1,12 @@
 # @repo/toolsync-plugins
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [6424aaf]
+  - @toolsync/builtin@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes

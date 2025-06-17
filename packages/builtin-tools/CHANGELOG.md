@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.1.4
+
+### Patch Changes
+
+- 6424aaf: Move yaml to regular dependencies
+
 ## 0.1.3
 
 ### Patch Changes
