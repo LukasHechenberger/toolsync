@@ -3,6 +3,8 @@
 
 # @toolsync/monorepo
 
+> [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
+
 No more setting up the same 100 tools when starting a new project
 
 <!-- #endregion header -->
@@ -47,7 +49,7 @@ This repository contains the following packages:
 | [@toolsync/object-mods](packages/object-mods)   | Type-safe object manipulation utility                    | [![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods) |
 | [@toolsync/template](packages/template)         | Update sections of source files                          | [![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template)       |
 | [@repo/toolsync-plugins](packages/repo-plugins) | Some toolsync plugins we use in the toolsync monorepo :) |                                                                                                                           |
-| [@toolsync/docs](docs)                          | _no description_                                         |                                                                                                                           |
+| [@toolsync/docs](docs)                          | The sources of toolsync.vercel.app                       |                                                                                                                           |
 
 <!-- #endregion packages -->
 

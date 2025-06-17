@@ -3,7 +3,7 @@
 
 # @toolsync/object-mods
 
-[![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods)
+> [![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods) [![Homepage](https://img.shields.io/badge/docs-default)](https://toolsync.vercel.app)
 
 Type-safe object manipulation utility
 

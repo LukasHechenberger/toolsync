@@ -6,7 +6,7 @@ import type { Package } from '@toolsync/core/types';
 
 const pluginName = '@toolsync/builtin/package-readme';
 
-const allBadges = ['npm-version' as const];
+const allBadges = ['npm-version' as const, 'docs' as const];
 type BadgesAvailable = (typeof allBadges)[number];
 
 declare global {
@@ -15,7 +15,7 @@ declare global {
       [pluginName]: {
         /**
          * The badges to add to each package
-         * @default ['npm-version']
+         * @default ['npm-version', 'docs']
          */
         badges?: boolean | BadgesAvailable[];
       };
@@ -30,7 +30,9 @@ function badgesForPackage(pkg: Package, badges: BadgesAvailable[]) {
         ? pkg.packageJson.private // FIXME: Also disable if published to a private registry
           ? ''
           : `[![NPM Version](https://img.shields.io/npm/v/${pkg.packageJson.name})](https://www.npmjs.com/package/${pkg.packageJson.name})`
-        : '',
+        : badge === 'docs' && pkg.packageJson.homepage
+          ? `[![Homepage](https://img.shields.io/badge/docs-default)](${pkg.packageJson.homepage})`
+          : '',
     )
 
     .filter(Boolean)
@@ -52,7 +54,7 @@ const packageReadmePlugin = defineBuiltinPlugin({
 
     const paragraphs = [
       `# ${pkg.packageJson.name}`,
-      badgesForPackage(pkg, badges),
+      `> ${badgesForPackage(pkg, badges)}`,
       pkg.packageJson.description,
     ];
 
@@ -83,7 +85,10 @@ ${markdownTable([
     .map((p) => [
       `[${p.packageJson.name}](${p.relativeDir})`,
       `${p.packageJson.description ?? '_no description_'}`,
-      badgesForPackage(p, badges),
+      badgesForPackage(
+        p,
+        badges.filter((b) => b !== 'docs'),
+      ),
     ]),
 ])}
 `,
