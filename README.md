@@ -130,6 +130,8 @@ This repository contains the following packages:
     - [ ] Should not run during CI to speed up build
   - [ ] `check` should call prepare and check if git status is clean - tovalidate setup during CI builds
     > `check` could be a v2 feature
+- [ ] Github
+  - [ ] Automatically update repo description + homepage
 
 ## Core
 
