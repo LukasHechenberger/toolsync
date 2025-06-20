@@ -1,5 +1,11 @@
 # @toolsync/cli
 
+## 0.2.4
+
+### Patch Changes
+
+- 651997a: Improve config printing
+
 ## 0.2.3
 
 ### Patch Changes
