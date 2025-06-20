@@ -144,6 +144,7 @@ This repository contains the following packages:
 ## Core
 
 - [ ] Allow configuration via package.json
+- [ ] Store generated file hashes to detect user customizations: Warn if a file is modified by the user, ask to reset or add to "customized" files list (?)
 - [ ] Allow individial packages to disable tools in their package.json (or toolsync.json ?)
 
   ```json filename="packages/my-package/package.json"
