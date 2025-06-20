@@ -32,6 +32,9 @@ const turboPlugin = defineBuiltinPlugin({
               cache: false,
               persistent: true,
             },
+            lint: {
+              dependsOn: ['^lint'],
+            },
             'check:types': {
               dependsOn: ['^check:types'],
             },
