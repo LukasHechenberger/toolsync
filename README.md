@@ -137,6 +137,9 @@ This repository contains the following packages:
   - [ ] Setup prettier plugin
 - [ ] Renovatebot
   - [ ] Add renovate.json
+- [ ] Vercel
+  - [ ] Add vercel.json with node version etc.
+  - [ ] Un-ignore turbo.json for vercel to detect it
 
 ## Core
 
