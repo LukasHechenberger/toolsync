@@ -135,6 +135,8 @@ This repository contains the following packages:
   - [ ] Automatically update repo description + homepage
 - [ ] Tailwind
   - [ ] Setup prettier plugin
+- [ ] Renovatebot
+  - [ ] Add renovate.json
 
 ## Core
 
