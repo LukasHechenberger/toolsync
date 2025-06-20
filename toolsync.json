@@ -20,5 +20,11 @@
       "access": "public"
     }
   },
-  "@toolsync/builtin/turbo": {}
+  "@toolsync/builtin/turbo": {
+    "tasks": {
+      "build": {
+        "outputs": ["README.md"]
+      }
+    }
+  }
 }

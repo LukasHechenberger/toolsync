@@ -1,24 +1,70 @@
+import { writeFile } from 'fs/promises';
 import { defineBuiltinPlugin } from '../lib/plugins';
+import type { BaseSchema, PipelineV2 } from '@turbo/types';
+import { join } from 'path';
 
-const pluginName = '@toolsync/builtin/turbo';
+export const turboPluginName = '@toolsync/builtin/turbo';
 
 declare global {
   namespace Toolsync {
     interface ConfigMap {
-      [pluginName]: {
-        // TODO: Define plugin options here
-      };
+      [turboPluginName]: BaseSchema;
     }
   }
 }
 
 const turboPlugin = defineBuiltinPlugin({
-  name: pluginName,
+  name: turboPluginName,
   description: 'Integrates with Turborepo',
-  setupPackage(pkg, { options, log }) {
+  loadConfig() {
+    return {
+      config: {
+        [turboPluginName]: {
+          $schema: 'https://turbo.build/schema.json',
+          ui: 'tui',
+          tasks: {
+            build: {
+              dependsOn: ['^build'],
+              inputs: ['$TURBO_DEFAULT$', '.env*'],
+              outputs: ['.next/**', '!.next/cache/**', 'out/**'],
+            },
+            dev: {
+              cache: false,
+              persistent: true,
+            },
+            'check:types': {
+              dependsOn: ['^check:types'],
+            },
+            check: {
+              dependsOn: ['check:types'],
+            },
+            test: {
+              outputs: [],
+              dependsOn: ['test:transit'],
+            },
+            'test:transit': {
+              dependsOn: ['^test:transit'],
+            },
+          },
+        },
+      },
+    };
+  },
+  async setupPackage(pkg, { options, log }) {
     if (pkg.isRoot) {
-      console.log('SETUP ROOT ');
+      await writeFile(join(pkg.dir, 'turbo.json'), JSON.stringify(options, undefined, 2));
+
+      const rootTasks = Object.keys(options.tasks).filter((t) => !t.includes(':'));
+      log.debug(`Adding root tasks as workspace scripts: ${rootTasks.join(', ')}`);
+
+      pkg.packageJson.scripts ??= {};
+      for (const task of rootTasks) {
+        pkg.packageJson.scripts[task] = `turbo run ${task}`;
+      }
     }
+
+    // TODO [>=1.0.0]: Handle package-specific tasks
+    // else { ... }
   },
 });
 
