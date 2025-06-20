@@ -9,7 +9,10 @@ declare global {
   namespace Toolsync {
     interface ConfigMap {
       [turboPluginName]: BaseSchema & {
-        /** @default {false} */
+        /**
+         * Enable remote caching for Turborepo during CI builds. This requires setting up `TURBO_TEAM` and `TURBO_TOKEN` environment variables in your CI configuration.
+         * @default false
+         */
         remoteCaching: boolean;
       };
     }
