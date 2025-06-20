@@ -1,32 +1,53 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
   "tasks": {
+    "build": {
+      "outputs": [
+        "README.md",
+        ".next/**",
+        "!.next/cache/**",
+        "out/**"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ]
+    },
     "//#check:format": {},
     "check": {
-      "dependsOn": ["//#check:format"]
-    },
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "out/**", "README.md"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": [
+        "//#check:format",
+        "check:types"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    },
+    "check:types": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "test": {
       "outputs": [],
-      "dependsOn": ["transit"]
+      "dependsOn": [
+        "test:transit"
+      ]
     },
-    "transit": {
-      "dependsOn": ["^transit"]
+    "test:transit": {
+      "dependsOn": [
+        "^test:transit"
+      ]
     }
-  }
+  },
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui"
 }

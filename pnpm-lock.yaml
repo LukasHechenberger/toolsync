@@ -124,6 +124,9 @@ importers:
         specifier: ^2.8.0
         version: 2.8.0
     devDependencies:
+      '@turbo/types':
+        specifier: ^2.5.4
+        version: 2.5.4
       '@types/node':
         specifier: ^22.15.30
         version: 22.15.30
@@ -136,6 +139,9 @@ importers:
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(typescript@5.8.3)(yaml@2.8.0)
+      turbo:
+        specifier: ^2.5.4
+        version: 2.5.4
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -1451,6 +1457,9 @@ packages:
   '@turbo/gen@2.5.4':
     resolution: {integrity: sha512-e69ut1PHTuwjqoZNF4Zpi8mOvh6EIkbUthh797y+Z/46bwiQfGsEKfw94t0CT+8UcwMvRZCbRXU7xo8hI86eDQ==}
     hasBin: true
+
+  '@turbo/types@2.5.4':
+    resolution: {integrity: sha512-iQpEjperiiLcUF3x1D7ENiI381MuL/sFLX6w8PUwFj5RX9aFl0Ry/0FFQRJW5XcxHx0b+4flLi49VF4KUhASnw==}
 
   '@turbo/workspaces@2.5.4':
     resolution: {integrity: sha512-LLmImNOyDOZ8XNsNolefa7wQdrzAss0CoedPADCZFB+iIDXW+8w4YkgOvKaLKBLcm9kb7gWCP4L0o0EiZLXBUA==}
@@ -6032,6 +6041,8 @@ snapshots:
       - '@types/node'
       - supports-color
       - typescript
+
+  '@turbo/types@2.5.4': {}
 
   '@turbo/workspaces@2.5.4':
     dependencies:

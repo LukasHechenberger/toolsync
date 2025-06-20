@@ -8,6 +8,7 @@ import { readFile } from 'fs/promises';
 import { logger } from '@toolsync/logger';
 import { setupInitCommand } from './commands/init';
 import terminalLink from 'terminal-link';
+import { inspect, styleText } from 'util';
 
 const log = logger.child('cli');
 
@@ -170,7 +171,11 @@ program
     const config = await tools.loadConfig();
     log.timing('Finished loading config');
 
-    console.log(options.json ? JSON.stringify(config.config, null, 2) : config.config);
+    console.log(
+      options.json
+        ? JSON.stringify(config.config, null, 2)
+        : inspect(config.config, { depth: 10, colors: process.stdout.hasColors?.() }),
+    );
   });
 
 setupInitCommand(

@@ -71,7 +71,7 @@ export const defaultOptions = {
             },
             {
               name: 'Code Quality Checks',
-              run: 'pnpm turbo check lint check-types test build',
+              run: 'pnpm turbo check lint test build',
             },
             {
               name: 'Ensure there are no uncommitted changes',
