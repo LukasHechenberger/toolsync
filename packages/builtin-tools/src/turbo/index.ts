@@ -8,7 +8,10 @@ export const turboPluginName = '@toolsync/builtin/turbo';
 declare global {
   namespace Toolsync {
     interface ConfigMap {
-      [turboPluginName]: BaseSchema;
+      [turboPluginName]: BaseSchema & {
+        /** @default {false} */
+        remoteCaching: boolean;
+      };
     }
   }
 }
@@ -16,7 +19,7 @@ declare global {
 const turboPlugin = defineBuiltinPlugin({
   name: turboPluginName,
   description: 'Integrates with Turborepo',
-  loadConfig() {
+  loadConfig(config) {
     return {
       config: {
         [turboPluginName]: {
@@ -50,10 +53,28 @@ const turboPlugin = defineBuiltinPlugin({
             },
           },
         },
+        ...(config.remoteCaching
+          ? {
+              '@toolsync/builtin/github-actions': {
+                workflows: {
+                  ci: {
+                    jobs: {
+                      build: {
+                        env: {
+                          TURBO_TEAM: '${{ vars.TURBO_TEAM }}',
+                          TURBO_TOKEN: '${{ secrets.TURBO_TOKEN }}',
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            }
+          : {}),
       },
     };
   },
-  async setupPackage(pkg, { options, log }) {
+  async setupPackage(pkg, { options: { remoteCaching, ...options }, log }) {
     if (pkg.isRoot) {
       await writeFile(join(pkg.dir, 'turbo.json'), JSON.stringify(options, undefined, 2));
 

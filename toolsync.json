@@ -21,6 +21,7 @@
     }
   },
   "@toolsync/builtin/turbo": {
+    "remoteCaching": true,
     "tasks": {
       "build": {
         "outputs": ["README.md"]
