@@ -20,6 +20,7 @@
       "types": "./out/ignore-sync/index.d.ts",
       "default": "./out/ignore-sync/index.js"
     },
+    "./tools.json": "./out/tools.json",
     "./vscode": {
       "types": "./out/vscode/index.d.ts",
       "default": "./out/vscode/index.js"
@@ -44,7 +45,10 @@
       "types": "./out/package-meta/index.d.ts",
       "default": "./out/package-meta/index.js"
     },
-    "./tools.json": "./out/tools.json"
+    "./turbo": {
+      "types": "./out/turbo/index.d.ts",
+      "default": "./out/turbo/index.js"
+    }
   },
   "scripts": {
     "build": "tsup",
