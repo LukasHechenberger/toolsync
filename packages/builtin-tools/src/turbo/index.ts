@@ -39,7 +39,7 @@ const turboPlugin = defineBuiltinPlugin({
               dependsOn: ['^lint'],
             },
             'check:types': {
-              dependsOn: ['^check:types'],
+              dependsOn: ['^build'],
             },
             check: {
               dependsOn: ['check:types'],
@@ -76,7 +76,7 @@ const turboPlugin = defineBuiltinPlugin({
   },
   async setupPackage(pkg, { options: { remoteCaching, ...options }, log }) {
     if (pkg.isRoot) {
-      await writeFile(join(pkg.dir, 'turbo.json'), JSON.stringify(options, undefined, 2));
+      await writeFile(join(pkg.dir, 'turbo.json'), `${JSON.stringify(options, undefined, 2)}\n`);
 
       const rootTasks = Object.keys(options.tasks).filter((t) => !t.includes(':'));
       log.debug(`Adding root tasks as workspace scripts: ${rootTasks.join(', ')}`);
