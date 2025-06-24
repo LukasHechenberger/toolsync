@@ -97,6 +97,7 @@ This repository contains the following packages:
 - [ ] Eslint
   - [ ] Ensure all packages have an eslint config file
   - [ ] Add vscode extension if enabled
+  - [ ] Ignore coverage files - Sync "ignores" with gitignore etc.
   - [ ] Configure vscode setting "eslint.workingDirectories"
     - Check first if "mode": "auto" isn't enough
   - [ ] Configure vscode setting "editor.codeActionsOnSave"
