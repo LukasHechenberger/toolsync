@@ -76,6 +76,7 @@ This repository contains the following packages:
   - [x] Create settings.json based on other plugins
   - [ ] Gitignore .vscode folder
   - [ ] Generate devcontainers.json
+  - [ ] Hide generated files in explorer (so users don't edit them directly)
 - [x] prettier
   - [x] Create .prettierrc
   - [x] Add `format` script
@@ -89,8 +90,8 @@ This repository contains the following packages:
   - [ ] Create .prettierignore-sync if prettier is enabled
   - [x] Add file associations to vscode settings
 - [ ] Turborepo
-  - [ ] Create turbo.json
-  - [ ] Create root scripts
+  - [x] Create turbo.json
+  - [x] Create root scripts
   - [ ] Provide instructions on how to configure remote caching
   - [ ] Create generators for new packages
     - [ ] These should also init other tools
@@ -133,10 +134,18 @@ This repository contains the following packages:
     > `check` could be a v2 feature
 - [ ] Github
   - [ ] Automatically update repo description + homepage
+- [ ] Tailwind
+  - [ ] Setup prettier plugin
+- [ ] Renovatebot
+  - [ ] Add renovate.json
+- [ ] Vercel
+  - [ ] Add vercel.json with node version etc.
+  - [ ] Un-ignore turbo.json for vercel to detect it
 
 ## Core
 
 - [ ] Allow configuration via package.json
+- [ ] Store generated file hashes to detect user customizations: Warn if a file is modified by the user, ask to reset or add to "customized" files list (?)
 - [ ] Allow individial packages to disable tools in their package.json (or toolsync.json ?)
 
   ```json filename="packages/my-package/package.json"

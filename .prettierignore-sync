@@ -11,3 +11,6 @@ pnpm-lock.yaml
 
 # Should be added by @toolsync/builtin/changesets
 .changeset/*.md
+
+# By @toolsync/builtins/turborepo tool
+turbo.json

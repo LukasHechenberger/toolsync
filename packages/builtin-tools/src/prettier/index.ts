@@ -3,6 +3,7 @@ import { join } from 'path';
 import { devDependencies } from '../../package.json';
 import { defineBuiltinPlugin } from '../lib/plugins';
 import { vscodePluginName } from '../vscode';
+import { turboPluginName } from '../turbo';
 
 export const defaultSettings = { singleQuote: true, printWidth: 100 };
 
@@ -36,6 +37,14 @@ const prettierPlugin = defineBuiltinPlugin({
         [vscodePluginName]: {
           extensions: {
             recommendations: ['esbenp.prettier-vscode'],
+          },
+        },
+        [turboPluginName]: {
+          tasks: {
+            '//#check:format': {},
+            check: {
+              dependsOn: ['//#check:format'],
+            },
           },
         },
       },

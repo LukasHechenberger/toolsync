@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.3.0
+
+### Minor Changes
+
+- 651997a: Add turborepo plugin
+
 ## 0.2.2
 
 ### Patch Changes

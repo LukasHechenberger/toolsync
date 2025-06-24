@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/builtin",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Default toolsync plugins available",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
@@ -20,6 +20,7 @@
       "types": "./out/ignore-sync/index.d.ts",
       "default": "./out/ignore-sync/index.js"
     },
+    "./tools.json": "./out/tools.json",
     "./vscode": {
       "types": "./out/vscode/index.d.ts",
       "default": "./out/vscode/index.js"
@@ -44,7 +45,10 @@
       "types": "./out/package-meta/index.d.ts",
       "default": "./out/package-meta/index.js"
     },
-    "./tools.json": "./out/tools.json"
+    "./turbo": {
+      "types": "./out/turbo/index.d.ts",
+      "default": "./out/turbo/index.js"
+    }
   },
   "scripts": {
     "build": "tsup",
@@ -57,10 +61,12 @@
     "yaml": "^2.8.0"
   },
   "devDependencies": {
+    "@turbo/types": "^2.5.4",
     "@types/node": "^22.15.30",
     "ignore-sync": "^8.0.0",
     "prettier": "^3.5.3",
     "tsup": "^8.5.0",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
