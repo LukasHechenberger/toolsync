@@ -80,6 +80,7 @@ const toolFiles: Record<string, string[]> = {
   '@toolsync/builtin/vscode': ['.vscode/settings.json', '.vscode/extensions.json'],
   '@toolsync/builtin/package-meta': ['package.json', ...eachPackage('package.json')],
   '@toolsync/builtin/package-readme': ['README.md', ...eachPackage('README.md')],
+  '@toolsync/builtin/turbo': ['turbo.json'],
 };
 
 export function Preview() {
