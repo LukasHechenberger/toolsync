@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.3.1
+
+### Patch Changes
+
+- 842e8f6: github-actions: Add step ids to remaining github actions tasks
+
 ## 0.3.0
 
 ### Minor Changes
