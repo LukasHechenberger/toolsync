@@ -49,6 +49,7 @@ export const defaultOptions = {
           },
           steps: [
             {
+              id: 'checkout',
               name: 'Check out code',
               uses: 'actions/checkout@v4',
               with: {
@@ -70,15 +71,18 @@ export const defaultOptions = {
               // NOTE: run is set by e.g. pnpm plugin
             },
             {
+              id: 'checks',
               name: 'Code Quality Checks',
               run: 'pnpm turbo check lint test build',
             },
             {
+              id: 'ensure-clean',
               name: 'Ensure there are no uncommitted changes',
               run: 'git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)',
             },
             {
               // TODO: Move to @toolsync/builtin/changesets plugin
+              id: 'changesets',
               // if the event is a push this also implies that the branch is main
               if: "${{ github.event_name == 'push' }}",
               name: 'Changesets',
