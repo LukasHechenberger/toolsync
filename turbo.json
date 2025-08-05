@@ -26,7 +26,11 @@
       "cache": false,
       "persistent": true
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    },
     "check:types": {
       "dependsOn": [
         "^build"
