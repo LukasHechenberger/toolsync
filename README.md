@@ -120,6 +120,7 @@ This repository contains the following packages:
   - [ ] Manage config file (?)
   - [ ] Setup github action
     - [ ] Provide instructions on how to configure GitHub settings (separate GITHUB_TOKEN)
+  - [ ] Adjust "on" in ci workflow to include the default branch
   - [ ] Create a "prebuild" version of @changesets/cli that does not add 1000 runtime dependencies
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
@@ -140,6 +141,7 @@ This repository contains the following packages:
   - [ ] Add renovate.json
 - [ ] Vercel
   - [ ] Add vercel.json with node version etc.
+  - [ ] VSCode: Add `"$schema": "https://openapi.vercel.sh/vercel.json"` for vercel.json files to vscode settings,
   - [ ] Un-ignore turbo.json for vercel to detect it
 
 ## Core
@@ -157,6 +159,8 @@ This repository contains the following packages:
     }
   }
   ```
+
+- [ ] Plugin's own default config should be loaded first so others/config file can override it
 
 ## Docs
 

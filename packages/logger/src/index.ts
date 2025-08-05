@@ -6,7 +6,7 @@ const envDebug = process.env.DEBUG;
 const envLogLevel = process.env.LOG_LEVEL || 'info';
 
 const pretty = pinoPretty({
-  ignore: 'pid,hostname,ns,time',
+  ignore: 'pid,hostname,ns,time,level',
   // Customize the log message format
   messageFormat(log, messageKey, _, { colors }) {
     return colors.reset(`${log[messageKey]} ${colors.reset(colors.dim(`[${log.ns}]`))}`);
