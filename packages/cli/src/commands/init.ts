@@ -85,7 +85,13 @@ async function init({ rootDir, force, yes }: { rootDir: string; force: boolean; 
         {
           title: 'Installing dependencies...',
           type: 'runCommand',
-          command: 'pnpm add -Dw @toolsync/cli ' + (plugins.length > 0 ? '@toolsync/builtin' : ''),
+          command: [
+            'pnpm',
+            'add',
+            '-Dw',
+            '@toolsync/cli',
+            ...(plugins.length > 0 ? ['@toolsync/builtin'] : []),
+          ].join(' '),
         } as RunCommandAction,
         {
           title: 'Syncing config files...',
