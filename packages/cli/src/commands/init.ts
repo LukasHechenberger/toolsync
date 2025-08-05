@@ -1,16 +1,11 @@
 import { logger } from '@toolsync/logger';
 import type { Command } from 'commander';
-import nodePlop, {
-  type CustomActionConfig,
-  type CustomActionFunction,
-  type PromptQuestion,
-} from 'node-plop';
+import nodePlop, { type CustomActionConfig, type PromptQuestion } from 'node-plop';
 import { getPackages } from '@toolsync/core';
 import tools from '@toolsync/builtin/tools.json';
 import { execa } from 'execa';
 import { styleText } from 'util';
 import { homepage } from '../../package.json';
-import type { stdout } from 'process';
 
 const log = logger.child('cli:init');
 

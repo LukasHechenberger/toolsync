@@ -143,6 +143,8 @@ This repository contains the following packages:
   - [ ] Add vercel.json with node version etc.
   - [ ] VSCode: Add `"$schema": "https://openapi.vercel.sh/vercel.json"` for vercel.json files to vscode settings,
   - [ ] Un-ignore turbo.json for vercel to detect it
+- Shadcn UI
+  - [ ] Add vscode setting `"tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css"` if inside a monorepo
 
 ## Core
 
