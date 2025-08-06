@@ -3,4 +3,4 @@
 '@toolsync/create': minor
 ---
 
-Install dependencies during install command
+Install dependencies during `init` command
