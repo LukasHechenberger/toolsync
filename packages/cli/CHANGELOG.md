@@ -1,5 +1,11 @@
 # @toolsync/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- 4228c96: Install dependencies during `init` command
+
 ## 0.2.4
 
 ### Patch Changes
