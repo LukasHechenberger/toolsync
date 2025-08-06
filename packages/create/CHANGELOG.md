@@ -1,5 +1,16 @@
 # @toolsync/create
 
+## 0.3.0
+
+### Minor Changes
+
+- 4228c96: Install dependencies during `init` command
+
+### Patch Changes
+
+- Updated dependencies [4228c96]
+  - @toolsync/cli@0.3.0
+
 ## 0.2.4
 
 ### Patch Changes
