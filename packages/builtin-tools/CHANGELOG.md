@@ -1,5 +1,12 @@
 # @toolsync/builtin
 
+## 0.3.2
+
+### Patch Changes
+
+- Updated dependencies [932e2ab]
+  - @toolsync/template@0.1.1
+
 ## 0.3.1
 
 ### Patch Changes

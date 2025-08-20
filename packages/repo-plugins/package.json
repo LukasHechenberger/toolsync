@@ -1,6 +1,6 @@
 {
   "name": "@repo/toolsync-plugins",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": true,
   "description": "Some toolsync plugins we use in the toolsync monorepo :)",
   "homepage": "https://toolsync.vercel.app",
