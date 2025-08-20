@@ -105,7 +105,10 @@ export class Template {
     const markerComments = this.options.markers.map((marker) =>
       this.comment(`${marker} ${sectionName}`),
     );
-    const regExp = new RegExp(markerComments.join('[^]*'), 'm');
+    const regExp = new RegExp(
+      markerComments.map((c) => c.replaceAll('*', '\\*')).join('[^]*'),
+      'm',
+    );
     const replacement = [
       `${markerComments[0]}\n${this.comment(notice)}`,
       content.trim(),
