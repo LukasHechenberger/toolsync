@@ -9,7 +9,7 @@ declare global {
   namespace Toolsync {
     interface ConfigMap {
       [pluginName]: {
-        /** The version of prettier to use. */
+        /** The version of publint to use. */
         version?: string;
       };
     }
