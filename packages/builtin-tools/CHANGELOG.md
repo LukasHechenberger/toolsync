@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.4.0
+
+### Minor Changes
+
+- 912f8e2: Add publint plugin
+
 ## 0.3.2
 
 ### Patch Changes
