@@ -27,5 +27,6 @@
         "outputs": ["README.md"]
       }
     }
-  }
+  },
+  "@toolsync/builtin/publint": {}
 }

@@ -19,7 +19,8 @@
     "check": {
       "dependsOn": [
         "//#check:format",
-        "check:types"
+        "check:types",
+        "check:exports"
       ]
     },
     "dev": {
@@ -45,6 +46,11 @@
     "test:transit": {
       "dependsOn": [
         "^test:transit"
+      ]
+    },
+    "check:exports": {
+      "dependsOn": [
+        "build"
       ]
     }
   },

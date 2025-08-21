@@ -22,6 +22,7 @@ Default toolsync plugins available
 | [@toolsync/builtin/package-readme](./src/package-readme) | Generates README.md files for all packages in the workspace.                                           | [Documentation](https://toolsync.vercel.app/docs/builtin/package-readme) |
 | [@toolsync/builtin/pnpm](./src/pnpm)                     | Integrates with the pnpm package manager, setting up the root package.json with the specified version. | [Documentation](https://toolsync.vercel.app/docs/builtin/pnpm)           |
 | [@toolsync/builtin/prettier](./src/prettier)             | Integrates with Prettier for code formatting                                                           | [Documentation](https://toolsync.vercel.app/docs/builtin/prettier)       |
+| [@toolsync/builtin/publint](./src/publint)               | Validate package exports with publint                                                                  | [Documentation](https://toolsync.vercel.app/docs/builtin/publint)        |
 | [@toolsync/builtin/turbo](./src/turbo)                   | Integrates with Turborepo                                                                              | [Documentation](https://toolsync.vercel.app/docs/builtin/turbo)          |
 | [@toolsync/builtin/vscode](./src/vscode)                 | Integrates with Visual Studio Code for settings and extensions management                              | [Documentation](https://toolsync.vercel.app/docs/builtin/vscode)         |
 

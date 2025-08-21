@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "check:exports": "publint",
     "dev": "tsup --watch",
     "update-readme": "node out/bin.js README.md cli-usage \"\\`\\`\\`\n$(node ./out/bin.js --help)\n\\`\\`\\`\""
   },
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
+    "publint": "^0.3.12",
     "tsup": "^8.5.0"
   },
   "engines": {
