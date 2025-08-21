@@ -48,10 +48,15 @@
     "./turbo": {
       "types": "./out/turbo/index.d.ts",
       "default": "./out/turbo/index.js"
+    },
+    "./publint": {
+      "types": "./out/publint/index.d.ts",
+      "default": "./out/publint/index.js"
     }
   },
   "scripts": {
     "build": "tsup",
+    "check:exports": "publint",
     "dev": "tsup --watch"
   },
   "dependencies": {
@@ -65,19 +70,24 @@
     "@types/node": "^22.15.30",
     "ignore-sync": "^8.0.0",
     "prettier": "^3.5.3",
+    "publint": "^0.3.12",
     "tsup": "^8.5.0",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "ignore-sync": "^8.0.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "publint": "^0.3.12"
   },
   "peerDependenciesMeta": {
     "ignore-sync": {
       "optional": true
     },
     "prettier": {
+      "optional": true
+    },
+    "publint": {
       "optional": true
     }
   },

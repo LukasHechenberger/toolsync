@@ -18,10 +18,12 @@
   },
   "scripts": {
     "build": "tsup",
+    "check:exports": "publint",
     "dev": "tsup --watch",
     "test": "vitest"
   },
   "devDependencies": {
+    "publint": "^0.3.12",
     "tsup": "^8.5.0",
     "vitest": "^3.2.2"
   },

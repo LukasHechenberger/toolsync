@@ -12,6 +12,7 @@
   "bin": "./out/bin.js",
   "scripts": {
     "build": "tsup",
+    "check:exports": "publint",
     "dev": "tsup --watch",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
@@ -26,6 +27,7 @@
     "@commander-js/extra-typings": "^14.0.0",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
+    "publint": "^0.3.12",
     "tsup": "^8.5.0"
   },
   "engines": {
