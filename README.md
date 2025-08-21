@@ -110,6 +110,8 @@ This repository contains the following packages:
   - [ ] Framework integration:
     - Create e.g. nextjs config if used
     - Disable nextjs eslint during build if github actions are used
+    - nextjs:
+      - create turbo.json like in docs/turbo.json
 - [x] Publint
   - [x] Ensure all packages have a "check:exports" script
   - [x] Add "check:exports" to turbo.json if necessary
