@@ -1,5 +1,12 @@
 # @toolsync/core
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [4c20af5]
+  - @toolsync/logger@0.0.1
+
 ## 0.1.2
 
 ### Patch Changes

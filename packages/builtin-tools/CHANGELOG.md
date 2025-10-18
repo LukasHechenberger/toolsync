@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.4.1
+
+### Patch Changes
+
+- @toolsync/core@0.1.3
+
 ## 0.4.0
 
 ### Minor Changes

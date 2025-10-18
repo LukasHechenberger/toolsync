@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/logger",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The logger we use",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
