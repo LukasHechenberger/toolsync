@@ -263,7 +263,7 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       pino:
-        specifier: ^9.7.0
+        specifier: ^9.5.0
         version: 9.7.0
       pino-pretty:
         specifier: ^13.0.0
