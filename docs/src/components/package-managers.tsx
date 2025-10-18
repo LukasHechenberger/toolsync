@@ -1,6 +1,5 @@
 import { getMDXComponents } from '@/mdx-components';
 import { compileMDX } from '@fumadocs/mdx-remote';
-import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { ReactNode } from 'react';
 
