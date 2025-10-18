@@ -14,6 +14,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
   if (!page) notFound();
 
   const MDXContent = page.data.body;
+  const lastModified = page.data.lastModified || new Date().toISOString();
 
   return (
     <DocsPage
@@ -38,7 +39,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
             <div className="flex-1"></div>
 
             <p className="text-sm p-2 pt-0 text-fd-muted-foreground">
-              Last modified: {new Date(page.data.lastModified!).toISOString().split('T')[0]}
+              Last modified: {new Date(lastModified).toISOString().split('T')[0]}
             </p>
           </>
         ),
