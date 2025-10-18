@@ -1,0 +1,39 @@
+---
+title: Updating Toolsync
+description: How to update Toolsync packages in your project.
+---
+
+import { Tab } from 'fumadocs-ui/components/tabs';
+import { PackageManagerTabs, RunPackageTabs } from '@/components/package-managers';
+
+## Update Packages
+
+<PackageManagerTabs>
+<Tab value='pnpm'>
+
+```shell
+pnpm up -r --latest '@toolsync/*'
+```
+
+</Tab>
+<Tab value='npm'>
+
+```shell
+npm up @toolsync/cli@latest @toolsync/builtin@latest # potentially other @toolsync packages
+```
+
+</Tab>
+<Tab value='yarn'>
+
+```shell
+yarn upgrade --latest --scope '@toolsync'
+```
+
+</Tab>
+</PackageManagerTabs>
+
+## Update tools config
+
+After updating the packages, it's a good idea to run `toolsync init` to ensure that all configuration files are up to date and **potentially enable newly added plugins**:
+
+<RunPackageTabs command="toolsync init --config toolsync.json" />
