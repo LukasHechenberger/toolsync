@@ -1,5 +1,13 @@
 # @toolsync/create
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [4c20af5]
+  - @toolsync/logger@0.0.1
+  - @toolsync/cli@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
