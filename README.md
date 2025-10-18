@@ -77,6 +77,11 @@ This repository contains the following packages:
   - [ ] Gitignore .vscode folder
   - [ ] Generate devcontainers.json
   - [ ] Hide generated files in explorer (so users don't edit them directly)
+  - [ ] Generate "search.exclude" setting from gitignore and generated files
+  - [ ] Generate "files.readonlyInclude" setting from generated files a la https://tanstack.com/router/latest/docs/framework/react/routing/installation-with-vite#ignoring-the-generated-route-tree-file
+- [ ] toolsync VScode extension
+  - [ ] Show errors for files that will be overwritten
+  - [ ] JSON schema for toolsync.json
 - [x] prettier
   - [x] Create .prettierrc
   - [x] Add `format` script
@@ -165,6 +170,10 @@ This repository contains the following packages:
   ```
 
 - [ ] Plugin's own default config should be loaded first so others/config file can override it
+
+## Logger
+
+- [ ] Get rid of pino packages
 
 ## Docs
 
