@@ -14,7 +14,7 @@ export const BottomFooter = () => (
     <small>
       Found an issue? Have a suggestion?{' '}
       <Link className="font-semibold hover:underline" href={repoUrl('/issues/new/choose')}>
-        Open an issue on GitHub repository ✨
+        Open an issue on GitHub ✨
       </Link>
       .
     </small>
