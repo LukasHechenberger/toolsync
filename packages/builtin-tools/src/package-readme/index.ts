@@ -6,7 +6,42 @@ import type { Package } from '@toolsync/core/types';
 
 const pluginName = '@toolsync/builtin/package-readme';
 
-const allBadges = ['npm-version' as const, 'docs' as const];
+type BuiltinBadgeImplementation<S extends string> = {
+  slug: S;
+  render: (pkg: Package) => string | undefined;
+};
+
+const builtinBadges = [
+  {
+    slug: 'npm-version',
+    render: (pkg) => {
+      // FIXME: Also disable if published to a private registry
+      if (!pkg.packageJson.private) {
+        return `[![NPM Version](https://img.shields.io/npm/v/${pkg.packageJson.name})](https://www.npmjs.com/package/${pkg.packageJson.name})`;
+      }
+    },
+  },
+  {
+    slug: 'docs',
+    render: (pkg) => {
+      if (pkg.packageJson.homepage) {
+        return `[![Homepage](https://img.shields.io/badge/docs-default)](${pkg.packageJson.homepage})`;
+      }
+    },
+  },
+  {
+    slug: 'vscode-extension',
+    render: (pkg) => {
+      if ('vscode' in (pkg.packageJson.engines ?? {}) && 'publisher' in pkg.packageJson) {
+        const extensionId = `${pkg.packageJson.publisher}.${pkg.packageJson.name}`;
+
+        return `[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/${extensionId}?label=vscode)](https://marketplace.visualstudio.com/items?itemName=${extensionId})`;
+      }
+    },
+  } satisfies BuiltinBadgeImplementation<'vscode-extension'>,
+] satisfies BuiltinBadgeImplementation<any>[];
+
+const allBadges = ['vscode-extension' as const, 'npm-version' as const, 'docs' as const];
 type BadgesAvailable = (typeof allBadges)[number];
 
 declare global {
@@ -15,7 +50,7 @@ declare global {
       [pluginName]: {
         /**
          * The badges to add to each package
-         * @default ['npm-version', 'docs']
+         * @default ['vscode-extension', 'npm-version', 'docs']
          */
         badges?: boolean | BadgesAvailable[];
       };
@@ -25,21 +60,13 @@ declare global {
 
 function badgesForPackage(pkg: Package, badges: BadgesAvailable[]) {
   return badges
-    .flatMap((badge) =>
-      badge === 'npm-version'
-        ? pkg.packageJson.private // FIXME: Also disable if published to a private registry
-          ? []
-          : [
-              `[![NPM Version](https://img.shields.io/npm/v/${pkg.packageJson.name})](https://www.npmjs.com/package/${pkg.packageJson.name})`,
-            ]
-        : badge === 'docs' && pkg.packageJson.homepage
-          ? [
-              `[![Homepage](https://img.shields.io/badge/docs-default)](${pkg.packageJson.homepage})`,
-            ]
-          : [],
-    )
+    .flatMap((badge) => {
+      const implementation = builtinBadges.find((b) => b.slug === badge);
+      if (!implementation) return [];
 
-    .filter(Boolean)
+      const rendered = implementation.render(pkg);
+      return rendered ? [rendered] : [];
+    })
     .join(' ');
 }
 

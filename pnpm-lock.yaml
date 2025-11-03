@@ -114,6 +114,9 @@ importers:
       '@toolsync/core':
         specifier: workspace:^
         version: link:../core
+      '@toolsync/object-mods':
+        specifier: workspace:^
+        version: link:../object-mods
       '@toolsync/template':
         specifier: workspace:^
         version: link:../template

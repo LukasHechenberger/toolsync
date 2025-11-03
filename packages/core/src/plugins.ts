@@ -18,7 +18,7 @@ export type Plugin<K extends keyof Toolsync.ConfigMap> = {
 
   /** The loadConfig hook is called to load the plugin's configuration and to configure other plugins */
   loadConfig?(
-    options: Toolsync.ConfigMap[K],
+    config: Toolsync.ConfigMap[K],
     context: PluginContext<K>,
   ): MaybePromise<{
     plugins?: ToolsyncConfig['plugins'];
