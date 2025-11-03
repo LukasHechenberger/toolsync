@@ -35,8 +35,7 @@ const builtinBadges = [
       if ('vscode' in (pkg.packageJson.engines ?? {}) && 'publisher' in pkg.packageJson) {
         const extensionId = `${pkg.packageJson.publisher}.${pkg.packageJson.name}`;
 
-        return `[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/${extensionId}?label=vscode)](https://marketplace.visualstudio.com/items?itemName=${extensionId})
-`;
+        return `[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/${extensionId}?label=vscode)](https://marketplace.visualstudio.com/items?itemName=${extensionId})`;
       }
     },
   } satisfies BuiltinBadgeImplementation<'vscode-extension'>,
