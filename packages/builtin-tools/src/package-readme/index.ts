@@ -41,7 +41,7 @@ const builtinBadges = [
   } satisfies BuiltinBadgeImplementation<'vscode-extension'>,
 ] satisfies BuiltinBadgeImplementation<any>[];
 
-const allBadges = ['npm-version' as const, 'docs' as const, 'vscode-extension' as const];
+const allBadges = ['vscode-extension' as const, 'npm-version' as const, 'docs' as const];
 type BadgesAvailable = (typeof allBadges)[number];
 
 declare global {
@@ -50,7 +50,7 @@ declare global {
       [pluginName]: {
         /**
          * The badges to add to each package
-         * @default ['npm-version', 'docs', 'vscode-extension']
+         * @default ['vscode-extension', 'npm-version', 'docs']
          */
         badges?: boolean | BadgesAvailable[];
       };
