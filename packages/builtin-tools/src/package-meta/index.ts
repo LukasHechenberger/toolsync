@@ -1,5 +1,6 @@
 import type { Package } from '@toolsync/core/types';
 import { defineBuiltinPlugin } from '../lib/plugins';
+import { modify } from '@toolsync/object-mods';
 
 const pluginName = '@toolsync/builtin/package-meta';
 
@@ -33,7 +34,7 @@ const packageMetaPlugin = defineBuiltinPlugin({
     if (license) pkg.packageJson.license = license;
 
     const engines = rootPackage?.packageJson.engines;
-    if (engines) pkg.packageJson.engines = { ...engines, ...pkg.packageJson.engines };
+    if (engines) pkg.packageJson.engines = modify(pkg.packageJson.engines ?? {}, engines);
 
     const repository = rootPackage?.packageJson.repository;
     if (repository) {
