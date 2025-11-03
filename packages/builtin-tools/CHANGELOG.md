@@ -1,5 +1,15 @@
 # @toolsync/builtin
 
+## 0.5.0
+
+### Minor Changes
+
+- de91bfa: Add `vscode-extension` badge in package-readme plugin
+
+### Patch Changes
+
+- de91bfa: Allow custom `engines` in package-meta plugin
+
 ## 0.4.1
 
 ### Patch Changes
