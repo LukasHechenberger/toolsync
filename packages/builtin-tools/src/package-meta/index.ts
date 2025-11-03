@@ -33,7 +33,7 @@ const packageMetaPlugin = defineBuiltinPlugin({
     if (license) pkg.packageJson.license = license;
 
     const engines = rootPackage?.packageJson.engines;
-    if (engines) pkg.packageJson.engines = engines;
+    if (engines) pkg.packageJson.engines = { ...engines, ...pkg.packageJson.engines };
 
     const repository = rootPackage?.packageJson.repository;
     if (repository) {
