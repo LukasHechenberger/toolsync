@@ -35,12 +35,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         path: './src/{{ dashCase name }}/index.ts',
         template: `import { defineBuiltinPlugin } from '../lib/plugins';
 
-const pluginName = '${prefix}/{{ dashCase name }}';
+export const {{ camelCase name }}PluginName = '${prefix}/{{ dashCase name }}';
 
 declare global {
   namespace Toolsync {
     interface ConfigMap {
-      [pluginName]: {
+      [{{ camelCase name }}PluginName]: {
         // TODO: Define plugin options here
       };
     }
@@ -48,7 +48,7 @@ declare global {
 }
 
 const {{ camelCase name }}Plugin = defineBuiltinPlugin({
-  name: pluginName,
+  name: {{ camelCase name }}PluginName,
   description: '{{ description }}',
   // TODO: Add hooks here...
 });
