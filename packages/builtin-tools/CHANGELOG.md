@@ -1,5 +1,12 @@
 # @toolsync/builtin
 
+## 0.5.1
+
+### Patch Changes
+
+- a7b54d1: Use 'github-api' commitMode in changesets workflow step
+- 6fa61c7: Ignore pnpm lockfiles in vscode search
+
 ## 0.5.0
 
 ### Minor Changes
