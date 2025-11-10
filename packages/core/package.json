@@ -30,9 +30,9 @@
   },
   "main": "out/index.js",
   "scripts": {
-    "build": "tsup",
+    "build": "rslib build",
     "check:exports": "publint",
-    "dev": "tsup --watch"
+    "dev": "rslib build --watch"
   },
   "dependencies": {
     "@manypkg/get-packages": "^3.0.0",
@@ -42,10 +42,10 @@
     "debug": "^4.4.1"
   },
   "devDependencies": {
+    "@rslib/core": "^0.17.1",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.15.30",
     "publint": "^0.3.12",
-    "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
   "engines": {

@@ -9,8 +9,6 @@ The toolsync command line interface
 
 <!-- #endregion header -->
 
-## Usage
-
 <!-- #region cli-usage -->
 <!-- This section is generated. Do not edit manually! -->
 
