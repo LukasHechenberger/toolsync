@@ -55,9 +55,9 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "rslib build",
     "check:exports": "publint",
-    "dev": "tsup --watch"
+    "dev": "chokidar package.json -c 'rslib build --watch' --initial"
   },
   "dependencies": {
     "@toolsync/core": "workspace:^",
@@ -67,12 +67,13 @@
     "yaml": "^2.8.0"
   },
   "devDependencies": {
+    "@rslib/core": "^0.17.1",
     "@turbo/types": "^2.5.4",
     "@types/node": "^22.15.30",
+    "chokidar-cli": "^3.0.0",
     "ignore-sync": "^8.0.0",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
-    "tsup": "^8.5.0",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
