@@ -18,9 +18,9 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "rslib build",
     "check:exports": "publint",
-    "dev": "tsup --watch"
+    "dev": "rslib build --watch"
   },
   "dependencies": {
     "debug": "^4.4.1",
@@ -28,9 +28,9 @@
     "pino-pretty": "^13.0.0"
   },
   "devDependencies": {
+    "@rslib/core": "^0.17.1",
     "@types/debug": "^4.1.12",
-    "publint": "^0.3.12",
-    "tsup": "^8.5.0"
+    "publint": "^0.3.12"
   },
   "engines": {
     "node": ">=20.6.0"

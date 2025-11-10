@@ -37,6 +37,13 @@ const repoPlugin = definePlugin({
             },
           },
         },
+        '@toolsync/builtin/ignore-sync': {
+          gitignore: [
+            '# By @repo/toolsync-plugins (repo-specific)',
+            '.changeset/README.md',
+            'tsup.config.bundled*',
+          ],
+        },
       },
     };
   },
