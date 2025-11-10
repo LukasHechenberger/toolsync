@@ -38,7 +38,7 @@
     "@toolsync/cli": "workspace:*",
     "@toolsync/core": "workspace:*",
     "@types/mdx": "^2.0.13",
-    "@types/node": "22.15.28",
+    "@types/node": "^22.15.30",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
     "eslint": "^8.57.1",
