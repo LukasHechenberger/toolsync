@@ -1,4 +1,4 @@
-import { description } from '../../../../package.json';
+import manifest from '../../../../package.json';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { compileMDX } from '@fumadocs/mdx-remote';
 import { getMDXComponents } from '@/mdx-components';
@@ -15,7 +15,7 @@ pnpm create @toolsync
     <main className="flex flex-1 flex-col container mx-auto gap-12 py-8">
       <div className="py-12 flex flex-col items-center justify-center space-y-4">
         <h1 className="mb-4 text-2xl font-bold">Toolsync</h1>
-        <p className="text-fd-muted-foreground">{description}</p>
+        <p className="text-fd-muted-foreground">{manifest.description}</p>
 
         <div className="text-left">
           <InstallCommand components={getMDXComponents()} />
