@@ -55,6 +55,13 @@ const pnpmPlugin = defineBuiltinPlugin({
             },
           },
         },
+        '@toolsync/builtin/vscode': {
+          settings: {
+            'search.exclude': {
+              '**/pnpm-lock*.yaml': true,
+            },
+          },
+        },
       },
     };
   },
