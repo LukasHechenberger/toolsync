@@ -3,7 +3,7 @@ import { MarkdownTemplate } from '@toolsync/template';
 import { name, exports, homepage } from './package.json';
 import { join } from 'path';
 import { markdownTable } from 'markdown-table';
-import { defineConfig, Rspack } from '@rslib/core';
+import { defineConfig, type Rspack } from '@rslib/core';
 
 const buildIndexPlugin = {
   name: 'build-index',
