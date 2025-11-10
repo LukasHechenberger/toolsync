@@ -91,6 +91,7 @@ export const defaultOptions = {
                 commit: 'chore: Update versions',
                 title: 'chore: Update versions',
                 publish: 'pnpm changeset publish',
+                commitMode: 'github-api',
               },
               env: {
                 GITHUB_TOKEN: '${{ secrets.CHANGESETS_GITHUB_TOKEN }}',
