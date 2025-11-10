@@ -296,9 +296,6 @@ importers:
 
   packages/repo-plugins:
     dependencies:
-      '@toolsync/builtin':
-        specifier: workspace:*
-        version: link:../builtin-tools
       '@toolsync/core':
         specifier: workspace:*
         version: link:../core
