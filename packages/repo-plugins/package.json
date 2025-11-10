@@ -22,7 +22,6 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@toolsync/builtin": "workspace:*",
     "@toolsync/core": "workspace:*",
     "@toolsync/template": "workspace:*"
   },
