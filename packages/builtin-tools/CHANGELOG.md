@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.5.2
+
+### Patch Changes
+
+- b8bfead: Add comment to generated GitHub workflow files
+
 ## 0.5.1
 
 ### Patch Changes
