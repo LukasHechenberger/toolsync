@@ -11,9 +11,9 @@
   "type": "module",
   "bin": "./out/bin.js",
   "scripts": {
-    "build": "tsup",
+    "build": "rslib build",
     "check:exports": "publint",
-    "dev": "tsup --watch",
+    "dev": "rslib build --watch",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@rslib/core": "^0.17.1",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
-    "publint": "^0.3.12",
-    "tsup": "^8.5.0"
+    "publint": "^0.3.12"
   },
   "engines": {
     "node": ">=20.6.0"

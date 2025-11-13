@@ -17,5 +17,7 @@
     "strict": true,
     "target": "ES2022",
     "verbatimModuleSyntax": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "src/**/*.test.ts"]
 }

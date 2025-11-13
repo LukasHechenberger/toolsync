@@ -18,15 +18,15 @@
     }
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch"
+    "build": "rslib build",
+    "dev": "rslib build --watch"
   },
   "dependencies": {
     "@toolsync/core": "workspace:*",
     "@toolsync/template": "workspace:*"
   },
   "devDependencies": {
-    "tsup": "^8.5.0"
+    "@rslib/core": "^0.17.1"
   },
   "engines": {
     "node": ">=20.6.0"
