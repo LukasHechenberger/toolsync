@@ -28,5 +28,7 @@
       }
     }
   },
-  "@toolsync/builtin/publint": {}
+  "@toolsync/builtin/publint": {
+    "private": true
+  }
 }
