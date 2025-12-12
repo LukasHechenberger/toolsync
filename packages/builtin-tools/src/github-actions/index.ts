@@ -39,10 +39,7 @@ interface GithubActionsWorkflowOptions {
 
 interface GithubActionsPluginOptions {
   workflows?: Record<string, GithubActionsWorkflowOptions>;
-  /**
-   * Options to pass to yaml writer
-   * @see https://eemeli.org/yaml/#tostring-options
-   */
+  /** Options to pass to yaml writer */
   yamlOptions?: YAML.ToStringOptions;
 }
 
@@ -57,7 +54,7 @@ export const defaultOptions = {
       },
       concurrency: {
         group: '${{ github.workflow }}-${{ github.ref }}',
-        'cancel-in-progress': "${{ github.ref !== 'main' && !contains(github.ref, 'release/') }}",
+        'cancel-in-progress': "${{ github.ref != 'main' && !contains(github.ref, 'release/') }}",
       },
       jobs: {
         build: {

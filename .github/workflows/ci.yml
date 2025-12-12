@@ -12,7 +12,7 @@ on:
       - main
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref !== 'main' && !contains(github.ref, 'release/') }}
+  cancel-in-progress: ${{ github.ref != 'main' && !contains(github.ref, 'release/') }}
 jobs:
   build:
     name: Code Quality
