@@ -73,7 +73,7 @@ export const defaultOptions = {
             {
               id: 'checks',
               name: 'Code Quality Checks',
-              run: 'pnpm turbo check lint test build',
+              run: 'pnpm turbo check lint test build --continue',
             },
             {
               id: 'ensure-clean',
