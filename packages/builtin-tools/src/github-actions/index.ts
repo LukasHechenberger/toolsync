@@ -13,31 +13,51 @@ interface GithubActionsWorkflowStepOptions {
   env?: Record<string, string>;
 }
 
+/**
+ * @see https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
+ */
+interface GithubActionsConcurrencyOptions {
+  group: string;
+  'cancel-in-progress'?: string | boolean;
+}
+
 interface GithubActionsJobOptions {
   name?: string;
   'timeout-minutes'?: number;
   'runs-on': string;
   env?: Record<string, string>;
   steps: GithubActionsWorkflowStepOptions[];
+  concurrency?: GithubActionsConcurrencyOptions;
 }
 
 interface GithubActionsWorkflowOptions {
   name?: string;
   on: string[] | Record<string, any>;
+  concurrency?: GithubActionsConcurrencyOptions;
   jobs: Record<string, GithubActionsJobOptions>;
 }
 
 interface GithubActionsPluginOptions {
   workflows?: Record<string, GithubActionsWorkflowOptions>;
+  /**
+   * Options to pass to yaml writer
+   * @see https://eemeli.org/yaml/#tostring-options
+   */
+  yamlOptions?: YAML.ToStringOptions;
 }
 
 export const defaultOptions = {
+  yamlOptions: {},
   workflows: {
     ci: {
       name: 'CI',
       on: {
         push: { branches: ['main'] },
         pull_request: { branches: ['main'] },
+      },
+      concurrency: {
+        group: '${{ github.workflow }}-${{ github.ref }}',
+        'cancel-in-progress': "${{ github.ref !== 'main' && !contains(github.ref, 'release/') }}",
       },
       jobs: {
         build: {
@@ -128,7 +148,7 @@ const githubActionsPlugin = defineBuiltinPlugin({
       },
     },
   }),
-  async setupPackage(pkg, { log, options }) {
+  async setupPackage(pkg, { options }) {
     if (pkg.isRoot) {
       for (const [name, workflow] of Object.entries(options.workflows || {})) {
         const dir = join(pkg.dir, '.github', 'workflows');
@@ -144,13 +164,8 @@ const githubActionsPlugin = defineBuiltinPlugin({
 
         await mkdir(dir, { recursive: true });
         // TODO: Update if file already exists
-        await writeFile(
-          join(dir, `${name}.yml`),
-          YAML.stringify(doc, {
-            // TODO: Get from prettier settings
-            singleQuote: true,
-          }),
-        );
+        // TODO: Get from prettier settings
+        await writeFile(join(dir, `${name}.yml`), YAML.stringify(doc, options.yamlOptions));
       }
     }
   },
