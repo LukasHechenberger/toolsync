@@ -12,6 +12,7 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
+    "check:exports": "publint",
     "check:types": "tsc --noEmit",
     "dev": "next dev --turbo",
     "postinstall": "fumadocs-mdx",
@@ -44,6 +45,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "15.3.3",
     "postcss": "^8.5.4",
+    "publint": "^0.3.12",
     "tailwindcss": "^4.1.8",
     "typescript": "^5.8.3"
   },

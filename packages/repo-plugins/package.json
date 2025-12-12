@@ -19,6 +19,7 @@
   },
   "scripts": {
     "build": "rslib build",
+    "check:exports": "publint",
     "dev": "rslib build --watch"
   },
   "dependencies": {
@@ -26,7 +27,8 @@
     "@toolsync/template": "workspace:*"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.1"
+    "@rslib/core": "^0.17.1",
+    "publint": "^0.3.12"
   },
   "engines": {
     "node": ">=20.6.0"

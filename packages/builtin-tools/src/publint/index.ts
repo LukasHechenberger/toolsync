@@ -11,6 +11,12 @@ declare global {
       [pluginName]: {
         /** The version of publint to use. */
         version?: string;
+
+        /**
+         * Check private packages as well.
+         * @default false
+         */
+        private?: boolean;
       };
     }
   }
@@ -43,7 +49,7 @@ const publintPlugin = defineBuiltinPlugin({
   async setupPackage(pkg, { options }) {
     if (pkg.isRoot) return;
 
-    if (pkg.packageJson.private) {
+    if (pkg.packageJson.private && !options.private) {
       delete pkg.packageJson.scripts?.['check:exports'];
       delete pkg.packageJson.devDependencies?.['publint'];
     } else {
