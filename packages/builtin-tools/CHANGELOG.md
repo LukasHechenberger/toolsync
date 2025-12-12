@@ -1,5 +1,12 @@
 # @toolsync/builtin
 
+## 0.5.3
+
+### Patch Changes
+
+- 5ed3e53: GitHub Actions: Run turbo with `--continue` flag
+- 7efe25c: Add "private" option to @toolsync/builtin/publint to also check private workspace packages
+
 ## 0.5.2
 
 ### Patch Changes
