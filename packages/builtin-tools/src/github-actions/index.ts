@@ -14,7 +14,8 @@ interface GithubActionsWorkflowStepOptions {
 }
 
 /**
- * @see https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
+ * @see {@link https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency | Guide}
+ * @see {@link https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#concurrency | Syntax}
  */
 interface GithubActionsConcurrencyOptions {
   group: string;
