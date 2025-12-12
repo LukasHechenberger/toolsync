@@ -6,6 +6,7 @@ import tools from '@toolsync/builtin/tools.json';
 import { execa } from 'execa';
 import { styleText } from 'util';
 import { homepage } from '../../package.json';
+import { isNodeError } from '../lib/utilities';
 
 const log = logger.child('cli:init');
 
@@ -138,9 +139,23 @@ async function confirmRetry({ rootDir }: { rootDir: string }) {
 
 export function setupInitCommand(command: Command) {
   return command
+    .argument('[cwd]', 'init in a specific directory')
     .option('-y, --yes', 'accept all default options', false)
     .option('-f, --force', 'overwrite existing files etc.', false)
-    .action(async ({ yes, force }) => {
+    .action(async (cwd, { yes, force }) => {
+      if (cwd) {
+        try {
+          log.debug(`Changing working directory to ${cwd}`);
+          process.chdir(cwd);
+        } catch (error) {
+          if (isNodeError(error) && error.code === 'ENOENT') {
+            command.error(`The directory "${cwd}" does not exist.`, { code: error.code });
+          }
+
+          throw error;
+        }
+      }
+
       const { rootDir } = await getPackages();
 
       log.debug('Running plop');

@@ -85,6 +85,11 @@ const program = new Command()
   .option('--config <config>', 'Specify a config file to load')
   .option('--plugin <plugin>', 'Specify a plugin to load')
   .option('--no-default-plugins', 'Disable all default plugins') // FIXME: Get description from core plugin
+  .configureOutput({
+    outputError: (str, write) => {
+      write(styleText(['red'], str));
+    },
+  })
   .addHelpText(
     'afterAll',
     `
