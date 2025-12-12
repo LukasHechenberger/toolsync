@@ -5,8 +5,9 @@ import { getPackages } from '@toolsync/core';
 import tools from '@toolsync/builtin/tools.json';
 import { execa } from 'execa';
 import { styleText } from 'util';
-import { homepage } from '../../package.json';
 import { isNodeError } from '../lib/utilities';
+import terminalLink from 'terminal-link';
+import { relative } from 'path';
 
 const log = logger.child('cli:init');
 
@@ -79,12 +80,12 @@ async function init({ rootDir, force, yes }: { rootDir: string; force: boolean; 
         },
 
         {
-          title: 'Installing dependencies...',
+          title: 'Installing new dependencies...',
           type: 'runCommand',
           command: [
             'pnpm',
             'add',
-            '-Dw',
+            '-D',
             '@toolsync/cli',
             ...(plugins.length > 0 ? ['@toolsync/builtin'] : []),
           ].join(' '),
@@ -93,6 +94,11 @@ async function init({ rootDir, force, yes }: { rootDir: string; force: boolean; 
           title: 'Syncing config files...',
           type: 'runCommand',
           command: 'pnpm toolsync prepare --config toolsync.json',
+        } as RunCommandAction,
+        {
+          title: 'Installing updated dependencies...',
+          type: 'runCommand',
+          command: 'pnpm install',
         } as RunCommandAction,
         {
           title: 'Running first toolsync...',
@@ -146,7 +152,12 @@ export function setupInitCommand(command: Command) {
       if (cwd) {
         try {
           log.debug(`Changing working directory to ${cwd}`);
+
+          const originalCwd = process.cwd();
           process.chdir(cwd);
+          log.info(
+            `Changed working directory to ${styleText('magenta', relative(originalCwd, process.cwd()))}`,
+          );
         } catch (error) {
           if (isNodeError(error) && error.code === 'ENOENT') {
             command.error(`The directory "${cwd}" does not exist.`, { code: error.code });
@@ -179,7 +190,7 @@ export function setupInitCommand(command: Command) {
 
         log.info(`${styleText(['bold', 'green'], 'All done!')}
         
-  Visit ${styleText('cyan', homepage)} for more information
+  Next, ${terminalLink(styleText('cyan', 'configure your project'), 'https://toolsync.vercel.app/docs/configuration')} if needed.
                                                            `);
       }
     });
