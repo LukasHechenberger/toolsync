@@ -11,7 +11,11 @@ declare global {
       [pluginName]: {
         /** The version of publint to use. */
         version?: string;
-        /** Check private packages as well. */
+
+        /**
+         * Check private packages as well.
+         * @default false
+         */
         private?: boolean;
       };
     }
