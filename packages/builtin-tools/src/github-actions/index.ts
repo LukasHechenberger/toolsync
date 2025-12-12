@@ -44,7 +44,9 @@ interface GithubActionsPluginOptions {
 }
 
 export const defaultOptions = {
-  yamlOptions: {},
+  yamlOptions: {
+    singleQuote: true,
+  },
   workflows: {
     ci: {
       name: 'CI',
