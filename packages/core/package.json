@@ -42,7 +42,7 @@
     "debug": "^4.4.1"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.1",
+    "@rslib/core": "^0.17.2",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.15.30",
     "publint": "^0.3.12",

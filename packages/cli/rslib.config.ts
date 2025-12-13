@@ -27,6 +27,9 @@ export default defineConfig({
       bin: './src/bin.ts',
       'commands/init': './src/commands/init.ts',
     },
+    define: {
+      'process.env.RSTEST': 'false',
+    },
   },
   tools: {
     rspack: (config, { appendPlugins }) => {

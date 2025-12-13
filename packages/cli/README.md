@@ -25,7 +25,7 @@ Options:
 Commands:
   prepare               Prepare the environment for development
   config [options]      Print the fully resolved toolsync config
-  init [options]        Configure toolsync in the current repository
+  init [options] [cwd]  Configure toolsync in the current repository
   help [command]        display help for command
 
 For usage details see our documentation (​https://toolsync.vercel.app/docs/reference/cli​).

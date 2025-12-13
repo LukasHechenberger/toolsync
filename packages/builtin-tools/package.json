@@ -67,7 +67,7 @@
     "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.1",
+    "@rslib/core": "^0.17.2",
     "@turbo/types": "^2.5.4",
     "@types/node": "^22.15.30",
     "chokidar-cli": "^3.0.0",
