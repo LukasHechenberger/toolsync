@@ -31,7 +31,6 @@ Arguments:
 
 Options:
   -y, --yes      accept all default options (default: false)
-  --empty        setup empty project (used for testing) (default: false)
   -f, --force    overwrite existing files etc. (default: false)
   -V, --version  output the version number
   -h, --help     display help for command

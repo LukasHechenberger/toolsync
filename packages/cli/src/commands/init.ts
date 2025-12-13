@@ -26,11 +26,15 @@ const promptsSupported = isatty(process.stdin.fd);
 log.debug(`Prompts supported: ${promptsSupported}`);
 
 export type InitOptions = {
+  /** Init project in this directory */
   cwd?: string;
+  /** Overwrite existing files */
   force: boolean;
-  useDefaults: boolean;
-  empty?: boolean;
+  /** Defaults to true @default true */
+  useDefaults?: boolean;
+  /** Override versions of installed packages */
   versions?: Record<string, string>;
+  /** Throw errors instead of returning failures @default true */
   throw?: boolean;
 };
 
@@ -55,10 +59,9 @@ class AppError extends Error {
 export async function init({
   cwd = process.cwd(),
   force,
-  useDefaults,
-  empty,
+  useDefaults = true,
   versions,
-  throw: shouldThrow,
+  throw: shouldThrow = true,
 }: InitOptions): Promise<InitResult> {
   // NOTE: This is probably not necessary, as we pass cwd to plop, but just in case
   if (cwd) {
@@ -174,8 +177,8 @@ export async function init({
 
   const answers = useDefaults
     ? Object.fromEntries(prompts.map((p) => [p.name, p.default]))
-    : empty
-      ? { plugins: [] }
+    : !promptsSupported
+      ? { plugins: [] } // TODO: Use plugins from options
       : await init.runPrompts([]);
 
   const results = await init.runActions(answers, {
@@ -222,18 +225,17 @@ export function setupInitCommand(command: Command) {
   return command
     .argument('[cwd]', 'init in a specific directory')
     .option('-y, --yes', 'accept all default options', false)
-    .option('--empty', 'setup empty project (used for testing)', false)
     .option('-f, --force', 'overwrite existing files etc.', false)
-    .action(async (cwd, { yes, force, empty }) => {
+    .action(async (cwd, { yes, force }) => {
       log.debug('Running plop');
 
-      let { results, answers } = await init({ force, useDefaults: yes, empty, cwd });
+      let { results, answers } = await init({ force, useDefaults: yes, cwd, throw: false });
       if (results.failures.length && !force && promptsSupported) {
         const retryWithForce = await confirmRetry();
 
         if (retryWithForce) {
           console.log('TODO: Add answers', answers);
-          results = (await init({ force: true, useDefaults: yes, empty, cwd })).results;
+          results = (await init({ force: true, useDefaults: yes, cwd, throw: false })).results;
         } else {
           log.debug('User chose not to retry with force, exiting');
           log.info('Cancelling...');
