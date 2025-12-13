@@ -1,5 +1,11 @@
 # @toolsync/core
 
+## 0.1.4
+
+### Patch Changes
+
+- e4eb11f: Improve performance by not running for root packages twice
+
 ## 0.1.3
 
 ### Patch Changes

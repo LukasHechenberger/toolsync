@@ -1,5 +1,15 @@
 # @toolsync/builtin
 
+## 0.5.4
+
+### Patch Changes
+
+- 7b66f14: Allow custom yaml formatting in github-actions plugin
+- 7b66f14: GitHub Actions: Cancel concurrent builds on non-production builds
+- e4eb11f: Fix: Allow to run toolsync init in a non-monorepo
+- Updated dependencies [e4eb11f]
+  - @toolsync/core@0.1.4
+
 ## 0.5.3
 
 ### Patch Changes
