@@ -7,7 +7,6 @@ import { execa } from 'execa';
 import { styleText } from 'util';
 import { isNodeError } from '../lib/utilities';
 import terminalLink from 'terminal-link';
-import { relative } from 'path';
 import { isatty } from 'tty';
 
 const log = logger.child('cli:init');
@@ -61,15 +60,13 @@ export async function init({
   versions,
   throw: shouldThrow,
 }: InitOptions): Promise<InitResult> {
+  // NOTE: This is probably not necessary, as we pass cwd to plop, but just in case
   if (cwd) {
     try {
       log.debug(`Changing working directory to ${cwd}`);
 
-      const originalCwd = process.cwd();
       process.chdir(cwd);
-      log.info(
-        `Working directory changed to ${styleText('magenta', relative(originalCwd, process.cwd()))}`,
-      );
+      log.info(`Working directory changed to ${styleText('magenta', process.cwd())}`);
     } catch (error) {
       if (isNodeError(error) && error.code === 'ENOENT') {
         throw new AppError(`The directory "${cwd}" does not exist.`, { code: error.code });
@@ -164,7 +161,7 @@ export async function init({
         {
           title: 'Installing updated dependencies...',
           type: 'runCommand',
-          command: 'pnpm install',
+          command: `pnpm install ${process.env.RSTEST ? '--prefer-frozen-lockfile' : ''}`,
         } as RunCommandAction,
         {
           title: 'Running first toolsync...',
