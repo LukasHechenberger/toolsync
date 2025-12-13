@@ -53,6 +53,14 @@ This repository contains the following packages:
 
 <!-- #endregion packages -->
 
+## Contributing
+
+Run all tests in watch mode
+
+```shell
+pnpm turbo watch test
+```
+
 ## TODO
 
 > Just a bunch of stuff we want to implement in the future
@@ -65,6 +73,7 @@ This repository contains the following packages:
 - [x] Pnpm
   - [x] Set correct version in root packageManager
   - [x] Set version in github actions install steps
+  - [ ] Use `catalog:*` dependencies if configured
 - [ ] Package metadata
   - [x] Sync meta fields like repository, url, author, etc.
   - [ ] Ensure private packages have the same scope (e.g. `@repo/`)
