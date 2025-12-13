@@ -79,7 +79,7 @@ const cliPlugin = definePlugin({
 
       // FIXME: Move to 'install' hook
       pkg.packageJson.devDependencies ??= {};
-      pkg.packageJson.devDependencies['@toolsync/cli'] = options.version ?? version;
+      pkg.packageJson.devDependencies['@toolsync/cli'] ??= options.version ?? version;
     }
   },
 });
