@@ -1,5 +1,18 @@
 # @toolsync/cli
 
+## 0.4.0
+
+### Minor Changes
+
+- e4eb11f: Add `cwd` argument to `toolsync init`
+
+### Patch Changes
+
+- e4eb11f: Better "getting started" message/link after `toolsync init`
+- e4eb11f: Run another `pnpm install` after `toolsync init`
+- Updated dependencies [e4eb11f]
+  - @toolsync/core@0.1.4
+
 ## 0.3.1
 
 ### Patch Changes
