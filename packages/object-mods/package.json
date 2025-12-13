@@ -23,7 +23,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.1",
+    "@rslib/core": "^0.17.2",
     "publint": "^0.3.12",
     "vitest": "^3.2.2"
   },

@@ -28,7 +28,7 @@
     "pino-pretty": "^13.0.0"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.1",
+    "@rslib/core": "^0.17.2",
     "@types/debug": "^4.1.12",
     "publint": "^0.3.12"
   },
