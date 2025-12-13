@@ -10,6 +10,9 @@ import { setupInitCommand } from './commands/init';
 import terminalLink from 'terminal-link';
 import { inspect, styleText } from 'util';
 
+// TODO: Rename this file to 'cli.ts'
+// and add a 'real' index.ts that exports the public API (e.g. init function, types...)
+
 const log = logger.child('cli');
 
 // TODO: Also implement a config plugin that checks for "toolsync" inside package.json

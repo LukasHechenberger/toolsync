@@ -86,7 +86,9 @@ export async function getPackages(): Promise<Packages> {
     rootPackage,
     packages: [
       ...(rootPackage ? [rootPackage] : []),
-      ...packages.map((pkg) => ({ ...pkg, isRoot: false })),
+      ...packages
+        .filter((pkg) => pkg.dir !== rootPackage?.dir)
+        .map((pkg) => ({ ...pkg, isRoot: false })),
     ],
   };
 }

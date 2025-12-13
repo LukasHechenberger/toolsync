@@ -21,13 +21,17 @@ yarn create @toolsync
 <!-- This section is generated. Do not edit manually! -->
 
 ```
-Usage: @toolsync/create [options]
+Usage: @toolsync/create [options] [cwd]
 
 Setup Toolsync in your repository - same as running `@toolsync/cli init
 [args...]`
 
+Arguments:
+  cwd            init in a specific directory
+
 Options:
   -y, --yes      accept all default options (default: false)
+  --empty        setup empty project (used for testing) (default: false)
   -f, --force    overwrite existing files etc. (default: false)
   -V, --version  output the version number
   -h, --help     display help for command
