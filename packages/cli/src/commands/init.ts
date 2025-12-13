@@ -28,8 +28,8 @@ log.debug(`Prompts supported: ${promptsSupported}`);
 export type InitOptions = {
   /** Init project in this directory */
   cwd?: string;
-  /** Overwrite existing files */
-  force: boolean;
+  /** Overwrite existing files @default false */
+  force?: boolean;
   /** Defaults to true @default true */
   useDefaults?: boolean;
   /** Override versions of installed packages */
@@ -58,7 +58,7 @@ class AppError extends Error {
 
 export async function init({
   cwd = process.cwd(),
-  force,
+  force = false,
   useDefaults = true,
   versions,
   throw: shouldThrow = true,

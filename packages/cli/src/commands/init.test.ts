@@ -27,13 +27,25 @@ rstest.setConfig({ testTimeout: 60000 });
 const originalCwd = process.cwd();
 beforeEach(() => process.chdir(originalCwd));
 
+// MARK: Unit tests
+
+describe('init', () => {
+  test('throws with invalid cwd', async () => {
+    await expect(
+      init({ cwd: 'non-existent-dir' }),
+      'init with invalid cwd should throw',
+    ).rejects.toThrow('does not exist');
+  });
+});
+
+// MARK: Integration tests
+
 describe('single package project', () => {
   test('init command works', async () => {
     const tempDir = await prepareFixture('single-package-project');
 
     await init({
       cwd: tempDir,
-      force: false,
       useDefaults: false,
       versions: {
         '@toolsync/cli': `link:${originalCwd}`,
@@ -54,7 +66,6 @@ describe('monorepo project', () => {
 
     await init({
       cwd: tempDir,
-      force: false,
       useDefaults: false,
       versions: {
         '@toolsync/cli': `link:${originalCwd}`,
