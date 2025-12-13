@@ -34,9 +34,7 @@ describe('single package project', () => {
     await init({
       cwd: tempDir,
       force: false,
-      empty: true,
       useDefaults: false,
-      throw: true,
       versions: {
         '@toolsync/cli': `link:${originalCwd}`,
       },
@@ -57,9 +55,7 @@ describe('monorepo project', () => {
     await init({
       cwd: tempDir,
       force: false,
-      empty: true,
       useDefaults: false,
-      throw: true,
       versions: {
         '@toolsync/cli': `link:${originalCwd}`,
       },
