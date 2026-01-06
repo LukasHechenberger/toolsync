@@ -1,7 +1,8 @@
-import { packageManager as defaultPackageManager } from '../../../../package.json';
+import { getConfiguredPackageManagerVersion } from '../lib/package-manager';
 import { defineBuiltinPlugin } from '../lib/plugins';
 
 const pluginName = '@toolsync/builtin/pnpm';
+const defaultPackageManager = 'pnpm@10.11.1';
 
 declare global {
   namespace Toolsync {
@@ -18,22 +19,12 @@ const pnpmPlugin = defineBuiltinPlugin({
   name: pluginName,
   description:
     'Integrates with the pnpm package manager, setting up the root package.json with the specified version.',
-  loadConfig(config, { rootPackage }) {
+  loadConfig(config, { rootPackage, log }) {
     let version = config.version;
 
-    // Detect version from packageManger field in root package.json
-    if (!version) {
-      const packageManager = rootPackage?.packageJson?.packageManager || defaultPackageManager;
-      const [tool, versionPart] = packageManager.split('@');
-
-      if (tool !== 'pnpm') {
-        throw new Error(
-          `Expected packageManager to be 'pnpm', but found '${tool}' in root package.json.`,
-        );
-      }
-
-      version = versionPart;
-    }
+    // Detect version from packageManager field in root package.json
+    version ??= getConfiguredPackageManagerVersion('pnpm', defaultPackageManager, rootPackage);
+    log.debug(`Using pnpm version: ${version}`);
 
     return {
       config: {

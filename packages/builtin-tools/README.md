@@ -16,6 +16,7 @@ Default toolsync plugins available
 
 | Name                                                     | Description                                                                                            | Links                                                                    |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| [@toolsync/builtin/bun](./src/bun)                       | Use bun as a package manager                                                                           | [Documentation](https://toolsync.vercel.app/docs/builtin/bun)            |
 | [@toolsync/builtin/github-actions](./src/github-actions) | Integrates with GitHub Actions for CI workflows                                                        | [Documentation](https://toolsync.vercel.app/docs/builtin/github-actions) |
 | [@toolsync/builtin/ignore-sync](./src/ignore-sync)       | Integrates the 'ignore-sync' tool to manage .gitignore, .prettierignore, etc.                          | [Documentation](https://toolsync.vercel.app/docs/builtin/ignore-sync)    |
 | [@toolsync/builtin/package-meta](./src/package-meta)     | Sync package metadata like repository etc between workspace packages                                   | [Documentation](https://toolsync.vercel.app/docs/builtin/package-meta)   |

@@ -9,6 +9,7 @@
     }
   },
   "@toolsync/builtin/github-actions": {},
+  "@toolsync/builtin/bun": {},
   "@toolsync/cli": {
     "version": "workspace:*"
   },

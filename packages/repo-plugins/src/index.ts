@@ -27,7 +27,7 @@ const repoPlugin = definePlugin({
                         before: 'install',
                         data: {
                           name: 'Prepare toolsync',
-                          run: `pnpm install --ignore-scripts && pnpm build`,
+                          run: `bun install --ignore-scripts && bun run build`,
                         },
                       },
                     },
