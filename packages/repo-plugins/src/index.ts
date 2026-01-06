@@ -27,7 +27,7 @@ const repoPlugin = definePlugin({
                         before: 'install',
                         data: {
                           name: 'Prepare toolsync',
-                          run: `bun install --ignore-scripts && bun run build`,
+                          run: `bun install --ignore-scripts && bun run build --filter '!@toolsync/docs'`,
                         },
                       },
                     },
