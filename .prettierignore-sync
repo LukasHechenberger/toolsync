@@ -4,7 +4,7 @@
 .gitignore-sync
 
 [inline]
-pnpm-lock.yaml
+bun.lock
 
 # Should be added by @toolsync/builtin/prettier
 .prettierignore
