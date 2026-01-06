@@ -39,14 +39,11 @@ const bunPlugin = defineBuiltinPlugin({
                     {
                       '@update': {
                         id: 'setup-node',
-                        name: 'Setup Bun',
                         data: {
-                          uses: 'oven-sh/setup-bun@v2',
                           name: 'Setup Bun',
-                          with: {
-                            'node-version': undefined,
-                            'bun-version': version,
-                          },
+                          uses: 'oven-sh/setup-bun@v2',
+                          // Bun version is detected from package.json, no need to specify here
+                          with: undefined,
                         },
                       },
                     },

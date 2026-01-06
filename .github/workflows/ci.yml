@@ -32,8 +32,6 @@ jobs:
       - id: setup-node
         name: Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.3.4
       - name: Prepare toolsync
         run: bun install --ignore-scripts && bun run build --filter '!@toolsync/docs'
       - id: install
