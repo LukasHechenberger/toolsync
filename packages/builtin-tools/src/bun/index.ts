@@ -55,7 +55,7 @@ const bunPlugin = defineBuiltinPlugin({
                       '@update': {
                         id: 'checks',
                         data: {
-                          run: 'bun --bun turbo check lint test build --continue',
+                          run: 'bun turbo check lint test build --continue',
                         },
                       },
                     },
