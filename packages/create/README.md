@@ -9,7 +9,10 @@
 
 ## Usage
 
+Run one of these commands to create a new project using toolsync:
+
 ```shell
+bun create @toolsync
 pnpm create @toolsync
 npm init @toolsync
 yarn create @toolsync

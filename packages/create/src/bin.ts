@@ -15,6 +15,7 @@ log.debug('Detected tool', { tool: tool.type, rootDir });
 
 const [scope] = name.split('/');
 let binName = {
+  bun: `bun create ${scope}`,
   pnpm: `pnpm create ${scope}`,
   yarn: `yarn create ${scope}`,
   npm: `npm init ${scope}`,

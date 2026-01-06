@@ -164,6 +164,7 @@ export async function init({
         {
           title: 'Installing updated dependencies...',
           type: 'runCommand',
+          // FIXME: Get package manager from (?)
           command: `pnpm install ${process.env.RSTEST ? '--prefer-frozen-lockfile' : ''}`,
         } as RunCommandAction,
         {

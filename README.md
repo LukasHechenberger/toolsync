@@ -58,7 +58,7 @@ This repository contains the following packages:
 Run all tests in watch mode
 
 ```shell
-pnpm turbo watch test
+bun turbo watch test
 ```
 
 ## TODO
