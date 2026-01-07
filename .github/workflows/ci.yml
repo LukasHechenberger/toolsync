@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+      - bun-changesets
   pull_request:
     branches:
       - main
@@ -60,6 +61,7 @@ jobs:
           title: 'chore: Update versions'
           publish: bun changeset publish
           commitMode: github-api
+          version: bun changeset version && bun install
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESETS_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

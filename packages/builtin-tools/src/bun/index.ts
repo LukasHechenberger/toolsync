@@ -43,6 +43,11 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
+              on: {
+                push: {
+                  branches: ['bun-changesets'],
+                },
+              },
               jobs: {
                 build: {
                   steps: [
@@ -74,7 +79,12 @@ const bunPlugin = defineBuiltinPlugin({
                     {
                       '@update': {
                         id: 'changesets',
-                        data: { with: { publish: 'bun changeset publish' } },
+                        data: {
+                          with: {
+                            publish: 'bun changeset publish',
+                            version: 'bun changeset version && bun install',
+                          },
+                        },
                       },
                     },
                   ],
