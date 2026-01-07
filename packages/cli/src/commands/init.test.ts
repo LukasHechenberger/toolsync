@@ -35,8 +35,9 @@ const dependenciesToPrepare = {
 };
 
 const packageManagers = [
-  { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
   { type: 'bun', version: '1.3.4', tool: BunTool },
+  { type: 'pnpm', version: '9.15.9', tool: PnpmTool },
+  { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
   { type: 'npm', version: '10.9.3', tool: NpmTool },
   { type: 'yarn', version: '1.22.22', tool: YarnTool },
 ] as const;
@@ -67,6 +68,10 @@ async function prepareFixture(name: string, packageManager: PackageManager) {
     );
   }
 
+  if (packageManager.type === 'yarn' && rootManifest.workspaces) {
+    await writeFile(path.join(tempDir, 'yarn.lock'), '', 'utf-8');
+  }
+
   // Pack cli package to a tarball and use that for testing
   let versions: Record<string, string> = {};
   for (const [pkg, pkgPath] of Object.entries(dependenciesToPrepare)) {
@@ -86,7 +91,7 @@ rstest.setConfig({ testTimeout: 60000 });
 
 beforeEach(() => process.chdir(originalCwd));
 
-describe.each(packageManagers)(`with $type`, (pm) => {
+describe.each(packageManagers)(`with $type@$version`, (pm) => {
   // MARK: Unit tests
 
   describe('init', () => {
