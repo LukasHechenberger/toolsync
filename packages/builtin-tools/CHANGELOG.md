@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.6.0
+
+### Minor Changes
+
+- d4c1b8c: Add bun plugin
+
 ## 0.5.4
 
 ### Patch Changes
