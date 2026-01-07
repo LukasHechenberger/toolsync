@@ -82,7 +82,7 @@ const bunPlugin = defineBuiltinPlugin({
                         data: {
                           with: {
                             publish: 'bun changeset publish',
-                            version: 'bun changeset version',
+                            version: 'bun run changesets:version',
                           },
                         },
                       },
