@@ -52,7 +52,7 @@
     },
     "packages/builtin-tools": {
       "name": "@toolsync/builtin",
-      "version": "0.5.4",
+      "version": "0.6.0",
       "dependencies": {
         "@toolsync/core": "workspace:^",
         "@toolsync/object-mods": "workspace:^",
