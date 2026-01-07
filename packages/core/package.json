@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@manypkg/get-packages": "^3.0.0",
-    "@manypkg/tools": "^2.0.0",
+    "@manypkg/tools": "^2.1.0",
     "@toolsync/logger": "workspace:^",
     "@toolsync/object-mods": "workspace:^",
     "debug": "^4.4.1"

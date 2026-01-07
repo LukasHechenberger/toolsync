@@ -71,7 +71,8 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/vscode': {
           settings: {
             'search.exclude': {
-              '**/bun.lockb?': true,
+              '**/bun.lock': true,
+              '**/bun.lockb': true,
             },
           },
         },
