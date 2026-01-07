@@ -29,9 +29,14 @@ jobs:
         with:
           fetch-depth: 2
           lfs: true
-      - id: setup-node
+      - id: setup-bun
         name: Setup Bun
         uses: oven-sh/setup-bun@v2
+      - id: setup-node
+        name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
       - name: Prepare toolsync
         run: bun install --ignore-scripts && bun run build --filter '!@toolsync/docs'
       - id: install

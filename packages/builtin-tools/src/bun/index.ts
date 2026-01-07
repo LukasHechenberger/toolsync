@@ -10,6 +10,8 @@ declare global {
       [bunPluginName]: {
         /** Version of bun to use */
         version?: string;
+        /** Pass `true` or an explicit version to also setup Node.js (e.g. for integration tests) */
+        setupNode?: boolean | string;
       };
     }
   }
@@ -25,6 +27,14 @@ const bunPlugin = defineBuiltinPlugin({
     version ??= getConfiguredPackageManagerVersion('bun', defaultPackageManager, rootPackage);
     log.debug(`Using bun version: ${version}`);
 
+    const setupBunStep = {
+      id: 'setup-bun',
+      name: 'Setup Bun',
+      uses: 'oven-sh/setup-bun@v2',
+      // Bun version is detected from package.json, no need to specify here
+      with: undefined,
+    };
+
     return {
       config: {
         [bunPluginName]: {
@@ -36,17 +46,22 @@ const bunPlugin = defineBuiltinPlugin({
               jobs: {
                 build: {
                   steps: [
-                    {
-                      '@update': {
-                        id: 'setup-node',
-                        data: {
-                          name: 'Setup Bun',
-                          uses: 'oven-sh/setup-bun@v2',
-                          // Bun version is detected from package.json, no need to specify here
-                          with: undefined,
-                        },
-                      },
-                    },
+                    ...(config.setupNode
+                      ? [
+                          { '@insert': { before: 'setup-node', data: setupBunStep } },
+                          ...(typeof config.setupNode === 'string'
+                            ? [
+                                {
+                                  '@update': {
+                                    id: 'setup-node',
+                                    data: { with: { 'node-version': config.setupNode } },
+                                  },
+                                },
+                              ]
+                            : []),
+                        ]
+                      : [{ '@update': { id: 'setup-node', data: setupBunStep } }]),
+
                     { '@update': { id: 'install', data: { run: 'bun install' } } },
                     {
                       '@update': {

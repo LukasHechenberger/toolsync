@@ -9,7 +9,9 @@
     }
   },
   "@toolsync/builtin/github-actions": {},
-  "@toolsync/builtin/bun": {},
+  "@toolsync/builtin/bun": {
+    "setupNode": "24.x"
+  },
   "@toolsync/cli": {
     "version": "workspace:*"
   },

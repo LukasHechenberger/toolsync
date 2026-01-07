@@ -110,7 +110,7 @@
       "name": "@toolsync/core",
       "version": "0.1.4",
       "dependencies": {
-        "@manypkg/get-packages": "^3.0.0",
+        "@manypkg/get-packages": "^3.1.0",
         "@manypkg/tools": "^2.1.0",
         "@toolsync/logger": "workspace:^",
         "@toolsync/object-mods": "workspace:^",
@@ -129,7 +129,7 @@
       "version": "0.4.0",
       "bin": "./out/bin.js",
       "dependencies": {
-        "@manypkg/get-packages": "^3.0.0",
+        "@manypkg/get-packages": "^3.1.0",
         "@toolsync/cli": "workspace:^",
         "@toolsync/logger": "workspace:^",
         "commander": "^14.0.0",
