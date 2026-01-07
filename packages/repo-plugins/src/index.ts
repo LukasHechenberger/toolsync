@@ -22,6 +22,18 @@ const repoPlugin = definePlugin({
               jobs: {
                 build: {
                   steps: [
+                    // Setup other package managers
+                    {
+                      '@insert': {
+                        after: 'setup-node',
+                        data: {
+                          id: 'setup-test-pms',
+                          run: 'corepack enable && corepack prepare pnpm@10.11.1 && corepack prepare yarn@1.22.22',
+                        },
+                      },
+                    },
+
+                    // Build before install to have plugins ready
                     {
                       '@insert': {
                         before: 'install',
