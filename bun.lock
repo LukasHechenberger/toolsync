@@ -98,6 +98,7 @@
       },
       "devDependencies": {
         "@commander-js/extra-typings": "^14.0.0",
+        "@manypkg/tools": "^2.1.0",
         "@rslib/core": "^0.17.2",
         "@rstest/core": "^0.7.2",
         "@toolsync/builtin": "workspace:^",
