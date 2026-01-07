@@ -52,6 +52,10 @@
     "./publint": {
       "types": "./out/publint/index.d.ts",
       "default": "./out/publint/index.js"
+    },
+    "./bun": {
+      "types": "./out/bun/index.d.ts",
+      "default": "./out/bun/index.js"
     }
   },
   "scripts": {

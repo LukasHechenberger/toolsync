@@ -1,81 +1,147 @@
-import fs, { cp, readFile } from 'node:fs/promises';
+import fs, { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { expect, test, describe, beforeEach, rstest } from '@rstest/core';
-import { existsSync } from 'node:fs';
+import { BunTool, NpmTool, PnpmTool, YarnTool } from '@manypkg/tools';
+import { existsSync, readFileSync } from 'node:fs';
 import { init } from './init';
+import { execa } from 'execa';
+
+const originalCwd = process.cwd();
+
+// MARK: Config
+// NOTE: Set to a fixed directory for easier debugging
+const fixedTestDir = undefined; // '/Users/lukas/Downloads/toolsync-test';
+
+// MARK: Helpers
 
 async function createTempDir() {
+  if (fixedTestDir) {
+    await rm(fixedTestDir, { recursive: true, force: true });
+    await mkdir(fixedTestDir, { recursive: true });
+    return fixedTestDir;
+  }
+
   const ostmpdir = os.tmpdir();
   const tmpdir = path.join(ostmpdir, 'unit-test-');
 
   return await fs.mkdtemp(tmpdir);
 }
 
-async function prepareFixture(name: string) {
+const dependenciesToPrepare = {
+  '@toolsync/cli': originalCwd,
+  '@toolsync/core': path.join(originalCwd, '../core'),
+  '@toolsync/builtin': path.join(originalCwd, '../builtin-tools'),
+};
+
+const packageManagers = [
+  { type: 'bun', version: '1.3.4', tool: BunTool },
+  { type: 'pnpm', version: '9.15.9', tool: PnpmTool },
+  { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
+  { type: 'npm', version: '10.9.3', tool: NpmTool },
+  { type: 'yarn', version: '1.22.22', tool: YarnTool },
+] as const;
+type PackageManager = (typeof packageManagers)[number];
+
+async function prepareFixture(name: string, packageManager: PackageManager) {
   const fixtureDir = path.join('test/fixtures', name);
-  const tmpdir = await createTempDir();
+  const tempDir = await createTempDir();
 
-  await cp(fixtureDir, tmpdir, { recursive: true });
+  await cp(fixtureDir, tempDir, { recursive: true });
 
-  console.debug(`Prepared fixture ${name} in temp dir ${tmpdir}...`);
-  return tmpdir;
+  // Update root package.json
+  const rootManifest = JSON.parse(readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
+
+  rootManifest.packageManager = `${packageManager.type}@${packageManager.version}`;
+  await writeFile(
+    path.join(tempDir, 'package.json'),
+    JSON.stringify(rootManifest, null, 2),
+    'utf-8',
+  );
+
+  // Create config files
+  if (packageManager.type === 'pnpm' && rootManifest.workspaces) {
+    await writeFile(
+      path.join(tempDir, 'pnpm-workspace.yaml'),
+      JSON.stringify({ packages: rootManifest.workspaces }),
+      'utf-8',
+    );
+  }
+
+  if (packageManager.type === 'yarn' && rootManifest.workspaces) {
+    await writeFile(path.join(tempDir, 'yarn.lock'), '', 'utf-8');
+  }
+
+  // Pack cli package to a tarball and use that for testing
+  let versions: Record<string, string> = {};
+  for (const [pkg, pkgPath] of Object.entries(dependenciesToPrepare)) {
+    const tarPath = path.join(tempDir, `${pkg.split('/').pop()}.tgz`);
+    await execa('bun', ['pm', 'pack', '--filename', tarPath], { cwd: pkgPath });
+    versions[pkg] = `file:${tarPath}`;
+  }
+
+  console.debug(`Prepared fixture ${name} in temp dir ${tempDir}...`);
+  return {
+    tempDir,
+    versions,
+  };
 }
 
 rstest.setConfig({ testTimeout: 60000 });
 
-const originalCwd = process.cwd();
 beforeEach(() => process.chdir(originalCwd));
 
-// MARK: Unit tests
+describe.each(packageManagers)(`with $type@$version`, (pm) => {
+  // MARK: Unit tests
 
-describe('init', () => {
-  test('throws with invalid cwd', async () => {
-    await expect(
-      init({ cwd: 'non-existent-dir' }),
-      'init with invalid cwd should throw',
-    ).rejects.toThrow('does not exist');
-  });
-});
-
-// MARK: Integration tests
-
-describe('single package project', () => {
-  test('init command works', async () => {
-    const tempDir = await prepareFixture('single-package-project');
-
-    await init({
-      cwd: tempDir,
-      useDefaults: false,
-      versions: {
-        '@toolsync/cli': `link:${originalCwd}`,
-      },
+  describe('init', () => {
+    test('throws with invalid cwd', async () => {
+      await expect(
+        init({ cwd: 'non-existent-dir' }),
+        'init with invalid cwd should throw',
+      ).rejects.toThrow('does not exist');
     });
-
-    const configPath = path.join(tempDir, 'toolsync.json');
-    expect(existsSync(configPath), 'toolsync.json should exist').toBe(true);
-
-    const config = await readFile(configPath, 'utf-8').then((data) => JSON.parse(data));
-    expect(config, 'toolsync.json content').toEqual({});
   });
-});
 
-describe('monorepo project', () => {
-  test('init command works', async () => {
-    const tempDir = await prepareFixture('monorepo-project');
+  // MARK: Integration tests
 
-    await init({
-      cwd: tempDir,
-      useDefaults: false,
-      versions: {
-        '@toolsync/cli': `link:${originalCwd}`,
-      },
+  describe('single package project', () => {
+    test('init command works', async () => {
+      const { tempDir, versions } = await prepareFixture('single-package-project', pm);
+
+      await init({
+        cwd: tempDir,
+        useDefaults: false,
+        versions,
+      });
+
+      const configPath = path.join(tempDir, 'toolsync.json');
+      expect(existsSync(configPath), 'toolsync.json should exist').toBe(true);
+
+      const config = await readFile(configPath, 'utf-8').then((data) => JSON.parse(data));
+      expect(config, 'toolsync.json content').toEqual({});
+      expect(pm.tool.isMonorepoRootSync(tempDir), 'should still be single package project').toBe(
+        false,
+      );
     });
+  });
 
-    const configPath = path.join(tempDir, 'toolsync.json');
-    expect(existsSync(configPath), 'toolsync.json should exist').toBe(true);
+  describe('monorepo project', () => {
+    test('init command works', async () => {
+      const { tempDir, versions } = await prepareFixture('monorepo-project', pm);
 
-    const config = await readFile(configPath, 'utf-8').then((data) => JSON.parse(data));
-    expect(config, 'toolsync.json content').toEqual({});
+      await init({
+        cwd: tempDir,
+        useDefaults: false,
+        versions,
+      });
+
+      const configPath = path.join(tempDir, 'toolsync.json');
+      expect(existsSync(configPath), 'toolsync.json should exist').toBe(true);
+
+      const config = await readFile(configPath, 'utf-8').then((data) => JSON.parse(data));
+      expect(config, 'toolsync.json content').toEqual({});
+      expect(pm.tool.isMonorepoRootSync(tempDir), 'should be monorepo project').toBe(true);
+    });
   });
 });

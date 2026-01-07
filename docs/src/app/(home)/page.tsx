@@ -7,7 +7,7 @@ import { Preview } from './page.client';
 export default async function HomePage() {
   const { body: InstallCommand } = await compileMDX({
     source: `\`\`\`shell title="TL;DR"
-pnpm create @toolsync
+bun create @toolsync
 \`\`\``,
   });
 

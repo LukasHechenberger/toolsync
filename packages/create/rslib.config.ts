@@ -24,7 +24,7 @@ export default defineConfig({
           apply(compiler) {
             compiler.hooks.done.tap('OnSuccessPlugin', () => {
               import('child_process').then(({ exec }) => {
-                exec('pnpm -s update-readme', (error, stdout, stderr) => {
+                exec('bun run update-readme', (error, stdout, stderr) => {
                   if (stdout) console.log(stdout);
                   if (stderr) console.error(stderr);
                   if (error) console.error('OnSuccess error:', error);

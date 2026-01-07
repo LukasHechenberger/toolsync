@@ -3,10 +3,11 @@ import { compileMDX } from '@fumadocs/mdx-remote';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { ReactNode } from 'react';
 
-const defaultPackageManagers = ['pnpm' as const, 'npm' as const, 'yarn' as const];
+const defaultPackageManagers = ['bun' as const, 'pnpm' as const, 'npm' as const, 'yarn' as const];
 type PackageManager = (typeof defaultPackageManagers)[number];
 
 const execMap = {
+  bun: 'bun',
   pnpm: 'pnpm',
   npm: 'npx',
   yarn: 'yarn',

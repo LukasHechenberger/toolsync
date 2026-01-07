@@ -58,7 +58,7 @@ This repository contains the following packages:
 Run all tests in watch mode
 
 ```shell
-pnpm turbo watch test
+bun turbo watch test
 ```
 
 ## TODO
@@ -162,7 +162,7 @@ pnpm turbo watch test
 - Shadcn UI
   - [ ] Add vscode setting `"tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css"` if inside a monorepo
 
-## Core
+### Core
 
 - [ ] Allow configuration via package.json
 - [ ] Store generated file hashes to detect user customizations: Warn if a file is modified by the user, ask to reset or add to "customized" files list (?)
@@ -180,10 +180,14 @@ pnpm turbo watch test
 
 - [ ] Plugin's own default config should be loaded first so others/config file can override it
 
-## Logger
+### Logger
 
 - [ ] Get rid of pino packages
 
-## Docs
+### Docs
 
 - [ ] Add builtin plugins to search index
+
+### Known Issues
+
+@toolsync/core does not check if a plugin's name matches the name it was loaded from. This can lead to naming conflicts during config merging etc.

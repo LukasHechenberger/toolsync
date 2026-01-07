@@ -1,6 +1,6 @@
 import { writeFile } from 'fs/promises';
 import { defineBuiltinPlugin } from '../lib/plugins';
-import type { BaseSchema, PipelineV2 } from '@turbo/types';
+import type { BaseSchema } from '@turbo/types';
 import { join } from 'path';
 
 export const turboPluginName = '@toolsync/builtin/turbo';

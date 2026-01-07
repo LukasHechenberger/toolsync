@@ -14,7 +14,8 @@ Update sections of source files
 Use your favorite package manager to install this package:
 
 ```shell
-pnpm install @toolsync/template # pnpm (recommended), you can also use npm, yarn, bun, whatever...
+# bun is recommended, you can also use pnpm, npm, yarn, whatever...
+bun add @toolsync/template
 ```
 
 ## Usage

@@ -9,10 +9,12 @@
     }
   },
   "@toolsync/builtin/github-actions": {},
+  "@toolsync/builtin/bun": {
+    "setupNode": "24.x"
+  },
   "@toolsync/cli": {
     "version": "workspace:*"
   },
-  "@toolsync/builtin/pnpm": {},
   "@toolsync/builtin/package-readme": {},
   "@repo/toolsync-plugins": {},
   "@toolsync/builtin/package-meta": {

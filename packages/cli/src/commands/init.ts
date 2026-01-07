@@ -8,6 +8,7 @@ import { styleText } from 'util';
 import { isNodeError } from '../lib/utilities';
 import terminalLink from 'terminal-link';
 import { isatty } from 'tty';
+import type { Package } from '@toolsync/core/types';
 
 const log = logger.child('cli:init');
 
@@ -56,6 +57,31 @@ class AppError extends Error {
   }
 }
 
+function detectPackageManager(rootPackage?: Package) {
+  const pmField = rootPackage?.packageJson.packageManager;
+  if (pmField) {
+    const [pm] = pmField.split('@');
+    if (!['bun', 'pnpm', 'yarn', 'npm'].includes(pm!)) {
+      throw new AppError(
+        `Detected package manager "${pm}" from packageManager field is not supported.`,
+        { code: 'UNSUPPORTED_PACKAGE_MANAGER' },
+      );
+    }
+
+    log.debug(`Detected package manager from packageManager field: ${pm}`);
+
+    return pm!;
+  }
+
+  log.debug('No packageManager field found in root package.json, detecting from user agent');
+  const userAgent = process.env.npm_config_user_agent;
+  if (userAgent?.startsWith('bun/')) return 'bun';
+  if (userAgent?.startsWith('pnpm/')) return 'pnpm';
+  if (userAgent?.startsWith('yarn/')) return 'yarn';
+
+  return 'npm';
+}
+
 export async function init({
   cwd = process.cwd(),
   force = false,
@@ -79,7 +105,7 @@ export async function init({
     }
   }
 
-  const { rootDir, tool } = await getPackages();
+  const { rootDir, rootPackage, tool, packages, ...packagesInfo } = await getPackages();
   const plop = await nodePlop(undefined, { destBasePath: rootDir, force });
 
   plop.setActionType('runCommand', async (answers, config, plop) => {
@@ -117,13 +143,53 @@ export async function init({
     },
   ] satisfies (PromptQuestion & { name: string })[];
 
+  const isMonorepo = tool.type !== 'root';
+  const packageManager = tool.type === 'root' ? detectPackageManager(rootPackage) : tool.type;
+  log.info(`Using package manager: ${styleText('cyan', packageManager)}`);
+  log.debug(`Resolved package manager from @manypkg tool: ${tool.type}`);
+  log.debug(`Detected monorepo: ${isMonorepo}`);
+
   const init = plop.setGenerator('init', {
     prompts,
     actions: (answers) => {
       // TODO: Support other package managers
       const { plugins } = answers as InitAnswers;
 
-      const isMonorepo = tool.type !== 'root';
+      const pm = {
+        bun: {
+          runPackageCommand: 'bun',
+          installCommand: 'bun install',
+          runScriptCommand: 'bun run',
+          installPackageCommand: 'bun add -D',
+        },
+        pnpm: {
+          runPackageCommand: 'pnpm',
+          installCommand: 'pnpm install',
+          runScriptCommand: 'pnpm run',
+          installPackageCommand: isMonorepo ? 'pnpm add -Dw' : 'pnpm add -D',
+        },
+        yarn: {
+          runPackageCommand: 'yarn',
+          installCommand: 'yarn install',
+          runScriptCommand: 'yarn',
+          installPackageCommand: isMonorepo ? 'yarn add -DW' : 'yarn add -D',
+        },
+        npm: {
+          runPackageCommand: 'npx',
+          installCommand: 'npm install',
+          runScriptCommand: 'npm run',
+          installPackageCommand: 'npm install -D',
+        },
+      }[packageManager];
+
+      if (!pm?.installPackageCommand) {
+        throw new AppError(
+          `The package manager "${tool.type}" is not supported by the init command yet.`,
+          { code: 'UNSUPPORTED_PACKAGE_MANAGER' },
+        );
+      }
+
+      const { installCommand, installPackageCommand, runPackageCommand, runScriptCommand } = pm;
 
       const dependencies = [
         '@toolsync/cli',
@@ -154,22 +220,22 @@ export async function init({
         {
           title: 'Installing new dependencies...',
           type: 'runCommand',
-          command: ['pnpm', 'add', '-D', ...(isMonorepo ? ['-w'] : []), ...dependencies].join(' '),
+          command: `${installPackageCommand} ${dependencies.join(' ')}`,
         } as RunCommandAction,
         {
           title: 'Syncing config files...',
           type: 'runCommand',
-          command: 'pnpm toolsync prepare --config toolsync.json',
+          command: `${runPackageCommand} toolsync prepare --config toolsync.json`,
         } as RunCommandAction,
         {
           title: 'Installing updated dependencies...',
           type: 'runCommand',
-          command: `pnpm install ${process.env.RSTEST ? '--prefer-frozen-lockfile' : ''}`,
+          command: `${installCommand}`,
         } as RunCommandAction,
         {
           title: 'Running first toolsync...',
           type: 'runCommand',
-          command: 'pnpm prepare',
+          command: `${runScriptCommand} prepare`,
         } as RunCommandAction,
       ];
     },
@@ -234,7 +300,7 @@ export function setupInitCommand(command: Command) {
         const retryWithForce = await confirmRetry();
 
         if (retryWithForce) {
-          console.log('TODO: Add answers', answers);
+          console.debug('TODO: Add answers', answers);
           results = (await init({ force: true, useDefaults: yes, cwd, throw: false })).results;
         } else {
           log.debug('User chose not to retry with force, exiting');
