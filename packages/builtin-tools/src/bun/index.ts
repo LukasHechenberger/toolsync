@@ -43,11 +43,6 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
-              on: {
-                push: {
-                  branches: ['bun-changesets'],
-                },
-              },
               jobs: {
                 build: {
                   steps: [
