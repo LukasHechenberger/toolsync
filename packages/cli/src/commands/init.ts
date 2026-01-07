@@ -2,7 +2,7 @@ import { logger } from '@toolsync/logger';
 import type { Command } from 'commander';
 import nodePlop, { type CustomActionConfig, type PromptQuestion } from 'node-plop';
 import { getPackages } from '@toolsync/core';
-import tools from '@toolsync/builtin/tools.json';
+import tools from '@toolsync/builtin/tools';
 import { execa } from 'execa';
 import { styleText } from 'util';
 import { isNodeError } from '../lib/utilities';
