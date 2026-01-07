@@ -29,7 +29,7 @@
     "build": "rslib build",
     "check:exports": "publint",
     "dev": "rslib build --watch",
-    "test:pnpm": "rstest",
+    "test": "rstest",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
