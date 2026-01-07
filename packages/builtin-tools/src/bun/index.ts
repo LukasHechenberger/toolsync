@@ -74,7 +74,12 @@ const bunPlugin = defineBuiltinPlugin({
                     {
                       '@update': {
                         id: 'changesets',
-                        data: { with: { publish: 'bun changeset publish' } },
+                        data: {
+                          with: {
+                            publish: 'bun changeset publish',
+                            version: 'bun run changesets:version',
+                          },
+                        },
                       },
                     },
                   ],

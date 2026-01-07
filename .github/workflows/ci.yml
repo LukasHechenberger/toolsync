@@ -60,6 +60,7 @@ jobs:
           title: 'chore: Update versions'
           publish: bun changeset publish
           commitMode: github-api
+          version: bun run changesets:version
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESETS_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

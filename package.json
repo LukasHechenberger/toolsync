@@ -17,6 +17,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "changesets:version": "changeset version && bun install",
     "check": "turbo run check",
     "check:format": "prettier --check .",
     "dev": "turbo run dev",
