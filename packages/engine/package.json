@@ -12,11 +12,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./src/index.ts"
+      "types": "./out/index.d.ts",
+      "default": "./out/index.js"
     }
   },
+  "files": [
+    "CHANGELOG.md",
+    "out"
+  ],
   "scripts": {
-    "build": "node ./node_modules/@toolsync/template/out/bin.js README.md basic-usage \"$(cat ./examples/basic-usage.ts)\" --codeblock ts",
+    "build": "bun run build:tsc && bun run build:bun && bun run build:readme",
+    "build:bun": "bun build ./src/index.ts --sourcemap --production --outdir ./out --target node",
+    "build:readme": "bun ./node_modules/@toolsync/template/out/bin.js README.md basic-usage \"$(cat ./examples/basic-usage.ts)\" --codeblock ts",
+    "build:tsc": "tsc -p tsconfig.types.json",
     "check:exports": "publint"
   },
   "devDependencies": {
