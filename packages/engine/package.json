@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "build": "update-section README.md basic-usage \"$(cat ./examples/basic-usage.ts)\" --codeblock ts",
+    "build": "node ./node_modules/@toolsync/template/out/bin.js README.md basic-usage \"$(cat ./examples/basic-usage.ts)\" --codeblock ts",
     "check:exports": "publint"
   },
   "devDependencies": {
