@@ -192,3 +192,4 @@ docs/.gitignore
 .vscode
 .changeset/README.md
 tsup.config.bundled*
+packages/*/.cursor

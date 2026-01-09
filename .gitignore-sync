@@ -26,3 +26,6 @@ docs/.gitignore
 
 # By @toolsync/builtins/tsup
 tsup.config.bundled*
+
+# bun init
+packages/*/.cursor
