@@ -23,6 +23,9 @@ export type TemplateUpdateOptions = {
   /** Content that should be inserted into the section */
   content: string;
 
+  /** Wrap the content in a codeblock of the given language */
+  codeblock?: string;
+
   /** Where to insert the section, if the file does not contain it already. If you don't use this option {@link Template.update} will throw if the section does not exist */
   insert?: 'top' | 'bottom';
 
@@ -98,10 +101,12 @@ export class Template {
   /** Replaces a section in the template */
   update({
     section: sectionName,
-    content,
+    content: contentInput,
     insert,
+    codeblock,
     notice = this.options.notice,
   }: TemplateUpdateOptions) {
+    const content = codeblock ? `\`\`\`${codeblock}\n${contentInput}\n\`\`\`` : contentInput;
     const markerComments = this.options.markers.map((marker) =>
       this.comment(`${marker} ${sectionName}`),
     );

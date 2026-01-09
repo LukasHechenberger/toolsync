@@ -23,7 +23,7 @@ yarn create @toolsync
 <!-- #region cli-usage -->
 <!-- This section is generated. Do not edit manually! -->
 
-```
+```ansi
 Usage: @toolsync/create [options] [cwd]
 
 Setup Toolsync in your repository - same as running `@toolsync/cli init

@@ -17,6 +17,7 @@ A plugin engine, built for toolsync
 **Usage example:**
 
 <!-- #region basic-usage -->
+<!-- This section is generated. Do not edit manually! -->
 
 ```ts
 import { createEngine, EnginePlugin } from '@toolsync/engine';
@@ -27,12 +28,12 @@ class MyPlugin extends EnginePlugin {
 
   // Plugin implementation here
   doSomething() {
-    console.log('Doing something!');
+    return 'Doing something!';
   }
 }
 
 // Create the engine with your plugins
-const engine = createEngine({
+export const engine = createEngine({
   plugins: [
     // Your plugins here
     MyPlugin,

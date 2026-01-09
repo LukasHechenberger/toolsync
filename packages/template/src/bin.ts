@@ -14,6 +14,11 @@ program
   .argument('<file>', 'file to update (only .md files are supported)')
   .argument('<section>', 'section to update')
   .argument('<content>', 'content to insert into the section')
+  .option(
+    '--codeblock <language>',
+    'wrap the content in a markdown codeblock of the given language',
+    undefined,
+  )
   .option('--notice <text>', 'notice to add to the section', undefined)
   .option('--insert <top|bottom>', 'where to insert the section if it does not exist', 'bottom')
   .action(async (file, section, content, options) => {
@@ -24,7 +29,7 @@ program
     template.update({
       section: section,
       content,
-      insert: options.insert,
+      ...options,
     });
 
     await template.save();
