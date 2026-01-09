@@ -149,6 +149,7 @@
       "name": "@toolsync/engine",
       "version": "0.0.0",
       "devDependencies": {
+        "@toolsync/template": "workspace:^",
         "@types/bun": "latest",
         "publint": "^0.3.12",
       },
