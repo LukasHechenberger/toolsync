@@ -12,24 +12,31 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./out/index.d.ts",
-      "default": "./out/index.js"
-    }
+      "import": {
+        "types": "./out/index.d.ts",
+        "default": "./out/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
+  "module": "./out/index.js",
+  "types": "./out/index.d.ts",
   "files": [
     "CHANGELOG.md",
     "out"
   ],
   "scripts": {
-    "build": "bun run build:tsc && bun run build:bun && bun run build:readme",
-    "build:bun": "bun build ./src/index.ts --sourcemap --production --outdir ./out --target node",
-    "build:readme": "bun ./node_modules/@toolsync/template/out/bin.js README.md basic-usage \"$(cat ./examples/basic-usage.ts)\" --codeblock ts",
-    "build:tsc": "tsc -p tsconfig.types.json",
-    "check:exports": "publint"
+    "build": "bunup",
+    "check:exports": "publint",
+    "dev": "bunup --watch"
+  },
+  "dependencies": {
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@toolsync/template": "workspace:^",
     "@types/bun": "latest",
+    "bunup": "^0.16.17",
     "publint": "^0.3.12"
   },
   "peerDependencies": {
