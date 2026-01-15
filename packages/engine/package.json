@@ -1,15 +1,14 @@
 {
-  "name": "@toolsync/core",
-  "version": "0.1.4",
-  "description": "Core functionality used in @toolsync/cli etc",
+  "name": "@toolsync/engine",
+  "version": "0.0.0",
+  "description": "A plugin engine, built for toolsync",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LukasHechenberger/toolsync.git",
-    "directory": "packages/core"
+    "directory": "packages/engine"
   },
   "license": "MIT",
-  "author": "Lukas Hechenberger <npm@ls-age.com> (https://ls-age.com/)",
   "type": "module",
   "exports": {
     ".": {
@@ -23,6 +22,7 @@
   "module": "./out/index.js",
   "types": "./out/index.d.ts",
   "files": [
+    "CHANGELOG.md",
     "out"
   ],
   "scripts": {
@@ -31,19 +31,16 @@
     "dev": "bunup --watch"
   },
   "dependencies": {
-    "@manypkg/get-packages": "^3.1.0",
-    "@manypkg/tools": "^2.1.0",
-    "@toolsync/engine": "workspace:^",
-    "@toolsync/logger": "workspace:^",
-    "@toolsync/object-mods": "workspace:^",
-    "debug": "^4.4.1"
+    "zod": "^4.3.5"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.12",
-    "@types/node": "^22.15.30",
-    "bunup": "0.16.17",
-    "publint": "^0.3.12",
-    "typescript": "^5.8.3"
+    "@toolsync/template": "workspace:^",
+    "@types/bun": "latest",
+    "bunup": "^0.16.17",
+    "publint": "^0.3.12"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   },
   "engines": {
     "node": ">=20.6.0"

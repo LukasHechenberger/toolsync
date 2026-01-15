@@ -63,22 +63,24 @@ Whenever you run the script again the section will be updated.
 <!-- #region cli-usage -->
 <!-- This section is generated. Do not edit manually! -->
 
-```
+```ansi
 Usage: npx @toolsync/template [options] <file> <section> <content>
 
 Update a section of a file with @toolsync/template
 
 Arguments:
-  file                   file to update (only .md files are supported)
-  section                section to update
-  content                content to insert into the section
+  file                    file to update (only .md files are supported)
+  section                 section to update
+  content                 content to insert into the section
 
 Options:
-  -V, --version          output the version number
-  --notice <text>        notice to add to the section
-  --insert <top|bottom>  where to insert the section if it does not exist
-                         (default: "bottom")
-  -h, --help             display help for command
+  -V, --version           output the version number
+  --codeblock <language>  wrap the content in a markdown codeblock of the given
+                          language
+  --notice <text>         notice to add to the section
+  --insert <top|bottom>   where to insert the section if it does not exist
+                          (default: "bottom")
+  -h, --help              display help for command
 
 For more information, visit https://toolsync.vercel.app
 ```

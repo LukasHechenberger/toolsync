@@ -35,7 +35,7 @@ const dependenciesToPrepare = {
 };
 
 const packageManagers = [
-  { type: 'bun', version: '1.3.4', tool: BunTool },
+  { type: 'bun', version: '1.3.6', tool: BunTool },
   { type: 'pnpm', version: '9.15.9', tool: PnpmTool },
   { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
   { type: 'npm', version: '10.9.3', tool: NpmTool },

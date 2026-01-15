@@ -30,6 +30,7 @@
     "check:exports": "publint",
     "dev": "rslib build --watch",
     "test": "rstest",
+    "test:write-schema": "bun ./src/bin.ts config --config ../../toolsync.json --schema --json > ../../etc/toolsync.schema.json",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
@@ -45,7 +46,7 @@
     "@manypkg/tools": "^2.1.0",
     "@rslib/core": "^0.17.2",
     "@rstest/core": "^0.7.2",
-    "@toolsync/builtin": "workspace:^",
+    "@toolsync/builtin": "workspace:*",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
     "publint": "^0.3.12"

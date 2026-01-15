@@ -23,7 +23,7 @@
     "build": "rslib build",
     "check:exports": "publint",
     "dev": "rslib build --watch",
-    "update-readme": "node out/bin.js README.md cli-usage \"\\`\\`\\`\n$(node ./out/bin.js --help)\n\\`\\`\\`\""
+    "update-readme": "node out/bin.js README.md cli-usage --codeblock ansi \"$(node ./out/bin.js --help)\""
   },
   "dependencies": {
     "commander": "^14.0.0"
