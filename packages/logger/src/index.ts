@@ -1,15 +1,45 @@
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
 import setupDebug, { type Debugger } from 'debug';
+import { styleText } from 'node:util';
 
 const envDebug = process.env.DEBUG;
 const envLogLevel = process.env.LOG_LEVEL || 'info';
 
+const labels = new Map(
+  Object.entries(pino.levels.labels).map(([level, label]) => {
+    return [
+      Number(level),
+      styleText(
+        ['reset'],
+        styleText(
+          {
+            trace: ['gray' as const],
+            debug: ['blue' as const],
+            info: ['green' as const],
+            warn: ['yellow' as const],
+            error: ['red' as const],
+            fatal: ['red' as const, 'bold' as const],
+          }[label] ?? ['red' as const],
+          label.toUpperCase().padEnd(5, ' '),
+        ),
+      ),
+    ];
+  }),
+);
+
 const pretty = pinoPretty({
   ignore: 'pid,hostname,ns,time,level',
+  destination: process.stderr,
+
   // Customize the log message format
+
   messageFormat(log, messageKey, _, { colors }) {
-    return colors.reset(`${log[messageKey]} ${colors.reset(colors.dim(`[${log.ns}]`))}`);
+    const levelName = labels.get(log.level as number)!;
+    const message = (log[messageKey] as string).replaceAll(process.cwd(), '.');
+
+    // TODO: Pad message to end-align ns
+    return colors.reset(`${levelName} ${message} ${styleText(['dim'], `[${log.ns}]`)}`);
   },
   sync: true,
 });
