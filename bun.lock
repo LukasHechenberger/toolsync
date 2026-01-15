@@ -101,7 +101,7 @@
         "@manypkg/tools": "^2.1.0",
         "@rslib/core": "^0.17.2",
         "@rstest/core": "^0.7.2",
-        "@toolsync/builtin": "workspace:^",
+        "@toolsync/builtin": "workspace:*",
         "@toolsync/template": "workspace:*",
         "@types/node": "^22.15.30",
         "publint": "^0.3.12",
@@ -119,7 +119,6 @@
         "debug": "^4.4.1",
       },
       "devDependencies": {
-        "@rslib/core": "^0.17.2",
         "@types/debug": "^4.1.12",
         "@types/node": "^22.15.30",
         "bunup": "0.16.17",

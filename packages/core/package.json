@@ -13,26 +13,22 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./out/index.d.ts",
-      "import": "./out/index.js",
-      "default": "./out/index.js"
+      "import": {
+        "types": "./out/index.d.ts",
+        "default": "./out/index.js"
+      }
     },
-    "./plugins": {
-      "types": "./out/plugins.d.ts",
-      "import": "./out/plugins.js",
-      "default": "./out/plugins.js"
-    },
-    "./types": {
-      "types": "./out/types.d.ts",
-      "import": "./out/types.js",
-      "default": "./out/types.js"
-    }
+    "./package.json": "./package.json"
   },
-  "main": "out/index.js",
+  "module": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "files": [
+    "out"
+  ],
   "scripts": {
-    "build": "rslib build",
+    "build": "bunup",
     "check:exports": "publint",
-    "dev": "rslib build --watch"
+    "dev": "bunup --watch"
   },
   "dependencies": {
     "@manypkg/get-packages": "^3.1.0",
@@ -43,9 +39,9 @@
     "debug": "^4.4.1"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.2",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.15.30",
+    "bunup": "0.16.17",
     "publint": "^0.3.12",
     "typescript": "^5.8.3"
   },
