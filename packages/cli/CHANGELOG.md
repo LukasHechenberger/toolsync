@@ -1,5 +1,11 @@
 # @toolsync/cli
 
+## 0.4.1
+
+### Patch Changes
+
+- f4ded4f: Support bun in init and prepare
+
 ## 0.4.0
 
 ### Minor Changes
