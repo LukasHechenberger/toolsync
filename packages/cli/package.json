@@ -30,6 +30,7 @@
     "check:exports": "publint",
     "dev": "rslib build --watch",
     "test": "rstest",
+    "test:write-schema": "bun ./src/bin.ts config --config ../../toolsync.json --schema --json > ../../etc/toolsync.schema.json",
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
