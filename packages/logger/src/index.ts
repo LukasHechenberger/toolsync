@@ -43,8 +43,8 @@ const pretty = pinoPretty({
   },
   sync: true,
 });
-const rootLogger = pino({ level: envLogLevel }, pretty);
 
+const rootLogger = pino({ level: envLogLevel }, pretty);
 const rootNamespace = 'toolsync';
 
 const rootDebug = setupDebug(rootNamespace);
@@ -81,7 +81,7 @@ class Logger implements LogFns {
   fatal: LogFn;
   silent: LogFn;
 
-  get level() {
+  get level(): pino.LevelWithSilentOrString {
     return this.pino.level;
   }
 
@@ -116,11 +116,11 @@ class Logger implements LogFns {
     this.silent = (msg: string, data = {}) => this.pino.silent(data, msg);
   }
 
-  child(ns: string) {
+  child(ns: string): Logger {
     return new Logger(ns, this);
   }
 }
 
 export type { LogFns as Logger };
 
-export const logger = new Logger(rootNamespace);
+export const logger: Logger = new Logger(rootNamespace);

@@ -12,15 +12,22 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./out/index.d.ts",
-      "import": "./out/index.js",
-      "require": "./out/index.cjs"
-    }
+      "import": {
+        "types": "./out/index.d.ts",
+        "default": "./out/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
+  "module": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "files": [
+    "out"
+  ],
   "scripts": {
-    "build": "rslib build",
+    "build": "bunup",
     "check:exports": "publint",
-    "dev": "rslib build --watch"
+    "dev": "bunup --watch"
   },
   "dependencies": {
     "debug": "^4.4.1",
@@ -28,9 +35,9 @@
     "pino-pretty": "^13.0.0"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.2",
     "@types/debug": "^4.1.12",
     "@types/node": "^24",
+    "bunup": "^0.16.20",
     "publint": "^0.3.12"
   },
   "engines": {
