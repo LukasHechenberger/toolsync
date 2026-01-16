@@ -1,5 +1,11 @@
 # @toolsync/core
 
+## 0.1.5
+
+### Patch Changes
+
+- ed8a9bb: Re-release packages with correct dependencies
+
 ## 0.1.4
 
 ### Patch Changes

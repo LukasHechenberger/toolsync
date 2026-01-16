@@ -1,5 +1,13 @@
 # @toolsync/create
 
+## 0.4.2
+
+### Patch Changes
+
+- ed8a9bb: Re-release packages with correct dependencies
+- Updated dependencies [ed8a9bb]
+  - @toolsync/cli@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

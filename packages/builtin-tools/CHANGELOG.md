@@ -1,5 +1,14 @@
 # @toolsync/builtin
 
+## 0.6.1
+
+### Patch Changes
+
+- ed8a9bb: Re-release packages with correct dependencies
+- 1ea9d7f: Bun: Include custom changesets scripts
+- Updated dependencies [ed8a9bb]
+  - @toolsync/core@0.1.5
+
 ## 0.6.0
 
 ### Minor Changes
