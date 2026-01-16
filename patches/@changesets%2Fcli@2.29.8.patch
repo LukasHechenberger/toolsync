@@ -1,0 +1,15 @@
+diff --git a/dist/changesets-cli.esm.js b/dist/changesets-cli.esm.js
+index 1946941b0b876b6f90d25c613696a8e151b726c4..277e88ed0247a720ed68104c8ddb928be0834850 100644
+--- a/dist/changesets-cli.esm.js
++++ b/dist/changesets-cli.esm.js
+@@ -593,6 +593,10 @@ function getCorrectRegistry(packageJson) {
+   };
+ }
+ async function getPublishTool(cwd) {
++  if (process.versions.bun) return {
++    name: 'bun',
++    shouldAddNoGitChecks: false,
++  }
+   const pm = await detect({
+     cwd
+   });

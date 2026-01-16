@@ -52,7 +52,7 @@
     },
     "packages/builtin-tools": {
       "name": "@toolsync/builtin",
-      "version": "0.6.1",
+      "version": "0.6.2-next.0",
       "dependencies": {
         "@toolsync/core": "workspace:*",
         "@toolsync/object-mods": "workspace:*",
@@ -84,7 +84,7 @@
     },
     "packages/cli": {
       "name": "@toolsync/cli",
-      "version": "0.4.2",
+      "version": "0.4.3-next.0",
       "bin": {
         "toolsync": "./out/bin.js",
       },
@@ -109,7 +109,7 @@
     },
     "packages/core": {
       "name": "@toolsync/core",
-      "version": "0.1.5",
+      "version": "0.1.6-next.0",
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
         "@manypkg/tools": "^2.1.0",
@@ -127,12 +127,12 @@
     },
     "packages/create": {
       "name": "@toolsync/create",
-      "version": "0.4.2",
+      "version": "0.4.3-next.0",
       "bin": "./out/bin.js",
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
-        "@toolsync/cli": "workspace:^",
-        "@toolsync/logger": "workspace:^",
+        "@toolsync/cli": "workspace:*",
+        "@toolsync/logger": "workspace:*",
         "commander": "^14.0.0",
         "terminal-link": "^4.0.0",
       },
@@ -169,7 +169,7 @@
     },
     "packages/repo-plugins": {
       "name": "@repo/toolsync-plugins",
-      "version": "0.1.15",
+      "version": "0.1.16-next.0",
       "dependencies": {
         "@toolsync/core": "workspace:*",
         "@toolsync/template": "workspace:*",
@@ -194,6 +194,9 @@
         "publint": "^0.3.12",
       },
     },
+  },
+  "patchedDependencies": {
+    "@changesets/cli@2.29.8": "patches/@changesets%2Fcli@2.29.8.patch",
   },
   "packages": {
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],

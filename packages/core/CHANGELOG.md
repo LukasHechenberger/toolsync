@@ -1,5 +1,11 @@
 # @toolsync/core
 
+## 0.1.6-next.0
+
+### Patch Changes
+
+- b8022be: Re-release packages with correct dependencies
+
 ## 0.1.5
 
 ### Patch Changes

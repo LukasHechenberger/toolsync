@@ -1,5 +1,14 @@
 # @toolsync/builtin
 
+## 0.6.2-next.0
+
+### Patch Changes
+
+- b8022be: Re-release packages with correct dependencies
+- b8022be: Bun: Include custom changesets scripts
+- Updated dependencies [b8022be]
+  - @toolsync/core@0.1.6-next.0
+
 ## 0.6.1
 
 ### Patch Changes

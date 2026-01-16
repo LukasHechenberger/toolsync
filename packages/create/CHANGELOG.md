@@ -1,5 +1,13 @@
 # @toolsync/create
 
+## 0.4.3-next.0
+
+### Patch Changes
+
+- b8022be: Re-release packages with correct dependencies
+- Updated dependencies [b8022be]
+  - @toolsync/cli@0.4.3-next.0
+
 ## 0.4.2
 
 ### Patch Changes
