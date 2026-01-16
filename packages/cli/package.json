@@ -33,8 +33,8 @@
     "update-readme": "node ./node_modules/@toolsync/template/out/bin.js README.md cli-usage \"\\`\\`\\`\n$(LOG_LEVEL=silent node ./out/bin.js --help)\n\\`\\`\\`\""
   },
   "dependencies": {
-    "@toolsync/core": "workspace:^",
-    "@toolsync/logger": "workspace:^",
+    "@toolsync/core": "workspace:*",
+    "@toolsync/logger": "workspace:*",
     "commander": "^14.0.0",
     "execa": "^9.6.0",
     "node-plop": "^0.32.0",
@@ -45,7 +45,7 @@
     "@manypkg/tools": "^2.1.0",
     "@rslib/core": "^0.17.2",
     "@rstest/core": "^0.7.2",
-    "@toolsync/builtin": "workspace:^",
+    "@toolsync/builtin": "workspace:*",
     "@toolsync/template": "workspace:*",
     "@types/node": "^22.15.30",
     "publint": "^0.3.12"

@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@manypkg/get-packages": "^3.1.0",
-    "@toolsync/cli": "workspace:^",
-    "@toolsync/logger": "workspace:^",
+    "@toolsync/cli": "workspace:*",
+    "@toolsync/logger": "workspace:*",
     "commander": "^14.0.0",
     "terminal-link": "^4.0.0"
   },
