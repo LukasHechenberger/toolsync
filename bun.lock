@@ -131,8 +131,8 @@
       "bin": "./out/bin.js",
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
-        "@toolsync/cli": "workspace:^",
-        "@toolsync/logger": "workspace:^",
+        "@toolsync/cli": "workspace:*",
+        "@toolsync/logger": "workspace:*",
         "commander": "^14.0.0",
         "terminal-link": "^4.0.0",
       },
@@ -194,6 +194,9 @@
         "publint": "^0.3.12",
       },
     },
+  },
+  "patchedDependencies": {
+    "@changesets/cli@2.29.8": "patches/@changesets%2Fcli@2.29.8.patch",
   },
   "packages": {
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],

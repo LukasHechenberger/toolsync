@@ -105,8 +105,7 @@ const bunPlugin = defineBuiltinPlugin({
       pkg.packageJson.scripts ??= {};
 
       // TODO: Move to changesets plugin
-      pkg.packageJson.scripts['changesets:publish'] =
-        'for dir in packages/*; do (cd "$dir" && bun publish || true); done && changeset tag';
+      pkg.packageJson.scripts['changesets:publish'] = 'bun changeset publish';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },
