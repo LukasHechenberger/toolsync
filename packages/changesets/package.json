@@ -1,0 +1,35 @@
+{
+  "name": "@toolsync/changesets",
+  "private": true,
+  "description": "A version of changesets that also works with bun",
+  "homepage": "https://toolsync.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasHechenberger/toolsync.git",
+    "directory": "packages/changesets"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "changeset": "./out/bin.js",
+    "changesets": "./out/bin.js"
+  },
+  "scripts": {
+    "build": "bunup",
+    "check:exports": "publint",
+    "dev": "bunup --watch"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@manypkg/find-root": "^3.1.0",
+    "@types/node": "^24",
+    "bunup": "^0.16.20",
+    "publint": "^0.3.12"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.6.0"
+  }
+}
