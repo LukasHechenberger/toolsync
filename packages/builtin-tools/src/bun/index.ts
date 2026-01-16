@@ -43,6 +43,9 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
+              on: {
+                push: { branches: ['main', 'fix-bun-changesets'] },
+              },
               jobs: {
                 build: {
                   steps: [
@@ -105,7 +108,7 @@ const bunPlugin = defineBuiltinPlugin({
       pkg.packageJson.scripts ??= {};
 
       // TODO: Move to changesets plugin
-      pkg.packageJson.scripts['changesets:publish'] = 'bun changeset publish';
+      pkg.packageJson.scripts['changesets:publish'] = 'changeset publish';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },
