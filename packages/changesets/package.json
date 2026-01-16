@@ -1,5 +1,6 @@
 {
   "name": "@toolsync/changesets",
+  "version": "0.0.0",
   "private": true,
   "description": "A version of changesets that also works with bun",
   "homepage": "https://toolsync.vercel.app",
@@ -24,10 +25,8 @@
     "@manypkg/find-root": "^3.1.0",
     "@types/node": "^24",
     "bunup": "^0.16.20",
-    "publint": "^0.3.12"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "publint": "^0.3.12",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20.6.0"

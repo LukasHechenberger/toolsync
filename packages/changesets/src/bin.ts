@@ -2,10 +2,17 @@
 
 import { findRoot } from '@manypkg/find-root';
 import { styleText } from 'node:util';
+import { name, version } from '../package.json';
+import { version as changesetsVersion } from '@changesets/cli/package.json';
+
+const log = (message: string) => process.stderr.write(styleText(['dim'], `👾  ${message}\n`));
+
+log(`Using patched ${name} v${version} based on @changesets/cli v${changesetsVersion}`);
 
 const root = await findRoot(process.cwd());
 if (root && root.rootDir !== process.cwd()) {
-  console.log(styleText(['dim'], `👾  Changing working directory to: ${root.rootDir}`));
+  log(`Changing working directory to: ${root.rootDir}`);
+
   process.chdir(root.rootDir);
 }
 
