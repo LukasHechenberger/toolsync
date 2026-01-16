@@ -58,7 +58,7 @@ jobs:
         with:
           commit: 'chore: Update versions'
           title: 'chore: Update versions'
-          publish: bun changeset publish
+          publish: bun run changesets:publish
           commitMode: github-api
           version: bun run changesets:version
         env:

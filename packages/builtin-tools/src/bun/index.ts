@@ -76,7 +76,7 @@ const bunPlugin = defineBuiltinPlugin({
                         id: 'changesets',
                         data: {
                           with: {
-                            publish: 'bun changeset publish',
+                            publish: 'bun run changesets:publish',
                             version: 'bun run changesets:version',
                           },
                         },
@@ -102,6 +102,12 @@ const bunPlugin = defineBuiltinPlugin({
   setupPackage(pkg, { options }) {
     if (pkg.isRoot) {
       pkg.packageJson.packageManager = `bun@${options.version}`;
+      pkg.packageJson.scripts ??= {};
+
+      // TODO: Move to changesets plugin
+      pkg.packageJson.scripts['changesets:publish'] =
+        'for dir in packages/*; do (cd "$dir" && bun publish || true); done && changeset tag';
+      pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },
 });

@@ -17,6 +17,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "changesets:publish": "for dir in packages/*; do (cd \"$dir\" && bun publish || true); done && changeset tag",
     "changesets:version": "changeset version && bun install",
     "check": "turbo run check",
     "check:format": "prettier --check .",
