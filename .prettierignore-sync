@@ -11,6 +11,7 @@ bun.lock
 
 # Should be added by @toolsync/builtin/changesets
 .changeset/*.md
+.changeset/pre.json
 
 # By @toolsync/builtins/turborepo tool
 turbo.json
