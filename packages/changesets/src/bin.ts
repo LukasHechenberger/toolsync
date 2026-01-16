@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { findRoot } from '@manypkg/find-root';
 import { styleText } from 'node:util';
 

@@ -138,7 +138,7 @@ bun turbo watch test
   - [ ] Setup github action
     - [ ] Provide instructions on how to configure GitHub settings (separate GITHUB_TOKEN)
   - [ ] Adjust "on" in ci workflow to include the default branch
-  - [ ] Create a "prebuild" version of @changesets/cli that does not add 1000 runtime dependencies
+  - [x] Create a "prebuild" version of @changesets/cli that does not add 1000 runtime dependencies
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [ ] Recommended: A builtin plugin that loads all other builtin plugins
