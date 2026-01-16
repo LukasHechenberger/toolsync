@@ -9,11 +9,18 @@ const log = (message: string) => process.stderr.write(styleText(['dim'], `👾  
 
 log(`Using patched ${name} v${version} based on @changesets/cli v${changesetsVersion}`);
 
-const root = await findRoot(process.cwd());
-if (root && root.rootDir !== process.cwd()) {
-  log(`Changing working directory to: ${root.rootDir}`);
+async function run() {
+  const root = await findRoot(process.cwd());
+  if (root && root.rootDir !== process.cwd()) {
+    log(`Changing working directory to: ${root.rootDir}`);
 
-  process.chdir(root.rootDir);
+    process.chdir(root.rootDir);
+  }
+
+  await import('@changesets/cli');
 }
 
-await import('@changesets/cli');
+run().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

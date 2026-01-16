@@ -1,7 +1,11 @@
 import { defineConfig } from 'bunup';
 
 export default defineConfig({
-  entry: './src/bin.ts',
-  outDir: './out',
+  entry: './src/*.ts',
+  outDir: 'out',
   unused: true,
+  minify: true,
+  exports: true,
+  format: ['esm', 'cjs'],
+  sourcemap: 'external',
 });

@@ -11,10 +11,36 @@
   },
   "license": "MIT",
   "type": "module",
+  "exports": {
+    "./changelog": {
+      "import": {
+        "types": "./out/changelog.d.ts",
+        "default": "./out/changelog.js"
+      },
+      "require": {
+        "types": "./out/changelog.d.cts",
+        "default": "./out/changelog.cjs"
+      }
+    },
+    "./commit": {
+      "import": {
+        "types": "./out/commit.d.ts",
+        "default": "./out/commit.js"
+      },
+      "require": {
+        "types": "./out/commit.d.cts",
+        "default": "./out/commit.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "bin": {
     "changeset": "./out/bin.js",
     "changesets": "./out/bin.js"
   },
+  "files": [
+    "out"
+  ],
   "scripts": {
     "build": "bunup",
     "check:exports": "publint",
