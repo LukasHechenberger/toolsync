@@ -64,9 +64,9 @@
     "dev": "chokidar package.json -c 'rslib build --watch' --initial"
   },
   "dependencies": {
-    "@toolsync/core": "workspace:^",
-    "@toolsync/object-mods": "workspace:^",
-    "@toolsync/template": "workspace:^",
+    "@toolsync/core": "workspace:*",
+    "@toolsync/object-mods": "workspace:*",
+    "@toolsync/template": "workspace:*",
     "markdown-table": "^3.0.4",
     "yaml": "^2.8.0"
   },

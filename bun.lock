@@ -54,9 +54,9 @@
       "name": "@toolsync/builtin",
       "version": "0.6.0",
       "dependencies": {
-        "@toolsync/core": "workspace:^",
-        "@toolsync/object-mods": "workspace:^",
-        "@toolsync/template": "workspace:^",
+        "@toolsync/core": "workspace:*",
+        "@toolsync/object-mods": "workspace:*",
+        "@toolsync/template": "workspace:*",
         "markdown-table": "^3.0.4",
         "yaml": "^2.8.0",
       },
@@ -89,8 +89,8 @@
         "toolsync": "./out/bin.js",
       },
       "dependencies": {
-        "@toolsync/core": "workspace:^",
-        "@toolsync/logger": "workspace:^",
+        "@toolsync/core": "workspace:*",
+        "@toolsync/logger": "workspace:*",
         "commander": "^14.0.0",
         "execa": "^9.6.0",
         "node-plop": "^0.32.0",
@@ -101,7 +101,7 @@
         "@manypkg/tools": "^2.1.0",
         "@rslib/core": "^0.17.2",
         "@rstest/core": "^0.7.2",
-        "@toolsync/builtin": "workspace:^",
+        "@toolsync/builtin": "workspace:*",
         "@toolsync/template": "workspace:*",
         "@types/node": "^22.15.30",
         "publint": "^0.3.12",
@@ -113,8 +113,8 @@
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
         "@manypkg/tools": "^2.1.0",
-        "@toolsync/logger": "workspace:^",
-        "@toolsync/object-mods": "workspace:^",
+        "@toolsync/logger": "workspace:*",
+        "@toolsync/object-mods": "workspace:*",
         "debug": "^4.4.1",
       },
       "devDependencies": {
