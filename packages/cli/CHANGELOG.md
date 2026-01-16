@@ -1,5 +1,13 @@
 # @toolsync/cli
 
+## 0.4.3
+
+### Patch Changes
+
+- 13122d6: Re-release packages with correct dependencies
+- Updated dependencies [13122d6]
+  - @toolsync/core@0.1.6
+
 ## 0.4.3-next.0
 
 ### Patch Changes
