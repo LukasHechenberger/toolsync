@@ -1,5 +1,12 @@
 # @repo/toolsync-plugins
 
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies [b8022be]
+  - @toolsync/core@0.1.5
+
 ## 0.1.14
 
 ### Patch Changes

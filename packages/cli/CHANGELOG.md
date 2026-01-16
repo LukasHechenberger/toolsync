@@ -1,5 +1,13 @@
 # @toolsync/cli
 
+## 0.4.2
+
+### Patch Changes
+
+- b8022be: Re-release packages with correct dependencies
+- Updated dependencies [b8022be]
+  - @toolsync/core@0.1.5
+
 ## 0.4.1
 
 ### Patch Changes
