@@ -1,5 +1,14 @@
 # @toolsync/builtin
 
+## 0.6.2
+
+### Patch Changes
+
+- 13122d6: Re-release packages with correct dependencies
+- 13122d6: Bun: Include custom changesets scripts
+- Updated dependencies [13122d6]
+  - @toolsync/core@0.1.6
+
 ## 0.6.2-next.0
 
 ### Patch Changes
