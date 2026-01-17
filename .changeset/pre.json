@@ -12,5 +12,7 @@
     "@repo/toolsync-plugins": "0.1.16",
     "@toolsync/template": "0.1.1"
   },
-  "changesets": []
+  "changesets": [
+    "sharp-carpets-drive"
+  ]
 }
