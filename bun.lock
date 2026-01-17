@@ -52,7 +52,7 @@
     },
     "packages/builtin-tools": {
       "name": "@toolsync/builtin",
-      "version": "0.6.2",
+      "version": "0.6.3-next.0",
       "dependencies": {
         "@toolsync/core": "workspace:*",
         "@toolsync/object-mods": "workspace:*",
@@ -84,7 +84,7 @@
     },
     "packages/cli": {
       "name": "@toolsync/cli",
-      "version": "0.4.3",
+      "version": "0.4.4-next.0",
       "bin": {
         "toolsync": "./out/bin.js",
       },
@@ -109,7 +109,7 @@
     },
     "packages/core": {
       "name": "@toolsync/core",
-      "version": "0.1.6",
+      "version": "0.1.7-next.0",
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
         "@manypkg/tools": "^2.1.0",
@@ -127,7 +127,7 @@
     },
     "packages/create": {
       "name": "@toolsync/create",
-      "version": "0.4.3",
+      "version": "0.4.4-next.0",
       "bin": "./out/bin.js",
       "dependencies": {
         "@manypkg/get-packages": "^3.1.0",
@@ -146,7 +146,7 @@
     },
     "packages/logger": {
       "name": "@toolsync/logger",
-      "version": "0.0.1",
+      "version": "0.0.2-next.0",
       "dependencies": {
         "debug": "^4.4.1",
         "pino": "^9.5.0",
@@ -160,7 +160,7 @@
     },
     "packages/object-mods": {
       "name": "@toolsync/object-mods",
-      "version": "0.0.0",
+      "version": "0.0.1-next.0",
       "devDependencies": {
         "@rslib/core": "^0.17.2",
         "publint": "^0.3.12",
@@ -169,7 +169,7 @@
     },
     "packages/repo-plugins": {
       "name": "@repo/toolsync-plugins",
-      "version": "0.1.16",
+      "version": "0.1.17-next.0",
       "dependencies": {
         "@toolsync/core": "workspace:*",
         "@toolsync/template": "workspace:*",
@@ -181,7 +181,7 @@
     },
     "packages/template": {
       "name": "@toolsync/template",
-      "version": "0.1.1",
+      "version": "0.1.2-next.0",
       "bin": {
         "update-section": "./out/bin.js",
       },

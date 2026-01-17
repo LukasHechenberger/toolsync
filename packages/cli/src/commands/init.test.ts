@@ -40,24 +40,17 @@ const packageManagers = [
   { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
   { type: 'npm', version: '10.9.3', tool: NpmTool },
   { type: 'yarn', version: '1.22.22', tool: YarnTool },
-] as const;
+]; // as const;
 type PackageManager = (typeof packageManagers)[number];
 
 async function prepareFixture(name: string, packageManager: PackageManager) {
   const fixtureDir = path.join('test/fixtures', name);
   const tempDir = await createTempDir();
 
+  console.debug(`Preparing fixture ${name} in temp dir ${tempDir}...`);
+
   await cp(fixtureDir, tempDir, { recursive: true });
-
-  // Update root package.json
   const rootManifest = JSON.parse(readFileSync(path.join(tempDir, 'package.json'), 'utf-8'));
-
-  rootManifest.packageManager = `${packageManager.type}@${packageManager.version}`;
-  await writeFile(
-    path.join(tempDir, 'package.json'),
-    JSON.stringify(rootManifest, null, 2),
-    'utf-8',
-  );
 
   // Create config files
   if (packageManager.type === 'pnpm' && rootManifest.workspaces) {
@@ -75,30 +68,21 @@ async function prepareFixture(name: string, packageManager: PackageManager) {
   // Pack cli package to a tarball and use that for testing
   let versions: Record<string, string> = {};
   for (const [pkg, pkgPath] of Object.entries(dependenciesToPrepare)) {
-    const manifestPath = path.join(pkgPath, 'package.json');
-    const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
-
-    // Loosen internal versions to allow unpublished packages
-    await writeFile(
-      manifestPath,
-      JSON.stringify({
-        ...manifest,
-        dependencies: Object.fromEntries(
-          Object.entries(manifest.dependencies ?? {}).map(([dep, version]) => [
-            dep,
-            dep.startsWith('@toolsync/') ? '*' : version,
-          ]),
-        ),
-      }),
-    );
-
     const tarPath = path.join(tempDir, `${pkg.split('/').pop()}.tgz`);
     await execa('bun', ['pm', 'pack', '--filename', tarPath], { cwd: pkgPath });
     versions[pkg] = `file:${tarPath}`;
-
-    // Restore original manifest
-    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
   }
+
+  rootManifest.packageManager = `${packageManager.type}@${packageManager.version}`;
+  rootManifest[packageManager.tool.type === 'yarn' ? 'resolutions' : 'overrides'] = {
+    ...versions,
+  };
+
+  await writeFile(
+    path.join(tempDir, 'package.json'),
+    JSON.stringify(rootManifest, null, 2),
+    'utf-8',
+  );
 
   console.debug(`Prepared fixture ${name} in temp dir ${tempDir}...`);
   return {
@@ -128,6 +112,7 @@ describe.each(packageManagers)(`with $type@$version`, (pm) => {
   describe('single package project', () => {
     test('init command works', async () => {
       const { tempDir, versions } = await prepareFixture('single-package-project', pm);
+      console.log('Temp dir:', tempDir);
 
       await init({
         cwd: tempDir,
