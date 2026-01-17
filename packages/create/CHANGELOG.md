@@ -1,6 +1,16 @@
 # @toolsync/create
 
+## 0.4.4
+
+### Patch Changes
+
+- 428596d: Re-publish
+- Updated dependencies [428596d]
+  - @toolsync/cli@0.4.4
+  - @toolsync/logger@0.0.2
+
 ## 0.4.4-next.0
+
 ### Patch Changes
 
 - 38477e3: Re-publish

@@ -1,6 +1,17 @@
 # @toolsync/builtin
 
+## 0.6.3
+
+### Patch Changes
+
+- 428596d: Re-publish
+- Updated dependencies [428596d]
+  - @toolsync/template@0.1.2
+  - @toolsync/core@0.1.7
+  - @toolsync/object-mods@0.0.1
+
 ## 0.6.3-next.0
+
 ### Patch Changes
 
 - 38477e3: Re-publish
