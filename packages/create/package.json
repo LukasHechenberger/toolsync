@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/create",
-  "version": "0.4.4-next.0",
+  "version": "0.4.4",
   "homepage": "https://toolsync.vercel.app",
   "repository": {
     "type": "git",

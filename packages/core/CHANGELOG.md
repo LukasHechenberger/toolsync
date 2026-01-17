@@ -1,6 +1,16 @@
 # @toolsync/core
 
+## 0.1.7
+
+### Patch Changes
+
+- 428596d: Re-publish
+- Updated dependencies [428596d]
+  - @toolsync/logger@0.0.2
+  - @toolsync/object-mods@0.0.1
+
 ## 0.1.7-next.0
+
 ### Patch Changes
 
 - 38477e3: Re-publish
