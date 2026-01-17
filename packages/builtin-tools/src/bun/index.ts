@@ -43,6 +43,11 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
+              on: {
+                push: {
+                  branches: ['custom-publish'],
+                },
+              },
               jobs: {
                 build: {
                   steps: [
@@ -68,6 +73,17 @@ const bunPlugin = defineBuiltinPlugin({
                         id: 'checks',
                         data: {
                           run: 'bun turbo check lint test build --continue',
+                        },
+                      },
+                    },
+                    {
+                      '@insert': {
+                        before: 'changesets',
+                        data: {
+                          id: 'npm-login',
+                          if: "${{ github.event_name == 'push' }}",
+                          name: 'Login to npm registry',
+                          run: 'echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc',
                         },
                       },
                     },
@@ -105,7 +121,8 @@ const bunPlugin = defineBuiltinPlugin({
       pkg.packageJson.scripts ??= {};
 
       // TODO: Move to changesets plugin
-      pkg.packageJson.scripts['changesets:publish'] = 'changeset publish';
+      pkg.packageJson.scripts['changesets:publish'] =
+        'for dir in packages/*; do (cd "$dir" && bun publish --tolerate-republish); done && changeset tag';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },
