@@ -43,11 +43,6 @@ const bunPlugin = defineBuiltinPlugin({
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
-              on: {
-                push: {
-                  branches: ['custom-publish'],
-                },
-              },
               jobs: {
                 build: {
                   steps: [

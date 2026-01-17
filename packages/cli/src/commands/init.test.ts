@@ -40,7 +40,7 @@ const packageManagers = [
   { type: 'pnpm', version: '10.11.1', tool: PnpmTool },
   { type: 'npm', version: '10.9.3', tool: NpmTool },
   { type: 'yarn', version: '1.22.22', tool: YarnTool },
-]; // as const;
+] as const;
 type PackageManager = (typeof packageManagers)[number];
 
 async function prepareFixture(name: string, packageManager: PackageManager) {
@@ -112,7 +112,6 @@ describe.each(packageManagers)(`with $type@$version`, (pm) => {
   describe('single package project', () => {
     test('init command works', async () => {
       const { tempDir, versions } = await prepareFixture('single-package-project', pm);
-      console.log('Temp dir:', tempDir);
 
       await init({
         cwd: tempDir,
