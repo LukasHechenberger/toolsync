@@ -1,5 +1,13 @@
 # @toolsync/create
 
+## 0.4.4-next.0
+### Patch Changes
+
+- 38477e3: Re-publish
+- Updated dependencies [38477e3]
+  - @toolsync/cli@0.4.4-next.0
+  - @toolsync/logger@0.0.2-next.0
+
 ## 0.4.3
 
 ### Patch Changes

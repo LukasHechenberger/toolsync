@@ -79,6 +79,9 @@ const bunPlugin = defineBuiltinPlugin({
                             publish: 'bun run changesets:publish',
                             version: 'bun run changesets:version',
                           },
+                          env: {
+                            NPM_CONFIG_TOKEN: '${{ secrets.NPM_TOKEN }}',
+                          },
                         },
                       },
                     },
@@ -105,7 +108,8 @@ const bunPlugin = defineBuiltinPlugin({
       pkg.packageJson.scripts ??= {};
 
       // TODO: Move to changesets plugin
-      pkg.packageJson.scripts['changesets:publish'] = 'changeset publish';
+      pkg.packageJson.scripts['changesets:publish'] =
+        'for dir in packages/*; do (cd "$dir" && bun publish || exit 0); done && changeset tag';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },

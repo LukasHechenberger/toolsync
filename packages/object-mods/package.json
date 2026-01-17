@@ -1,6 +1,6 @@
 {
   "name": "@toolsync/object-mods",
-  "version": "0.0.0",
+  "version": "0.0.1-next.0",
   "description": "Type-safe object manipulation utility",
   "homepage": "https://toolsync.vercel.app",
   "repository": {

@@ -1,5 +1,14 @@
 # @toolsync/builtin
 
+## 0.6.3-next.0
+### Patch Changes
+
+- 38477e3: Re-publish
+- Updated dependencies [38477e3]
+  - @toolsync/template@0.1.2-next.0
+  - @toolsync/core@0.1.7-next.0
+  - @toolsync/object-mods@0.0.1-next.0
+
 ## 0.6.2
 
 ### Patch Changes

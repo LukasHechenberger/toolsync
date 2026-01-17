@@ -1,5 +1,12 @@
 # @repo/toolsync-plugins
 
+## 0.1.17-next.0
+### Patch Changes
+
+- Updated dependencies [38477e3]
+  - @toolsync/template@0.1.2-next.0
+  - @toolsync/core@0.1.7-next.0
+
 ## 0.1.16
 
 ### Patch Changes

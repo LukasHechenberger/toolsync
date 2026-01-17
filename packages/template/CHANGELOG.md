@@ -1,5 +1,10 @@
 # @toolsync/template
 
+## 0.1.2-next.0
+### Patch Changes
+
+- 38477e3: Re-publish
+
 ## 0.1.1
 
 ### Patch Changes

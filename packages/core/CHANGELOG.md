@@ -1,5 +1,13 @@
 # @toolsync/core
 
+## 0.1.7-next.0
+### Patch Changes
+
+- 38477e3: Re-publish
+- Updated dependencies [38477e3]
+  - @toolsync/logger@0.0.2-next.0
+  - @toolsync/object-mods@0.0.1-next.0
+
 ## 0.1.6
 
 ### Patch Changes
