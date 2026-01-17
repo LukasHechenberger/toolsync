@@ -52,10 +52,6 @@ jobs:
       - id: ensure-clean
         name: Ensure there are no uncommitted changes
         run: git diff --exit-code || (echo "There are uncommitted changes!" && exit 1)
-      - id: npm-login
-        if: ${{ github.event_name == 'push' }}
-        name: Login to npm registry
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - id: changesets
         if: ${{ github.event_name == 'push' }}
         name: Changesets
@@ -69,3 +65,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESETS_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}

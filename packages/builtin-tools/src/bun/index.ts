@@ -77,23 +77,15 @@ const bunPlugin = defineBuiltinPlugin({
                       },
                     },
                     {
-                      '@insert': {
-                        before: 'changesets',
-                        data: {
-                          id: 'npm-login',
-                          if: "${{ github.event_name == 'push' }}",
-                          name: 'Login to npm registry',
-                          run: 'echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc',
-                        },
-                      },
-                    },
-                    {
                       '@update': {
                         id: 'changesets',
                         data: {
                           with: {
                             publish: 'bun run changesets:publish',
                             version: 'bun run changesets:version',
+                          },
+                          env: {
+                            NPM_CONFIG_TOKEN: '${{ secrets.NPM_TOKEN }}',
                           },
                         },
                       },
