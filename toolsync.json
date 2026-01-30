@@ -13,7 +13,8 @@
     "setupNode": "24.x"
   },
   "@toolsync/cli": {
-    "version": "workspace:*"
+    "version": "workspace:*",
+    "toolsyncCommand": "bun --bun toolsync"
   },
   "@toolsync/builtin/package-readme": {},
   "@repo/toolsync-plugins": {},
