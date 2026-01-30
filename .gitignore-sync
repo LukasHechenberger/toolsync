@@ -1,11 +1,19 @@
-[github/gitignore]
-Node.gitignore
+[inline]
+# Dependencies
+node_modules/
+
+# Build output
+out
+
+# TypeScript cache
+*.tsbuildinfo
 
 [relative]
 packages/*/.gitignore-sync
 docs/.gitignore-sync
 
 [inline]
+# By ignore-sync
 packages/.gitignore
 docs/.gitignore
 
