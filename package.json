@@ -25,7 +25,7 @@
     "format": "prettier --write .",
     "ignore-sync": "ignore-sync .",
     "lint": "turbo run lint",
-    "prepare": "toolsync prepare --config toolsync.json && ignore-sync .",
+    "prepare": "bun --bun toolsync prepare --config toolsync.json && ignore-sync .",
     "test": "turbo run test"
   },
   "devDependencies": {

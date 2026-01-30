@@ -12,22 +12,16 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./out/index.d.ts",
-      "default": "./out/index.js"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "rslib build",
-    "check:exports": "publint",
-    "dev": "rslib build --watch"
+    "check:exports": "publint"
   },
   "dependencies": {
     "@toolsync/core": "workspace:*",
     "@toolsync/template": "workspace:*"
   },
   "devDependencies": {
-    "@rslib/core": "^0.17.2",
     "publint": "^0.3.12"
   },
   "engines": {

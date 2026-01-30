@@ -175,7 +175,6 @@
         "@toolsync/template": "workspace:*",
       },
       "devDependencies": {
-        "@rslib/core": "^0.17.2",
         "publint": "^0.3.12",
       },
     },

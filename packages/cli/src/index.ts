@@ -23,6 +23,7 @@ declare global {
       '@toolsync/cli': {
         version?: string;
         configFile?: string;
+        toolsyncCommand?: string;
         prepare?: string[];
       };
       '@toolsync/cli/resolve-json-config-file': {
@@ -56,7 +57,7 @@ const programConfig: ToolsyncConfig = {
   plugins: [],
   config: {
     [cliPluginName]: {
-      prepare: ['toolsync prepare'],
+      prepare: [],
     },
   },
 };
@@ -71,11 +72,21 @@ const cliPlugin = definePlugin({
     if (pkg.isRoot) {
       pkg.packageJson.scripts ??= {};
 
-      // TODO: Append if already exists
-      pkg.packageJson.scripts['prepare'] = [
-        `toolsync prepare${options.configFile ? ` --config ${relative(pkg.dir, join(process.cwd(), options.configFile))}` : ''}`,
+      const prepareCommand = [
+        [
+          // toolsync prepare [--config <file>]
+          options.toolsyncCommand ?? 'toolsync',
+          'prepare',
+          ...(options.configFile
+            ? ['--config', relative(pkg.dir, join(process.cwd(), options.configFile))]
+            : []),
+        ].join(' '),
+        // Custom / plugin prepare commands
         ...(options.prepare ?? []),
       ].join(' && ');
+
+      // TODO: Append if already exists
+      pkg.packageJson.scripts['prepare'] = prepareCommand;
 
       // FIXME: Move to 'install' hook
       pkg.packageJson.devDependencies ??= {};
