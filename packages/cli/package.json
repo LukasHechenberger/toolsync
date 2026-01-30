@@ -47,7 +47,7 @@
     "@rstest/core": "^0.7.2",
     "@toolsync/builtin": "workspace:*",
     "@toolsync/template": "workspace:*",
-    "@types/node": "^22.15.30",
+    "@types/node": "24.x",
     "publint": "^0.3.12"
   },
   "engines": {
