@@ -27,7 +27,7 @@
     "@commander-js/extra-typings": "^14.0.0",
     "@rslib/core": "^0.17.2",
     "@toolsync/template": "workspace:*",
-    "@types/node": "^22.15.30",
+    "@types/node": "24.x",
     "publint": "^0.3.12"
   },
   "engines": {

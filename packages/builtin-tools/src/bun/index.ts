@@ -115,6 +115,19 @@ const bunPlugin = defineBuiltinPlugin({
         'for dir in packages/*; do (cd "$dir" && bun publish || exit 0); done && changeset tag';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
+
+    // Sync @types/bun if present
+    if (options.version && '@types/bun' in (pkg.packageJson.devDependencies ?? {})) {
+      pkg.packageJson.devDependencies!['@types/bun'] = options.version;
+    }
+
+    // Sync @types/node if present
+    if (
+      typeof options.setupNode === 'string' &&
+      '@types/node' in (pkg.packageJson.devDependencies ?? {})
+    ) {
+      pkg.packageJson.devDependencies!['@types/node'] = options.setupNode;
+    }
   },
 });
 
