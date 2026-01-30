@@ -1,5 +1,12 @@
 # @toolsync/create
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [902440d]
+  - @toolsync/cli@0.4.5
+
 ## 0.4.4
 
 ### Patch Changes

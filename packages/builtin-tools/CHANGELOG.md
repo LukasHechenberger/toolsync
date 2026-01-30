@@ -1,5 +1,11 @@
 # @toolsync/builtin
 
+## 0.6.4
+
+### Patch Changes
+
+- 902440d: Use 'bun --bun' to run toolsync during prepare
+
 ## 0.6.3
 
 ### Patch Changes
