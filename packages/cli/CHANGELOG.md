@@ -1,5 +1,11 @@
 # @toolsync/cli
 
+## 0.4.5
+
+### Patch Changes
+
+- 902440d: Allow custom toolsync command to be used in prepare script
+
 ## 0.4.4
 
 ### Patch Changes
