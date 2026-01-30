@@ -49,6 +49,7 @@ This repository contains the following packages:
 | [@toolsync/object-mods](packages/object-mods)   | Type-safe object manipulation utility                    | [![NPM Version](https://img.shields.io/npm/v/@toolsync/object-mods)](https://www.npmjs.com/package/@toolsync/object-mods) |
 | [@toolsync/template](packages/template)         | Update sections of source files                          | [![NPM Version](https://img.shields.io/npm/v/@toolsync/template)](https://www.npmjs.com/package/@toolsync/template)       |
 | [@repo/toolsync-plugins](packages/repo-plugins) | Some toolsync plugins we use in the toolsync monorepo :) |                                                                                                                           |
+| [@toolsync/changesets](packages/changesets)     | A version of changesets that also works with bun         |                                                                                                                           |
 | [@toolsync/docs](docs)                          | The sources of toolsync.vercel.app                       |                                                                                                                           |
 
 <!-- #endregion packages -->
@@ -137,7 +138,7 @@ bun turbo watch test
   - [ ] Setup github action
     - [ ] Provide instructions on how to configure GitHub settings (separate GITHUB_TOKEN)
   - [ ] Adjust "on" in ci workflow to include the default branch
-  - [ ] Create a "prebuild" version of @changesets/cli that does not add 1000 runtime dependencies
+  - [x] Create a "prebuild" version of @changesets/cli that does not add 1000 runtime dependencies
 - [ ] Payload
   - [ ] Adjust eslint config for importmap etc.
 - [ ] Recommended: A builtin plugin that loads all other builtin plugins
