@@ -40,6 +40,9 @@ const bunPlugin = defineBuiltinPlugin({
         [bunPluginName]: {
           version,
         },
+        '@toolsync/cli': {
+          toolsyncCommand: 'bun --bun toolsync',
+        },
         '@toolsync/builtin/github-actions': {
           workflows: {
             ci: {
