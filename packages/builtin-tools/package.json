@@ -21,6 +21,10 @@
       "default": "./out/ignore-sync/index.js"
     },
     "./tools.json": "./out/tools.json",
+    "./tools": {
+      "types": "./out/tools/index.d.ts",
+      "default": "./out/tools/index.js"
+    },
     "./vscode": {
       "types": "./out/vscode/index.d.ts",
       "default": "./out/vscode/index.js"
