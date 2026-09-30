@@ -54,14 +54,13 @@ jobs:
       - id: changesets
         if: ${{ github.event_name == 'push' }}
         name: Changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          commit: 'chore: Update versions'
-          title: 'chore: Update versions'
-          publish: bun run changesets:publish
-          commitMode: github-api
-          version: bun run changesets:version
+          github-token: ${{ secrets.CHANGESETS_GITHUB_TOKEN }}
+          commit-message: 'chore: Update versions'
+          pr-title: 'chore: Update versions'
+          publish-script: bun run changesets:publish
+          version-script: bun run changesets:version
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESETS_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
