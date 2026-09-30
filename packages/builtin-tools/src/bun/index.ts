@@ -79,8 +79,8 @@ const bunPlugin = defineBuiltinPlugin({
                         id: 'changesets',
                         data: {
                           with: {
-                            publish: 'bun run changesets:publish',
-                            version: 'bun run changesets:version',
+                            'publish-script': 'bun run changesets:publish',
+                            'version-script': 'bun run changesets:version',
                           },
                           env: {
                             NPM_CONFIG_TOKEN: '${{ secrets.NPM_TOKEN }}',
@@ -111,8 +111,10 @@ const bunPlugin = defineBuiltinPlugin({
       pkg.packageJson.scripts ??= {};
 
       // TODO: Move to changesets plugin
+      // TODO: Replace with `changeset publish` once native bun publishing is released
+      // See: https://github.com/changesets/changesets/pull/2181
       pkg.packageJson.scripts['changesets:publish'] =
-        'for dir in packages/*; do (cd "$dir" && bun publish || exit 0); done && changeset tag';
+        'for dir in packages/*; do (cd "$dir" && grep -q \'"private": true\' package.json || bun publish || exit 0); done && changeset git-tag';
       pkg.packageJson.scripts['changesets:version'] = 'changeset version && bun install';
     }
   },

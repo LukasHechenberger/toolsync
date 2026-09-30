@@ -106,15 +106,14 @@ export const defaultOptions = {
               // if the event is a push this also implies that the branch is main
               if: "${{ github.event_name == 'push' }}",
               name: 'Changesets',
-              uses: 'changesets/action@v1',
+              uses: 'changesets/action@v2',
               with: {
-                commit: 'chore: Update versions',
-                title: 'chore: Update versions',
-                publish: 'pnpm changeset publish',
-                commitMode: 'github-api',
+                'github-token': '${{ secrets.CHANGESETS_GITHUB_TOKEN }}',
+                'commit-message': 'chore: Update versions',
+                'pr-title': 'chore: Update versions',
+                'publish-script': 'pnpm changeset publish',
               },
               env: {
-                GITHUB_TOKEN: '${{ secrets.CHANGESETS_GITHUB_TOKEN }}',
                 NPM_TOKEN: '${{ secrets.NPM_TOKEN }}',
               },
             },

@@ -1,0 +1,34 @@
+---
+title: Migrating to Changesets v3
+description: Upgrade a Toolsync project to Changesets v3 and changesets/action@v2.
+---
+
+Starting with `@toolsync/builtin@0.7.0`, the generated CI workflow uses [`changesets/action@v2`](https://github.com/changesets/action) and the bun publish script calls `changeset git-tag`, which requires Changesets v3. After [updating Toolsync](/docs/guides/updating), follow these steps. See the official [migration guide](https://changesets.dev/guide/migration) for all details.
+
+## Upgrade `@changesets/cli`
+
+Update `@changesets/cli` to `^3` in your root `package.json` and remove any patches for `@changesets/cli@2`.
+
+## Update `.changeset/config.json`
+
+- Point `$schema` to `https://unpkg.com/@changesets/config@4.0.1/schema.json`.
+- `baseBranch` now defaults to `main`, so you can remove `"baseBranch": "main"`.
+- Changesets v3 no longer versions private packages by default. To keep the v2 behavior (version private packages, but don't tag them), add:
+
+```json title=".changeset/config.json"
+{
+  "privatePackages": { "version": true, "tag": false }
+}
+```
+
+- Replace `"prettier": false` with `"format": false` and `"access": "private"` with `"access": "restricted"`, if you use them.
+
+## Regenerate CI workflow and scripts
+
+Run `toolsync prepare` (or just install your dependencies) to regenerate `.github/workflows/ci.yml` and the `changesets:*` scripts. The generated changesets step now:
+
+- uses `changesets/action@v2` with the renamed inputs `commit-message`, `pr-title`, `publish-script` and `version-script`
+- passes the `CHANGESETS_GITHUB_TOKEN` secret as the `github-token` input instead of the `GITHUB_TOKEN` environment variable
+- no longer sets `commitMode: github-api`, which is the default now
+
+If your toolsync config overrides the `changesets` step (e.g. via `@update`), rename the inputs there as well: `commit` → `commit-message`, `title` → `pr-title`, `publish` → `publish-script`, `version` → `version-script`. Overrides that only switched to `changesets/action@v2` or `changeset git-tag` can be removed.
